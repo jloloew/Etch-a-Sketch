@@ -10,7 +10,12 @@
 #define EtchASketch_hpp
 
 #include <stdio.h>
+#include "Image.hpp"
 
-void foo(void);
+namespace etchasketch {
+	
+	
+	
+}
 
 #endif /* EtchASketch_hpp */

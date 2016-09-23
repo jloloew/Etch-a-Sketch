@@ -17,46 +17,32 @@
  3/21/2009		Created
  */
 
-template<int Dim>
-bool Point<Dim>::enable_mines = false;
+using etchasketch::PointCoordinate;
 
 /* Point constructor. Initializes everything to 0.
  */
 template<int Dim>
-Point<Dim>::Point()
-: am_mine(false)
+etchasketch::Point<Dim>::Point()
 {
-	for(int i = 0; i < Dim; ++i)
+	for(int i = 0; i < Dim; i++) {
 		vals[i] = 0;
+	}
 }
 
 /* Point constructor
 	Copy the array of points in
  */
 template<int Dim>
-Point<Dim>::Point(double arr[Dim])
-: am_mine(false)
+etchasketch::Point<Dim>::Point(PointCoordinate arr[Dim])
 {
-	for(int i = 0; i < Dim; ++i)
+	for(int i = 0; i < Dim; i++) {
 		vals[i] = arr[i];
-}
-
-/* Point constructor
-	Copy the array of points in
-	set mine flag
- */
-template<int Dim>
-Point<Dim>::Point(double arr[Dim], bool mine)
-: am_mine(mine)
-{
-	for(int i = 0; i < Dim; ++i)
-		vals[i] = arr[i];
+	}
 }
 
 template<int Dim>
 template <typename T>
-Point<Dim>::Point(T x0, T x1, T x2)
-: am_mine(false)
+etchasketch::Point<Dim>::Point(T x0, T x1, T x2)
 {
 	vals[0] = x0;
 	vals[1] = x1;
@@ -65,25 +51,54 @@ Point<Dim>::Point(T x0, T x1, T x2)
 
 template<int Dim>
 template <typename T>
-Point<Dim>::Point(T x, ...)
-: am_mine(false)
+etchasketch::Point<Dim>::Point(T x, ...)
 {
 	vals[0] = x;
 	va_list ap;
 	va_start(ap, x);
-	for (int i = 1; i < Dim; i++)
+	for (int i = 1; i < Dim; i++) {
 		vals[i] = va_arg(ap, T);
+	}
 	va_end(ap);
 }
 
 template<int Dim>
-double Point<Dim>::operator[](int index) const
+bool
+etchasketch::Point<Dim>::isValid(void) const
 {
-	if (enable_mines && am_mine)
-		cout << "Hit mine " << *this << endl;
-	
-	if (index >= Dim)
-	{
+	PointCoordinate invalid = etchasketch::Point<Dim>::PointCoordinateInvalid;
+	for (int i = 0; i < Dim; i++) {
+		if (vals[i] == invalid) {
+			return false;
+		}
+	}
+	return true;
+}
+
+template<int Dim>
+bool
+etchasketch::Point<Dim>::isLeaf(void) const
+{
+	return (lesserPoints == nullptr) && (greaterPoints == nullptr);
+}
+
+template<int Dim>
+float
+etchasketch::Point<Dim>::distanceTo(const Point<Dim> &other) const
+{
+	float dist = 0.0f;
+	for (int i = 0; i < Dim; i++) {
+		float diff = static_cast<float>((*this)[i] - other[i]);
+		dist += diff * diff;
+	}
+	return dist;
+}
+
+template<int Dim>
+PointCoordinate
+etchasketch::Point<Dim>::operator[](int index) const
+{
+	if (index >= Dim) {
 		out_of_range e("Point index out of range");
 		throw e;
 	}
@@ -91,13 +106,10 @@ double Point<Dim>::operator[](int index) const
 }
 
 template<int Dim>
-double & Point<Dim>::operator[](int index)
+PointCoordinate &
+etchasketch::Point<Dim>::operator[](int index)
 {
-	if (enable_mines && am_mine)
-		cout << "Hit mine " << *this << endl;
-	
-	if (index >= Dim)
-	{
+	if (index >= Dim) {
 		out_of_range e("Point index out of range");
 		throw e;
 	}
@@ -105,10 +117,10 @@ double & Point<Dim>::operator[](int index)
 }
 
 template<int Dim>
-void Point<Dim>::set(int index, double val)
+void
+etchasketch::Point<Dim>::set(int index, PointCoordinate val)
 {
-	if (index >= Dim)
-	{
+	if (index >= Dim) {
 		out_of_range e("Point index out of range");
 		throw e;
 	}
@@ -116,65 +128,89 @@ void Point<Dim>::set(int index, double val)
 }
 
 template<int Dim>
-void Point<Dim>::print(std::ostream & out /* = cout */) const
+void
+etchasketch::Point<Dim>::print(std::ostream &out /* = cout */) const
 {
-	out << (am_mine ? '{' : '(');
-	
-	for (int i = 0; i < Dim - 1; ++i)
-		out << vals[i] << ", ";
-	out << vals[Dim - 1];
-	
-	out << (am_mine ? '}' : ')');
+	out << "{value: ";
+	printVals(out);
+	out << ", lesserPoints: ";
+	out << (lesserPoints != nullptr) ?: "NULL";
+	out << ", greaterPoints: ";
+	out << (greaterPoints != nullptr) ?: "NULL";
+	out << "}";
 }
 
 template<int Dim>
-std::ostream & operator<<(std::ostream & out, const Point<Dim> & p)
+void
+etchasketch::Point<Dim>::printVals(std::ostream &out) const
+{
+	out << '(';
+	
+	for (int i = 0; i < Dim - 1; i++) {
+		out << vals[i] << ", ";
+	}
+	out << vals[Dim - 1];
+	
+	out << ')';
+}
+
+template<int Dim>
+std::ostream &
+operator<<(std::ostream &out, const etchasketch::Point<Dim> &p)
 {
 	p.print(out);
 	return out;
 }
 
 template<int Dim>
-bool Point<Dim>::operator==(const Point<Dim> p) const
+bool
+etchasketch::Point<Dim>::operator==(const etchasketch::Point<Dim> p) const
 {
 	return !(*this != p);
 }
 
 template<int Dim>
-bool Point<Dim>::operator!=(const Point<Dim> p) const
+bool
+etchasketch::Point<Dim>::operator!=(const etchasketch::Point<Dim> p) const
 {
 	bool eq = true;
-	for(int i = 0; i < Dim; ++i)
+	for (int i = 0; i < Dim; i++) {
 		eq &= (vals[i] == p.vals[i]);
+	}
 	return !eq;
 }
 
 template<int Dim>
-bool Point<Dim>::operator<(const Point<Dim> p) const
+bool
+etchasketch::Point<Dim>::operator<(const etchasketch::Point<Dim> p) const
 {
 	bool less = false;
-	for(int i = 0; i < Dim; ++i){
+	for (int i = 0; i < Dim; i++) {
 		less = vals[i] < p[i];
-		if(vals[i] != p[i])
+		if (vals[i] != p[i]) {
 			break;
+		}
 	}
 	return less;
 }
 
 template<int Dim>
-bool Point<Dim>::operator<=(const Point<Dim> p) const
+bool
+etchasketch::Point<Dim>::operator<=(const etchasketch::Point<Dim> p) const
 {
 	return (*this < p) || (*this == p);
 }
 
 template<int Dim>
-bool Point<Dim>::operator>(const Point<Dim> p) const
+bool
+etchasketch::Point<Dim>::operator>(const etchasketch::Point<Dim> p) const
 {
-	return !(*this < p);
+	return !(*this < p) && (*this != p);
 }
 
 template<int Dim>
-bool Point<Dim>::operator>=(const Point<Dim> p) const
+bool
+etchasketch::Point<Dim>::operator>=(const etchasketch::Point<Dim> p) const
 {
 	return (*this > p) || (*this == p);
 }

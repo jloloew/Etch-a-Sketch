@@ -17,80 +17,100 @@ using std::out_of_range;
 using std::cout;
 using std::endl;
 
-/**
- * Point class: represents a point in Dim dimensional space.
- *
- * @author Matt Sachtler
- * @date Spring 2009
- */
-template<int Dim>
-class Point
-{
-public:
-	static bool enable_mines;
+namespace etchasketch {
 	
-private:
-	double vals[Dim];
-	bool am_mine;
-	
-public:
-	Point();
-	
-	Point(double arr[Dim]);
-	Point(double arr[Dim], bool mine);
-	template <typename T>
-	explicit Point(T x, ...);
-	template <typename T>
-	explicit Point(T x0, T x1, T x2);
+	typedef int PointCoordinate;
 	
 	/**
-	 * Gets the value of the Point object in the given dimension
-	 * (index). This function is const so we don't modify Points using
-	 * this function.
+	 * Point class: represents a point in Dim dimensional space.
 	 *
-	 * @param index The dimension of the Point to grab.
-	 * @return The value of the Point in the indexth dimension.
+	 * @author Matt Sachtler
+	 * @date Spring 2009
 	 */
-	double operator[](int index) const;
+	template<int Dim>
+	class Point
+	{
+	public:
+		static const PointCoordinate PointCoordinateInvalid = INT_MAX;
+		
+	private:
+		PointCoordinate vals[Dim];
+		
+	public:
+		/// The subtree containing all points less than the current point.
+		Point<Dim> *lesserPoints = nullptr;
+		
+		/// The subtree containing all points greater than the current point.
+		Point<Dim> *greaterPoints = nullptr;
+		
+		Point();
+		
+		Point(PointCoordinate arr[Dim]);
+		template <typename T>
+		explicit Point(T x, ...);
+		template <typename T>
+		explicit Point(T x0, T x1, T x2);
+		
+		bool isValid(void) const;
+		
+		bool isLeaf(void) const;
+		
+		/**
+		 * @param other The point to measure the distance to.
+		 * @return The square of the distance to other.
+		 */
+		float distanceTo(const Point<Dim> &other) const;
+		
+		/**
+		 * Gets the value of the Point object in the given dimension
+		 * (index). This function is const so we don't modify Points using
+		 * this function.
+		 *
+		 * @param index The dimension of the Point to grab.
+		 * @return The value of the Point in the indexth dimension.
+		 */
+		PointCoordinate operator[](int index) const;
+		
+		/**
+		 * Gets the value of the Point object in the given dimension
+		 * (index). This is the non-const version, so it can be used to
+		 * modify Points like so:
+		 *
+		 *     Point<3> a(1, 2, 3);
+		 *     a[0] = 4; // a is now (4, 2, 3)
+		 *
+		 * @param index The dimension of the Point to grab.
+		 * @return The value of the Point in the indexth dimension, by
+		 *	reference (so that it may be modified).
+		 */
+		PointCoordinate & operator[](int index);
+		
+		bool operator==(const Point<Dim> p) const;
+		bool operator!=(const Point<Dim> p) const;
+		
+		/**
+		 * Compares whether the given Point is smaller than the current
+		 * Point.
+		 *
+		 * @param p The other point to compare with.
+		 * @return A boolean value indicating whether the current Point is
+		 *  smaller than the provided Point p.
+		 */
+		bool operator<(const Point<Dim> p) const;
+		
+		bool operator<=(const Point<Dim> p) const;
+		bool operator>(const Point<Dim> p) const;
+		bool operator>=(const Point<Dim> p) const;
+		
+		void set(int index, PointCoordinate val);
+		
+		void print(std::ostream &out = std::cout) const;
+		void printVals(std::ostream &out = std::cout) const;
+	};
 	
-	/**
-	 * Gets the value of the Point object in the given dimension
-	 * (index). This is the non-const version, so it can be used to
-	 * modify Points like so:
-	 *
-	 *     Point<3> a(1, 2, 3);
-	 *     a[0] = 4; // a is now (4, 2, 3)
-	 *
-	 * @param index The dimension of the Point to grab.
-	 * @return The value of the Point in the indexth dimension, by
-	 *	reference (so that it may be modified).
-	 */
-	double & operator[](int index);
+	template<int Dim>
+	std::ostream & operator<<(std::ostream &out, const Point<Dim> &p);
 	
-	bool operator==(const Point<Dim> p) const;
-	bool operator!=(const Point<Dim> p) const;
-	
-	/**
-	 * Compares whether the given Point is smaller than the current
-	 * Point.
-	 *
-	 * @param p The other point to compare with.
-	 * @return A boolean value indicating whether the current Point is
-	 *  smaller than the provided Point p.
-	 */
-	bool operator<(const Point<Dim> p) const;
-	
-	bool operator<=(const Point<Dim> p) const;
-	bool operator>(const Point<Dim> p) const;
-	bool operator>=(const Point<Dim> p) const;
-	
-	void set(int index, double val);
-	bool is_mine() { return am_mine; }
-	
-	void print(std::ostream & out = std::cout) const;
-};
-
-template<int Dim>
-std::ostream & operator<<(std::ostream & out, const Point<Dim> & p);
+}
 
 #endif /* Point_hpp */

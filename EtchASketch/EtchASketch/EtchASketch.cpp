@@ -8,7 +8,4 @@
 
 #include "EtchASketch.hpp"
 
-void foo(void)
-{
-	
-}
+

@@ -14,8 +14,8 @@
 
 #define EASLog(fmt, ...) _EASLog((fmt) , ## __VA_ARGS__)
 
-namespace EtchASketch {
-
+namespace etchasketch {
+	
 	double timeFunction(void (function)(void))
 	__attribute__((warn_unused_result));
 	

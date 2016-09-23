@@ -14,8 +14,7 @@
 
 using std::string;
 
-
-double EtchASketch::timeFunction(void (function)(void))
+double etchasketch::timeFunction(void (function)(void))
 {
 	// Get the start time.
 	struct timeval startTime, endTime;
@@ -35,10 +34,10 @@ double EtchASketch::timeFunction(void (function)(void))
 	return timeTaken;
 }
 
-void EtchASketch::timeFunctionAndPrint(void (function)(void), string funcName)
+void etchasketch::timeFunctionAndPrint(void (function)(void), string funcName)
 {
 	// Get elapsed time.
-	double elapsedTime = timeFunction(function);
+	double elapsedTime = etchasketch::timeFunction(function);
 	std::stringstream resultStr;
 	resultStr << "'" << funcName << "' took " << elapsedTime << "s to run.\n";
 	EASLog(resultStr.str());
