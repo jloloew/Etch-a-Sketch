@@ -7,6 +7,7 @@
 //
 
 #include "EASUtils.hpp"
+#include <cstdio>
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -14,7 +15,8 @@
 
 using std::string;
 
-double etchasketch::timeFunction(void (function)(void))
+double
+etchasketch::timeFunction(void (function)(void))
 {
 	// Get the start time.
 	struct timeval startTime, endTime;
@@ -34,11 +36,21 @@ double etchasketch::timeFunction(void (function)(void))
 	return timeTaken;
 }
 
-void etchasketch::timeFunctionAndPrint(void (function)(void), string funcName)
+void
+etchasketch::timeFunctionAndPrint(void (function)(void), string funcName)
 {
 	// Get elapsed time.
 	double elapsedTime = etchasketch::timeFunction(function);
 	std::stringstream resultStr;
 	resultStr << "'" << funcName << "' took " << elapsedTime << "s to run.\n";
 	EASLog(resultStr.str());
+}
+
+void
+etchasketch::_EAS_Log(string fmt, ...)
+{
+	va_list args;
+	va_start(args, fmt);
+	vfprintf(stdout, fmt.c_str(), args);
+	va_end(args);
 }

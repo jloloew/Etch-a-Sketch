@@ -23,19 +23,19 @@ namespace etchasketch {
 		class Salesman {
 			
 		public:
-			Salesman(const std::unordered_set<Point<2> *> &unorderedPoints);
+			Salesman(const std::unordered_set<KDPoint<2> *> &unorderedPoints);
 			
 			virtual ~Salesman(void);
 			
 			/// Order the points for the best drawing order.
 			void orderPoints(void);
 			
-			const std::vector<Point<2>> & getOrderedPoints(void) const
+			const std::vector<KDPoint<2>> & getOrderedPoints(void) const
 				{ return orderedPoints; }
 			
 		private:
-			std::unordered_set<Point<2> *> unorderedPoints;
-			std::vector<Point<2>> orderedPoints;
+			std::unordered_set<KDPoint<2> *> unorderedPoints;
+			std::vector<KDPoint<2>> orderedPoints;
 			
 			void primsAlgorithm(KDTree<2> &kdTree);
 		};

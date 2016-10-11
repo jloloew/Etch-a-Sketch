@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "EtchASketch.hpp"
 
 @interface ViewController ()
 

@@ -12,7 +12,7 @@
 #include <iostream>
 #include <unordered_set>
 #include <vector>
-#include "Point.hpp"
+#include "KDPoint.hpp"
 
 namespace etchasketch {
 	
@@ -21,9 +21,9 @@ namespace etchasketch {
 	{
 	public:
 		/**
-		 * Constructs a KDTree from a vector of Points, each having dimension Dim.
+		 * Constructs a KDTree from a vector of KDPoints, each having dimension Dim.
 		 *
-		 * You may assume the vector has at least one Point in it. It should
+		 * You may assume the vector has at least one KDPoint in it. It should
 		 * build the tree using recursive helper functions.
 		 *
 		 * Since we know the size of the KDTree at construction, we can
@@ -46,7 +46,7 @@ namespace etchasketch {
 		 *     middle node is selected if there are an odd number, and the
 		 *     item before the middle if there are an even number. **If there
 		 *     are ties (two points have equal value along a dimension), they
-		 *     must be decided using Point::operator<().** Although this is
+		 *     must be decided using KDPoint::operator<().** Although this is
 		 *     arbitrary and doesn't affect the functionality of the KDTree,
 		 *     it is required to be able to grade your code.
 		 *
@@ -71,45 +71,45 @@ namespace etchasketch {
 		 * should choose a midpoint between the left and right indices.
 		 *
 		 * @todo This function is required for MP 6.1.
-		 * @param newPoints The vector of points to build your KDTree off of.
+		 * @param newKDPoints The vector of points to build your KDTree off of.
 		 */
-		KDTree(const std::vector<etchasketch::Point<Dim> *> &newPoints);
+		KDTree(const std::vector<etchasketch::KDPoint<Dim> *> &newKDPoints);
 		
-		KDTree(const std::unordered_set<etchasketch::Point<Dim> *> &newPoints);
+		KDTree(const std::unordered_set<etchasketch::KDPoint<Dim> *> &newKDPoints);
 		
 		virtual ~KDTree(void);
 		
 		/**
-		 * Determines if Point a is smaller than Point b in a given dimension d.
-		 * If there is a tie, break it with Point::operator<().
+		 * Determines if KDPoint a is smaller than KDPoint b in a given dimension d.
+		 * If there is a tie, break it with KDPoint::operator<().
 		 *
 		 * For example:
 		 *
-		 *     Point<3> a(1, 2, 3);
-		 *     Point<3> b(3, 2, 1);
+		 *     KDPoint<3> a(1, 2, 3);
+		 *     KDPoint<3> b(3, 2, 1);
 		 *     cout << smallerDimVal(a, b, 0) << endl; // should print true
 		 *     cout << smallerDimVal(a, b, 2) << endl; // should print false
 		 *     cout << smallerDimVal(a, b, 1) << endl; // based on operator<, this should be true
 		 *
 		 * @todo This function is required for MP 6.1.
-		 * @param first Point to compare.
+		 * @param first KDPoint to compare.
 		 * @param second Second point to compare.
 		 * @param curDim Dimension these points are being compared in.
-		 * @return A boolean value indicating whether the first Point is smaller than the second
-		 *  Point in the curDim dimension.
+		 * @return A boolean value indicating whether the first KDPoint is smaller than the second
+		 *  KDPoint in the curDim dimension.
 		 */
-		bool smallerDimVal(const etchasketch::Point<Dim> &first,
-						   const etchasketch::Point<Dim> &second,
+		bool smallerDimVal(const etchasketch::KDPoint<Dim> &first,
+						   const etchasketch::KDPoint<Dim> &second,
 						   const int curDim) const;
 		
 		/**
 		 * Finds the closest point to the parameter point in the KDTree.
 		 *
-		 * This function takes a reference to a template parameter Point and
-		 * returns the Point closest to it in the tree. We are defining
+		 * This function takes a reference to a template parameter KDPoint and
+		 * returns the KDPoint closest to it in the tree. We are defining
 		 * closest here to be the minimum Euclidean distance between elements.
 		 * Again, **if there are ties (this time in distance), they must be
-		 * decided using Point::operator<().** Recall that an RGBAPixel is
+		 * decided using KDPoint::operator<().** Recall that an RGBAPixel is
 		 * defined by three components: red, green, and blue.
 		 *
 		 * The findNearestNeighbor() search is done in two steps: a search to
@@ -158,56 +158,56 @@ namespace etchasketch {
 		 * @param query The point we wish to find the closest neighbor to in the tree.
 		 * @return The closest point to a in the KDTree.
 		 */
-		etchasketch::Point<Dim> * findNearestNeighbor(const etchasketch::Point<Dim> &query) const;
+		const etchasketch::KDPoint<Dim> * findNearestNeighbor(const etchasketch::KDPoint<Dim> &query) const;
 		
 		/**
 		 * Check whether the KD tree contains a given point.
 		 * @param query The point to see if it's in the KD tree.
 		 * @return `true` if `query` is present in the KD tree, `false` otherwise.
 		 */
-		bool contains(const etchasketch::Point<Dim> &query) const;
+		bool contains(const etchasketch::KDPoint<Dim> &query) const;
 		
 		/**
 		 * Insert a new point.
-		 * @param newPoint The new point to be added to the KD tree.
+		 * @param newKDPoint The new point to be added to the KD tree.
 		 */
-		void insert(etchasketch::Point<Dim> &newPoint);
+		void insert(etchasketch::KDPoint<Dim> &newKDPoint);
 		
 		/**
 		 * Remove a given node from the KD tree, then delete the node. The
 		 * target's subtrees are retained in the KD tree.
 		 * @param target The node to be removed and deleted.
 		 */
-		void remove(etchasketch::Point<Dim> *&target);
+		void remove(etchasketch::KDPoint<Dim> *&target);
 		
 	private:
 		/// This is the root node of our KDTree representation.
-		etchasketch::Point<Dim> *root;
+		etchasketch::KDPoint<Dim> *root;
 		
 		/// Helper function for the KDTree constructor.
-		void buildTree(const std::vector<etchasketch::Point<Dim> *> &points);
+		void buildTree(const std::unordered_set<etchasketch::KDPoint<Dim> *> &points);
 		
 		/**
 		 * Delete a subtree.
 		 * @param subRoot inout The root of the subtree to be deleted.
 		 */
-		void deleteSubtree(etchasketch::Point<Dim> *subRoot);
+		void deleteSubtree(etchasketch::KDPoint<Dim> *subRoot);
 		
 		/// Helper function for insert.
-		void insert(etchasketch::Point<Dim> &newPoint,
-					etchasketch::Point<Dim> &subRoot,
+		void insert(etchasketch::KDPoint<Dim> &newKDPoint,
+					etchasketch::KDPoint<Dim> &subRoot,
 					const int dimension);
 		
-		const etchasketch::Point<Dim> * getParent(const etchasketch::Point<Dim> &child) const;
+		const etchasketch::KDPoint<Dim> * getParent(const etchasketch::KDPoint<Dim> &child) const;
 		
-		etchasketch::Point<Dim> * findNearestNeighbor(const etchasketch::Point<Dim> &query,
-													const etchasketch::Point<Dim> &subRoot,
+		const etchasketch::KDPoint<Dim> * findNearestNeighbor(const etchasketch::KDPoint<Dim> &query,
+													const etchasketch::KDPoint<Dim> *subroot,
 													double &currentBestDist, // inout
 													const int dimension) const;
 		
 		/**
-		 * Determines if a Point is closer to the target Point than another
-		 * reference Point. Takes three points: target, currentBest, and
+		 * Determines if a KDPoint is closer to the target KDPoint than another
+		 * reference KDPoint. Takes three points: target, currentBest, and
 		 * potential, and returns whether or not potential is closer to
 		 * target than currentBest.
 		 *
@@ -220,32 +220,32 @@ namespace etchasketch {
 		 *
 		 * For example:
 		 *
-		 *     Point<3> target(1, 3, 5);
-		 *     Point<3> currentBest1(1, 3, 2);
-		 *     Point<3> possibleBest1(2, 4, 4);
-		 *     Point<3> currentBest2(1, 3, 6);
-		 *     Point<3> possibleBest2(2, 4, 4);
-		 *     Point<3> currentBest3(0, 2, 4);
-		 *     Point<3> possibleBest3(2, 4, 6);
+		 *     KDPoint<3> target(1, 3, 5);
+		 *     KDPoint<3> currentBest1(1, 3, 2);
+		 *     KDPoint<3> possibleBest1(2, 4, 4);
+		 *     KDPoint<3> currentBest2(1, 3, 6);
+		 *     KDPoint<3> possibleBest2(2, 4, 4);
+		 *     KDPoint<3> currentBest3(0, 2, 4);
+		 *     KDPoint<3> possibleBest3(2, 4, 6);
 		 *     cout << shouldReplace(target, currentBest1, possibleBest1) << endl; // true
 		 *     cout << shouldReplace(target, currentBest2, possibleBest2) << endl; // false
 		 *     cout << shouldReplace(target, currentBest3, possibleBest3) << endl;
 		 *      // based on operator<, this should be false
 		 *
 		 * @todo This function is required for MP 6.1.
-		 * @param target The Point we want to be close to.
-		 * @param currentBest The Point that is currently our closest Point
+		 * @param target The KDPoint we want to be close to.
+		 * @param currentBest The KDPoint that is currently our closest KDPoint
 		 *    to target.
-		 * @param potential Our Point that is a candidate to replace
+		 * @param potential Our KDPoint that is a candidate to replace
 		 *    currentBest (that is, it may be closer to target than
 		 *    currentBest).
 		 * @return A boolean value indicating whether potential is closer
 		 *  to target than currentBest. Ties should be broken with
-		 *  Point::operator<().
+		 *  KDPoint::operator<().
 		 */
-		bool shouldReplace(const etchasketch::Point<Dim> &target,
-						   const etchasketch::Point<Dim> *currentBest,
-						   const etchasketch::Point<Dim> &potential) const;
+		bool shouldReplace(const etchasketch::KDPoint<Dim> &target,
+						   const etchasketch::KDPoint<Dim> *currentBest,
+						   const etchasketch::KDPoint<Dim> &potential) const;
 		
 		/// Print the KD tree, one node at a time.
 		void print(std::ostream &out) const;
@@ -255,5 +255,7 @@ namespace etchasketch {
 	std::ostream & operator<<(std::ostream &out, const KDTree<Dim> &kdtree);
 	
 }
+
+#include "KDTree.cpp"
 
 #endif /* KDTree_hpp */

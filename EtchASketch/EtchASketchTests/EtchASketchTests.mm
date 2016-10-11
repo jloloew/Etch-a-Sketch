@@ -11,10 +11,12 @@
 #import <vector>
 
 using std::vector;
+using etchasketch::KDTree;
+#define KDPoint etchasketch::KDPoint
 
 @interface EtchASketchTests : XCTestCase
 
-@property EtchASketch::KDTree<2> *kdtree;
+@property etchasketch::KDTree<2> *kdtree;
 
 @end
 
@@ -23,10 +25,10 @@ using std::vector;
 - (void)setUp {
     [super setUp];
     // Generate points to put in the new tree.
-	vector points;
-	points.put(Point<2>(1, 0));
-	points.put(Point<2>(3, 4));
-	points.put(Point<2>(0, -2));
+	vector<KDPoint<2> *> points;
+	points.push_back(new KDPoint<2>(1, 0));
+	points.push_back(new KDPoint<2>(3, 4));
+	points.push_back(new KDPoint<2>(0, -2));
 	self.kdtree = new KDTree<2>(points);
 }
 

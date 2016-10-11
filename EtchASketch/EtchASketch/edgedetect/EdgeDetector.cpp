@@ -7,3 +7,9 @@
 //
 
 #include "EdgeDetector.hpp"
+
+etchasketch::Image *
+etchasketch::edgedetect::EdgeDetector::detectEdges(const etchasketch::Image &grayscaleImage) const
+{
+	return nullptr;
+}

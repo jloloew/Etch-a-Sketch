@@ -17,7 +17,7 @@ namespace etchasketch {
 		
 		class EdgeDetector {
 		public:
-			EdgeDetector();
+			EdgeDetector() { };
 			
 			/// Detect edges in an image.
 			virtual Image * detectEdges(const Image &grayscaleImage) const;

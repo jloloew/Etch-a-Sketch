@@ -9,14 +9,14 @@
 #include "Image.hpp"
 
 etchasketch::Image::Image(size_t width, size_t height)
-:Image(nullptr, width, height)
+:etchasketch::Image(nullptr, width, height)
 { }
 
-etchasketch::Image::Image(const Pixel *data, size_t width, size_t height)
+etchasketch::Image::Image(const etchasketch::Image::Pixel *data, size_t width, size_t height)
 :width(width), height(height)
 {
 	// TODO: check for overflow on the multiplication
-	this->data = new Image::Pixel[width * height];
+	this->data = new etchasketch::Image::Pixel[width * height];
 	if (nullptr != data) {
 		memcpy(this->data, data, width * height * sizeof(etchasketch::Image::Pixel));
 	}
@@ -41,14 +41,14 @@ etchasketch::Image::getHeight(void) const
 }
 
 const etchasketch::Image::Pixel &
-etchasketch::Image::operator[](const Point<2> &index) const
+etchasketch::Image::operator[](const etchasketch::KDPoint<2> &index) const
 {
 	size_t dataIndex = index[0] + (index[1] * width);
 	return data[dataIndex];
 }
 
 etchasketch::Image::Pixel &
-etchasketch::Image::operator[](const Point<2> &index)
+etchasketch::Image::operator[](const etchasketch::KDPoint<2> &index)
 {
 	size_t dataIndex = index[0] + (index[1] * width);
 	return data[dataIndex];

@@ -9,12 +9,16 @@
 #ifndef Image_hpp
 #define Image_hpp
 
-#include <cstdint>
-#include "Point.hpp"
+#include <stdint.h>
+#include "KDPoint.hpp"
 
-using etchasketch::Point;
+//using etchasketch::KDPoint;
 
 namespace etchasketch {
+	
+//	// Forward declare.
+//	template<int Dim>
+//	class KDPoint;
 	
 	/**
 	 * The backing store of a single image.
@@ -34,9 +38,9 @@ namespace etchasketch {
 		
 		size_t getHeight(void) const;
 		
-		const Pixel & operator[] (const Point<2> & index) const;
+		const Pixel & operator[] (const etchasketch::KDPoint<2> & index) const;
 		
-		Pixel & operator[] (const Point<2> & index);
+		Pixel & operator[] (const etchasketch::KDPoint<2> & index);
 		
 	private:
 		size_t width, height;

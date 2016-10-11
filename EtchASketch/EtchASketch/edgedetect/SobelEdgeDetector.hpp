@@ -23,7 +23,7 @@ namespace etchasketch {
 			
 		private:
 			float
-			intensityForPoint(const Image &img,
+			intensityForKDPoint(const Image &img,
 							  const size_t x,
 							  const size_t y) const;
 			

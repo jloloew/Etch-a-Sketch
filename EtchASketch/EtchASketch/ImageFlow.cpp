@@ -29,8 +29,8 @@ etchasketch::ImageFlow::~ImageFlow()
 	if ((edgePoints != nullptr) && (salesman == nullptr)) {
 		for (auto iter = edgePoints->begin(); iter != edgePoints->end(); iter++) {
 			delete *iter;
-			// No need to remove it from edgePoints because we're about to
-			// delete edgePoints.
+			// No need to remove it from edgeKDPoints because we're about to
+			// delete edgeKDPoints.
 		}
 	}
 	delete edgePoints;
@@ -43,7 +43,7 @@ etchasketch::ImageFlow::convertToGrayscale(void)
 	// Transform each pixel.
 	for (size_t x = 0; x < originalImage.getWidth(); x++) {
 		for (size_t y = 0; y < originalImage.getHeight(); y++) {
-			Point<2> pt(x, y);
+			KDPoint<2> pt(x, y);
 			// Average the components.
 			const Image::Pixel color = originalImage[pt];
 			const Image::Pixel gray =    (((color >> 24) & 0xFF)
@@ -63,16 +63,16 @@ etchasketch::ImageFlow::detectEdges(void)
 void
 etchasketch::ImageFlow::generateEdgePoints(void)
 {
-	unordered_set<Point<2> *> *pointSet = new unordered_set<Point<2> *>();
+	unordered_set<KDPoint<2> *> *pointSet = new unordered_set<KDPoint<2> *>();
 	// Loop through each point to see if its pixel is part of an edge.
 	for (size_t x = 0; x < edgeDetectedImage->getWidth(); x++) {
 		for (size_t y = 0; y < edgeDetectedImage->getHeight(); y++) {
-			Point<2> pt(x, y);
+			KDPoint<2> pt(x, y);
 			Image::Pixel px = (*edgeDetectedImage)[pt];
 			uint8_t greenComponent = ((px >> 16) & 0xFF);
 			// Check for non-black.
 			if (greenComponent != 0) {
-				pointSet->insert(new Point<2>(pt));
+				pointSet->insert(new KDPoint<2>(pt));
 			}
 		}
 	}

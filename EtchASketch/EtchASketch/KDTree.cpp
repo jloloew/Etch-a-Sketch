@@ -6,40 +6,43 @@
 //  Copyright © 2016 Justin Loew. All rights reserved.
 //
 
-#include "KDTree.hpp"
+//#include "KDTree.hpp"
 #include <algorithm>
 
 using std::unordered_set;
 using std::vector;
-using etchasketch::Point;
 
 
 #pragma mark - Constructors
 
 template<int Dim>
-etchasketch::KDTree<Dim>::KDTree(const unordered_set<Point<Dim> *> &newPoints)
+etchasketch::KDTree<Dim>::KDTree(const unordered_set<etchasketch::KDPoint<Dim> *> &newKDPoints)
 {
-	if (newPoints.empty()) {
+	if (newKDPoints.empty()) {
 		root = nullptr;
 		return;
 	}
 	
-	buildTree(newPoints);
+	buildTree(newKDPoints);
 }
 
 template<int Dim>
-etchasketch::KDTree<Dim>::KDTree(const vector<Point<Dim> *> &newPoints)
-: KDTree(unordered_set<Point<Dim> *>(newPoints.begin(), newPoints.end()))
+etchasketch::KDTree<Dim>::KDTree(const vector<KDPoint<Dim> *> &newKDPoints)
+: KDTree(unordered_set<etchasketch::KDPoint<Dim> *>(newKDPoints.begin(),
+													newKDPoints.end()))
 { }
 
 template<int Dim>
 void
-etchasketch::KDTree<Dim>::buildTree(const vector<Point<Dim> *> &points)
+etchasketch::KDTree<Dim>::buildTree(const unordered_set<KDPoint<Dim> *> &points)
 {
 	// TODO: Would sorting the points help speed up the build?
 	// Just insert each point.
 	for (auto pointIter = points.begin(); pointIter != points.end(); pointIter++) {
-		insert(*pointIter);
+		KDPoint<2> *point = *pointIter;
+		if (nullptr != point) {
+			this->insert(*point);
+		}
 	}
 }
 
@@ -53,8 +56,8 @@ etchasketch::KDTree<Dim>::~KDTree()
 
 template<int Dim>
 bool
-etchasketch::KDTree<Dim>::smallerDimVal(const Point<Dim> &first,
-										const Point<Dim> &second,
+etchasketch::KDTree<Dim>::smallerDimVal(const etchasketch::KDPoint<Dim> &first,
+										const etchasketch::KDPoint<Dim> &second,
 										const int curDim) const
 {
 	if (first[curDim] < second[curDim]) {
@@ -69,46 +72,47 @@ etchasketch::KDTree<Dim>::smallerDimVal(const Point<Dim> &first,
 #pragma mark - Find nearest neighbor
 
 template<int Dim>
-Point<Dim> *
-etchasketch::KDTree<Dim>::findNearestNeighbor(const Point<Dim> &query) const
+const etchasketch::KDPoint<Dim> *
+etchasketch::KDTree<Dim>::findNearestNeighbor(const etchasketch::KDPoint<Dim> &query) const
 {
 	double currentBestDist = 1.0 / 0.0; // infinity
 	return findNearestNeighbor(query, root, currentBestDist, 0);
 }
 
 template<int Dim>
-Point<Dim> *
-etchasketch::KDTree<Dim>::findNearestNeighbor(const Point<Dim> &query,
-											  const etchasketch::Point<Dim> &subRoot,
+const etchasketch::KDPoint<Dim> *
+etchasketch::KDTree<Dim>::findNearestNeighbor(const etchasketch::KDPoint<Dim> &query,
+											  const etchasketch::KDPoint<Dim> *subroot,
 											  double &currentBestDist, // inout
 											  const int dimension) const
 {
 	// Base cases.
-	if (subRoot == nullptr) {
+	if (subroot == nullptr) {
 		return nullptr;
 	}
+	const etchasketch::KDPoint<Dim> subRoot = *subroot;
 	if (subRoot.isLeaf()) {
 		currentBestDist = query.distanceTo(subRoot);
-		return subRoot;
+		return subroot;
 	}
 	
 	const int nextDimension = (dimension + 1) % Dim;
 	const double myDistance = query.distanceTo(subRoot);
-	const Point<Dim> *currentBestPoint = nullptr;
+	const etchasketch::KDPoint<Dim> *currentBestKDPoint = nullptr;
 	
 	// Recurse to find the nearest neighbor in a subtree.
 	if (smallerDimVal(query, subRoot, dimension)) {
 		// Go left.
-		currentBestPoint = findNearestNeighbor(query, subRoot.lesserPoints, currentBestDist, nextDimension);
+		currentBestKDPoint = findNearestNeighbor(query, subRoot.lesserKDPoints, currentBestDist, nextDimension);
 	} else {
 		// Go right.
-		currentBestPoint = findNearestNeighbor(query, subRoot.greaterPoints, currentBestDist, nextDimension);
+		currentBestKDPoint = findNearestNeighbor(query, subRoot.greaterKDPoints, currentBestDist, nextDimension);
 	}
 	
 	// Check if the subroot is better than the subtree's best.
-	if (shouldReplace(query, currentBestPoint, subRoot)) {
+	if (shouldReplace(query, currentBestKDPoint, subRoot)) {
 		currentBestDist = myDistance;
-		currentBestPoint = subRoot;
+		currentBestKDPoint = subroot;
 	}
 	
 	// Check if there could be a better point in the other subtree.
@@ -119,32 +123,32 @@ etchasketch::KDTree<Dim>::findNearestNeighbor(const Point<Dim> &query,
 	const double distInCurDim = diffInCurDim * diffInCurDim;
 	if (distInCurDim <= currentBestDist) {
 		double newBestDist = 1.0 / 0.0; // Infinity.
-		Point<Dim> *newBestPoint;
+		const etchasketch::KDPoint<Dim> *newBestKDPoint;
 		if (smallerDimVal(subRoot, query, dimension)) {
 			// Go left.
-			newBestPoint = findNearestNeighbor(query, subRoot.lesserPoints, newBestDist, nextDimension);
+			newBestKDPoint = findNearestNeighbor(query, subRoot.lesserKDPoints, newBestDist, nextDimension);
 		} else {
 			// Go right.
-			newBestPoint = findNearestNeighbor(query, subRoot.greaterPoints, newBestDist, nextDimension);
+			newBestKDPoint = findNearestNeighbor(query, subRoot.greaterKDPoints, newBestDist, nextDimension);
 		}
 		
-		if (newBestPoint != nullptr) {
+		if (newBestKDPoint != nullptr) {
 			// Check the distance we just got.
-			if (shouldReplace(query, currentBestPoint, newBestPoint)) {
+			if (shouldReplace(query, currentBestKDPoint, *newBestKDPoint)) {
 				currentBestDist = newBestDist;
-				currentBestPoint = newBestPoint;
+				currentBestKDPoint = newBestKDPoint;
 			}
 		}
 	}
 	
-	return currentBestPoint;
+	return currentBestKDPoint;
 }
 
 template<int Dim>
 bool
-etchasketch::KDTree<Dim>::shouldReplace(const Point<Dim> &target,
-										const Point<Dim> *currentBest,
-										const Point<Dim> &potential) const
+etchasketch::KDTree<Dim>::shouldReplace(const KDPoint<Dim> &target,
+										const KDPoint<Dim> *currentBest,
+										const KDPoint<Dim> &potential) const
 {
 	if (currentBest == nullptr) {
 		return true;
@@ -158,7 +162,7 @@ etchasketch::KDTree<Dim>::shouldReplace(const Point<Dim> &target,
 	} else if (potentialDist > currentBestDist) {
 		return false;
 	} else {
-		return potential < currentBest;
+		return potential < *currentBest;
 	}
 }
 
@@ -166,9 +170,9 @@ etchasketch::KDTree<Dim>::shouldReplace(const Point<Dim> &target,
 
 template<int Dim>
 bool
-etchasketch::KDTree<Dim>::contains(const Point<Dim> &query) const
+etchasketch::KDTree<Dim>::contains(const KDPoint<Dim> &query) const
 {
-	const Point<Dim> *subRoot = *root;
+	const KDPoint<Dim> *subRoot = *root;
 	int dimension = 0;
 	while (subRoot != nullptr) {
 		// Base case.
@@ -178,10 +182,10 @@ etchasketch::KDTree<Dim>::contains(const Point<Dim> &query) const
 		
 		if (smallerDimVal(query, *subRoot, dimension)) {
 			// Go left.
-			subRoot = subRoot->lesserPoints;
+			subRoot = subRoot->lesserKDPoints;
 		} else {
 			// Go right.
-			subRoot = subRoot->greaterPoints;
+			subRoot = subRoot->greaterKDPoints;
 		}
 		dimension = (dimension + 1) % Dim;
 	}
@@ -192,19 +196,19 @@ etchasketch::KDTree<Dim>::contains(const Point<Dim> &query) const
 
 template<int Dim>
 void
-etchasketch::KDTree<Dim>::insert(Point<Dim> &newPoint)
+etchasketch::KDTree<Dim>::insert(KDPoint<Dim> &newKDPoint)
 {
 	// Temporarily remove the subtrees.
-	Point<Dim> *left = newPoint.lesserPoints;
-	Point<Dim> *right = newPoint.greaterPoints;
-	newPoint.lesserPoints = nullptr;
-	newPoint.greaterPoints = nullptr;
+	KDPoint<Dim> *left = newKDPoint.lesserKDPoints;
+	KDPoint<Dim> *right = newKDPoint.greaterKDPoints;
+	newKDPoint.lesserKDPoints = nullptr;
+	newKDPoint.greaterKDPoints = nullptr;
 	
 	if (root != nullptr) {
 		// Call the helper.
-		insert(newPoint, *root, 0);
+		insert(newKDPoint, *root, 0);
 	} else {
-		root = &newPoint;
+		root = &newKDPoint;
 	}
 	
 	// Insert the subtrees recursively.
@@ -218,99 +222,99 @@ etchasketch::KDTree<Dim>::insert(Point<Dim> &newPoint)
 
 template<int Dim>
 void
-etchasketch::KDTree<Dim>::insert(Point<Dim> &newPoint,
-								 Point<Dim> &subRoot,
+etchasketch::KDTree<Dim>::insert(KDPoint<Dim> &newKDPoint,
+								 KDPoint<Dim> &subRoot,
 								 const int dimension)
 {
 	const int nextDimension = (dimension + 1) % Dim;
 	// Should we go left or right?
-	if (smallerDimVal(newPoint, subRoot, dimension)) {
+	if (smallerDimVal(newKDPoint, subRoot, dimension)) {
 		// Go left.
-		Point<Dim> *lesser = subRoot.lesserPoints;
+		KDPoint<Dim> *lesser = subRoot.lesserKDPoints;
 		if (lesser != nullptr) {
-			insert(newPoint, *lesser, nextDimension);
+			insert(newKDPoint, *lesser, nextDimension);
 		} else {
 			// Put the new point here.
-			subRoot.lesserPoints = &newPoint;
-			// TODO: Clear the lesserPoints and greaterPoints of newPoint?
+			subRoot.lesserKDPoints = &newKDPoint;
+			// TODO: Clear the lesserKDPoints and greaterKDPoints of newKDPoint?
 		}
 	} else {
 		// Go right.
-		Point<Dim> *greater = subRoot.greaterPoints;
+		KDPoint<Dim> *greater = subRoot.greaterKDPoints;
 		if (greater != nullptr) {
-			insert(newPoint, *greater, nextDimension);
+			insert(newKDPoint, *greater, nextDimension);
 		} else {
 			// Put the new point here.
-			subRoot.greaterPoints = &newPoint;
-			// TODO: Clear the lesserPoints and greaterPoints of newPoint?
+			subRoot.greaterKDPoints = &newKDPoint;
+			// TODO: Clear the lesserKDPoints and greaterKDPoints of newKDPoint?
 		}
 	}
 }
 
 template<int Dim>
 void
-etchasketch::KDTree<Dim>::remove(Point<Dim> *&targetPoint)
+etchasketch::KDTree<Dim>::remove(KDPoint<Dim> *&targetKDPoint)
 {
 	// Safety first.
-	if (targetPoint == nullptr) {
+	if (targetKDPoint == nullptr) {
 		return;
 	}
 	
 	// Get the parent point.
-	Point<Dim> *parent = getParent(*targetPoint);
+	KDPoint<Dim> *parent = const_cast<KDPoint<Dim> *>(getParent(*targetKDPoint));
 	if (parent != nullptr) {
 		// Set the parent's reference to the target point to NULL, effectively
 		// removing it from the tree.
-		if (parent->lesserPoints == targetPoint) {
-			targetPoint = parent->lesserPoints;
-			parent->lesserPoints = nullptr;
-		} else if (parent->greaterPoints == targetPoint) {
-			targetPoint = parent->greaterPoints;
-			parent->greaterPoints = nullptr;
+		if (parent->lesserKDPoints == targetKDPoint) {
+			targetKDPoint = parent->lesserKDPoints;
+			parent->lesserKDPoints = nullptr;
+		} else if (parent->greaterKDPoints == targetKDPoint) {
+			targetKDPoint = parent->greaterKDPoints;
+			parent->greaterKDPoints = nullptr;
 		}
-	} else if (targetPoint == root) {
+	} else if (targetKDPoint == root) {
 		// The target is the root node.
-		targetPoint = root;
+		targetKDPoint = root;
 		root = nullptr;
 	}
 	
 	// Reinsert each of its children into the tree.
-	if (targetPoint->lesserPoints != nullptr) {
-		insert(targetPoint->lesserPoints);
-		targetPoint->lesserPoints = nullptr;
+	if (targetKDPoint->lesserKDPoints != nullptr) {
+		insert(*targetKDPoint->lesserKDPoints);
+		targetKDPoint->lesserKDPoints = nullptr;
 	}
-	if (targetPoint->greaterPoints != nullptr) {
-		insert(targetPoint->greaterPoints);
-		targetPoint->lesserPoints = nullptr;
+	if (targetKDPoint->greaterKDPoints != nullptr) {
+		insert(*targetKDPoint->greaterKDPoints);
+		targetKDPoint->lesserKDPoints = nullptr;
 	}
 	
 	// Delete the now-removed node.
-	delete targetPoint;
-	targetPoint = nullptr;
+	delete targetKDPoint;
+	targetKDPoint = nullptr;
 }
 
 template<int Dim>
-const Point<Dim> *
-etchasketch::KDTree<Dim>::getParent(const etchasketch::Point<Dim> &child) const
+const etchasketch::KDPoint<Dim> *
+etchasketch::KDTree<Dim>::getParent(const etchasketch::KDPoint<Dim> &child) const
 {
 	int dimension = 0;
-	const Point<Dim> *subRoot = root;
+	const KDPoint<Dim> *subRoot = root;
 	while (subRoot != nullptr) {
 		// Base case.
 		if (subRoot->isLeaf()) {
 			// No parent exists.
 			return nullptr;
 		}
-		if ((*subRoot->lesserPoints == child) || (*subRoot->greaterPoints == child)) {
+		if ((*subRoot->lesserKDPoints == child) || (*subRoot->greaterKDPoints == child)) {
 			return subRoot;
 		}
 		
 		if (smallerDimVal(child, *subRoot, dimension)) {
 			// Go left.
-			subRoot = subRoot->lesserPoints;
+			subRoot = subRoot->lesserKDPoints;
 		} else {
 			// Go right.
-			subRoot = subRoot->greaterPoints;
+			subRoot = subRoot->greaterKDPoints;
 		}
 		dimension = (dimension + 1) % Dim;
 	}

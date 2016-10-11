@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string>
 
-#define EASLog(fmt, ...) _EASLog((fmt) , ## __VA_ARGS__)
+#define EASLog(fmt, ...) etchasketch::_EAS_Log((fmt) , ## __VA_ARGS__)
 
 namespace etchasketch {
 	
@@ -21,7 +21,7 @@ namespace etchasketch {
 	
 	void timeFunctionAndPrint(void (function)(void), std::string funcName);
 	
-	void _EASLog(std::string fmt, ...);
+	void _EAS_Log(std::string fmt, ...);
 	
 }
 

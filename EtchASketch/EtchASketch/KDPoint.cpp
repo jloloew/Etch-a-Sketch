@@ -1,15 +1,15 @@
 //
-//  Point.cpp
+//  KDPoint.cpp
 //  EtchASketch
 //
 //  Created by Justin Loew on 9/2/16.
 //  Copyright © 2016 Justin Loew. All rights reserved.
 //
 
-#include "Point.hpp"
+//#include "KDPoint.hpp"
 
 /* point.cpp
-	Implementation of Point class
+	Implementation of KDPoint class
  
 	Written by Matt Sachtler for CS225 MP6
 	Spring 2009
@@ -17,32 +17,32 @@
  3/21/2009		Created
  */
 
-using etchasketch::PointCoordinate;
+using etchasketch::KDPointCoordinate;
 
-/* Point constructor. Initializes everything to 0.
+/* KDPoint constructor. Initializes everything to 0.
  */
 template<int Dim>
-etchasketch::Point<Dim>::Point()
+etchasketch::KDPoint<Dim>::KDPoint()
 {
-	for(int i = 0; i < Dim; i++) {
+	for (int i = 0; i < Dim; i++) {
 		vals[i] = 0;
 	}
 }
 
-/* Point constructor
+/* KDPoint constructor
 	Copy the array of points in
  */
 template<int Dim>
-etchasketch::Point<Dim>::Point(PointCoordinate arr[Dim])
+etchasketch::KDPoint<Dim>::KDPoint(KDPointCoordinate arr[Dim])
 {
-	for(int i = 0; i < Dim; i++) {
+	for (int i = 0; i < Dim; i++) {
 		vals[i] = arr[i];
 	}
 }
 
 template<int Dim>
 template <typename T>
-etchasketch::Point<Dim>::Point(T x0, T x1, T x2)
+etchasketch::KDPoint<Dim>::KDPoint(T x0, T x1, T x2)
 {
 	vals[0] = x0;
 	vals[1] = x1;
@@ -51,7 +51,7 @@ etchasketch::Point<Dim>::Point(T x0, T x1, T x2)
 
 template<int Dim>
 template <typename T>
-etchasketch::Point<Dim>::Point(T x, ...)
+etchasketch::KDPoint<Dim>::KDPoint(T x, ...)
 {
 	vals[0] = x;
 	va_list ap;
@@ -64,9 +64,9 @@ etchasketch::Point<Dim>::Point(T x, ...)
 
 template<int Dim>
 bool
-etchasketch::Point<Dim>::isValid(void) const
+etchasketch::KDPoint<Dim>::isValid(void) const
 {
-	PointCoordinate invalid = etchasketch::Point<Dim>::PointCoordinateInvalid;
+	KDPointCoordinate invalid = etchasketch::KDPoint<Dim>::KDPointCoordinateInvalid;
 	for (int i = 0; i < Dim; i++) {
 		if (vals[i] == invalid) {
 			return false;
@@ -77,14 +77,14 @@ etchasketch::Point<Dim>::isValid(void) const
 
 template<int Dim>
 bool
-etchasketch::Point<Dim>::isLeaf(void) const
+etchasketch::KDPoint<Dim>::isLeaf(void) const
 {
-	return (lesserPoints == nullptr) && (greaterPoints == nullptr);
+	return (lesserKDPoints == nullptr) && (greaterKDPoints == nullptr);
 }
 
 template<int Dim>
 float
-etchasketch::Point<Dim>::distanceTo(const Point<Dim> &other) const
+etchasketch::KDPoint<Dim>::distanceTo(const KDPoint<Dim> &other) const
 {
 	float dist = 0.0f;
 	for (int i = 0; i < Dim; i++) {
@@ -95,22 +95,22 @@ etchasketch::Point<Dim>::distanceTo(const Point<Dim> &other) const
 }
 
 template<int Dim>
-PointCoordinate
-etchasketch::Point<Dim>::operator[](int index) const
+KDPointCoordinate
+etchasketch::KDPoint<Dim>::operator[](int index) const
 {
 	if (index >= Dim) {
-		out_of_range e("Point index out of range");
+		out_of_range e("KDPoint index out of range");
 		throw e;
 	}
 	return vals[index];
 }
 
 template<int Dim>
-PointCoordinate &
-etchasketch::Point<Dim>::operator[](int index)
+KDPointCoordinate &
+etchasketch::KDPoint<Dim>::operator[](int index)
 {
 	if (index >= Dim) {
-		out_of_range e("Point index out of range");
+		out_of_range e("KDPoint index out of range");
 		throw e;
 	}
 	return vals[index];
@@ -118,10 +118,10 @@ etchasketch::Point<Dim>::operator[](int index)
 
 template<int Dim>
 void
-etchasketch::Point<Dim>::set(int index, PointCoordinate val)
+etchasketch::KDPoint<Dim>::set(int index, KDPointCoordinate val)
 {
 	if (index >= Dim) {
-		out_of_range e("Point index out of range");
+		out_of_range e("KDPoint index out of range");
 		throw e;
 	}
 	vals[index] = val;
@@ -129,20 +129,20 @@ etchasketch::Point<Dim>::set(int index, PointCoordinate val)
 
 template<int Dim>
 void
-etchasketch::Point<Dim>::print(std::ostream &out /* = cout */) const
+etchasketch::KDPoint<Dim>::print(std::ostream &out /* = cout */) const
 {
 	out << "{value: ";
 	printVals(out);
-	out << ", lesserPoints: ";
-	out << (lesserPoints != nullptr) ?: "NULL";
-	out << ", greaterPoints: ";
-	out << (greaterPoints != nullptr) ?: "NULL";
+	out << ", lesserKDPoints: ";
+	out << (lesserKDPoints != nullptr) ?: "NULL";
+	out << ", greaterKDPoints: ";
+	out << (greaterKDPoints != nullptr) ?: "NULL";
 	out << "}";
 }
 
 template<int Dim>
 void
-etchasketch::Point<Dim>::printVals(std::ostream &out) const
+etchasketch::KDPoint<Dim>::printVals(std::ostream &out) const
 {
 	out << '(';
 	
@@ -156,7 +156,7 @@ etchasketch::Point<Dim>::printVals(std::ostream &out) const
 
 template<int Dim>
 std::ostream &
-operator<<(std::ostream &out, const etchasketch::Point<Dim> &p)
+operator<<(std::ostream &out, const etchasketch::KDPoint<Dim> &p)
 {
 	p.print(out);
 	return out;
@@ -164,14 +164,14 @@ operator<<(std::ostream &out, const etchasketch::Point<Dim> &p)
 
 template<int Dim>
 bool
-etchasketch::Point<Dim>::operator==(const etchasketch::Point<Dim> p) const
+etchasketch::KDPoint<Dim>::operator==(const etchasketch::KDPoint<Dim> p) const
 {
 	return !(*this != p);
 }
 
 template<int Dim>
 bool
-etchasketch::Point<Dim>::operator!=(const etchasketch::Point<Dim> p) const
+etchasketch::KDPoint<Dim>::operator!=(const etchasketch::KDPoint<Dim> p) const
 {
 	bool eq = true;
 	for (int i = 0; i < Dim; i++) {
@@ -182,7 +182,7 @@ etchasketch::Point<Dim>::operator!=(const etchasketch::Point<Dim> p) const
 
 template<int Dim>
 bool
-etchasketch::Point<Dim>::operator<(const etchasketch::Point<Dim> p) const
+etchasketch::KDPoint<Dim>::operator<(const etchasketch::KDPoint<Dim> p) const
 {
 	bool less = false;
 	for (int i = 0; i < Dim; i++) {
@@ -196,21 +196,21 @@ etchasketch::Point<Dim>::operator<(const etchasketch::Point<Dim> p) const
 
 template<int Dim>
 bool
-etchasketch::Point<Dim>::operator<=(const etchasketch::Point<Dim> p) const
+etchasketch::KDPoint<Dim>::operator<=(const etchasketch::KDPoint<Dim> p) const
 {
 	return (*this < p) || (*this == p);
 }
 
 template<int Dim>
 bool
-etchasketch::Point<Dim>::operator>(const etchasketch::Point<Dim> p) const
+etchasketch::KDPoint<Dim>::operator>(const etchasketch::KDPoint<Dim> p) const
 {
 	return !(*this < p) && (*this != p);
 }
 
 template<int Dim>
 bool
-etchasketch::Point<Dim>::operator>=(const etchasketch::Point<Dim> p) const
+etchasketch::KDPoint<Dim>::operator>=(const etchasketch::KDPoint<Dim> p) const
 {
 	return (*this > p) || (*this == p);
 }

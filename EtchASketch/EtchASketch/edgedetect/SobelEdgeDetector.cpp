@@ -23,8 +23,8 @@ etchasketch::edgedetect::SobelEdgeDetector::detectEdges(const Image &grayscaleIm
 	
 	for (size_t x = 1; x < grayscaleImage.getWidth() - 1; x++) {
 		for (size_t y = 1; y < grayscaleImage.getHeight() - 1; y++) {
-			Point<2> dstPt(x-1, y-1);
-			float intensity = intensityForPoint(grayscaleImage, x, y);
+			KDPoint<2> dstPt(x-1, y-1);
+			float intensity = intensityForKDPoint(grayscaleImage, x, y);
 			// Scale the float intensity into an RGBA pixel.
 			uint8_t intensityInt = static_cast<uint8_t>(intensity / 255.0f);
 			Pixel intensityPixel =    (intensityInt << 24)
@@ -39,7 +39,7 @@ etchasketch::edgedetect::SobelEdgeDetector::detectEdges(const Image &grayscaleIm
 }
 
 float
-etchasketch::edgedetect::SobelEdgeDetector::intensityForPoint(const Image &img,
+etchasketch::edgedetect::SobelEdgeDetector::intensityForKDPoint(const Image &img,
 															  const size_t x,
 															  const size_t y) const
 {
@@ -59,7 +59,7 @@ etchasketch::edgedetect::SobelEdgeDetector::intensityForPoint(const Image &img,
 	float sumY = 0.0f;
 	for (int dy = -1; dy <= 1; dy++) {
 		for (int dx = -1; dx <= 1; dx++) {
-			Point<2> pt(x + dx, y + dy);
+			KDPoint<2> pt(x + dx, y + dy);
 			float currentIntensity = static_cast<float>(img[pt]);
 			sumX += sobelX[dx+1][dy+1] * currentIntensity;
 			sumY += sobelY[dx+1][dy+1] * currentIntensity;

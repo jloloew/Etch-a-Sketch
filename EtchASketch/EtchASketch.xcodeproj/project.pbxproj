@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B820E9051DAC6E2200135C8A /* EASImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B820E9041DAC6E2200135C8A /* EASImage.mm */; };
+		B820E9061DAC6E8C00135C8A /* EASUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDB1D79EE4600A4ED34 /* EASUtils.cpp */; };
+		B820E9071DAC6E8C00135C8A /* EdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C51D91AB400035B729 /* EdgeDetector.cpp */; };
+		B820E9081DAC6E8C00135C8A /* SobelEdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */; };
+		B820E9091DAC6E8C00135C8A /* EtchASketch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BD81D79DE7600A4ED34 /* EtchASketch.cpp */; };
+		B820E90A1DAC6E8C00135C8A /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C21D91AA870035B729 /* Image.cpp */; };
+		B820E90B1DAC6E8C00135C8A /* ImageFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlow.cpp */; };
+		B820E90C1DAC6E8C00135C8A /* KDTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDE1D79FA7400A4ED34 /* KDTree.cpp */; };
+		B820E90D1DAC6E8C00135C8A /* KDPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BE11D79FB8600A4ED34 /* KDPoint.cpp */; };
+		B820E90E1DAC6E8C00135C8A /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943CC1D91B0F30035B729 /* Salesman.cpp */; };
+		B820E90F1DAC750100135C8A /* EASUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDB1D79EE4600A4ED34 /* EASUtils.cpp */; };
+		B820E9101DAC750100135C8A /* EdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C51D91AB400035B729 /* EdgeDetector.cpp */; };
+		B820E9111DAC750100135C8A /* SobelEdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */; };
+		B820E9121DAC750100135C8A /* EtchASketch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BD81D79DE7600A4ED34 /* EtchASketch.cpp */; };
+		B820E9131DAC750100135C8A /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C21D91AA870035B729 /* Image.cpp */; };
+		B820E9141DAC750100135C8A /* ImageFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlow.cpp */; };
+		B820E9151DAC750100135C8A /* KDTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDE1D79FA7400A4ED34 /* KDTree.cpp */; };
+		B820E9161DAC750100135C8A /* KDPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BE11D79FB8600A4ED34 /* KDPoint.cpp */; };
 		B8643B301D920D0B00B93D84 /* SobelEdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */; };
 		B8766BA61D79DC9100A4ED34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8766BA51D79DC9100A4ED34 /* main.m */; };
 		B8766BA91D79DC9100A4ED34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8766BA81D79DC9100A4ED34 /* AppDelegate.m */; };
@@ -16,17 +34,16 @@
 		B8766BB41D79DC9100A4ED34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8766BB21D79DC9100A4ED34 /* LaunchScreen.storyboard */; };
 		B8766BBF1D79DC9100A4ED34 /* iEASTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B8766BBE1D79DC9100A4ED34 /* iEASTests.m */; };
 		B8766BCA1D79DC9100A4ED34 /* iEASUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B8766BC91D79DC9100A4ED34 /* iEASUITests.m */; };
-		B8766BD71D79DCA800A4ED34 /* libEtchASketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */; };
 		B8766BDA1D79DE7600A4ED34 /* EtchASketch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BD81D79DE7600A4ED34 /* EtchASketch.cpp */; };
 		B8766BDD1D79EE4600A4ED34 /* EASUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDB1D79EE4600A4ED34 /* EASUtils.cpp */; };
-		B8766BE31D79FB8600A4ED34 /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BE11D79FB8600A4ED34 /* Point.cpp */; };
+		B8766BE31D79FB8600A4ED34 /* KDPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BE11D79FB8600A4ED34 /* KDPoint.cpp */; };
 		B8766C091D79FF4300A4ED34 /* EtchASketchTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8766C081D79FF4300A4ED34 /* EtchASketchTests.mm */; };
-		B8766C0B1D79FF4300A4ED34 /* libEtchASketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */; };
 		B87943C01D91A58B0035B729 /* KDTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDE1D79FA7400A4ED34 /* KDTree.cpp */; };
 		B87943C41D91AA870035B729 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C21D91AA870035B729 /* Image.cpp */; };
 		B87943C71D91AB400035B729 /* EdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C51D91AB400035B729 /* EdgeDetector.cpp */; };
 		B87943CA1D91ADF30035B729 /* ImageFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlow.cpp */; };
 		B87943CE1D91B0F30035B729 /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943CC1D91B0F30035B729 /* Salesman.cpp */; };
+		B8B211631DAC88E4009814B8 /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943CC1D91B0F30035B729 /* Salesman.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,20 +61,6 @@
 			remoteGlobalIDString = B8766BA11D79DC9100A4ED34;
 			remoteInfo = iEAS;
 		};
-		B8766BD51D79DC9D00A4ED34 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B8766B8A1D79DC3E00A4ED34 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B8766B911D79DC3E00A4ED34;
-			remoteInfo = EtchASketch;
-		};
-		B8766C0C1D79FF4300A4ED34 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B8766B8A1D79DC3E00A4ED34 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B8766B911D79DC3E00A4ED34;
-			remoteInfo = EtchASketch;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -73,6 +76,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B820E9031DAC6E2200135C8A /* EASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASImage.h; sourceTree = "<group>"; };
+		B820E9041DAC6E2200135C8A /* EASImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EASImage.mm; sourceTree = "<group>"; };
+		B820E9181DAC75C800135C8A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SobelEdgeDetector.cpp; path = edgedetect/SobelEdgeDetector.cpp; sourceTree = "<group>"; };
 		B8643B2F1D920D0B00B93D84 /* SobelEdgeDetector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SobelEdgeDetector.hpp; path = edgedetect/SobelEdgeDetector.hpp; sourceTree = "<group>"; };
 		B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEtchASketch.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,10 +102,10 @@
 		B8766BD91D79DE7600A4ED34 /* EtchASketch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EtchASketch.hpp; sourceTree = "<group>"; };
 		B8766BDB1D79EE4600A4ED34 /* EASUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EASUtils.cpp; sourceTree = "<group>"; };
 		B8766BDC1D79EE4600A4ED34 /* EASUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EASUtils.hpp; sourceTree = "<group>"; };
-		B8766BDE1D79FA7400A4ED34 /* KDTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KDTree.cpp; sourceTree = "<group>"; };
-		B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KDTree.hpp; sourceTree = "<group>"; };
-		B8766BE11D79FB8600A4ED34 /* Point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Point.cpp; sourceTree = "<group>"; };
-		B8766BE21D79FB8600A4ED34 /* Point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Point.hpp; sourceTree = "<group>"; };
+		B8766BDE1D79FA7400A4ED34 /* KDTree.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = KDTree.cpp; sourceTree = "<group>"; };
+		B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = KDTree.hpp; sourceTree = "<group>"; };
+		B8766BE11D79FB8600A4ED34 /* KDPoint.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = KDPoint.cpp; sourceTree = "<group>"; };
+		B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = KDPoint.hpp; sourceTree = "<group>"; };
 		B8766C061D79FF4300A4ED34 /* EtchASketchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EtchASketchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8766C081D79FF4300A4ED34 /* EtchASketchTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EtchASketchTests.mm; sourceTree = "<group>"; };
 		B8766C0A1D79FF4300A4ED34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,7 +131,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8766BD71D79DCA800A4ED34 /* libEtchASketch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,13 +152,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8766C0B1D79FF4300A4ED34 /* libEtchASketch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B820E9001DAC6DC700135C8A /* EtchASketchWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				B820E9031DAC6E2200135C8A /* EASImage.h */,
+				B820E9041DAC6E2200135C8A /* EASImage.mm */,
+			);
+			name = EtchASketchWrapper;
+			sourceTree = "<group>";
+		};
+		B820E9171DAC75C800135C8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B820E9181DAC75C800135C8A /* libc++.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B8766B891D79DC3E00A4ED34 = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +184,7 @@
 				B8766BC81D79DC9100A4ED34 /* iEASUITests */,
 				B8766C071D79FF4300A4ED34 /* EtchASketchTests */,
 				B8766B931D79DC3E00A4ED34 /* Products */,
+				B820E9171DAC75C800135C8A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -192,8 +214,8 @@
 				B87943C91D91ADF30035B729 /* ImageFlow.hpp */,
 				B8766BDE1D79FA7400A4ED34 /* KDTree.cpp */,
 				B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */,
-				B8766BE11D79FB8600A4ED34 /* Point.cpp */,
-				B8766BE21D79FB8600A4ED34 /* Point.hpp */,
+				B8766BE11D79FB8600A4ED34 /* KDPoint.cpp */,
+				B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */,
 				B87943CB1D91B0CB0035B729 /* salesman */,
 			);
 			path = EtchASketch;
@@ -202,6 +224,7 @@
 		B8766BA31D79DC9100A4ED34 /* iEAS */ = {
 			isa = PBXGroup;
 			children = (
+				B820E9001DAC6DC700135C8A /* EtchASketchWrapper */,
 				B8766BA71D79DC9100A4ED34 /* AppDelegate.h */,
 				B8766BA81D79DC9100A4ED34 /* AppDelegate.m */,
 				B8766BAA1D79DC9100A4ED34 /* ViewController.h */,
@@ -301,7 +324,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B8766BD61D79DC9D00A4ED34 /* PBXTargetDependency */,
 			);
 			name = iEAS;
 			productName = iEAS;
@@ -355,7 +377,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B8766C0D1D79FF4300A4ED34 /* PBXTargetDependency */,
 			);
 			name = EtchASketchTests;
 			productName = EtchASketchTests;
@@ -376,6 +397,7 @@
 					};
 					B8766BA11D79DC9100A4ED34 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = VM5XXWMN9Y;
 					};
 					B8766BB91D79DC9100A4ED34 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -387,6 +409,7 @@
 					};
 					B8766C051D79FF4300A4ED34 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = VM5XXWMN9Y;
 					};
 				};
 			};
@@ -451,7 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8766BE31D79FB8600A4ED34 /* Point.cpp in Sources */,
+				B8766BE31D79FB8600A4ED34 /* KDPoint.cpp in Sources */,
 				B87943CE1D91B0F30035B729 /* Salesman.cpp in Sources */,
 				B8643B301D920D0B00B93D84 /* SobelEdgeDetector.cpp in Sources */,
 				B8766BDA1D79DE7600A4ED34 /* EtchASketch.cpp in Sources */,
@@ -467,9 +490,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B820E90D1DAC6E8C00135C8A /* KDPoint.cpp in Sources */,
 				B8766BAC1D79DC9100A4ED34 /* ViewController.m in Sources */,
+				B820E90E1DAC6E8C00135C8A /* Salesman.cpp in Sources */,
+				B820E90B1DAC6E8C00135C8A /* ImageFlow.cpp in Sources */,
+				B820E90C1DAC6E8C00135C8A /* KDTree.cpp in Sources */,
 				B8766BA91D79DC9100A4ED34 /* AppDelegate.m in Sources */,
 				B8766BA61D79DC9100A4ED34 /* main.m in Sources */,
+				B820E9081DAC6E8C00135C8A /* SobelEdgeDetector.cpp in Sources */,
+				B820E9051DAC6E2200135C8A /* EASImage.mm in Sources */,
+				B820E9071DAC6E8C00135C8A /* EdgeDetector.cpp in Sources */,
+				B820E90A1DAC6E8C00135C8A /* Image.cpp in Sources */,
+				B820E9061DAC6E8C00135C8A /* EASUtils.cpp in Sources */,
+				B820E9091DAC6E8C00135C8A /* EtchASketch.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +526,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B820E9161DAC750100135C8A /* KDPoint.cpp in Sources */,
+				B820E9121DAC750100135C8A /* EtchASketch.cpp in Sources */,
+				B820E9151DAC750100135C8A /* KDTree.cpp in Sources */,
+				B820E9101DAC750100135C8A /* EdgeDetector.cpp in Sources */,
+				B820E9131DAC750100135C8A /* Image.cpp in Sources */,
+				B8B211631DAC88E4009814B8 /* Salesman.cpp in Sources */,
+				B820E9111DAC750100135C8A /* SobelEdgeDetector.cpp in Sources */,
+				B820E90F1DAC750100135C8A /* EASUtils.cpp in Sources */,
+				B820E9141DAC750100135C8A /* ImageFlow.cpp in Sources */,
 				B8766C091D79FF4300A4ED34 /* EtchASketchTests.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,16 +551,6 @@
 			isa = PBXTargetDependency;
 			target = B8766BA11D79DC9100A4ED34 /* iEAS */;
 			targetProxy = B8766BC61D79DC9100A4ED34 /* PBXContainerItemProxy */;
-		};
-		B8766BD61D79DC9D00A4ED34 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B8766B911D79DC3E00A4ED34 /* EtchASketch */;
-			targetProxy = B8766BD51D79DC9D00A4ED34 /* PBXContainerItemProxy */;
-		};
-		B8766C0D1D79FF4300A4ED34 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B8766B911D79DC3E00A4ED34 /* EtchASketch */;
-			targetProxy = B8766C0C1D79FF4300A4ED34 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -656,6 +688,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VM5XXWMN9Y;
 				INFOPLIST_FILE = iEAS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinloew.iEAS;
@@ -668,6 +701,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VM5XXWMN9Y;
 				INFOPLIST_FILE = iEAS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinloew.iEAS;
@@ -725,6 +759,10 @@
 		B8766C0F1D79FF4300A4ED34 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = VM5XXWMN9Y;
 				INFOPLIST_FILE = EtchASketchTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinloew.EtchASketchTests;
@@ -735,6 +773,10 @@
 		B8766C101D79FF4300A4ED34 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = VM5XXWMN9Y;
 				INFOPLIST_FILE = EtchASketchTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinloew.EtchASketchTests;

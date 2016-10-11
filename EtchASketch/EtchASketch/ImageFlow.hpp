@@ -53,8 +53,8 @@ namespace etchasketch {
 		const Image originalImage;
 		Image grayscaleImage;
 		Image *edgeDetectedImage;
-		const std::unordered_set<Point<2> *> *edgePoints;
-		const std::vector<Point<2>> *orderedEdgePoints;
+		const std::unordered_set<KDPoint<2> *> *edgePoints;
+		const std::vector<KDPoint<2>> *orderedEdgePoints;
 		
 		edgedetect::EdgeDetector edgeDetector;
 		salesman::Salesman *salesman;

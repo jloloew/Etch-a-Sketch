@@ -12,11 +12,11 @@
 using std::unordered_set;
 using std::vector;
 using etchasketch::KDTree;
-using etchasketch::Point;
+using etchasketch::KDPoint;
 
-etchasketch::salesman::Salesman::Salesman(const unordered_set<Point<2> *> &unorderedPoints)
+etchasketch::salesman::Salesman::Salesman(const unordered_set<KDPoint<2> *> &unorderedPoints)
 : unorderedPoints(unorderedPoints),
-orderedPoints(vector<Point<2>>(unorderedPoints.size()))
+orderedPoints(vector<etchasketch::KDPoint<2>>(unorderedPoints.size()))
 { }
 
 etchasketch::salesman::Salesman::~Salesman(void)
@@ -38,26 +38,26 @@ etchasketch::salesman::Salesman::primsAlgorithm(KDTree<2> &kdTree)
 {
 	// Assume that we start at (0, 0).
 	// TODO: Fix needing to use doubles in this constructor.
-	const Point<2> startPoint = Point<2>(0.0, 0.0);
-	orderedPoints.push_back(startPoint);
+	const etchasketch::KDPoint<2> startKDPoint = etchasketch::KDPoint<2>(0.0, 0.0);
+	orderedPoints.push_back(startKDPoint);
 	
 	while (!unorderedPoints.empty()) {
-		_EASLog("Size remaining: %lu", unorderedPoints.size());
+		EASLog("Size remaining: %lu", unorderedPoints.size());
 		// Find the next point nearest the last point we added, add it to the
 		// list of ordered points, and remove it as an option in the list of
 		// unordered point list.
-		Point<2> *currPoint = kdTree.findNearestNeighbor(orderedPoints.back());
-		if ((currPoint != nullptr) && currPoint->isValid()) {
-			orderedPoints.push_back(*currPoint);
+		etchasketch::KDPoint<2> *currKDPoint = const_cast<KDPoint<2> *>(kdTree.findNearestNeighbor(orderedPoints.back()));
+		if ((currKDPoint != nullptr) && currKDPoint->isValid()) {
+			orderedPoints.push_back(*currKDPoint);
 			
 			// erase returns the number of elements removed.
-			if (1 != unorderedPoints.erase(currPoint)) {
-				_EASLog("Failed to remove the current value.");
+			if (1 != unorderedPoints.erase(currKDPoint)) {
+				EASLog("Failed to remove the current value.");
 			}
 			// When the KD tree removes a point, it also deletes it.
-			kdTree.remove(currPoint);
+			kdTree.remove(currKDPoint);
 		} else {
-			_EASLog("Bad currPoint.");
+			EASLog("Bad currKDPoint.");
 		}
 	}
 }
