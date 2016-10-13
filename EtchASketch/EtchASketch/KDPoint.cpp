@@ -19,14 +19,15 @@
 
 using etchasketch::KDPointCoordinate;
 
-/* KDPoint constructor. Initializes everything to 0.
+/* KDPoint constructor. Initializes everything to allValues.
  */
 template<int Dim>
-etchasketch::KDPoint<Dim>::KDPoint()
+etchasketch::KDPoint<Dim>::KDPoint(const KDPointCoordinate allValues)
 {
-	this->lesserPoints = this->greaterPoints = nullptr;
+	this->lesserPoints = nullptr;
+	this->greaterPoints = nullptr;
 	for (int i = 0; i < Dim; i++) {
-		vals[i] = 0;
+		vals[i] = allValues;
 	}
 }
 
@@ -35,35 +36,32 @@ etchasketch::KDPoint<Dim>::KDPoint()
  */
 template<int Dim>
 etchasketch::KDPoint<Dim>::KDPoint(KDPointCoordinate arr[Dim])
+: KDPoint()
 {
-	this->lesserPoints = this->greaterPoints = nullptr;
 	for (int i = 0; i < Dim; i++) {
 		vals[i] = arr[i];
 	}
 }
 
 template<int Dim>
-template <typename T>
-etchasketch::KDPoint<Dim>::KDPoint(T x0, T x1, T x2)
+etchasketch::KDPoint<Dim>::KDPoint(KDPointCoordinate x, KDPointCoordinate y ...)
+: KDPoint()
 {
-	this->lesserPoints = this->greaterPoints = nullptr;
-	vals[0] = x0;
-	vals[1] = x1;
-	vals[2] = x2;
+	vals[0] = x;
+	vals[1] = y;
+	va_list ap;
+	va_start(ap, y);
+	for (int i = 2; i < Dim; i++) {
+		vals[i] = va_arg(ap, KDPointCoordinate);
+	}
+	va_end(ap);
 }
 
 template<int Dim>
-template <typename T>
-etchasketch::KDPoint<Dim>::KDPoint(T x, ...)
+etchasketch::KDPoint<Dim>::KDPoint(const KDPoint<Dim> &other)
+: KDPoint()
 {
-	this->lesserPoints = this->greaterPoints = nullptr;
-	vals[0] = x;
-	va_list ap;
-	va_start(ap, x);
-	for (int i = 1; i < Dim; i++) {
-		vals[i] = va_arg(ap, T);
-	}
-	va_end(ap);
+	memcpy(this->vals, other.vals, sizeof(this->vals));
 }
 
 template<int Dim>
@@ -124,7 +122,7 @@ template<int Dim>
 void
 etchasketch::KDPoint<Dim>::set(int index, KDPointCoordinate val)
 {
-	if (index >= Dim) {
+	if (index < 0 || index >= Dim) {
 		out_of_range e("KDPoint index out of range");
 		throw e;
 	}
@@ -138,9 +136,17 @@ etchasketch::KDPoint<Dim>::print(std::ostream &out /* = cout */) const
 	out << "{value: ";
 	printVals(out);
 	out << ", lesserPoints: ";
-	out << (lesserPoints != nullptr) ?: "NULL";
+	if (nullptr != lesserPoints) {
+		lesserPoints->print(out);
+	} else {
+		out << "NULL";
+	}
 	out << ", greaterPoints: ";
-	out << (greaterPoints != nullptr) ?: "NULL";
+	if (nullptr != greaterPoints) {
+		greaterPoints->print(out);
+	} else {
+		out << "NULL";
+	}
 	out << "}";
 }
 
@@ -148,12 +154,11 @@ template<int Dim>
 void
 etchasketch::KDPoint<Dim>::printVals(std::ostream &out) const
 {
-	out << '(';
+	out << '(' << vals[0];
 	
-	for (int i = 0; i < Dim - 1; i++) {
-		out << vals[i] << ", ";
+	for (int i = 1; i < Dim; i++) {
+		out << ", " << vals[i];
 	}
-	out << vals[Dim - 1];
 	
 	out << ')';
 }

@@ -78,9 +78,11 @@ namespace etchasketch {
 		 * @todo This function is required for MP 6.1.
 		 * @param newKDPoints The vector of points to build your KDTree off of.
 		 */
-		KDTree(const std::vector<etchasketch::KDPoint<Dim> *> &newKDPoints);
+		KDTree(const std::vector<etchasketch::KDPoint<Dim>> &newPoints);
 		
-		KDTree(const std::unordered_set<etchasketch::KDPoint<Dim> *> &newKDPoints);
+		KDTree(const std::unordered_set<etchasketch::KDPoint<Dim>> &newPoints);
+		
+		KDTree();
 		
 		virtual ~KDTree(void);
 		
@@ -153,7 +155,7 @@ namespace etchasketch {
 		 * Insert a new point.
 		 * @param newKDPoint The new point to be added to the KD tree.
 		 */
-		void insert(etchasketch::KDPoint<Dim> &newKDPoint);
+		void insert(etchasketch::KDPoint<Dim> &newPoint);
 		
 		/**
 		 * Remove a given node from the KD tree, then delete the node. The
@@ -167,7 +169,7 @@ namespace etchasketch {
 		etchasketch::KDPoint<Dim> *root;
 		
 		/// Helper function for the KDTree constructor.
-		void buildTree(const std::unordered_set<etchasketch::KDPoint<Dim> *> &points);
+		void buildTree(const std::unordered_set<etchasketch::KDPoint<Dim>> &points);
 		
 		/**
 		 * Delete a subtree.
@@ -175,8 +177,11 @@ namespace etchasketch {
 		 */
 		void deleteSubtree(etchasketch::KDPoint<Dim> *subRoot);
 		
+		/// Like regular insert, but takes a pointer for a pre-copied point.
+		void insert(etchasketch::KDPoint<Dim> *newPoint);
+		
 		/// Helper function for insert.
-		void insert(etchasketch::KDPoint<Dim> &newKDPoint,
+		void insert(etchasketch::KDPoint<Dim> &newPoint,
 					etchasketch::KDPoint<Dim> &subRoot,
 					const int dimension);
 		

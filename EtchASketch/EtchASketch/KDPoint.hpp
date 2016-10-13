@@ -28,7 +28,7 @@ namespace etchasketch {
 	 * @date Spring 2009
 	 */
 	template<int Dim>
-	class KDPoint
+	struct KDPoint
 	{
 	public:
 		static const KDPointCoordinate KDPointCoordinateInvalid = INT_MAX;
@@ -38,22 +38,28 @@ namespace etchasketch {
 		
 	public:
 		/// The subtree containing all points less than the current point.
-		KDPoint<Dim> *lesserPoints = nullptr;
+		KDPoint<Dim> *lesserPoints;
 		
 		/// The subtree containing all points greater than the current point.
-		KDPoint<Dim> *greaterPoints = nullptr;
+		KDPoint<Dim> *greaterPoints;
 		
-		KDPoint();
+		KDPoint(const KDPointCoordinate allValues = 0);
 		
 		KDPoint(KDPointCoordinate arr[Dim]);
-		template <typename T>
-		explicit KDPoint(T x, ...);
-		template <typename T>
-		explicit KDPoint(T x0, T x1, T x2);
 		
-		bool isValid(void) const;
+		explicit KDPoint(KDPointCoordinate x, KDPointCoordinate y ...);
 		
-		bool isLeaf(void) const;
+		/**
+		 * Copy constructor.
+		 * Copies the values from other, but *not* the subtree pointers.
+		 */
+		KDPoint(const KDPoint<Dim> &other);
+		
+		inline
+		bool isValid() const;
+		
+		inline
+		bool isLeaf() const;
 		
 		/**
 		 * @param other The point to measure the distance to.
