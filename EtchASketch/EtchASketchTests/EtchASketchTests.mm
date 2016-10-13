@@ -12,7 +12,7 @@
 
 using std::vector;
 using etchasketch::KDTree;
-#define KDPoint etchasketch::KDPoint
+using etchasketch::KDPoint;
 
 @interface EtchASketchTests : XCTestCase
 
@@ -34,7 +34,7 @@ using etchasketch::KDTree;
 
 - (void)tearDown {
 	delete self.kdtree;
-	self.kdtree = NULL;
+	self.kdtree = nullptr;
     [super tearDown];
 }
 

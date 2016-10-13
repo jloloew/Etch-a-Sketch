@@ -38,10 +38,10 @@ namespace etchasketch {
 		
 	public:
 		/// The subtree containing all points less than the current point.
-		KDPoint<Dim> *lesserKDPoints = nullptr;
+		KDPoint<Dim> *lesserPoints = nullptr;
 		
 		/// The subtree containing all points greater than the current point.
-		KDPoint<Dim> *greaterKDPoints = nullptr;
+		KDPoint<Dim> *greaterPoints = nullptr;
 		
 		KDPoint();
 		

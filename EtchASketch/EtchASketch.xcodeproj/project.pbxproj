@@ -44,6 +44,7 @@
 		B87943CA1D91ADF30035B729 /* ImageFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlow.cpp */; };
 		B87943CE1D91B0F30035B729 /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943CC1D91B0F30035B729 /* Salesman.cpp */; };
 		B8B211631DAC88E4009814B8 /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943CC1D91B0F30035B729 /* Salesman.cpp */; };
+		B8B211651DAC895A009814B8 /* KDTreeTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8B211641DAC895A009814B8 /* KDTreeTests.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		B87943C91D91ADF30035B729 /* ImageFlow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageFlow.hpp; sourceTree = "<group>"; };
 		B87943CC1D91B0F30035B729 /* Salesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Salesman.cpp; path = salesman/Salesman.cpp; sourceTree = "<group>"; };
 		B87943CD1D91B0F30035B729 /* Salesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Salesman.hpp; path = salesman/Salesman.hpp; sourceTree = "<group>"; };
+		B8B211641DAC895A009814B8 /* KDTreeTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KDTreeTests.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +271,7 @@
 			children = (
 				B8766C081D79FF4300A4ED34 /* EtchASketchTests.mm */,
 				B8766C0A1D79FF4300A4ED34 /* Info.plist */,
+				B8B211641DAC895A009814B8 /* KDTreeTests.mm */,
 			);
 			path = EtchASketchTests;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				B820E9151DAC750100135C8A /* KDTree.cpp in Sources */,
 				B820E9101DAC750100135C8A /* EdgeDetector.cpp in Sources */,
 				B820E9131DAC750100135C8A /* Image.cpp in Sources */,
+				B8B211651DAC895A009814B8 /* KDTreeTests.mm in Sources */,
 				B8B211631DAC88E4009814B8 /* Salesman.cpp in Sources */,
 				B820E9111DAC750100135C8A /* SobelEdgeDetector.cpp in Sources */,
 				B820E90F1DAC750100135C8A /* EASUtils.cpp in Sources */,

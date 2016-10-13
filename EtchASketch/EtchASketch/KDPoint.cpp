@@ -24,6 +24,7 @@ using etchasketch::KDPointCoordinate;
 template<int Dim>
 etchasketch::KDPoint<Dim>::KDPoint()
 {
+	this->lesserPoints = this->greaterPoints = nullptr;
 	for (int i = 0; i < Dim; i++) {
 		vals[i] = 0;
 	}
@@ -35,6 +36,7 @@ etchasketch::KDPoint<Dim>::KDPoint()
 template<int Dim>
 etchasketch::KDPoint<Dim>::KDPoint(KDPointCoordinate arr[Dim])
 {
+	this->lesserPoints = this->greaterPoints = nullptr;
 	for (int i = 0; i < Dim; i++) {
 		vals[i] = arr[i];
 	}
@@ -44,6 +46,7 @@ template<int Dim>
 template <typename T>
 etchasketch::KDPoint<Dim>::KDPoint(T x0, T x1, T x2)
 {
+	this->lesserPoints = this->greaterPoints = nullptr;
 	vals[0] = x0;
 	vals[1] = x1;
 	vals[2] = x2;
@@ -53,6 +56,7 @@ template<int Dim>
 template <typename T>
 etchasketch::KDPoint<Dim>::KDPoint(T x, ...)
 {
+	this->lesserPoints = this->greaterPoints = nullptr;
 	vals[0] = x;
 	va_list ap;
 	va_start(ap, x);
@@ -79,7 +83,7 @@ template<int Dim>
 bool
 etchasketch::KDPoint<Dim>::isLeaf(void) const
 {
-	return (lesserKDPoints == nullptr) && (greaterKDPoints == nullptr);
+	return (lesserPoints == nullptr) && (greaterPoints == nullptr);
 }
 
 template<int Dim>
@@ -98,7 +102,7 @@ template<int Dim>
 KDPointCoordinate
 etchasketch::KDPoint<Dim>::operator[](int index) const
 {
-	if (index >= Dim) {
+	if (index < 0 || index >= Dim) {
 		out_of_range e("KDPoint index out of range");
 		throw e;
 	}
@@ -109,7 +113,7 @@ template<int Dim>
 KDPointCoordinate &
 etchasketch::KDPoint<Dim>::operator[](int index)
 {
-	if (index >= Dim) {
+	if (index < 0 || index >= Dim) {
 		out_of_range e("KDPoint index out of range");
 		throw e;
 	}
@@ -133,10 +137,10 @@ etchasketch::KDPoint<Dim>::print(std::ostream &out /* = cout */) const
 {
 	out << "{value: ";
 	printVals(out);
-	out << ", lesserKDPoints: ";
-	out << (lesserKDPoints != nullptr) ?: "NULL";
-	out << ", greaterKDPoints: ";
-	out << (greaterKDPoints != nullptr) ?: "NULL";
+	out << ", lesserPoints: ";
+	out << (lesserPoints != nullptr) ?: "NULL";
+	out << ", greaterPoints: ";
+	out << (greaterPoints != nullptr) ?: "NULL";
 	out << "}";
 }
 

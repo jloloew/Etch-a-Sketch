@@ -16,9 +16,14 @@
 
 namespace etchasketch {
 	
+	namespace tests {
+		class KDTreeTests;
+	}
+	
 	template<int Dim>
 	class KDTree
 	{
+		friend class tests::KDTreeTests;
 	public:
 		/**
 		 * Constructs a KDTree from a vector of KDPoints, each having dimension Dim.
@@ -78,29 +83,6 @@ namespace etchasketch {
 		KDTree(const std::unordered_set<etchasketch::KDPoint<Dim> *> &newKDPoints);
 		
 		virtual ~KDTree(void);
-		
-		/**
-		 * Determines if KDPoint a is smaller than KDPoint b in a given dimension d.
-		 * If there is a tie, break it with KDPoint::operator<().
-		 *
-		 * For example:
-		 *
-		 *     KDPoint<3> a(1, 2, 3);
-		 *     KDPoint<3> b(3, 2, 1);
-		 *     cout << smallerDimVal(a, b, 0) << endl; // should print true
-		 *     cout << smallerDimVal(a, b, 2) << endl; // should print false
-		 *     cout << smallerDimVal(a, b, 1) << endl; // based on operator<, this should be true
-		 *
-		 * @todo This function is required for MP 6.1.
-		 * @param first KDPoint to compare.
-		 * @param second Second point to compare.
-		 * @param curDim Dimension these points are being compared in.
-		 * @return A boolean value indicating whether the first KDPoint is smaller than the second
-		 *  KDPoint in the curDim dimension.
-		 */
-		bool smallerDimVal(const etchasketch::KDPoint<Dim> &first,
-						   const etchasketch::KDPoint<Dim> &second,
-						   const int curDim) const;
 		
 		/**
 		 * Finds the closest point to the parameter point in the KDTree.
@@ -203,7 +185,30 @@ namespace etchasketch {
 		const etchasketch::KDPoint<Dim> * findNearestNeighbor(const etchasketch::KDPoint<Dim> &query,
 													const etchasketch::KDPoint<Dim> *subroot,
 													double &currentBestDist, // inout
-													const int dimension) const;
+															  const int dimension) const;
+		
+		/**
+		 * Determines if KDPoint a is smaller than KDPoint b in a given dimension d.
+		 * If there is a tie, break it with KDPoint::operator<().
+		 *
+		 * For example:
+		 *
+		 *     KDPoint<3> a(1, 2, 3);
+		 *     KDPoint<3> b(3, 2, 1);
+		 *     cout << smallerDimVal(a, b, 0) << endl; // should print true
+		 *     cout << smallerDimVal(a, b, 2) << endl; // should print false
+		 *     cout << smallerDimVal(a, b, 1) << endl; // based on operator<, this should be true
+		 *
+		 * @todo This function is required for MP 6.1.
+		 * @param first KDPoint to compare.
+		 * @param second Second point to compare.
+		 * @param curDim Dimension these points are being compared in.
+		 * @return A boolean value indicating whether the first KDPoint is smaller than the second
+		 *  KDPoint in the curDim dimension.
+		 */
+		bool smallerDimVal(const etchasketch::KDPoint<Dim> &first,
+						   const etchasketch::KDPoint<Dim> &second,
+						   const int curDim) const;
 		
 		/**
 		 * Determines if a KDPoint is closer to the target KDPoint than another
