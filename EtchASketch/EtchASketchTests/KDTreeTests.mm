@@ -113,33 +113,43 @@ public:
 	cout << kdtree << endl;
 	const KDPoint<2> *nn;
 	// Test normal find nearest neighbor
-	nn = kdtree.findNearestNeighbor(pt_0_0);
+	KDTree<2> kdtree1;
+	kdtree1.insert(pt_1_1);
+	kdtree1.insert(pt_2_2);
+	nn = kdtree1.findNearestNeighbor(pt_0_0);
 	XCTAssert(nullptr != nn);
 	XCTAssert(pt_1_1 == *nn);
 	// Test tie for nearest neighbor.
-	nn = kdtree.findNearestNeighbor(pt_1_1);
+	KDTree<2> kdtree2;
+	kdtree2.insert(pt_0_0);
+	kdtree2.insert(pt_2_2);
+	nn = kdtree2.findNearestNeighbor(pt_1_1);
 	XCTAssert(nullptr != nn);
 	XCTAssert(pt_0_0 == *nn);
-	// Test nn of point not in the tree.
-	nn = kdtree.findNearestNeighbor(KDPoint<2>(7, 7));
+	// Test nn of point that's in the tree.
+	KDTree<2> kdtree3;
+	kdtree3.insert(pt_0_0);
+	kdtree3.insert(pt_1_1);
+	kdtree3.insert(pt_2_2);
+	nn = kdtree3.findNearestNeighbor(pt_2_2);
 	XCTAssert(nullptr != nn);
 	XCTAssertEqual(pt_2_2, *nn);
 	
 	// Test nn of empty tree.
-	KDTree<2> kdt1;
-	nn = kdt1.findNearestNeighbor(pt_0_0);
+	KDTree<2> kdtree4;
+	nn = kdtree4.findNearestNeighbor(pt_0_0);
 	XCTAssert(nullptr == nn);
 	// Test nn of tree with a single point.
-	vector<KDPoint<2>> points2;
-	points2.push_back(pt_1_1);
-	KDTree<2> kdt2(points2);
+	KDTree<2> kdtree5;
+	kdtree5.insert(pt_1_1);
 	// Should return the only point in the tree.
-	nn = kdt2.findNearestNeighbor(pt_2_2);
+	nn = kdtree5.findNearestNeighbor(pt_2_2);
 	XCTAssert(nullptr != nn);
 	XCTAssertEqual(pt_1_1, *nn);
 	// Test finding NN of the only point in the tree.
-	nn = kdt2.findNearestNeighbor(pt_1_1);
-	XCTAssert(nullptr == nn);
+	nn = kdtree5.findNearestNeighbor(pt_1_1);
+	XCTAssert(nullptr != nn);
+	XCTAssert(pt_1_1 == *nn);
 }
 
 @end

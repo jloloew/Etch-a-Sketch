@@ -97,7 +97,7 @@ etchasketch::KDTree<Dim>::findNearestNeighbor(const KDPoint<Dim> &query,
 	if (nullptr == subroot) {
 		return nullptr;
 	}
-	const KDPoint<Dim> subRoot = *subroot;
+	const KDPoint<Dim> &subRoot = *subroot;
 	if (subRoot.isLeaf()) {
 		currentBestDist = query.distanceTo(subRoot);
 		return subroot;
@@ -203,7 +203,7 @@ etchasketch::KDTree<Dim>::contains(const KDPoint<Dim> &query) const
 
 template<int Dim>
 void
-etchasketch::KDTree<Dim>::insert(KDPoint<Dim> &newPoint)
+etchasketch::KDTree<Dim>::insert(const KDPoint<Dim> &newPoint)
 {
 	// Make a copy and insert it.
 	KDPoint<Dim> *pointCopy = new KDPoint<Dim>(newPoint);
@@ -348,24 +348,29 @@ etchasketch::KDTree<Dim>::getParent(const KDPoint<Dim> &child) const
 
 template<int Dim>
 void
+etchasketch::KDTree<Dim>::plainPrint(std::ostream &out) const
+{
+	out << "{\"root\": ";
+	// Print all the nodes.
+	if (nullptr != root) {
+		out << *root;
+	} else {
+		out << "null";
+	}
+	out << '}';
+}
+
+template<int Dim>
+void
 etchasketch::KDTree<Dim>::print(std::ostream &out, bool prettyJSON) const
 {
 	if (!prettyJSON) {
-		// Just print all the nodes.
-		if (nullptr != root) {
-			out << *root;
-		} else {
-			out << "Empty";
-		}
+		plainPrint(out);
 		return;
 	} else {
 		// Print all the nodes to a string, then prettify it.
 		stringstream ss;
-		if (nullptr != root) {
-			ss << *root;
-		} else {
-			ss << "Empty";
-		}
+		plainPrint(ss);
 		etchasketch::utils::prettyPrintJSON(out, ss);
 	}
 }

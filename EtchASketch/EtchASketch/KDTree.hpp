@@ -27,7 +27,8 @@ namespace etchasketch {
 		
 	public:
 		/**
-		 * Constructs a KDTree from a vector of KDPoints, each having dimension Dim.
+		 * Constructs a KDTree from a vector of KDPoints, each having dimension
+		 * Dim.
 		 *
 		 * You may assume the vector has at least one KDPoint in it. It should
 		 * build the tree using recursive helper functions.
@@ -66,9 +67,9 @@ namespace etchasketch {
 		 * increasing dimensions, modulo the total number: a 3D tree will
 		 * have levels split by dimension 0, 1, 2, 0, 1, 2, etc.
 		 *
-		 * You will probably want to write a helper function which performs the median selection
-		 * and partitioning. Maybe you can use a
-		 * function you already wrote...
+		 * You will probably want to write a helper function which performs the
+		 * median selection and partitioning. Maybe you can use a function you
+		 * already wrote...
 		 *
 		 * @see Here is a reference that should help you create concise,
 		 * efficient code: [Partition-based General Selection
@@ -132,15 +133,17 @@ namespace etchasketch {
 		 * You can assume that findNearestNeighbor will only be called on a
 		 * valid kd-tree.
 		 *
-		 * @see Here is a reference we found quite useful in writing our kd-tree:
-		 *  [Andrew Moore's KD-Tree Tutorial]
-		 * (http://www.autonlab.org/autonweb/14665/version/2/part/5/data/moore-tutorial.pdf?branch=main&language=en).
+		 * @see Here is a reference we found quite useful in writing our
+		 * kd-tree: [Andrew Moore's KD-Tree Tutorial]
+		 *  (http://www.autonlab.org/autonweb/14665/version/2/part/5/data/moore-tutorial.pdf?branch=main&language=en).
 		 *
 		 * @see There is [an example]
-		 * (https://wiki.engr.illinois.edu/display/cs225/MP+6.1) on the KDTree spec on the wiki.
+		 *  (https://wiki.engr.illinois.edu/display/cs225/MP+6.1) on the KDTree
+		 * spec on the wiki.
 		 *
 		 * @todo This function is required for MP 6.1.
-		 * @param query The point we wish to find the closest neighbor to in the tree.
+		 * @param query The point we wish to find the closest neighbor to in the
+		 * tree.
 		 * @return The closest point to a in the KDTree.
 		 */
 		const etchasketch::KDPoint<Dim> *
@@ -149,7 +152,8 @@ namespace etchasketch {
 		/**
 		 * Check whether the KD tree contains a given point.
 		 * @param query The point to see if it's in the KD tree.
-		 * @return `true` if `query` is present in the KD tree, `false` otherwise.
+		 * @return `true` if `query` is present in the KD tree, `false`
+		 * otherwise.
 		 */
 		bool contains(const etchasketch::KDPoint<Dim> &query) const;
 		
@@ -157,7 +161,7 @@ namespace etchasketch {
 		 * Insert a new point.
 		 * @param newKDPoint The new point to be added to the KD tree.
 		 */
-		void insert(etchasketch::KDPoint<Dim> &newPoint);
+		void insert(const etchasketch::KDPoint<Dim> &newPoint);
 		
 		/**
 		 * Remove a given node from the KD tree, then delete the node. The
@@ -201,8 +205,8 @@ namespace etchasketch {
 							const int dimension) const;
 		
 		/**
-		 * Determines if KDPoint a is smaller than KDPoint b in a given dimension d.
-		 * If there is a tie, break it with KDPoint::operator<().
+		 * Determines if KDPoint a is smaller than KDPoint b in a given
+		 * dimension d. If there is a tie, break it with KDPoint::operator<().
 		 *
 		 * For example:
 		 *
@@ -216,8 +220,8 @@ namespace etchasketch {
 		 * @param first KDPoint to compare.
 		 * @param second Second point to compare.
 		 * @param curDim Dimension these points are being compared in.
-		 * @return A boolean value indicating whether the first KDPoint is smaller than the second
-		 *  KDPoint in the curDim dimension.
+		 * @return A boolean value indicating whether the first KDPoint is
+		 *  smaller than the second KDPoint in the curDim dimension.
 		 */
 		bool smallerDimVal(const etchasketch::KDPoint<Dim> &first,
 						   const etchasketch::KDPoint<Dim> &second,
@@ -264,6 +268,8 @@ namespace etchasketch {
 		bool shouldReplace(const etchasketch::KDPoint<Dim> &target,
 						   const etchasketch::KDPoint<Dim> *currentBest,
 						   const etchasketch::KDPoint<Dim> &potential) const;
+		
+		void plainPrint(std::ostream &out) const;
 	};
 	
 	template<int Dim>
