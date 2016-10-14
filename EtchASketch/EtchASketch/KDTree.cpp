@@ -8,7 +8,10 @@
 
 //#include "KDTree.hpp"
 #include <algorithm>
+#include <sstream>
+#include "EASUtils+Private.hpp"
 
+using std::stringstream;
 using std::unordered_set;
 using std::vector;
 using etchasketch::KDPoint;
@@ -345,13 +348,25 @@ etchasketch::KDTree<Dim>::getParent(const KDPoint<Dim> &child) const
 
 template<int Dim>
 void
-etchasketch::KDTree<Dim>::print(std::ostream &out) const
+etchasketch::KDTree<Dim>::print(std::ostream &out, bool prettyJSON) const
 {
-	// Just print all the nodes.
-	if (root != nullptr) {
-		out << *root;
+	if (!prettyJSON) {
+		// Just print all the nodes.
+		if (nullptr != root) {
+			out << *root;
+		} else {
+			out << "Empty";
+		}
+		return;
 	} else {
-		out << "Empty";
+		// Print all the nodes to a string, then prettify it.
+		stringstream ss;
+		if (nullptr != root) {
+			ss << *root;
+		} else {
+			ss << "Empty";
+		}
+		etchasketch::utils::prettyPrintJSON(out, ss);
 	}
 }
 

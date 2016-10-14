@@ -111,6 +111,8 @@ namespace etchasketch {
 		void set(int index, KDPointCoordinate val);
 		
 		void print(std::ostream &out = std::cout) const;
+		
+	private:
 		void printVals(std::ostream &out = std::cout) const;
 	};
 	

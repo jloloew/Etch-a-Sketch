@@ -133,19 +133,19 @@ template<int Dim>
 void
 etchasketch::KDPoint<Dim>::print(std::ostream &out /* = cout */) const
 {
-	out << "{value: ";
+	out << "{\"value\": ";
 	printVals(out);
-	out << ", lesserPoints: ";
+	out << ", \"lesserPoints\": ";
 	if (nullptr != lesserPoints) {
 		lesserPoints->print(out);
 	} else {
-		out << "NULL";
+		out << "null";
 	}
-	out << ", greaterPoints: ";
+	out << ", \"greaterPoints\": ";
 	if (nullptr != greaterPoints) {
 		greaterPoints->print(out);
 	} else {
-		out << "NULL";
+		out << "null";
 	}
 	out << "}";
 }
@@ -154,18 +154,18 @@ template<int Dim>
 void
 etchasketch::KDPoint<Dim>::printVals(std::ostream &out) const
 {
-	out << '(' << vals[0];
+	out << '[' << vals[0];
 	
 	for (int i = 1; i < Dim; i++) {
 		out << ", " << vals[i];
 	}
 	
-	out << ')';
+	out << ']';
 }
 
 template<int Dim>
 std::ostream &
-operator<<(std::ostream &out, const etchasketch::KDPoint<Dim> &p)
+etchasketch::operator<<(std::ostream &out, const etchasketch::KDPoint<Dim> &p)
 {
 	p.print(out);
 	return out;

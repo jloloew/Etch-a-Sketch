@@ -13,29 +13,32 @@
 #include <string>
 
 #define _EASLog2(fmt, ...) do { \
-	etchasketch::_EAS_Log("%s:%s:%d: ", __FILE__, __PRETTY_FUNCTION__, \
-			__LINE__); \
-	etchasketch::_EAS_Log((fmt) , ## __VA_ARGS__); \
-	etchasketch::_EAS_Log("\n"); \
+etchasketch::utils::_EAS_Log("%s:%s:%d: ", __FILE__, __PRETTY_FUNCTION__, \
+__LINE__); \
+etchasketch::utils::_EAS_Log((fmt) , ## __VA_ARGS__); \
+etchasketch::utils::_EAS_Log("\n"); \
 } while (0)
 
 #define EASLog(fmt, ...) _EASLog2((fmt) , ## __VA_ARGS__)
 
 namespace etchasketch {
-	
-	/**
-	 * Run a function and return the time it took to execute, in seconds.
-	 */
-	double timeFunction(void (function)(void))
-	__attribute__((warn_unused_result));
-	
-	/**
-	 * Same as `timeFunction`, but also prints how long the function took.
-	 */
-	double timeFunctionAndPrint(void (function)(void), std::string funcName);
-	
-	void _EAS_Log(std::string fmt, ...);
-	
+	namespace utils {
+		
+		/**
+		 * Run a function and return the time it took to execute, in seconds.
+		 */
+		double timeFunction(void (function)(void))
+		__attribute__((warn_unused_result));
+		
+		/**
+		 * Same as `timeFunction`, but also prints how long the function took.
+		 */
+		double timeFunctionAndPrint(void (function)(void),
+									std::string funcName);
+		
+		void _EAS_Log(std::string fmt, ...);
+		
+	}
 }
 
 #endif /* EASUtils_hpp */

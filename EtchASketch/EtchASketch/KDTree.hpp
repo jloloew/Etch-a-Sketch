@@ -24,6 +24,7 @@ namespace etchasketch {
 	class KDTree
 	{
 		friend class tests::KDTreeTests;
+		
 	public:
 		/**
 		 * Constructs a KDTree from a vector of KDPoints, each having dimension Dim.
@@ -165,6 +166,9 @@ namespace etchasketch {
 		 */
 		void remove(etchasketch::KDPoint<Dim> *&target);
 		
+		/// Print the KD tree, one node at a time.
+		void print(std::ostream &out, bool prettyJSON = true) const;
+		
 	private:
 		/// This is the root node of our KDTree representation.
 		etchasketch::KDPoint<Dim> *root;
@@ -260,9 +264,6 @@ namespace etchasketch {
 		bool shouldReplace(const etchasketch::KDPoint<Dim> &target,
 						   const etchasketch::KDPoint<Dim> *currentBest,
 						   const etchasketch::KDPoint<Dim> &potential) const;
-		
-		/// Print the KD tree, one node at a time.
-		void print(std::ostream &out) const;
 	};
 	
 	template<int Dim>
