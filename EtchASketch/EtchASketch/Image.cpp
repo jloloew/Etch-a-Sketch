@@ -8,17 +8,35 @@
 
 #include "Image.hpp"
 
-etchasketch::Image::Image(size_t width, size_t height)
-:etchasketch::Image(nullptr, width, height)
-{ }
+using std::out_of_range;
+using Pixel = etchasketch::Image::Pixel;
+using etchasketch::KDPoint;
 
-etchasketch::Image::Image(const etchasketch::Image::Pixel *data, size_t width, size_t height)
-:width(width), height(height)
+etchasketch::Image::Image(size_t width, size_t height, const Pixel *data)
+: width(width), height(height)
 {
-	// TODO: check for overflow on the multiplication
-	this->data = new etchasketch::Image::Pixel[width * height];
+	if (nullptr == data) { // Safety first
+		goto bad_data;
+	}
+	this->data = new Pixel[getPixelCount()];
+	if (nullptr == this->data) {
+		goto bad_data;
+	}
+	memcpy(this->data, data, getPixelCount() * sizeof(Pixel));
+	return;
+	
+bad_data:
+	this->width = 0;
+	this->height = 0;
+	this->data = nullptr;
+}
+
+etchasketch::Image::Image(const etchasketch::Image &other)
+: width(other.getWidth()), height(other.getHeight())
+{
+	data = new Pixel[other.getPixelCount()];
 	if (nullptr != data) {
-		memcpy(this->data, data, width * height * sizeof(etchasketch::Image::Pixel));
+		memcpy(data, other.data, getPixelCount() * sizeof(Pixel));
 	}
 }
 
@@ -28,28 +46,29 @@ etchasketch::Image::~Image()
 	data = nullptr;
 }
 
-size_t
-etchasketch::Image::getWidth(void) const
-{
-	return width;
-}
+#define VALIDATE_INDEX(index) do { \
+	if ((index)[0] < 0 || (index)[0] >= getWidth()) { \
+		out_of_range e("Invalid X coordinate"); \
+		throw e; \
+	} \
+	if ((index)[1] < 0 || (index)[1] >= getHeight()) { \
+		out_of_range e("Invalid Y coordinate"); \
+		throw e; \
+	} \
+} while (0)
 
-size_t
-etchasketch::Image::getHeight(void) const
+Pixel
+etchasketch::Image::operator[](const KDPoint<2> &index) const
 {
-	return height;
-}
-
-const etchasketch::Image::Pixel &
-etchasketch::Image::operator[](const etchasketch::KDPoint<2> &index) const
-{
+	VALIDATE_INDEX(index);
 	size_t dataIndex = index[0] + (index[1] * width);
 	return data[dataIndex];
 }
 
-etchasketch::Image::Pixel &
-etchasketch::Image::operator[](const etchasketch::KDPoint<2> &index)
+Pixel &
+etchasketch::Image::operator[](const KDPoint<2> &index)
 {
+	VALIDATE_INDEX(index);
 	size_t dataIndex = index[0] + (index[1] * width);
 	return data[dataIndex];
 }

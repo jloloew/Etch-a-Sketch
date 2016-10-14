@@ -9,13 +9,7 @@
 #ifndef EtchASketch_hpp
 #define EtchASketch_hpp
 
-#include <stdio.h>
 #include "Image.hpp"
-
-namespace etchasketch {
-	
-	
-	
-}
+#include "ImageFlow.hpp"
 
 #endif /* EtchASketch_hpp */

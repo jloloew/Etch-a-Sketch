@@ -66,7 +66,7 @@ etchasketch::KDPoint<Dim>::KDPoint(const KDPoint<Dim> &other)
 
 template<int Dim>
 bool
-etchasketch::KDPoint<Dim>::isValid(void) const
+etchasketch::KDPoint<Dim>::isValid() const
 {
 	KDPointCoordinate invalid = etchasketch::KDPoint<Dim>::KDPointCoordinateInvalid;
 	for (int i = 0; i < Dim; i++) {
@@ -79,7 +79,7 @@ etchasketch::KDPoint<Dim>::isValid(void) const
 
 template<int Dim>
 bool
-etchasketch::KDPoint<Dim>::isLeaf(void) const
+etchasketch::KDPoint<Dim>::isLeaf() const
 {
 	return (lesserPoints == nullptr) && (greaterPoints == nullptr);
 }

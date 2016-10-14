@@ -31,12 +31,13 @@ etchasketch::timeFunction(void (function)(void))
 		// error
 		return -1.0;
 	}
-	double timeTaken = double(endTime.tv_sec - startTime.tv_sec);
-	timeTaken += double(endTime.tv_usec - startTime.tv_usec) / 1000.0;
+	double timeTaken = static_cast<double>(endTime.tv_sec - startTime.tv_sec);
+	timeTaken += static_cast<double>(endTime.tv_usec - startTime.tv_usec) /
+			1.0e6; // Convert usec to sec.
 	return timeTaken;
 }
 
-void
+double
 etchasketch::timeFunctionAndPrint(void (function)(void), string funcName)
 {
 	// Get elapsed time.
@@ -44,6 +45,7 @@ etchasketch::timeFunctionAndPrint(void (function)(void), string funcName)
 	std::stringstream resultStr;
 	resultStr << "'" << funcName << "' took " << elapsedTime << "s to run.\n";
 	EASLog(resultStr.str());
+	return elapsedTime;
 }
 
 void

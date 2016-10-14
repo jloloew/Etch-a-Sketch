@@ -12,40 +12,50 @@
 #include <stdint.h>
 #include "KDPoint.hpp"
 
-//using etchasketch::KDPoint;
-
 namespace etchasketch {
-	
-//	// Forward declare.
-//	template<int Dim>
-//	class KDPoint;
 	
 	/**
 	 * The backing store of a single image.
 	 */
-	class Image {
+	struct Image {
 	public:
 		/// RGBA format.
 		typedef uint32_t Pixel;
 		
-		Image(size_t width, size_t height);
+		Image(size_t width, size_t height, const Pixel *data = nullptr);
 		
-		Image(const Pixel *data, size_t width, size_t height);
+		// Deep copy another image.
+		Image(const etchasketch::Image &other);
 		
 		virtual ~Image();
 		
-		size_t getWidth(void) const;
+		inline
+		bool isValid() const {
+			return (getWidth() > 0) && (getHeight() > 0) && (nullptr != data);
+		}
 		
-		size_t getHeight(void) const;
+		inline
+		size_t getWidth() const {
+			return width;
+		}
 		
-		const Pixel & operator[] (const etchasketch::KDPoint<2> & index) const;
+		inline
+		size_t getHeight() const {
+			return height;
+		}
 		
-		Pixel & operator[] (const etchasketch::KDPoint<2> & index);
+		Pixel operator[] (const etchasketch::KDPoint<2> &index) const;
+		
+		Pixel & operator[] (const etchasketch::KDPoint<2> &index);
 		
 	private:
 		size_t width, height;
 		
 		Pixel *data;
+		
+		size_t getPixelCount() const
+			// TODO: check for overflow on the multiplication
+			{ return width * height; }
 	};
 	
 }

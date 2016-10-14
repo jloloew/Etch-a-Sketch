@@ -18,48 +18,63 @@
 namespace etchasketch {
 	
 	/**
-	 * The top-level object that takes an image and walks it through each stage of processing.
+	 * The top-level object that takes an image and walks it through each stage
+	 * of processing.
 	 */
 	class ImageFlow {
 		
 	public:
 		
-		// These public methods are listed in the order in which they are intended to be called.
+		/*
+		 * These public methods are listed in the order in which they are 
+		 * intended to be called.
+		 */
 		
 		/**
 		 * Create a new flow with a starting image.
 		 */
-		ImageFlow(const Image &colorImage);
+		ImageFlow(const etchasketch::Image &colorImage);
 		
-		virtual ~ImageFlow(void);
+		virtual ~ImageFlow();
 		
 		/**
 		 * Detect edges in the starting image.
 		 */
-		void detectEdges(void);
+		void detectEdges();
 		
 		/**
 		 * Get a set of all points on an edge in the edge detected image.
 		 */
-		void generateEdgePoints(void);
+		void generateEdgePoints();
 		
 		/**
 		 * Put the edge points in the best order for drawing.
 		 */
-		void orderEdgePointsForDrawing(void);
+		void orderEdgePointsForDrawing();
 		
 	private:
 		// Images and other such things, in order of use.
-		const Image originalImage;
-		Image grayscaleImage;
-		Image *edgeDetectedImage;
-		const std::unordered_set<KDPoint<2> *> *edgePoints;
-		const std::vector<KDPoint<2>> *orderedEdgePoints;
+		const etchasketch::Image originalImage;
+		etchasketch::Image grayscaleImage;
+		const etchasketch::Image *edgeDetectedImage;
+		const std::unordered_set<etchasketch::KDPoint<2>> *edgePoints;
+		const std::vector<etchasketch::KDPoint<2>> *orderedEdgePoints;
 		
-		edgedetect::EdgeDetector edgeDetector;
-		salesman::Salesman *salesman;
+		etchasketch::edgedetect::EdgeDetector edgeDetector;
+		etchasketch::salesman::Salesman *salesman;
 		
-		void convertToGrayscale(void);
+		void convertToGrayscale();
+		
+		// Setters
+		void setEdgeDetectedImage(const etchasketch::Image *newImage);
+		
+		void setEdgePoints(const std::unordered_set<etchasketch::KDPoint<2>>
+						   *newEdgePoints);
+		
+		void setOrderedEdgePoints(const std::vector<etchasketch::KDPoint<2>>
+								  *newOrderedEdgePoints);
+		
+		void setSalesman(etchasketch::salesman::Salesman *newSalesman);
 		
 	};
 	

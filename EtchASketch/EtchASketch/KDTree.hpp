@@ -142,7 +142,8 @@ namespace etchasketch {
 		 * @param query The point we wish to find the closest neighbor to in the tree.
 		 * @return The closest point to a in the KDTree.
 		 */
-		const etchasketch::KDPoint<Dim> * findNearestNeighbor(const etchasketch::KDPoint<Dim> &query) const;
+		const etchasketch::KDPoint<Dim> *
+		findNearestNeighbor(const etchasketch::KDPoint<Dim> &query) const;
 		
 		/**
 		 * Check whether the KD tree contains a given point.
@@ -169,7 +170,8 @@ namespace etchasketch {
 		etchasketch::KDPoint<Dim> *root;
 		
 		/// Helper function for the KDTree constructor.
-		void buildTree(const std::unordered_set<etchasketch::KDPoint<Dim>> &points);
+		void
+		buildTree(const std::unordered_set<etchasketch::KDPoint<Dim>> &points);
 		
 		/**
 		 * Delete a subtree.
@@ -185,12 +187,14 @@ namespace etchasketch {
 					etchasketch::KDPoint<Dim> &subRoot,
 					const int dimension);
 		
-		const etchasketch::KDPoint<Dim> * getParent(const etchasketch::KDPoint<Dim> &child) const;
+		const etchasketch::KDPoint<Dim> *
+		getParent(const etchasketch::KDPoint<Dim> &child) const;
 		
-		const etchasketch::KDPoint<Dim> * findNearestNeighbor(const etchasketch::KDPoint<Dim> &query,
-													const etchasketch::KDPoint<Dim> *subroot,
-													double &currentBestDist, // inout
-															  const int dimension) const;
+		const etchasketch::KDPoint<Dim> *
+		findNearestNeighbor(const etchasketch::KDPoint<Dim> &query,
+							const etchasketch::KDPoint<Dim> *subroot,
+							double &currentBestDist, // inout
+							const int dimension) const;
 		
 		/**
 		 * Determines if KDPoint a is smaller than KDPoint b in a given dimension d.

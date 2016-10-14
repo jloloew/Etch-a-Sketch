@@ -7,16 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "KDTree.hpp"
-#import <vector>
-
-using std::vector;
-using etchasketch::KDTree;
-using etchasketch::KDPoint;
 
 @interface EtchASketchTests : XCTestCase
-
-@property etchasketch::KDTree<2> *kdtree;
 
 @end
 
@@ -24,17 +16,9 @@ using etchasketch::KDPoint;
 
 - (void)setUp {
     [super setUp];
-    // Generate points to put in the new tree.
-	vector<KDPoint<2> *> points;
-	points.push_back(new KDPoint<2>(1, 0));
-	points.push_back(new KDPoint<2>(3, 4));
-	points.push_back(new KDPoint<2>(0, -2));
-	self.kdtree = new KDTree<2>(points);
 }
 
 - (void)tearDown {
-	delete self.kdtree;
-	self.kdtree = nullptr;
     [super tearDown];
 }
 

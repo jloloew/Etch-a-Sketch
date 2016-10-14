@@ -14,18 +14,22 @@
 namespace etchasketch {
 	namespace edgedetect {
 		
-		class SobelEdgeDetector : EdgeDetector {
+		class SobelEdgeDetector : etchasketch::edgedetect::EdgeDetector {
 		public:
 			SobelEdgeDetector();
 			
-			/// Detect edges in an image.
-			virtual Image * detectEdges(const Image &grayscaleImage) const;
+			/**
+			 * Detect edges in an image, copying the result into a newly
+			 * allocated image.
+			 */
+			virtual
+			etchasketch::Image *
+			detectEdges(const etchasketch::Image &grayscaleImage) const;
 			
 		private:
-			float
-			intensityForKDPoint(const Image &img,
-							  const size_t x,
-							  const size_t y) const;
+			float intensityForPoint(const etchasketch::Image &img,
+									const int x,
+									const int y) const;
 			
 		};
 		

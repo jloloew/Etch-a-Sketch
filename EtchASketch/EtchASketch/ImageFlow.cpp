@@ -10,43 +10,38 @@
 
 using std::unordered_set;
 using std::vector;
-using namespace etchasketch;
 using etchasketch::Image;
-using edgedetect::EdgeDetector;
+using etchasketch::edgedetect::EdgeDetector;
+using etchasketch::salesman::Salesman;
 
 etchasketch::ImageFlow::ImageFlow(const Image &colorImage)
-: originalImage(Image(colorImage)),
-grayscaleImage(Image(colorImage.getWidth(), colorImage.getHeight()))
-{
-	edgeDetector = etchasketch::edgedetect::EdgeDetector();
-}
+: originalImage(colorImage),
+grayscaleImage(colorImage.getWidth(), colorImage.getHeight()),
+edgeDetectedImage(nullptr),
+edgePoints(nullptr),
+orderedEdgePoints(nullptr),
+edgeDetector(),
+salesman(nullptr)
+{ }
 
 etchasketch::ImageFlow::~ImageFlow()
 {
 	delete edgeDetectedImage;
-	
-	// Delete the generated edge points if they haven't yet been given to the salesman.
-	if ((edgePoints != nullptr) && (salesman == nullptr)) {
-		for (auto iter = edgePoints->begin(); iter != edgePoints->end(); iter++) {
-			delete *iter;
-			// No need to remove it from edgeKDPoints because we're about to
-			// delete edgeKDPoints.
-		}
-	}
 	delete edgePoints;
-	edgePoints = nullptr;
+	delete orderedEdgePoints;
+	delete salesman;
 }
 
 void
-etchasketch::ImageFlow::convertToGrayscale(void)
+etchasketch::ImageFlow::convertToGrayscale()
 {
 	// Transform each pixel.
-	for (size_t x = 0; x < originalImage.getWidth(); x++) {
-		for (size_t y = 0; y < originalImage.getHeight(); y++) {
-			KDPoint<2> pt(x, y);
+	for (int x = 0; x < originalImage.getWidth(); x++) {
+		for (int y = 0; y < originalImage.getHeight(); y++) {
+			const KDPoint<2> pt(x, y);
 			// Average the components.
 			const Image::Pixel color = originalImage[pt];
-			const Image::Pixel gray =    (((color >> 24) & 0xFF)
+			const Image::Pixel gray =   (((color >> 24) & 0xFF)
 									   + ((color >> 16) & 0xFF)
 									   + ((color >>  8) & 0xFF)) / 3;
 			grayscaleImage[pt] = gray;
@@ -55,38 +50,73 @@ etchasketch::ImageFlow::convertToGrayscale(void)
 }
 
 void
-etchasketch::ImageFlow::detectEdges(void)
+etchasketch::ImageFlow::detectEdges()
 {
-	edgeDetectedImage = edgeDetector.detectEdges(grayscaleImage);
+	setEdgeDetectedImage(edgeDetector.detectEdges(grayscaleImage));
 }
 
 void
-etchasketch::ImageFlow::generateEdgePoints(void)
+etchasketch::ImageFlow::generateEdgePoints()
 {
-	unordered_set<KDPoint<2> *> *pointSet = new unordered_set<KDPoint<2> *>();
+	unordered_set<KDPoint<2>> *pointSet = new unordered_set<KDPoint<2>>();
 	// Loop through each point to see if its pixel is part of an edge.
-	for (size_t x = 0; x < edgeDetectedImage->getWidth(); x++) {
-		for (size_t y = 0; y < edgeDetectedImage->getHeight(); y++) {
-			KDPoint<2> pt(x, y);
-			Image::Pixel px = (*edgeDetectedImage)[pt];
-			uint8_t greenComponent = ((px >> 16) & 0xFF);
+	for (int x = 0; x < edgeDetectedImage->getWidth(); x++) {
+		for (int y = 0; y < edgeDetectedImage->getHeight(); y++) {
+			const KDPoint<2> pt(x, y);
+			const Image::Pixel px = (*edgeDetectedImage)[pt];
+			const uint8_t greenComponent = ((px >> 16) & 0xFF);
 			// Check for non-black.
 			if (greenComponent != 0) {
-				pointSet->insert(new KDPoint<2>(pt));
+				pointSet->insert(pt);
 			}
 		}
 	}
 	
-	edgePoints = pointSet;
+	setEdgePoints(pointSet);
 }
 
 void
-etchasketch::ImageFlow::orderEdgePointsForDrawing(void)
+etchasketch::ImageFlow::orderEdgePointsForDrawing()
 {
-	salesman = new salesman::Salesman(*edgePoints);
+	setSalesman(new Salesman(*edgePoints));
 	salesman->orderPoints();
-	orderedEdgePoints = &salesman->getOrderedPoints();
+	setOrderedEdgePoints(&salesman->getOrderedPoints());
 	// Done with the salesman.
+	setSalesman(nullptr);
+}
+
+#pragma mark Setters
+
+void
+etchasketch::ImageFlow::setEdgeDetectedImage(const Image *newImage)
+{
+	// Delete the old value and set it to the new pointer.
+	delete edgeDetectedImage;
+	edgeDetectedImage = newImage;
+}
+
+void
+etchasketch::ImageFlow::setEdgePoints(const unordered_set<KDPoint<2>>
+									  *newEdgePoints)
+{
+	// Delete the old value and set it to the new pointer.
+	delete edgePoints;
+	edgePoints = newEdgePoints;
+}
+
+void
+etchasketch::ImageFlow::setOrderedEdgePoints(const vector<KDPoint<2>>
+											 *newOrderedEdgePoints)
+{
+	// Delete the old value and set it to the new pointer.
+	delete orderedEdgePoints;
+	orderedEdgePoints = newOrderedEdgePoints;
+}
+
+void
+etchasketch::ImageFlow::setSalesman(Salesman *newSalesman)
+{
+	// Delete the old value and set it to the new pointer.
 	delete salesman;
-	salesman = nullptr;
+	salesman = newSalesman;
 }

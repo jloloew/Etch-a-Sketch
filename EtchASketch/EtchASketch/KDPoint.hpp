@@ -119,6 +119,19 @@ namespace etchasketch {
 	
 }
 
+// Add a hash function for use in unordered_map.
+namespace std {
+	template<>
+	struct hash<etchasketch::KDPoint<2>> {
+		size_t
+		operator()(const etchasketch::KDPoint<2> &pt) const
+		{
+			// Hash the point.
+			return (pt[0] * 0x1f1f1f1f) ^ pt[1];
+		}
+	};
+}
+
 #include "KDPoint.cpp"
 
 #endif /* KDPoint_hpp */

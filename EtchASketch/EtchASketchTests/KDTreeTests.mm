@@ -17,8 +17,8 @@ using etchasketch::KDPoint;
 class etchasketch::tests::KDTreeTests {
 public:
 	bool wrapSmallerDimVal(KDTree<2> *kdtree,
-						   const etchasketch::KDPoint<2> &first,
-						   const etchasketch::KDPoint<2> &second,
+						   const KDPoint<2> &first,
+						   const KDPoint<2> &second,
 						   const int curDim)
 	{
 		return kdtree->smallerDimVal(first, second, curDim);
@@ -37,10 +37,10 @@ public:
 - (void)setUp {
     [super setUp];
 	// Generate points to put in the new tree.
-	vector<KDPoint<2> *> points;
-	points.push_back(new KDPoint<2>(1, 0));
-	points.push_back(new KDPoint<2>(3, 4));
-	points.push_back(new KDPoint<2>(0, -2));
+	vector<KDPoint<2>> points;
+	points.push_back(KDPoint<2>(1, 0));
+	points.push_back(KDPoint<2>(3, 4));
+	points.push_back(KDPoint<2>(0, -2));
 	self.kdtree = new KDTree<2>(points);
 	self.wrapper = etchasketch::tests::KDTreeTests();
 }
@@ -55,9 +55,9 @@ public:
 	// Generate random (reproducible) points.
 	const size_t n_elems = 10;
 	srand(0x8BADF00D);
-	unordered_set<KDPoint<2> *> *points = new unordered_set<KDPoint<2> *>(n_elems);
+	unordered_set<KDPoint<2>> *points = new unordered_set<KDPoint<2>>(n_elems);
 	for (size_t i = 0; i < n_elems; i++) {
-		KDPoint<2> *pt = new KDPoint<2>(rand(), rand());
+		KDPoint<2> pt(rand(), rand());
 		points->insert(pt);
 	}
 	// Create the KDTree.

@@ -11,10 +11,7 @@
 
 #include <unordered_set>
 #include <vector>
-#include "Image.hpp"
 #include "KDTree.hpp"
-
-using etchasketch::Image;
 
 namespace etchasketch {
 	namespace salesman {
@@ -23,18 +20,19 @@ namespace etchasketch {
 		class Salesman {
 			
 		public:
-			Salesman(const std::unordered_set<KDPoint<2> *> &unorderedPoints);
+			Salesman(const std::unordered_set<etchasketch::KDPoint<2>>
+					 &unorderedPoints);
 			
-			virtual ~Salesman(void);
+			virtual ~Salesman();
 			
 			/// Order the points for the best drawing order.
-			void orderPoints(void);
+			void orderPoints();
 			
-			const std::vector<KDPoint<2>> & getOrderedPoints(void) const
+			const std::vector<KDPoint<2>> & getOrderedPoints() const
 				{ return orderedPoints; }
 			
 		private:
-			std::unordered_set<KDPoint<2> *> unorderedPoints;
+			std::unordered_set<etchasketch::KDPoint<2>> unorderedPoints;
 			std::vector<KDPoint<2>> orderedPoints;
 			
 			void primsAlgorithm(KDTree<2> &kdTree);

@@ -10,18 +10,22 @@
 #define EdgeDetector_hpp
 
 #include "Image.hpp"
-using etchasketch::Image;
 
 namespace etchasketch {
 	namespace edgedetect {
 		
 		class EdgeDetector {
 		public:
-			EdgeDetector() { };
+			/// Create a new edge detector.
+			EdgeDetector() { }
+			
+			virtual ~EdgeDetector() { }
 			
 			/// Detect edges in an image.
-			virtual Image * detectEdges(const Image &grayscaleImage) const;
-			
+			virtual etchasketch::Image *
+			detectEdges(const etchasketch::Image &grayscaleImage) const {
+				return nullptr;
+			}
 		};
 		
 	}
