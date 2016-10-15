@@ -152,4 +152,56 @@ public:
 	XCTAssert(pt_1_1 == *nn);
 }
 
+- (void)testContains {
+	const KDPoint<2> pt_0_0(0, 0), pt_1_1(1, 1), pt_2_2(2, 2);
+	KDTree<2> kdtree1;
+	// Test empty tree.
+	XCTAssertFalse(kdtree1.contains(pt_0_0));
+	// Test tree with different point.
+	kdtree1.insert(pt_1_1);
+	XCTAssertFalse(kdtree1.contains(pt_0_0));
+	// Test tree with target point.
+	XCTAssertTrue(kdtree1.contains(pt_1_1));
+}
+
+- (void)testInsert {
+	const KDPoint<2> pt_0_0(0, 0), pt_1_1(1, 1), pt_2_2(2, 2);
+	KDTree<2> kdtree1;
+	// TODO: Verify the actual organization of nodes within the KDTree.
+	// Test normal insertions.
+	XCTAssertTrue(kdtree1.insert(pt_0_0));
+	XCTAssertTrue(kdtree1.insert(pt_2_2));
+	XCTAssertTrue(kdtree1.insert(pt_1_1));
+	// Test duplicate insertion.
+	XCTAssertFalse(kdtree1.insert(pt_0_0));
+	XCTAssertFalse(kdtree1.insert(pt_1_1));
+	XCTAssertFalse(kdtree1.insert(pt_2_2));
+}
+
+- (void)testRemove {
+	const KDPoint<2> pt_0_0(0, 0), pt_1_1(1, 1), pt_2_2(2, 2);
+	KDTree<2> kdtree1;
+	// Test empty removal.
+	XCTAssertFalse(kdtree1.remove(pt_0_0));
+	// Test removal of the wrong point with a tree size of 1.
+	kdtree1.insert(pt_1_1);
+	XCTAssertFalse(kdtree1.remove(pt_0_0));
+	// Test removal of the only point.
+	XCTAssertTrue(kdtree1.remove(pt_1_1));
+	// Test double removal of a point.
+	XCTAssertFalse(kdtree1.remove(pt_1_1));
+	// Test removal of the whole tree.
+	KDTree<2> kdtree2;
+	kdtree2.insert(pt_0_0);
+	kdtree2.insert(pt_1_1);
+	kdtree2.insert(pt_2_2);
+	XCTAssertTrue(kdtree2.remove(pt_0_0));
+	XCTAssertTrue(kdtree2.remove(pt_2_2));
+	XCTAssertTrue(kdtree2.remove(pt_1_1));
+	// And double removal of the whole tree.
+	XCTAssertFalse(kdtree2.remove(pt_0_0));
+	XCTAssertFalse(kdtree2.remove(pt_1_1));
+	XCTAssertFalse(kdtree2.remove(pt_2_2));
+}
+
 @end

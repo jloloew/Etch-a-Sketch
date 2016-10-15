@@ -38,28 +38,29 @@ void
 etchasketch::salesman::Salesman::primsAlgorithm(KDTree<2> &kdTree)
 {
 	// Assume that we start at (0, 0).
-	// TODO: Fix needing to use doubles in this constructor.
-	const KDPoint<2> startKDPoint(0, 0);
-	orderedPoints.push_back(startKDPoint);
+	const KDPoint<2> startPoint(0, 0);
+	orderedPoints.push_back(startPoint);
+	kdTree.remove(startPoint);
 	
 	while (!unorderedPoints.empty()) {
 		EASLog("Size remaining: %lu", unorderedPoints.size());
 		// Find the next point nearest the last point we added, add it to the
 		// list of ordered points, and remove it as an option in the list of
 		// unordered point list.
-		KDPoint<2> *currKDPoint = const_cast<KDPoint<2> *>(
-			kdTree.findNearestNeighbor(orderedPoints.back()));
-		if ((currKDPoint != nullptr) && currKDPoint->isValid()) {
-			orderedPoints.push_back(*currKDPoint);
+		KDPoint<2> *currPoint =
+				kdTree.findNearestNeighbor(orderedPoints.back());
+		if ((nullptr != currPoint) && currPoint->isValid()) {
+			orderedPoints.push_back(*currPoint);
 			
 			// erase returns the number of elements removed.
-			if (1 != unorderedPoints.erase(*currKDPoint)) {
+			if (1 != unorderedPoints.erase(*currPoint)) {
 				EASLog("Failed to remove the current value.");
 			}
-			// When the KD tree removes a point, it also deletes it.
-			kdTree.remove(currKDPoint);
+			// Remove the point from the KDTree and delete our copy of it.
+			kdTree.remove(*currPoint);
+			delete currPoint;
 		} else {
-			EASLog("KDTree.findNearestNeighbor returned a bad currKDPoint.");
+			EASLog("KDTree.findNearestNeighbor returned a bad currPoint.");
 		}
 	}
 }

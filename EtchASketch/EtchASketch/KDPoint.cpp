@@ -58,7 +58,7 @@ etchasketch::KDPoint<Dim>::KDPoint(KDPointCoordinate x, KDPointCoordinate y ...)
 }
 
 template<int Dim>
-etchasketch::KDPoint<Dim>::KDPoint(const KDPoint<Dim> &other)
+etchasketch::KDPoint<Dim>::KDPoint(const KDPoint<Dim> & __restrict other)
 : KDPoint()
 {
 	memcpy(this->vals, other.vals, sizeof(this->vals));

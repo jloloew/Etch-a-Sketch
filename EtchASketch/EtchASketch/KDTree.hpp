@@ -144,9 +144,9 @@ namespace etchasketch {
 		 * @todo This function is required for MP 6.1.
 		 * @param query The point we wish to find the closest neighbor to in the
 		 * tree.
-		 * @return The closest point to a in the KDTree.
+		 * @return A copy of the closest point to `query` in the KDTree.
 		 */
-		const etchasketch::KDPoint<Dim> *
+		etchasketch::KDPoint<Dim> *
 		findNearestNeighbor(const etchasketch::KDPoint<Dim> &query) const;
 		
 		/**
@@ -160,15 +160,18 @@ namespace etchasketch {
 		/**
 		 * Insert a new point.
 		 * @param newKDPoint The new point to be added to the KD tree.
+		 * @returns `true` on success, or `false` if `newPoint` already exists.
 		 */
-		void insert(const etchasketch::KDPoint<Dim> &newPoint);
+		bool insert(const etchasketch::KDPoint<Dim> &newPoint);
 		
 		/**
 		 * Remove a given node from the KD tree, then delete the node. The
 		 * target's subtrees are retained in the KD tree.
 		 * @param target The node to be removed and deleted.
+		 * @returns `true` if `target` was successfully removed, `false` 
+		 *  otherwise.
 		 */
-		void remove(etchasketch::KDPoint<Dim> *&target);
+		bool remove(const etchasketch::KDPoint<Dim> &target);
 		
 		/// Print the KD tree, one node at a time.
 		void print(std::ostream &out, bool prettyJSON = true) const;
@@ -187,11 +190,17 @@ namespace etchasketch {
 		 */
 		void deleteSubtree(etchasketch::KDPoint<Dim> *subRoot);
 		
-		/// Like regular insert, but takes a pointer for a pre-copied point.
-		void insert(etchasketch::KDPoint<Dim> *newPoint);
+		/**
+		 * Like regular insert, but takes a pointer for a pre-copied point.
+		 * @returns `true` on success, or `false` on failure.
+		 */
+		bool insert(etchasketch::KDPoint<Dim> *newPoint);
 		
-		/// Helper function for insert.
-		void insert(etchasketch::KDPoint<Dim> &newPoint,
+		/**
+		 * Helper function for insert.
+		 * @returns `true` on success, or `false` on failure.
+		 */
+		bool insert(etchasketch::KDPoint<Dim> &newPoint,
 					etchasketch::KDPoint<Dim> &subRoot,
 					const int dimension);
 		

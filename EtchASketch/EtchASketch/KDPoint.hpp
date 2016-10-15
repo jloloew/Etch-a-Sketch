@@ -53,7 +53,7 @@ namespace etchasketch {
 		 * Copy constructor.
 		 * Copies the values from other, but *not* the subtree pointers.
 		 */
-		KDPoint(const KDPoint<Dim> &other);
+		KDPoint(const KDPoint<Dim> & __restrict other);
 		
 		inline
 		bool isValid() const;
