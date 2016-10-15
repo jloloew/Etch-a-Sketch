@@ -123,7 +123,7 @@ etchasketch::utils::prettyPrintJSON(std::ostream &out, std::istream &in)
 				// Turn multiple spaces into just one.
 				out << c;
 				while (in.peek() == ' ') {
-					c = in.get();
+					in.get();
 				}
 				break;
 			case '\n':

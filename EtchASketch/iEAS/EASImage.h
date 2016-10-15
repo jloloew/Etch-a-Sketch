@@ -10,10 +10,16 @@
 
 @interface EASImage : NSObject
 
-@property (nonatomic, readonly) NSUInteger width;
-@property (nonatomic, readonly) NSUInteger height;
-
 - (instancetype)initWithWidth:(NSUInteger)width
 					   height:(NSUInteger)height;
+
+/// Check whether the image is valid.
+- (BOOL)isValid;
+
+/// The width of the image, in pixels.
+- (NSUInteger)width;
+
+/// The height of the image, in pixels.
+- (NSUInteger)height;
 
 @end

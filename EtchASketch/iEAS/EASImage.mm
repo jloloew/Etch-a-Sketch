@@ -1,5 +1,5 @@
 //
-//  EASImage.m
+//  EASImage.mm
 //  EtchASketch
 //
 //  Created by Justin Loew on 10/10/16.
@@ -9,9 +9,11 @@
 #import "EASImage.h"
 #import "EtchASketch.hpp"
 
+using etchasketch::Image;
+
 @interface EASImage ()
 
-@property (nonatomic, readonly) etchasketch::Image *image;
+@property (nonatomic, readonly) Image *image;
 
 @end
 
@@ -23,7 +25,7 @@
 {
 	self = [super init];
 	if (self != nil) {
-		_image = new etchasketch::Image(width, height);
+		_image = new Image(width, height);
 	}
 	return self;
 }
@@ -33,14 +35,18 @@
 	_image = nil;
 }
 
+- (BOOL)isValid {
+	return self.image->isValid();
+}
+
 #pragma mark - Getters
 
 - (NSUInteger)width {
-	return (NSUInteger) self.image->getWidth();
+	return static_cast<NSUInteger>(self.image->getWidth());
 }
 
 - (NSUInteger)height {
-	return (NSUInteger) self.image->getHeight();
+	return static_cast<NSUInteger>(self.image->getHeight());
 }
 
 @end

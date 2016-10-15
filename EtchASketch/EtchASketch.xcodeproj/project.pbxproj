@@ -19,6 +19,9 @@
 		B820E9121DAC750100135C8A /* EtchASketch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BD81D79DE7600A4ED34 /* EtchASketch.cpp */; };
 		B820E9131DAC750100135C8A /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C21D91AA870035B729 /* Image.cpp */; };
 		B820E9141DAC750100135C8A /* ImageFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlow.cpp */; };
+		B827FE8F1DB1B27F007F2469 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
+		B827FE901DB1B27F007F2469 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
+		B827FE911DB1B27F007F2469 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
 		B8643B301D920D0B00B93D84 /* SobelEdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */; };
 		B872DD891DB06B2B008E08D8 /* KDTree.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */; };
 		B872DD8A1DB06B2E008E08D8 /* KDPoint.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */; };
@@ -78,6 +81,8 @@
 		B820E9041DAC6E2200135C8A /* EASImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EASImage.mm; sourceTree = "<group>"; };
 		B820E9181DAC75C800135C8A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B827FE8C1DB18A98007F2469 /* EASUtils+Private.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "EASUtils+Private.hpp"; sourceTree = "<group>"; };
+		B827FE8D1DB1B27F007F2469 /* EASImageFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EASImageFlow.h; path = EtchASketchWrapper/EASImageFlow.h; sourceTree = "<group>"; };
+		B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = EASImageFlow.mm; path = EtchASketchWrapper/EASImageFlow.mm; sourceTree = "<group>"; };
 		B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SobelEdgeDetector.cpp; path = edgedetect/SobelEdgeDetector.cpp; sourceTree = "<group>"; };
 		B8643B2F1D920D0B00B93D84 /* SobelEdgeDetector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SobelEdgeDetector.hpp; path = edgedetect/SobelEdgeDetector.hpp; sourceTree = "<group>"; };
 		B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEtchASketch.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +167,8 @@
 			children = (
 				B820E9031DAC6E2200135C8A /* EASImage.h */,
 				B820E9041DAC6E2200135C8A /* EASImage.mm */,
+				B827FE8D1DB1B27F007F2469 /* EASImageFlow.h */,
+				B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */,
 			);
 			name = EtchASketchWrapper;
 			sourceTree = "<group>";
@@ -497,6 +504,7 @@
 				B8766BA91D79DC9100A4ED34 /* AppDelegate.m in Sources */,
 				B8766BA61D79DC9100A4ED34 /* main.m in Sources */,
 				B820E9081DAC6E8C00135C8A /* SobelEdgeDetector.cpp in Sources */,
+				B827FE8F1DB1B27F007F2469 /* EASImageFlow.mm in Sources */,
 				B820E9051DAC6E2200135C8A /* EASImage.mm in Sources */,
 				B820E90A1DAC6E8C00135C8A /* Image.cpp in Sources */,
 				B820E9061DAC6E8C00135C8A /* EASUtils.cpp in Sources */,
@@ -509,6 +517,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8766BBF1D79DC9100A4ED34 /* iEASTests.m in Sources */,
+				B827FE901DB1B27F007F2469 /* EASImageFlow.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +542,7 @@
 				B820E9111DAC750100135C8A /* SobelEdgeDetector.cpp in Sources */,
 				B820E90F1DAC750100135C8A /* EASUtils.cpp in Sources */,
 				B820E9141DAC750100135C8A /* ImageFlow.cpp in Sources */,
+				B827FE911DB1B27F007F2469 /* EASImageFlow.mm in Sources */,
 				B8766C091D79FF4300A4ED34 /* EtchASketchTests.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
