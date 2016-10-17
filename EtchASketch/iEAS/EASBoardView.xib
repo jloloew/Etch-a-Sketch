@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EASBoardViewController">
+            <connections>
+                <outlet property="boardImageView" destination="Oke-Ie-1Ks" id="XDa-YC-UN7"/>
+                <outlet property="screenView" destination="Mjt-jn-W92" id="I2X-hU-HPG"/>
+                <outlet property="view" destination="Oke-Ie-1Ks" id="VKC-fW-TbA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" semanticContentAttribute="playback" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="playback" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="etch-a-sketch board" translatesAutoresizingMaskIntoConstraints="NO" id="Oke-Ie-1Ks"/>
+                <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="Mjt-jn-W92" customClass="EASScreenView">
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Mjt-jn-W92" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="141" id="13x-37-iel"/>
+                <constraint firstAttribute="bottom" secondItem="Mjt-jn-W92" secondAttribute="bottom" constant="169" id="94p-jP-ybF"/>
+                <constraint firstItem="Oke-Ie-1Ks" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="H1w-Mm-ECT"/>
+                <constraint firstAttribute="trailing" secondItem="Mjt-jn-W92" secondAttribute="trailing" constant="144" id="HRt-ec-Ayz"/>
+                <constraint firstItem="Oke-Ie-1Ks" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="IvE-DJ-54B"/>
+                <constraint firstAttribute="bottom" secondItem="Oke-Ie-1Ks" secondAttribute="bottom" id="JEJ-IS-fVP"/>
+                <constraint firstAttribute="trailing" secondItem="Oke-Ie-1Ks" secondAttribute="trailing" id="ahk-ne-hzP"/>
+                <constraint firstItem="Mjt-jn-W92" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="142" id="ucB-KV-ofs"/>
+            </constraints>
+            <point key="canvasLocation" x="-19" y="81"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="etch-a-sketch board" width="969" height="825"/>
+    </resources>
+</document>
