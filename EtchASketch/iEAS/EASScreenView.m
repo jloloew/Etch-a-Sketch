@@ -10,6 +10,8 @@
 
 @interface EASScreenView ()
 
+@property (nonatomic, readwrite, nullable) NSMutableArray<NSValue *> *points;
+
 /// Draw all the points in the points array.
 - (void)drawAllPoints;
 
@@ -41,6 +43,12 @@
 	self.pointColor = [UIColor redColor];//self.tintColor;
 	
 	self.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)addPoints:(NSArray<NSValue *> *)newPoints {
+	[_points addObjectsFromArray:newPoints];
+	[self setNeedsDisplay];
+	// TODO: Set up a way to redraw just the newly added points.
 }
 
 #pragma mark Drawing
@@ -92,7 +100,7 @@
 
 #pragma mark Setters
 
-- (void)setPoints:(NSArray<NSValue *> *)points {
+- (void)setPoints:(NSMutableArray<NSValue *> *)points {
 	_points = points;
 	[self setNeedsDisplay];
 }

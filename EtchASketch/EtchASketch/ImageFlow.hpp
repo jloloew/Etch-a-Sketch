@@ -52,6 +52,11 @@ namespace etchasketch {
 		 */
 		void orderEdgePointsForDrawing();
 		
+		/**
+		 * Get the points in drawing order, generating them if necessary.
+		 */
+		const std::vector<etchasketch::KDPoint<2>> & getOrderedEdgePoints();
+		
 	private:
 		// Images and other such things, in order of use.
 		const etchasketch::Image originalImage;

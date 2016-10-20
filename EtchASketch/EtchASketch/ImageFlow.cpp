@@ -64,6 +64,7 @@ etchasketch::ImageFlow::generateEdgePoints()
 		for (int y = 0; y < edgeDetectedImage->getHeight(); y++) {
 			const KDPoint<2> pt(x, y);
 			const Image::Pixel px = (*edgeDetectedImage)[pt];
+			// Arbitrarily choose the green component. RGB all have the same value.
 			const uint8_t greenComponent = ((px >> 16) & 0xFF);
 			// Check for non-black.
 			if (greenComponent != 0) {
@@ -83,6 +84,18 @@ etchasketch::ImageFlow::orderEdgePointsForDrawing()
 	setOrderedEdgePoints(&salesman->getOrderedPoints());
 	// Done with the salesman.
 	setSalesman(nullptr);
+}
+
+const vector<KDPoint<2>> &
+etchasketch::ImageFlow::getOrderedEdgePoints()
+{
+	// Make sure we actually have the ordered edge points ready to go.
+	if (nullptr == orderedEdgePoints) {
+		// TODO: Make sure we've gone through the entire flow.
+		orderEdgePointsForDrawing();
+	}
+	
+	return *orderedEdgePoints;
 }
 
 #pragma mark Setters

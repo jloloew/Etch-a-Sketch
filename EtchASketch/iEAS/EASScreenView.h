@@ -8,13 +8,17 @@
 
 @import UIKit;
 
+NS_ASSUME_NONNULL_BEGIN
 IB_DESIGNABLE
 @interface EASScreenView : UIView
 
 /// The points to display.
-@property (nonatomic) NSArray<NSValue *> *points;
+@property (nonatomic, readonly, nullable) NSArray<NSValue *> *points;
 
 /// The color in which the points are displayed.
 @property (nonatomic) IBInspectable UIColor *pointColor;
 
+- (void)addPoints:(NSArray<NSValue *> *)newPoints;
+
 @end
+NS_ASSUME_NONNULL_END

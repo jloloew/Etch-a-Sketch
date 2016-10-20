@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface EASImage : NSObject
 
 - (instancetype)initWithWidth:(NSUInteger)width
@@ -23,3 +24,4 @@
 - (NSUInteger)height;
 
 @end
+NS_ASSUME_NONNULL_END

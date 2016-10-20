@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "EASImage.h"
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  * The top-level object that takes an image and walks it through each stage of
  * processing.
@@ -28,3 +29,4 @@
 - (void)orderEdgePointsForDrawing;
 
 @end
+NS_ASSUME_NONNULL_END
