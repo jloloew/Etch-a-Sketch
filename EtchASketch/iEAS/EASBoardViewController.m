@@ -38,18 +38,20 @@
 }
 
 - (void)doComputationSequence {
-	self.statusLabel.text = @"Detecting edges…";
-	[self.imageFlow detectEdges];
-	
-	self.statusLabel.text = @"Generating edge points…";
-	[self.imageFlow generateEdgePoints];
-	
-	self.statusLabel.text = @"Ordering edge points for drawing…";
-	[self.imageFlow orderEdgePointsForDrawing];
-	
-	self.statusLabel.text = @"Drawing…";
-	NSArray<NSValue *> *points = [self.imageFlow getOrderedEdgePoints];
-	[self.screenVC addPoints:points animated:NO]; // TODO: try out animation
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		self.statusLabel.text = @"Detecting edges…";
+		[self.imageFlow detectEdges];
+		
+		self.statusLabel.text = @"Generating edge points…";
+		[self.imageFlow generateEdgePoints];
+		
+		self.statusLabel.text = @"Ordering edge points for drawing…";
+		[self.imageFlow orderEdgePointsForDrawing];
+		
+		self.statusLabel.text = @"Drawing…";
+		NSArray<NSValue *> *points = [self.imageFlow getOrderedEdgePoints];
+		[self.screenVC addPoints:points animated:NO]; // TODO: try out animation
+	});
 }
 
 @end
