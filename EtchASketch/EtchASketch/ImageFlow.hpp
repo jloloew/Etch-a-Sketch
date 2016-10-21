@@ -65,7 +65,7 @@ namespace etchasketch {
 		const std::unordered_set<etchasketch::KDPoint<2>> *edgePoints;
 		const std::vector<etchasketch::KDPoint<2>> *orderedEdgePoints;
 		
-		etchasketch::edgedetect::EdgeDetector edgeDetector;
+		etchasketch::edgedetect::EdgeDetector *edgeDetector;
 		etchasketch::salesman::Salesman *salesman;
 		
 		void convertToGrayscale();

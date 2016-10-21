@@ -14,9 +14,11 @@
 namespace etchasketch {
 	namespace edgedetect {
 		
-		class SobelEdgeDetector : etchasketch::edgedetect::EdgeDetector {
+		class SobelEdgeDetector : public etchasketch::edgedetect::EdgeDetector {
 		public:
 			SobelEdgeDetector();
+			
+			virtual ~SobelEdgeDetector() { };
 			
 			/**
 			 * Detect edges in an image, copying the result into a newly

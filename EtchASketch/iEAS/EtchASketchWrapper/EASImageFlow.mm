@@ -14,6 +14,8 @@ using etchasketch::ImageFlow;
 
 @interface EASImageFlow ()
 
+@property (nonatomic, readwrite) EASComputationStage computationStage;
+
 @property (nonatomic, readonly) ImageFlow *imageFlow;
 
 @end
@@ -31,6 +33,8 @@ using etchasketch::ImageFlow;
 - (instancetype)initWithColorImage:(EASImage *)colorImage {
 	self = [super init];
 	if (self != nil) {
+		self.computationStage = EASComputationStageNone;
+		self.delegate = nil;
 		_imageFlow = new ImageFlow(*colorImage.image);
 	}
 	return self;
@@ -42,15 +46,32 @@ using etchasketch::ImageFlow;
 }
 
 - (void)detectEdges {
+	NSAssert(self.computationStage == EASComputationStageNone, @"Computation already completed");
+	self.computationStage = EASComputationStageDetectEdges;
 	self.imageFlow->detectEdges();
+	
+	// Notify the delegate.
+	if (self.delegate && [self.delegate respondsToSelector:@selector(imageFlow:didCompleteComputationStage:)]) {
+		[self.delegate imageFlow:self didCompleteComputationStage:self.computationStage];
+	}
 }
 
 - (void)generateEdgePoints {
 	self.imageFlow->generateEdgePoints();
+	
+	// Notify the delegate.
+	if (self.delegate && [self.delegate respondsToSelector:@selector(imageFlow:didCompleteComputationStage:)]) {
+		[self.delegate imageFlow:self didCompleteComputationStage:self.computationStage];
+	}
 }
 
 - (void)orderEdgePointsForDrawing {
 	self.imageFlow->orderEdgePointsForDrawing();
+	
+	// Notify the delegate.
+	if (self.delegate && [self.delegate respondsToSelector:@selector(imageFlow:didCompleteComputationStage:)]) {
+		[self.delegate imageFlow:self didCompleteComputationStage:self.computationStage];
+	}
 }
 
 - (NSArray<NSValue *> *)getOrderedEdgePoints {

@@ -17,15 +17,13 @@ namespace etchasketch {
 		class EdgeDetector {
 		public:
 			/// Create a new edge detector.
-			EdgeDetector() { }
+//			EdgeDetector() { }
 			
-			virtual ~EdgeDetector() { }
+			virtual ~EdgeDetector() { };
 			
 			/// Detect edges in an image.
 			virtual etchasketch::Image *
-			detectEdges(const etchasketch::Image &grayscaleImage) const {
-				return nullptr;
-			}
+			detectEdges(const etchasketch::Image &grayscaleImage) const = 0;
 		};
 		
 	}

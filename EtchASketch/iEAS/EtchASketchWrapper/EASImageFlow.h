@@ -10,11 +10,36 @@
 #import "EASImage.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSUInteger, EASComputationStage) {
+	EASComputationStageNone = 0,
+	EASComputationStageGenerateGrayscaleImage,
+	EASComputationStageDetectEdges,
+	EASComputationStageGenerateEdgePoints,
+	EASComputationStageOrderEdgePointsForDrawing,
+	EASComputationStageFinished
+};
+
+@class EASImageFlow;
+
+/// Used to receive callbacks when each stage of computation completes.
+@protocol EASImageFlowDelegate <NSObject>
+
+@optional
+- (void)imageFlow:(EASImageFlow *)imageFlow willBeginComputationStage:(EASComputationStage)computationStage;
+- (void)imageFlow:(EASImageFlow *)imageFlow didCompleteComputationStage:(EASComputationStage)computationStage;
+- (void)imageFlowDidCompleteAllComputations:(EASImageFlow *)imageFlow;
+
+@end
+
 /**
  * The top-level object that takes an image and walks it through each stage of
  * processing.
  */
 @interface EASImageFlow : NSObject
+
+@property (nonatomic, readonly) EASComputationStage computationStage;
+
+@property (nonatomic, weak, nullable) id<EASImageFlowDelegate> delegate;
 
 /// Create a new flow with a starting image.
 - (instancetype)initWithColorImage:(EASImage *)colorImage;

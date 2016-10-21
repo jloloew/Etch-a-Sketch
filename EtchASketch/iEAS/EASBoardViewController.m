@@ -27,6 +27,7 @@
 	UIImage *img = [UIImage imageNamed:@"Lena"];
 	EASImage *image = [[EASImage alloc] initWithImage:img];
 	self.imageFlow = [[EASImageFlow alloc] initWithColorImage:image];
+	self.imageFlow.delegate = self;
 	
 	// Set up screen VC.
 	self.screenVC = [[EASScreenViewController alloc] initWithNibName:@"EASScreenViewController" bundle:nil];
@@ -39,17 +40,46 @@
 
 - (void)doComputationSequence {
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-		self.statusLabel.text = @"Detecting edges…";
 		[self.imageFlow detectEdges];
 		
-		self.statusLabel.text = @"Generating edge points…";
 		[self.imageFlow generateEdgePoints];
 		
-		self.statusLabel.text = @"Ordering edge points for drawing…";
 		[self.imageFlow orderEdgePointsForDrawing];
-		
-		self.statusLabel.text = @"Drawing…";
-		NSArray<NSValue *> *points = [self.imageFlow getOrderedEdgePoints];
+	});
+}
+
+#pragma mark EASImageFlowDelegate
+
+- (void)imageFlow:(EASImageFlow *)imageFlow willBeginComputationStage:(EASComputationStage)computationStage {
+	// Set the status label for the current stage of computation.
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		switch (computationStage) {
+			case EASComputationStageNone:
+				self.statusLabel.text = @"Loading…";
+				break;
+			case EASComputationStageGenerateGrayscaleImage:
+				self.statusLabel.text = @"Generating grayscale image…";
+				break;
+			case EASComputationStageDetectEdges:
+				self.statusLabel.text = @"Detecting edges…";
+				break;
+			case EASComputationStageGenerateEdgePoints:
+				self.statusLabel.text = @"Generating edge points…";
+				break;
+			case EASComputationStageOrderEdgePointsForDrawing:
+				self.statusLabel.text = @"Ordering edge points for drawing…";
+				break;
+			case EASComputationStageFinished:
+				self.statusLabel.text = @"Done!";
+				break;
+		}
+	});
+}
+
+- (void)imageFlowDidCompleteAllComputations:(EASImageFlow *)imageFlow {
+	// Draw the ordered edge points.
+	NSArray<NSValue *> *points = [self.imageFlow getOrderedEdgePoints];
+	dispatch_sync(dispatch_get_main_queue(), ^{
 		[self.screenVC addPoints:points animated:NO]; // TODO: try out animation
 	});
 }

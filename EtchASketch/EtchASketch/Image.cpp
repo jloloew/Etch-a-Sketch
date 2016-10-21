@@ -15,20 +15,24 @@ using etchasketch::KDPoint;
 etchasketch::Image::Image(size_t width, size_t height, const Pixel *data)
 : width(width), height(height)
 {
-	if (nullptr == data) { // Safety first
-		goto bad_data;
-	}
+//	if (nullptr == data) { // Safety first
+//		this->data = nullptr;
+//		return;
+//	}
+	
 	this->data = new Pixel[getPixelCount()];
 	if (nullptr == this->data) {
-		goto bad_data;
+		this->width = 0;
+		this->height = 0;
+		this->data = nullptr;
+		return;
 	}
-	memcpy(this->data, data, getPixelCount() * sizeof(Pixel));
+	if (nullptr != data) {
+		memcpy(this->data, data, getPixelCount() * sizeof(Pixel));
+	} else {
+		memset(this->data, 0, getPixelCount() * sizeof(Pixel));
+	}
 	return;
-	
-bad_data:
-	this->width = 0;
-	this->height = 0;
-	this->data = nullptr;
 }
 
 etchasketch::Image::Image(const etchasketch::Image &other)

@@ -7,11 +7,12 @@
 //
 
 #include "ImageFlow.hpp"
+#include "SobelEdgeDetector.hpp"
 
 using std::unordered_set;
 using std::vector;
 using etchasketch::Image;
-using etchasketch::edgedetect::EdgeDetector;
+using etchasketch::edgedetect::SobelEdgeDetector;
 using etchasketch::salesman::Salesman;
 
 etchasketch::ImageFlow::ImageFlow(const Image &colorImage)
@@ -20,7 +21,7 @@ grayscaleImage(colorImage.getWidth(), colorImage.getHeight()),
 edgeDetectedImage(nullptr),
 edgePoints(nullptr),
 orderedEdgePoints(nullptr),
-edgeDetector(),
+edgeDetector(new SobelEdgeDetector()),
 salesman(nullptr)
 { }
 
@@ -29,6 +30,7 @@ etchasketch::ImageFlow::~ImageFlow()
 	delete edgeDetectedImage;
 	delete edgePoints;
 	delete orderedEdgePoints;
+	delete edgeDetector;
 	delete salesman;
 }
 
@@ -52,7 +54,7 @@ etchasketch::ImageFlow::convertToGrayscale()
 void
 etchasketch::ImageFlow::detectEdges()
 {
-	setEdgeDetectedImage(edgeDetector.detectEdges(grayscaleImage));
+	setEdgeDetectedImage(edgeDetector->detectEdges(grayscaleImage));
 }
 
 void
