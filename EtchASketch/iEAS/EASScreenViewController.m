@@ -16,7 +16,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+	
+	// Display message for no points
+	UILabel *msgLabel = [[UILabel alloc] initWithFrame:self.view.frame];
+	msgLabel.text = @"No Points";
+	msgLabel.textAlignment = NSTextAlignmentCenter;
+	msgLabel.lineBreakMode = NSLineBreakByWordWrapping;
+	msgLabel.numberOfLines = 0;
+	msgLabel.adjustsFontSizeToFitWidth = YES;
+	msgLabel.allowsDefaultTighteningForTruncation = YES;
+	msgLabel.center = self.view.center;
+	[self.view addSubview:msgLabel];
 }
 
 - (void)addPoints:(NSArray<NSValue *> *)points animated:(BOOL)animated {

@@ -9,8 +9,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EASBoardViewController">
             <connections>
                 <outlet property="boardImageView" destination="Oke-Ie-1Ks" id="XDa-YC-UN7"/>
-                <outlet property="screenView" destination="Mjt-jn-W92" id="I2X-hU-HPG"/>
-                <outlet property="view" destination="Oke-Ie-1Ks" id="VKC-fW-TbA"/>
+                <outlet property="screenViewPlaceholder" destination="Mjt-jn-W92" id="Ynv-nQ-1Jq"/>
+                <outlet property="view" destination="iN0-l3-epB" id="bQg-B3-XUT"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
