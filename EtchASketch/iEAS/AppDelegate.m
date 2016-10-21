@@ -16,6 +16,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	// Set up UI
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.boardVC = [[EASBoardViewController alloc] initWithNibName:@"EASBoardViewController" bundle:nil];
 	self.window.rootViewController = self.boardVC;

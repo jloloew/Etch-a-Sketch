@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="boardImageView" destination="Oke-Ie-1Ks" id="XDa-YC-UN7"/>
                 <outlet property="screenViewPlaceholder" destination="Mjt-jn-W92" id="Ynv-nQ-1Jq"/>
+                <outlet property="statusLabel" destination="faX-b0-eAL" id="4te-E6-W8j"/>
                 <outlet property="view" destination="iN0-l3-epB" id="bQg-B3-XUT"/>
             </connections>
         </placeholder>
@@ -20,7 +21,18 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="playback" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="etch-a-sketch board" translatesAutoresizingMaskIntoConstraints="NO" id="Oke-Ie-1Ks"/>
                 <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="Mjt-jn-W92" customClass="EASScreenView">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status Message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="faX-b0-eAL">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="faX-b0-eAL" firstAttribute="centerX" secondItem="Mjt-jn-W92" secondAttribute="centerX" id="1gP-Fd-n7V"/>
+                        <constraint firstItem="faX-b0-eAL" firstAttribute="centerY" secondItem="Mjt-jn-W92" secondAttribute="centerY" id="dQa-Oc-5o7"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

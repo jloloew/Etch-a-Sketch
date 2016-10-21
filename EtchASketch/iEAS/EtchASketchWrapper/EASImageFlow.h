@@ -28,5 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Put the edge points in the best order for drawing.
 - (void)orderEdgePointsForDrawing;
 
+/// Get the points to draw in order, first computing them if necessary.
+- (NSArray<NSValue *> *)getOrderedEdgePoints;
+
 @end
 NS_ASSUME_NONNULL_END

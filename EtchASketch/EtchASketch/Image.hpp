@@ -22,6 +22,14 @@ namespace etchasketch {
 		/// RGBA format.
 		typedef uint32_t Pixel;
 		
+		// TODO: Add spec for the format of the data buffer.
+		/**
+		 * Create a new image.
+		 * @param width The width of the image, in pixels.
+		 * @param height The height of the image, in pixels.
+		 * @param data A raw pixel buffer. The data is copied out into the
+		 * Image's own internal buffer.
+		 */
 		Image(size_t width, size_t height, const Pixel *data = nullptr);
 		
 		// Deep copy another image.

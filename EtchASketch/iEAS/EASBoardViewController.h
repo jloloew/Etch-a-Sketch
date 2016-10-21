@@ -8,12 +8,14 @@
 
 @import UIKit;
 #import "EASScreenViewController.h"
+#import "EASImageFlow.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @interface EASBoardViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *boardImageView;
 @property (strong, nonatomic) EASScreenViewController *screenVC;
+@property (nonatomic, strong) EASImageFlow *imageFlow;
 
 @end
 NS_ASSUME_NONNULL_END

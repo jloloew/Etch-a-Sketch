@@ -53,4 +53,14 @@ using etchasketch::ImageFlow;
 	self.imageFlow->orderEdgePointsForDrawing();
 }
 
+- (NSArray<NSValue *> *)getOrderedEdgePoints {
+	const vector<KDPoint<2>> &pts = self.imageFlow->getOrderedEdgePoints();
+	// Copy the data out, converting to NSValue.
+	NSMutableArray<NSValue *> *points = [NSMutableArray arrayWithCapacity:pts.size()];
+	for (auto it = pts.begin(); it != pts.end(); ++it) {
+		[points addObject:[NSValue valueWithCGPoint:CGPointMake((*it)[0], (*it)[1])]];
+	}
+	return points;
+}
+
 @end
