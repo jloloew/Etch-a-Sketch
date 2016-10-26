@@ -138,7 +138,8 @@ using etchasketch::ImageFlow;
 - (UIImage *)grayscaleImage {
 	const Image & grayscaleImage = self.imageFlow->getGrayscaleImage();
 	EASImage *easImage = [[EASImage alloc] initWithCPPImage:&grayscaleImage];
-	return [easImage UIImage];
+	UIImage *grayImage = [easImage UIImage];
+	return grayImage;
 }
 
 @end

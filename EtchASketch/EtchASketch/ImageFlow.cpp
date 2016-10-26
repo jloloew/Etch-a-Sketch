@@ -43,10 +43,10 @@ etchasketch::ImageFlow::convertToGrayscale()
 			const KDPoint<2> pt(x, y);
 			// Average the components.
 			const Image::Pixel color = originalImage[pt];
-			const Image::Pixel gray =   (((color >> 24) & 0xFF)
-									   + ((color >> 16) & 0xFF)
-									   + ((color >>  8) & 0xFF)) / 3;
-			grayscaleImage[pt] = gray;
+			const Image::Pixel gray =   (( color        & 0xFF)
+									   + ((color >>  8) & 0xFF)
+									   + ((color >> 16) & 0xFF)) / 3;
+			grayscaleImage[pt] = gray | (gray << 8) | (gray << 16);
 		}
 	}
 }

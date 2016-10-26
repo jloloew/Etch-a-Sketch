@@ -27,7 +27,6 @@
 	// Set up image flow.
 	UIImage *img = [UIImage imageNamed:@"Lena"];
 	EASImage *image = [[EASImage alloc] initWithImage:img];
-	UIImage *renderedImage = [image UIImage];
 	self.imageFlow = [[EASImageFlow alloc] initWithColorImage:image];
 	self.imageFlow.delegate = self;
 	

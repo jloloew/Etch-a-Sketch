@@ -17,6 +17,12 @@ using etchasketch::Image;
 
 @property (nonatomic, nullable) CGImageRef backingCGImage;
 
+@property (nonatomic) BOOL shouldFreeCPPImage;
+
+/**
+ * @Note: Uses the same C++ image instance. This init is meant for short 
+ * lifespan EASImages where the EASImage will be freed shortly after use.
+ */
 - (instancetype)initWithCPPImage:(const Image *)image;
 
 - (CGImageRef)createCGImage;
@@ -31,6 +37,7 @@ using etchasketch::Image;
 {
 	self = [super init];
 	if (self) {
+		self.shouldFreeCPPImage = YES;
 		self.backingCGImage = nil;
 		_image = new Image(width, height);
 	}
@@ -81,6 +88,12 @@ using etchasketch::Image;
 		if (!image) {
 			return nil;
 		}
+		/*
+		 * This initializer is meant for creating a temporary EASImage to wrap
+		 * around an existing C++ Image. We don't make a copy of it, but we
+		 * won't free it either.
+		 */
+		self.shouldFreeCPPImage = NO;
 		self.backingCGImage = nil;
 		_image = image;
 	}
@@ -88,8 +101,10 @@ using etchasketch::Image;
 }
 
 - (void)dealloc {
-	delete self.image;
-	_image = nil;
+	if (self.shouldFreeCPPImage) {
+		delete self.image;
+		_image = nil;
+	}
 }
 
 - (BOOL)isValid {
@@ -104,7 +119,7 @@ using etchasketch::Image;
 	size_t bitsPerPixel = bytesPerPixel * 8;
 	size_t bytesPerRow = width * bytesPerPixel;
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host | kCGImageAlphaFirst;
+	CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host | kCGImageAlphaNoneSkipFirst;
 	// Create the data provider.
 	const void *data = (const void *)self.image->getData();
 	size_t size = self.image->getPixelCount() * sizeof(etchasketch::Image::Pixel);
