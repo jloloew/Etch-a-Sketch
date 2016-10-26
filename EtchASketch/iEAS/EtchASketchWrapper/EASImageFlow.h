@@ -26,7 +26,10 @@ typedef NS_ENUM(NSUInteger, EASComputationStage) {
 
 @optional
 - (void)imageFlow:(EASImageFlow *)imageFlow willBeginComputationStage:(EASComputationStage)computationStage;
+
+// Not called for @c EASComputationStageFinished.
 - (void)imageFlow:(EASImageFlow *)imageFlow didCompleteComputationStage:(EASComputationStage)computationStage;
+
 - (void)imageFlowDidCompleteAllComputations:(EASImageFlow *)imageFlow;
 
 @end
@@ -44,6 +47,9 @@ typedef NS_ENUM(NSUInteger, EASComputationStage) {
 /// Create a new flow with a starting image.
 - (instancetype)initWithColorImage:(EASImage *)colorImage;
 
+/// Convert the color image to a grayscale image.
+- (void)generateGrayscaleImage;
+
 /// Detect edges in the starting image.
 - (void)detectEdges;
 
@@ -55,6 +61,10 @@ typedef NS_ENUM(NSUInteger, EASComputationStage) {
 
 /// Get the points to draw in order, first computing them if necessary.
 - (NSArray<NSValue *> *)getOrderedEdgePoints;
+
+#pragma mark Image getters
+
+- (nullable UIImage *)grayscaleImage;
 
 @end
 NS_ASSUME_NONNULL_END

@@ -25,5 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The height of the image, in pixels.
 - (NSUInteger)height;
 
+/// Return a @c UIImage of the @c EASImage, performing conversion if necessary.
+- (nullable UIImage *)UIImage;
+
 @end
 NS_ASSUME_NONNULL_END

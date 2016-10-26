@@ -25,17 +25,22 @@ namespace etchasketch {
 		
 	public:
 		
-		/*
-		 * These public methods are listed in the order in which they are 
-		 * intended to be called.
-		 */
-		
 		/**
 		 * Create a new flow with a starting image.
 		 */
 		ImageFlow(const etchasketch::Image &colorImage);
 		
 		virtual ~ImageFlow();
+		
+		/*
+		 * These public methods are listed in the order in which they are 
+		 * intended to be called.
+		 */
+		
+		/**
+		 * Convert the color image into a grayscale image.
+		 */
+		void convertToGrayscale();
 		
 		/**
 		 * Detect edges in the starting image.
@@ -57,6 +62,11 @@ namespace etchasketch {
 		 */
 		const std::vector<etchasketch::KDPoint<2>> & getOrderedEdgePoints();
 		
+		// For the Objective-C wrapper.
+		
+		const etchasketch::Image & getGrayscaleImage() const
+			{ return grayscaleImage; }
+		
 	private:
 		// Images and other such things, in order of use.
 		const etchasketch::Image originalImage;
@@ -67,8 +77,6 @@ namespace etchasketch {
 		
 		etchasketch::edgedetect::EdgeDetector *edgeDetector;
 		etchasketch::salesman::Salesman *salesman;
-		
-		void convertToGrayscale();
 		
 		// Setters
 		void setEdgeDetectedImage(const etchasketch::Image *newImage);

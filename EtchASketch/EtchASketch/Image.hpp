@@ -56,14 +56,20 @@ namespace etchasketch {
 		
 		Pixel & operator[] (const etchasketch::KDPoint<2> &index);
 		
+		// For the Objective-C wrapper.
+		
+		inline
+		Pixel * getData() const { return data; }
+		
+		inline
+		size_t getPixelCount() const
+			// TODO: check for overflow on the multiplication
+			{ return width * height; }
+		
 	private:
 		size_t width, height;
 		
 		Pixel *data;
-		
-		size_t getPixelCount() const
-			// TODO: check for overflow on the multiplication
-			{ return width * height; }
 	};
 	
 }

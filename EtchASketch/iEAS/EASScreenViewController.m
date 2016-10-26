@@ -17,8 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	self.view.backgroundColor = [UIColor clearColor];
+	
 	// Display message for no points
 	UILabel *msgLabel = [[UILabel alloc] initWithFrame:self.view.frame];
+	msgLabel.backgroundColor = [UIColor clearColor];
 	msgLabel.textAlignment = NSTextAlignmentCenter;
 	msgLabel.lineBreakMode = NSLineBreakByWordWrapping;
 	msgLabel.numberOfLines = 0;

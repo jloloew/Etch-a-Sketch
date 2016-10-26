@@ -10,7 +10,8 @@
 
 @interface EASBoardViewController ()
 
-@property (weak, nonatomic) IBOutlet EASScreenView *screenViewPlaceholder;
+/// The view that's the exact size of the screen. Contains things like the @c EASScreenView.
+@property (weak, nonatomic) IBOutlet UIView *screenContents;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 - (void)doComputationSequence;
@@ -26,25 +27,38 @@
 	// Set up image flow.
 	UIImage *img = [UIImage imageNamed:@"Lena"];
 	EASImage *image = [[EASImage alloc] initWithImage:img];
+	UIImage *renderedImage = [image UIImage];
 	self.imageFlow = [[EASImageFlow alloc] initWithColorImage:image];
 	self.imageFlow.delegate = self;
 	
 	// Set up screen VC.
 	self.screenVC = [[EASScreenViewController alloc] initWithNibName:@"EASScreenViewController" bundle:nil];
-	self.screenVC.view.frame = self.screenViewPlaceholder.frame;
-	self.screenViewPlaceholder = nil;
+	self.screenVC.view.frame = self.screenContents.frame;
+	[self.screenContents addSubview:self.screenVC.view];
 	
 	// Begin computation.
 	[self doComputationSequence];
 }
 
 - (void)doComputationSequence {
+	[self test_doComputationSequence];
+	return;
+	/*
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		[self.imageFlow generateGrayscaleImage];
+		
 		[self.imageFlow detectEdges];
 		
 		[self.imageFlow generateEdgePoints];
 		
 		[self.imageFlow orderEdgePointsForDrawing];
+	});
+	*/
+}
+
+- (void)test_doComputationSequence {
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		[self.imageFlow generateGrayscaleImage];
 	});
 }
 
@@ -76,9 +90,21 @@
 	});
 }
 
+- (void)imageFlow:(EASImageFlow *)imageFlow didCompleteComputationStage:(EASComputationStage)computationStage {
+	if (computationStage == EASComputationStageGenerateGrayscaleImage) {
+		// Display the grayscale image.
+		dispatch_sync(dispatch_get_main_queue(), ^{
+			UIImage *grayscaleImage = [imageFlow grayscaleImage];
+			UIImageView *grayView = [[UIImageView alloc] initWithImage:grayscaleImage];
+			grayView.bounds = [[UIScreen mainScreen] bounds];
+			[self.view addSubview:grayView];
+		});
+	}
+}
+
 - (void)imageFlowDidCompleteAllComputations:(EASImageFlow *)imageFlow {
 	// Draw the ordered edge points.
-	NSArray<NSValue *> *points = [self.imageFlow getOrderedEdgePoints];
+	NSArray<NSValue *> * __block points = [self.imageFlow getOrderedEdgePoints];
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		[self.screenVC addPoints:points animated:NO]; // TODO: try out animation
 	});

@@ -13,7 +13,13 @@ using etchasketch::Image;
 
 @interface EASImage ()
 
-@property (nonatomic, readonly) Image *image;
+@property (nonatomic, readonly) const Image *image;
+
+@property (nonatomic, nullable) CGImageRef backingCGImage;
+
+- (instancetype)initWithCPPImage:(const Image *)image;
+
+- (CGImageRef)createCGImage;
 
 @end
 
@@ -24,7 +30,8 @@ using etchasketch::Image;
 					   height:(NSUInteger)height
 {
 	self = [super init];
-	if (self != nil) {
+	if (self) {
+		self.backingCGImage = nil;
 		_image = new Image(width, height);
 	}
 	return self;
@@ -32,8 +39,10 @@ using etchasketch::Image;
 
 - (instancetype)initWithImage:(UIImage *)image {
 	self = [self initWithWidth:image.size.width height:image.size.height];
-	if (self != nil) {
+	if (self) {
 		CGImageRef img = [image CGImage];
+		self.backingCGImage = img;
+		
 		// Draw the image into a buffer.
 		NSUInteger width = CGImageGetWidth(img);
 		NSUInteger height = CGImageGetHeight(img);
@@ -41,7 +50,8 @@ using etchasketch::Image;
 		NSUInteger bytesPerRow = bytesPerPixel * width;
 		NSUInteger bitsPerComponent = 8;
 		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-		UInt8 *rawData = (UInt8 *)calloc(width * height * bytesPerPixel, sizeof(UInt8));
+		size_t rawDataSize = width * height * bytesPerPixel;
+		UInt8 *rawData = (UInt8 *)calloc(rawDataSize, sizeof(UInt8));
 		if (nullptr == rawData) {
 			return nil;
 		}
@@ -50,14 +60,29 @@ using etchasketch::Image;
 		CGContextDrawImage(ctx, CGRectMake(0, 0, width, height), img);
 		CGContextRelease(ctx);
 		
-		// Create the image
-		_image = new Image(width, height,
-						   reinterpret_cast<uint32_t *>(rawData));
+		// Copy the image into the C++ image's buffer.
+		
+		memcpy(self.image->getData(), rawData, rawDataSize);
+//		// Create the image
+//		_image = new Image(width, height,
+//						   reinterpret_cast<Image::Pixel *>(rawData));
 		free(rawData);
 		rawData = nullptr;
-		if (nullptr == _image) {
+//		if (nullptr == _image) {
+//			return nil;
+//		}
+	}
+	return self;
+}
+
+- (instancetype)initWithCPPImage:(const etchasketch::Image *)image {
+	self = [super init];
+	if (self) {
+		if (!image) {
 			return nil;
 		}
+		self.backingCGImage = nil;
+		_image = image;
 	}
 	return self;
 }
@@ -69,6 +94,39 @@ using etchasketch::Image;
 
 - (BOOL)isValid {
 	return self.image->isValid();
+}
+
+- (CGImageRef)createCGImage {
+	size_t width = [self width];
+	size_t height = [self height];
+	size_t bitsPerComponent = 8;
+	size_t bytesPerPixel = 4;
+	size_t bitsPerPixel = bytesPerPixel * 8;
+	size_t bytesPerRow = width * bytesPerPixel;
+	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+	CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host | kCGImageAlphaFirst;
+	// Create the data provider.
+	const void *data = (const void *)self.image->getData();
+	size_t size = self.image->getPixelCount() * sizeof(etchasketch::Image::Pixel);
+	CGDataProviderRef provider = CGDataProviderCreateWithData(nullptr, data, size, nullptr);
+	// Create the image.
+	CGImageRef image = CGImageCreate(width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpace, bitmapInfo, provider, nullptr, false, kCGRenderingIntentPerceptual);
+	// Free up the used objects.
+	CGColorSpaceRelease(colorSpace);
+	CGDataProviderRelease(provider);
+	
+	return image;
+}
+
+- (UIImage *)UIImage {
+	// TODO: Add synchronization for this
+	if (!self.backingCGImage) {
+		// Generate the backing CGImage from the C++ Image.
+		self.backingCGImage = [self createCGImage];
+	}
+	
+	// Create a UIImage from the CGImage.
+	return [UIImage imageWithCGImage:self.backingCGImage];
 }
 
 #pragma mark - Getters
