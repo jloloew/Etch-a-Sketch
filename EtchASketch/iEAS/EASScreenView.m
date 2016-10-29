@@ -53,7 +53,7 @@
 
 #pragma mark Drawing
 
-- (void)drawRect:(CGRect)rect {
+- (void)drawRect:(CGRect __unused)rect {
 	[self drawAllPoints];
 }
 

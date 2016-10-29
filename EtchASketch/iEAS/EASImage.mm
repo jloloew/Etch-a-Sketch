@@ -45,7 +45,7 @@ using etchasketch::Image;
 }
 
 - (instancetype)initWithImage:(UIImage *)image {
-	self = [self initWithWidth:image.size.width height:image.size.height];
+	self = [self initWithWidth:(NSUInteger)image.size.width height:(NSUInteger)image.size.height];
 	if (self) {
 		self.backingUIImage = image;
 		CGImageRef img = [self.backingUIImage CGImage];

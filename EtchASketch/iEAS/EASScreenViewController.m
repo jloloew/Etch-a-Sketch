@@ -32,7 +32,7 @@
 	[self.view addSubview:msgLabel];
 }
 
-- (void)addPoints:(NSArray<NSValue *> *)points animated:(BOOL)animated {
+- (void)addPoints:(NSArray<NSValue *> * __unused)points animated:(BOOL __unused)animated {
 	// TODO: this
 }
 

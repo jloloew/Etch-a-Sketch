@@ -86,7 +86,7 @@ etchasketch::utils::prettyPrintJSON(std::ostream &out, std::istream &in)
 	bool isWithinSquareBrackets = false;
 	while (!in.eof()) {
 		// Read in next char.
-		char c = in.get();
+		char c = static_cast<char>(in.get());
 		switch (c) {
 			case '{':
 				out << c;
@@ -115,7 +115,7 @@ etchasketch::utils::prettyPrintJSON(std::ostream &out, std::istream &in)
 				out << c;
 				// Finish off the string.
 				do {
-					c = in.get();
+					c = static_cast<char>(in.get());
 					out << c;
 				} while (c != '"');
 				break;

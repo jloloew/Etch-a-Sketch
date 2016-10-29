@@ -78,7 +78,7 @@ namespace etchasketch {
 		 * should choose a midpoint between the left and right indices.
 		 *
 		 * @todo This function is required for MP 6.1.
-		 * @param newKDPoints The vector of points to build your KDTree off of.
+		 * @param newPoints The vector of points to build your KDTree off of.
 		 */
 		KDTree(const std::vector<etchasketch::KDPoint<Dim>> &newPoints);
 		
@@ -159,7 +159,7 @@ namespace etchasketch {
 		
 		/**
 		 * Insert a new point.
-		 * @param newKDPoint The new point to be added to the KD tree.
+		 * @param newPoint The new point to be added to the KD tree.
 		 * @returns `true` on success, or `false` if `newPoint` already exists.
 		 */
 		bool insert(const etchasketch::KDPoint<Dim> &newPoint);

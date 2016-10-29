@@ -64,7 +64,7 @@
 
 #pragma mark EASImageFlowDelegate
 
-- (void)imageFlow:(EASImageFlow *)imageFlow willBeginComputationStage:(EASComputationStage)computationStage {
+- (void)imageFlow:(EASImageFlow * __unused)imageFlow willBeginComputationStage:(EASComputationStage)computationStage {
 	// Set the status label for the current stage of computation.
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		switch (computationStage) {
@@ -104,7 +104,7 @@
 }
 // */
 
-- (void)imageFlowDidCompleteAllComputations:(EASImageFlow *)imageFlow {
+- (void)imageFlowDidCompleteAllComputations:(EASImageFlow * __unused)imageFlow {
 	// Draw the ordered edge points.
 	NSArray<NSValue *> * __block points = [self.imageFlow getOrderedEdgePoints];
 	dispatch_sync(dispatch_get_main_queue(), ^{
