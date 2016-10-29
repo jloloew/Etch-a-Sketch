@@ -40,9 +40,10 @@
 }
 
 - (void)doComputationSequence {
+	/*
 	[self test_doComputationSequence];
 	return;
-	/*
+	/*/
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 		[self.imageFlow generateGrayscaleImage];
 		
@@ -52,7 +53,7 @@
 		
 		[self.imageFlow orderEdgePointsForDrawing];
 	});
-	*/
+	// */
 }
 
 - (void)test_doComputationSequence {
@@ -89,6 +90,7 @@
 	});
 }
 
+/*
 - (void)imageFlow:(EASImageFlow *)imageFlow didCompleteComputationStage:(EASComputationStage)computationStage {
 	if (computationStage == EASComputationStageGenerateGrayscaleImage) {
 		// Display the grayscale image.
@@ -100,6 +102,7 @@
 		});
 	}
 }
+// */
 
 - (void)imageFlowDidCompleteAllComputations:(EASImageFlow *)imageFlow {
 	// Draw the ordered edge points.

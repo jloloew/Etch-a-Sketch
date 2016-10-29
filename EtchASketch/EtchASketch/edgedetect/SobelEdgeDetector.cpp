@@ -20,7 +20,8 @@ etchasketch::edgedetect::SobelEdgeDetector::detectEdges(
 		const Image &grayscaleImage) const
 {
 	// dst's width and height are each 1 less than the grayscaleImage.
-	Image *dst = new Image(grayscaleImage.getWidth()-1, grayscaleImage.getHeight()-1);
+	Image *dst = new Image(grayscaleImage.getWidth()-1,
+						   grayscaleImage.getHeight()-1);
 	
 	for (int x = 1; x < grayscaleImage.getWidth() - 1; x++) {
 		for (int y = 1; y < grayscaleImage.getHeight() - 1; y++) {
@@ -28,10 +29,10 @@ etchasketch::edgedetect::SobelEdgeDetector::detectEdges(
 			float intensity = intensityForPoint(grayscaleImage, x, y);
 			// Scale the float intensity into an RGBA pixel.
 			uint8_t intensityInt = static_cast<uint8_t>(intensity / 255.0f);
-			Pixel intensityPixel =    (intensityInt << 24)
+			Pixel intensityPixel =    (0xFF         << 24)
 									| (intensityInt << 16)
 									| (intensityInt <<  8)
-									| 0xFF;
+									|  intensityInt;
 			(*dst)[dstPt] = intensityPixel;
 		}
 	}

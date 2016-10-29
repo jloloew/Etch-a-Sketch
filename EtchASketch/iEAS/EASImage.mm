@@ -15,7 +15,7 @@ using etchasketch::Image;
 
 @property (nonatomic, readonly) const Image *image;
 
-@property (nonatomic, nullable) CGImageRef backingCGImage;
+@property (nonatomic, nullable) UIImage *backingUIImage;
 
 @property (nonatomic) BOOL shouldFreeCPPImage;
 
@@ -25,7 +25,7 @@ using etchasketch::Image;
  */
 - (instancetype)initWithCPPImage:(const Image *)image;
 
-- (CGImageRef)createCGImage;
+- (CGImageRef)newCGImageRepresentation;
 
 @end
 
@@ -38,7 +38,7 @@ using etchasketch::Image;
 	self = [super init];
 	if (self) {
 		self.shouldFreeCPPImage = YES;
-		self.backingCGImage = nil;
+		self.backingUIImage = nil;
 		_image = new Image(width, height);
 	}
 	return self;
@@ -47,8 +47,8 @@ using etchasketch::Image;
 - (instancetype)initWithImage:(UIImage *)image {
 	self = [self initWithWidth:image.size.width height:image.size.height];
 	if (self) {
-		CGImageRef img = [image CGImage];
-		self.backingCGImage = img;
+		self.backingUIImage = image;
+		CGImageRef img = [self.backingUIImage CGImage];
 		
 		// Draw the image into a buffer.
 		NSUInteger width = CGImageGetWidth(img);
@@ -60,6 +60,7 @@ using etchasketch::Image;
 		size_t rawDataSize = width * height * bytesPerPixel;
 		UInt8 *rawData = (UInt8 *)calloc(rawDataSize, sizeof(UInt8));
 		if (nullptr == rawData) {
+			CGColorSpaceRelease(colorSpace);
 			return nil;
 		}
 		CGContextRef ctx = CGBitmapContextCreate(rawData, width, height, bitsPerComponent, bytesPerRow, colorSpace/*/ nullptr*/, kCGImageAlphaNoneSkipFirst);
@@ -94,7 +95,7 @@ using etchasketch::Image;
 		 * won't free it either.
 		 */
 		self.shouldFreeCPPImage = NO;
-		self.backingCGImage = nil;
+		self.backingUIImage = nil;
 		_image = image;
 	}
 	return self;
@@ -111,7 +112,7 @@ using etchasketch::Image;
 	return self.image->isValid();
 }
 
-- (CGImageRef)createCGImage {
+- (CGImageRef)newCGImageRepresentation {
 	size_t width = [self width];
 	size_t height = [self height];
 	size_t bitsPerComponent = 8;
@@ -135,13 +136,14 @@ using etchasketch::Image;
 
 - (UIImage *)UIImage {
 	// TODO: Add synchronization for this
-	if (!self.backingCGImage) {
+	if (!self.backingUIImage) {
 		// Generate the backing CGImage from the C++ Image.
-		self.backingCGImage = [self createCGImage];
+		CGImageRef backingCGImage = [self newCGImageRepresentation];
+		self.backingUIImage = [UIImage imageWithCGImage:backingCGImage];
+		CGImageRelease(backingCGImage);
 	}
 	
-	// Create a UIImage from the CGImage.
-	return [UIImage imageWithCGImage:self.backingCGImage];
+	return self.backingUIImage;
 }
 
 #pragma mark - Getters

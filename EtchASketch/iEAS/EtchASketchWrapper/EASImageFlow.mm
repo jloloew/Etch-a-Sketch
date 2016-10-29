@@ -127,8 +127,9 @@ using etchasketch::ImageFlow;
 	}
 	
 	const vector<KDPoint<2>> &pts = self.imageFlow->getOrderedEdgePoints();
+	NSUInteger numPts = (NSUInteger)pts.size();
 	// Copy the data out, converting to NSValue.
-	NSMutableArray<NSValue *> *points = [NSMutableArray arrayWithCapacity:pts.size()];
+	NSMutableArray<NSValue *> *points = [NSMutableArray arrayWithCapacity:numPts];
 	for (auto it = pts.begin(); it != pts.end(); ++it) {
 		[points addObject:[NSValue valueWithCGPoint:CGPointMake((*it)[0], (*it)[1])]];
 	}
