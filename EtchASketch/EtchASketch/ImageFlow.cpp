@@ -84,7 +84,7 @@ etchasketch::ImageFlow::orderEdgePointsForDrawing()
 {
 	setSalesman(new Salesman(*edgePoints));
 	salesman->orderPoints();
-	setOrderedEdgePoints(&salesman->getOrderedPoints());
+	setOrderedEdgePoints(salesman->getOrderedPoints());
 	// Done with the salesman.
 	setSalesman(nullptr);
 }

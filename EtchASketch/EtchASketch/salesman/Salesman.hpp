@@ -28,13 +28,15 @@ namespace etchasketch {
 			/// Order the points for the best drawing order.
 			void orderPoints();
 			
-			const std::vector<KDPoint<2>> & getOrderedPoints() const
-				{ return orderedPoints; }
+			/// Get a copy of the ordered points.
+			const std::vector<KDPoint<2>> * getOrderedPoints() const
+				{ return new std::vector<KDPoint<2>>(orderedPoints); }
 			
 		private:
-			std::unordered_set<etchasketch::KDPoint<2>> unorderedPoints;
+			std::unordered_set<KDPoint<2>> unorderedPoints;
 			std::vector<KDPoint<2>> orderedPoints;
 			
+			void nearestNeighborAlgorithm(KDTree<2> &kdTree);
 			void primsAlgorithm(KDTree<2> &kdTree);
 		};
 		

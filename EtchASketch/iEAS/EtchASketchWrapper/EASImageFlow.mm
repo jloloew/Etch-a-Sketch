@@ -119,11 +119,12 @@ using etchasketch::ImageFlow;
 }
 
 - (NSArray<NSValue *> *)getOrderedEdgePoints {
-	NSAssert(self.computationStage == EASComputationStageOrderEdgePointsForDrawing, @"Computation already completed");
-	// Update the current stage of computation and notify the delegate.
-	self.computationStage = EASComputationStageFinished;
-	if (self.delegate && [self.delegate respondsToSelector:@selector(imageFlow:willBeginComputationStage:)]) {
-		[self.delegate imageFlow:self willBeginComputationStage:self.computationStage];
+	if (self.computationStage == EASComputationStageOrderEdgePointsForDrawing) {
+		// Update the current stage of computation and notify the delegate.
+		self.computationStage = EASComputationStageFinished;
+		if ([self.delegate respondsToSelector:@selector(imageFlow:willBeginComputationStage:)]) {
+			[self.delegate imageFlow:self willBeginComputationStage:self.computationStage];
+		}
 	}
 	
 	const vector<KDPoint<2>> &pts = self.imageFlow->getOrderedEdgePoints();

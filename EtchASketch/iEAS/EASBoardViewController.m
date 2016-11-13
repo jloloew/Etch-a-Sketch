@@ -44,11 +44,6 @@
 }
 
 - (void)doComputationSequence {
-	//*
-	// Don't forget to uncomment imageFlow:didCompleteComputationStage:
-	[self test_doComputationSequence];
-	return;
-	/*/
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 		[self.imageFlow generateGrayscaleImage];
 		
@@ -57,14 +52,9 @@
 		[self.imageFlow generateEdgePoints];
 		
 		[self.imageFlow orderEdgePointsForDrawing];
-	});
-	// */
-}
-
-- (void)test_doComputationSequence {
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-		[self.imageFlow generateGrayscaleImage];
-		[self.imageFlow detectEdges];
+		
+		NSArray<NSValue *> *orderedPoints = [self.imageFlow getOrderedEdgePoints];
+		NSLog(@"Ordered edge points: %@", orderedPoints);
 	});
 }
 

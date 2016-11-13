@@ -17,7 +17,7 @@ using etchasketch::KDPoint;
 etchasketch::salesman::Salesman::Salesman(const unordered_set<KDPoint<2>>
 										  &unorderedPoints)
 : unorderedPoints(unorderedPoints),
-orderedPoints(vector<KDPoint<2>>(unorderedPoints.size()))
+orderedPoints(vector<KDPoint<2>>())//unorderedPoints.size()))
 { }
 
 etchasketch::salesman::Salesman::~Salesman(void)
@@ -29,13 +29,13 @@ etchasketch::salesman::Salesman::orderPoints(void)
 	// Create a K-D tree with the points.
 	KDTree<2> *kdTree = new KDTree<2>(unorderedPoints);
 	
-	primsAlgorithm(*kdTree);
+	nearestNeighborAlgorithm(*kdTree);
 	
 	delete kdTree;
 }
 
 void
-etchasketch::salesman::Salesman::primsAlgorithm(KDTree<2> &kdTree)
+etchasketch::salesman::Salesman::nearestNeighborAlgorithm(KDTree<2> &kdTree)
 {
 	// Assume that we start at (0, 0).
 	const KDPoint<2> startPoint(0, 0);
@@ -63,4 +63,10 @@ etchasketch::salesman::Salesman::primsAlgorithm(KDTree<2> &kdTree)
 			EASLog("KDTree.findNearestNeighbor returned a bad currPoint.");
 		}
 	}
+}
+
+void
+etchasketch::salesman::Salesman::primsAlgorithm(KDTree<2> &kdTree)
+{
+	
 }
