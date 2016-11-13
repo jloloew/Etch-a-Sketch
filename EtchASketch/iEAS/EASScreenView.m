@@ -12,9 +12,6 @@
 
 @property (nonatomic, readwrite, nullable) NSMutableArray<NSValue *> *points;
 
-/// Draw all the points in the points array.
-- (void)drawAllPoints;
-
 @end
 
 
@@ -39,8 +36,8 @@
 }
 
 - (void)commonInit {
-	self.points = nil;
-	self.pointColor = [UIColor redColor];//self.tintColor;
+	self.points = [NSMutableArray array];
+	self.pointColor = self.tintColor;
 	
 	self.backgroundColor = [UIColor whiteColor];
 }
@@ -54,10 +51,6 @@
 #pragma mark Drawing
 
 - (void)drawRect:(CGRect __unused)rect {
-	[self drawAllPoints];
-}
-
-- (void)drawAllPoints {
 	// Set up how we're going to draw the points.
 	const CGFloat pointSize = 5.0;
 	const CGFloat offset = pointSize / 2.0;

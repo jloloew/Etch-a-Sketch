@@ -32,8 +32,9 @@
 	
 	// Set up screen VC.
 	self.screenVC = [[EASScreenViewController alloc] initWithNibName:@"EASScreenViewController" bundle:nil];
-	self.screenVC.view.frame = self.screenContents.frame;
+	self.screenVC.view.frame = self.screenContents.bounds;
 	[self.screenContents addSubview:self.screenVC.view];
+	[self.view bringSubviewToFront:self.statusLabel];
 	
 	// Wait for the UI to load, then begin computation.
 	[NSTimer scheduledTimerWithTimeInterval:1.0
@@ -90,23 +91,31 @@
 	});
 }
 
-//*
 - (void)imageFlow:(EASImageFlow *)imageFlow didCompleteComputationStage:(EASComputationStage)computationStage {
+	// Get the image that was just produced.
+	UIImage *producedImage = nil;
 	switch (computationStage) {
 		case EASComputationStageGenerateGrayscaleImage:
-			[self displayProducedImage:[imageFlow grayscaleImage]];
+			producedImage = [imageFlow grayscaleImage];
 			break;
 		
 		case EASComputationStageDetectEdges:
-			[self displayProducedImage:[imageFlow detectedEdgesImage]];
+			producedImage = [imageFlow detectedEdgesImage];
 			break;
 		
 	  default:
 			break;
 	}
+	
+	// Throw the image on the screen.
+//	[self displayProducedImage:producedImage];
 }
 
 - (void)displayProducedImage:(UIImage *)image {
+	if (!image) {
+		return;
+	}
+	
 	// Display the image.
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
@@ -114,7 +123,6 @@
 		[self.view addSubview:imageView];
 	});
 }
-// */
 
 - (void)imageFlowDidCompleteAllComputations:(EASImageFlow * __unused)imageFlow {
 	// Draw the ordered edge points.

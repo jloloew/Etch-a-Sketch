@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface EASScreenViewController : UIViewController
 
-@property (nonatomic) EASScreenView *screen;
+@property (weak, nonatomic) IBOutlet EASScreenView *screen;
 
 /**
  * Add new points to the path drawn on the screen.
