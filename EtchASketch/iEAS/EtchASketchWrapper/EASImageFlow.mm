@@ -136,11 +136,20 @@ using etchasketch::ImageFlow;
 	return points;
 }
 
+#pragma mark - Image getters
+
 - (UIImage *)grayscaleImage {
 	const Image & grayscaleImage = self.imageFlow->getGrayscaleImage();
 	EASImage *easImage = [[EASImage alloc] initWithCPPImage:&grayscaleImage];
 	UIImage *grayImage = [easImage UIImage];
 	return grayImage;
+}
+
+- (UIImage *)detectedEdgesImage {
+	const Image *detectedEdgesImage = self.imageFlow->getEdgeDetectedImage();
+	EASImage *easImage = [[EASImage alloc] initWithCPPImage:detectedEdgesImage];
+	UIImage *edgeImage = [easImage UIImage];
+	return edgeImage;
 }
 
 @end

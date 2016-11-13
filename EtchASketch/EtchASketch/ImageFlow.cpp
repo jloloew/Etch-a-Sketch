@@ -43,10 +43,10 @@ etchasketch::ImageFlow::convertToGrayscale()
 			const KDPoint<2> pt(x, y);
 			// Average the components.
 			const Image::Pixel color = originalImage[pt];
-			const Image::Pixel gray =   (( color        & 0xFF)
-									   + ((color >>  8) & 0xFF)
-									   + ((color >> 16) & 0xFF)) / 3;
-			grayscaleImage[pt] = gray | (gray << 8) | (gray << 16);
+			const Image::Pixel gray =   (((color >> 24) & 0xFF)
+									   + ((color >> 16) & 0xFF)
+									   + ((color >>  8) & 0xFF)) / 3;
+			grayscaleImage[pt] = 0xFF | (gray << 8) | (gray << 16) | (gray << 24);
 		}
 	}
 }
@@ -54,7 +54,8 @@ etchasketch::ImageFlow::convertToGrayscale()
 void
 etchasketch::ImageFlow::detectEdges()
 {
-	setEdgeDetectedImage(edgeDetector->detectEdges(grayscaleImage));
+	Image *detectedImage = edgeDetector->detectEdges(grayscaleImage);
+	setEdgeDetectedImage(detectedImage);
 }
 
 void

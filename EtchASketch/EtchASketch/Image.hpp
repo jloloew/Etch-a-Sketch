@@ -19,7 +19,7 @@ namespace etchasketch {
 	 */
 	struct Image {
 	public:
-		/// RGBA format.
+		/// A pixel in RGBA format.
 		typedef uint32_t Pixel;
 		
 		// TODO: Add spec for the format of the data buffer.

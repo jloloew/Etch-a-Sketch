@@ -67,6 +67,9 @@ namespace etchasketch {
 		const etchasketch::Image & getGrayscaleImage() const
 			{ return grayscaleImage; }
 		
+		const etchasketch::Image * getEdgeDetectedImage() const
+			{ return edgeDetectedImage; }
+		
 	private:
 		// Images and other such things, in order of use.
 		const etchasketch::Image originalImage;

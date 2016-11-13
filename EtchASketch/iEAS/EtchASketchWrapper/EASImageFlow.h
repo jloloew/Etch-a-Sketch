@@ -65,6 +65,7 @@ typedef NS_ENUM(NSUInteger, EASComputationStage) {
 #pragma mark Image getters
 
 - (nullable UIImage *)grayscaleImage;
+- (nullable UIImage *)detectedEdgesImage;
 
 @end
 NS_ASSUME_NONNULL_END

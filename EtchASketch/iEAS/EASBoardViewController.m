@@ -35,12 +35,17 @@
 	self.screenVC.view.frame = self.screenContents.frame;
 	[self.screenContents addSubview:self.screenVC.view];
 	
-	// Begin computation.
-	[self doComputationSequence];
+	// Wait for the UI to load, then begin computation.
+	[NSTimer scheduledTimerWithTimeInterval:1.0
+									 target:self
+								   selector:@selector(doComputationSequence)
+								   userInfo:nil
+									repeats:NO];
 }
 
 - (void)doComputationSequence {
-	/*
+	//*
+	// Don't forget to uncomment imageFlow:didCompleteComputationStage:
 	[self test_doComputationSequence];
 	return;
 	/*/
@@ -59,6 +64,7 @@
 - (void)test_doComputationSequence {
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 		[self.imageFlow generateGrayscaleImage];
+		[self.imageFlow detectEdges];
 	});
 }
 
@@ -66,41 +72,57 @@
 
 - (void)imageFlow:(EASImageFlow * __unused)imageFlow willBeginComputationStage:(EASComputationStage)computationStage {
 	// Set the status label for the current stage of computation.
+	NSString *statusText = nil;
+	switch (computationStage) {
+		case EASComputationStageNone:
+			statusText = @"Loading…";
+			break;
+		case EASComputationStageGenerateGrayscaleImage:
+			statusText = @"Generating grayscale image…";
+			break;
+		case EASComputationStageDetectEdges:
+			statusText = @"Detecting edges…";
+			break;
+		case EASComputationStageGenerateEdgePoints:
+			statusText = @"Generating edge points…";
+			break;
+		case EASComputationStageOrderEdgePointsForDrawing:
+			statusText = @"Ordering edge points for drawing…";
+			break;
+		case EASComputationStageFinished:
+			statusText = @"Done!";
+			break;
+	}
+	// Log it and update the status label.
+	NSLog(@"New status: %@", statusText);
 	dispatch_sync(dispatch_get_main_queue(), ^{
-		switch (computationStage) {
-			case EASComputationStageNone:
-				self.statusLabel.text = @"Loading…";
-				break;
-			case EASComputationStageGenerateGrayscaleImage:
-				self.statusLabel.text = @"Generating grayscale image…";
-				break;
-			case EASComputationStageDetectEdges:
-				self.statusLabel.text = @"Detecting edges…";
-				break;
-			case EASComputationStageGenerateEdgePoints:
-				self.statusLabel.text = @"Generating edge points…";
-				break;
-			case EASComputationStageOrderEdgePointsForDrawing:
-				self.statusLabel.text = @"Ordering edge points for drawing…";
-				break;
-			case EASComputationStageFinished:
-				self.statusLabel.text = @"Done!";
-				break;
-		}
+		self.statusLabel.text = statusText;
 	});
 }
 
-/*
+//*
 - (void)imageFlow:(EASImageFlow *)imageFlow didCompleteComputationStage:(EASComputationStage)computationStage {
-	if (computationStage == EASComputationStageGenerateGrayscaleImage) {
-		// Display the grayscale image.
-		dispatch_sync(dispatch_get_main_queue(), ^{
-			UIImage *grayscaleImage = [imageFlow grayscaleImage];
-			UIImageView *grayView = [[UIImageView alloc] initWithImage:grayscaleImage];
-			grayView.bounds = [[UIScreen mainScreen] bounds];
-			[self.view addSubview:grayView];
-		});
+	switch (computationStage) {
+		case EASComputationStageGenerateGrayscaleImage:
+			[self displayProducedImage:[imageFlow grayscaleImage]];
+			break;
+		
+		case EASComputationStageDetectEdges:
+			[self displayProducedImage:[imageFlow detectedEdgesImage]];
+			break;
+		
+	  default:
+			break;
 	}
+}
+
+- (void)displayProducedImage:(UIImage *)image {
+	// Display the image.
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+		imageView.bounds = [[UIScreen mainScreen] bounds];
+		[self.view addSubview:imageView];
+	});
 }
 // */
 

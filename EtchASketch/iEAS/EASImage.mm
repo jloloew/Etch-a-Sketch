@@ -63,7 +63,7 @@ using etchasketch::Image;
 			CGColorSpaceRelease(colorSpace);
 			return nil;
 		}
-		CGContextRef ctx = CGBitmapContextCreate(rawData, width, height, bitsPerComponent, bytesPerRow, colorSpace/*/ nullptr*/, kCGImageAlphaNoneSkipFirst);
+		CGContextRef ctx = CGBitmapContextCreate(rawData, width, height, bitsPerComponent, bytesPerRow, colorSpace/*/ nullptr*/, kCGImageAlphaNoneSkipLast);
 		CGColorSpaceRelease(colorSpace);
 		CGContextDrawImage(ctx, CGRectMake(0, 0, width, height), img);
 		CGContextRelease(ctx);
@@ -120,7 +120,7 @@ using etchasketch::Image;
 	size_t bitsPerPixel = bytesPerPixel * 8;
 	size_t bytesPerRow = width * bytesPerPixel;
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host | kCGImageAlphaNoneSkipFirst;
+	CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host | kCGImageAlphaNoneSkipLast;
 	// Create the data provider.
 	const void *data = (const void *)self.image->getData();
 	size_t size = self.image->getPixelCount() * sizeof(etchasketch::Image::Pixel);
