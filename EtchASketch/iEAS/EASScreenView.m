@@ -12,6 +12,12 @@
 
 @property (nonatomic, readwrite, nullable) NSMutableArray<NSValue *> *points;
 
+/// Draw each individual point.
+- (void)drawPoints;
+
+/// Drawa Bezier path connecting the points.
+- (void)connectPoints;
+
 @end
 
 
@@ -51,6 +57,11 @@
 #pragma mark Drawing
 
 - (void)drawRect:(CGRect __unused)rect {
+	[self drawPoints];
+	[self connectPoints];
+}
+
+- (void)drawPoints {
 	// Set up how we're going to draw the points.
 	const CGFloat pointSize = 5.0;
 	const CGFloat offset = pointSize / 2.0;
@@ -63,6 +74,20 @@
 								 pointSize, pointSize);
 		CGContextFillEllipseInRect(ctx, rect);
 	}
+}
+
+- (void)connectPoints {
+	// Connect the points with a bezier path.
+	UIBezierPath *path = [UIBezierPath bezierPath];
+	[path moveToPoint:CGPointMake(0, 0)];
+	path.lineWidth = 1.0;
+	path.lineJoinStyle = kCGLineJoinRound;
+	// Add each point to the path, in order.
+	for (NSValue *point in self.points) {
+		[path addLineToPoint:point.CGPointValue];
+	}
+	// Draw the path.
+	[path stroke];
 }
 
 - (void)prepareForInterfaceBuilder {
