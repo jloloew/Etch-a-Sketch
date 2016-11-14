@@ -32,14 +32,9 @@
 //	[self.view addSubview:msgLabel];
 }
 
-- (void)addPoints:(NSArray<NSValue *> *)points animated:(BOOL __unused)animated {
-	if (!animated) {
-		// Just add the points, nothing fancy.
-		[self.screen addPoints:points];
-		return;
-	}
-	
+- (void)addPoints:(NSArray<NSValue *> *)points animated:(BOOL)animated {
 	// Animate adding the points.
+	[self.screen addPoints:points animated:animated];
 }
 
 @end

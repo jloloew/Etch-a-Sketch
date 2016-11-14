@@ -128,7 +128,7 @@
 	// Draw the ordered edge points.
 	NSArray<NSValue *> * __block points = [self.imageFlow getOrderedEdgePoints];
 	dispatch_sync(dispatch_get_main_queue(), ^{
-		[self.screenVC addPoints:points animated:NO]; // TODO: try out animation
+		[self.screenVC addPoints:points animated:YES];
 	});
 }
 
