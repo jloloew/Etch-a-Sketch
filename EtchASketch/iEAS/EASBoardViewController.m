@@ -10,7 +10,10 @@
 
 @interface EASBoardViewController ()
 
-/// The view that's the exact size of the screen. Contains things like the @c EASScreenView.
+/**
+ The view that's the exact size of the screen. Contains things like the
+ @c EASScreenView.
+ */
 @property (weak, nonatomic) IBOutlet UIView *screenContents;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
@@ -31,7 +34,8 @@
 	self.imageFlow.delegate = self;
 	
 	// Set up screen VC.
-	self.screenVC = [[EASScreenViewController alloc] initWithNibName:@"EASScreenViewController" bundle:nil];
+	self.screenVC = [[EASScreenViewController alloc]
+					 initWithNibName:@"EASScreenViewController" bundle:nil];
 	self.screenVC.view.frame = self.screenContents.bounds;
 	[self.screenContents addSubview:self.screenVC.view];
 	[self.view bringSubviewToFront:self.statusLabel];
@@ -54,14 +58,17 @@
 		
 		[self.imageFlow orderEdgePointsForDrawing];
 		
-		NSArray<NSValue *> *orderedPoints = [self.imageFlow getOrderedEdgePoints];
+		NSArray<NSValue *> *orderedPoints = [self.imageFlow
+											 getOrderedEdgePoints];
 		NSLog(@"Ordered edge points: %@", orderedPoints);
 	});
 }
 
 #pragma mark EASImageFlowDelegate
 
-- (void)imageFlow:(EASImageFlow * __unused)imageFlow willBeginComputationStage:(EASComputationStage)computationStage {
+- (void)imageFlow:(EASImageFlow * __unused)imageFlow
+willBeginComputationStage:(EASComputationStage)computationStage
+{
 	// Set the status label for the current stage of computation.
 	NSString *statusText = nil;
 	switch (computationStage) {
@@ -91,7 +98,9 @@
 	});
 }
 
-- (void)imageFlow:(EASImageFlow *)imageFlow didCompleteComputationStage:(EASComputationStage)computationStage {
+- (void)imageFlow:(EASImageFlow *)imageFlow
+didCompleteComputationStage:(EASComputationStage)computationStage
+{
 	// Get the image that was just produced.
 	UIImage *producedImage = nil;
 	switch (computationStage) {
@@ -119,7 +128,7 @@
 	// Display the image.
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-		imageView.bounds = [[UIScreen mainScreen] bounds];
+		imageView.frame = [[UIScreen mainScreen] bounds];
 		[self.view addSubview:imageView];
 	});
 }

@@ -157,7 +157,7 @@
 		[path addArcWithCenter:cgPoint
 						radius:2.5
 					startAngle:0.0
-					  endAngle:2 * M_PI
+					  endAngle:2.0 * M_PI
 					 clockwise:NO];
 		[path closePath];
 	}
