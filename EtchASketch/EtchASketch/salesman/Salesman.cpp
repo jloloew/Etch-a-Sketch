@@ -43,7 +43,8 @@ etchasketch::salesman::Salesman::nearestNeighborAlgorithm(KDTree<2> &kdTree)
 	kdTree.remove(startPoint);
 	
 	while (!unorderedPoints.empty()) {
-		EASLog("Size remaining: %lu", unorderedPoints.size());
+//		EASLog("Size remaining: %lu", unorderedPoints.size());
+		
 		// Find the next point nearest the last point we added, add it to the
 		// list of ordered points, and remove it as an option in the list of
 		// unordered point list.

@@ -58,9 +58,9 @@
 		
 		[self.imageFlow orderEdgePointsForDrawing];
 		
-		NSArray<NSValue *> *orderedPoints = [self.imageFlow
-											 getOrderedEdgePoints];
-		NSLog(@"Ordered edge points: %@", orderedPoints);
+//		NSArray<NSValue *> *orderedPoints = [self.imageFlow
+//											 getOrderedEdgePoints];
+//		NSLog(@"Ordered edge points: %@", orderedPoints);
 	});
 }
 
@@ -98,6 +98,7 @@ willBeginComputationStage:(EASComputationStage)computationStage
 	});
 }
 
+/*
 - (void)imageFlow:(EASImageFlow *)imageFlow
 didCompleteComputationStage:(EASComputationStage)computationStage
 {
@@ -117,8 +118,9 @@ didCompleteComputationStage:(EASComputationStage)computationStage
 	}
 	
 	// Throw the image on the screen.
-//	[self displayProducedImage:producedImage];
+	[self displayProducedImage:producedImage];
 }
+// */
 
 - (void)displayProducedImage:(UIImage *)image {
 	if (!image) {
