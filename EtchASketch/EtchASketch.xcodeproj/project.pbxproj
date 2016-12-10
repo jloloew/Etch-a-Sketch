@@ -21,6 +21,8 @@
 		B827FEA31DB1BF48007F2469 /* EASScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */; };
 		B827FEA61DB1BF98007F2469 /* EASScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FEA51DB1BF98007F2469 /* EASScreenView.m */; };
 		B827FEA81DB1BF98007F2469 /* EASScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FEA51DB1BF98007F2469 /* EASScreenView.m */; };
+		B85A95941DFCC06E00E0F6BE /* EASDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */; };
+		B85A95951DFCC06E00E0F6BE /* EASDebugViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */; };
 		B8643B301D920D0B00B93D84 /* SobelEdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */; };
 		B872DD8F1DB06C2D008E08D8 /* KDTree.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */; };
 		B872DD901DB06C30008E08D8 /* KDPoint.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */; };
@@ -110,6 +112,9 @@
 		B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASScreenViewController.xib; sourceTree = "<group>"; };
 		B827FEA41DB1BF98007F2469 /* EASScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASScreenView.h; sourceTree = "<group>"; };
 		B827FEA51DB1BF98007F2469 /* EASScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASScreenView.m; sourceTree = "<group>"; };
+		B85A95911DFCC06E00E0F6BE /* EASDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASDebugViewController.h; sourceTree = "<group>"; };
+		B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASDebugViewController.m; sourceTree = "<group>"; };
+		B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASDebugViewController.xib; sourceTree = "<group>"; };
 		B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SobelEdgeDetector.cpp; path = edgedetect/SobelEdgeDetector.cpp; sourceTree = "<group>"; };
 		B8643B2F1D920D0B00B93D84 /* SobelEdgeDetector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SobelEdgeDetector.hpp; path = edgedetect/SobelEdgeDetector.hpp; sourceTree = "<group>"; };
 		B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEtchASketch.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,6 +267,9 @@
 				B8766BA81D79DC9100A4ED34 /* AppDelegate.m */,
 				B8766BB01D79DC9100A4ED34 /* Assets.xcassets */,
 				B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */,
+				B85A95911DFCC06E00E0F6BE /* EASDebugViewController.h */,
+				B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */,
+				B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */,
 				B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */,
 				B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */,
 				B827FEA41DB1BF98007F2469 /* EASScreenView.h */,
@@ -487,6 +495,7 @@
 				B8766BB41D79DC9100A4ED34 /* LaunchScreen.storyboard in Resources */,
 				B827FE931DB1B74B007F2469 /* EASBoardViewController.xib in Resources */,
 				B8766BB11D79DC9100A4ED34 /* Assets.xcassets in Resources */,
+				B85A95951DFCC06E00E0F6BE /* EASDebugViewController.xib in Resources */,
 				B8766BAF1D79DC9100A4ED34 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,6 +549,7 @@
 			files = (
 				B827FE9E1DB1BF48007F2469 /* EASScreenViewController.m in Sources */,
 				B827FE981DB1BDFE007F2469 /* EASBoardViewController.m in Sources */,
+				B85A95941DFCC06E00E0F6BE /* EASDebugViewController.m in Sources */,
 				B8766BA91D79DC9100A4ED34 /* AppDelegate.m in Sources */,
 				B8766BA61D79DC9100A4ED34 /* main.m in Sources */,
 				B827FE8F1DB1B27F007F2469 /* EASImageFlow.mm in Sources */,
