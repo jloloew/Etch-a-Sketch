@@ -8,10 +8,12 @@
 
 #include "ImageFlow.hpp"
 #include "SobelEdgeDetector.hpp"
+#include "BlurImageFilter.hpp"
 
 using std::unordered_set;
 using std::vector;
 using etchasketch::Image;
+using etchasketch::edgedetect::BlurImageFilter;
 using etchasketch::edgedetect::SobelEdgeDetector;
 using etchasketch::salesman::Salesman;
 
@@ -54,7 +56,15 @@ etchasketch::ImageFlow::convertToGrayscale()
 void
 etchasketch::ImageFlow::detectEdges()
 {
-	Image *detectedImage = edgeDetector->detectEdges(grayscaleImage);
+	// Blur the image.
+	BlurImageFilter *blurFilter = new BlurImageFilter();
+	Image *blurredImage = blurFilter->apply(grayscaleImage);
+	delete blurFilter;
+	blurFilter = nullptr;
+	// Perform edge detection.
+	Image *detectedImage = edgeDetector->detectEdges(*blurredImage);
+	delete blurredImage;
+	blurredImage = nullptr;
 	setEdgeDetectedImage(detectedImage);
 }
 

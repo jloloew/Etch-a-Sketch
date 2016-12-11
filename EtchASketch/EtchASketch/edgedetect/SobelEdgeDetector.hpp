@@ -24,8 +24,7 @@ namespace etchasketch {
 			 * Detect edges in an image, copying the result into a newly
 			 * allocated image.
 			 */
-			virtual
-			etchasketch::Image *
+			virtual etchasketch::Image *
 			detectEdges(const etchasketch::Image &grayscaleImage) const;
 			
 		private:
