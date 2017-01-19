@@ -9,6 +9,7 @@
 #include "ImageFlow.hpp"
 #include "SobelEdgeDetector.hpp"
 #include "BlurImageFilter.hpp"
+#include "SmallishSpanningTreeWalkSalesman.hpp"
 
 using std::unordered_set;
 using std::vector;
@@ -16,6 +17,7 @@ using etchasketch::Image;
 using etchasketch::edgedetect::BlurImageFilter;
 using etchasketch::edgedetect::SobelEdgeDetector;
 using etchasketch::salesman::Salesman;
+using etchasketch::salesman::SmallishSpanningTreeWalkSalesman;
 
 etchasketch::ImageFlow::ImageFlow(const Image &colorImage)
 : originalImage(colorImage),
@@ -92,7 +94,7 @@ etchasketch::ImageFlow::generateEdgePoints()
 void
 etchasketch::ImageFlow::orderEdgePointsForDrawing()
 {
-	setSalesman(new Salesman(*edgePoints));
+	setSalesman(new SmallishSpanningTreeWalkSalesman(*edgePoints));
 	salesman->orderPoints();
 	setOrderedEdgePoints(salesman->getOrderedPoints());
 	// Done with the salesman.

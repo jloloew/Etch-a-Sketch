@@ -41,6 +41,7 @@
 		B87943C41D91AA870035B729 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C21D91AA870035B729 /* Image.cpp */; };
 		B87943CA1D91ADF30035B729 /* ImageFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlow.cpp */; };
 		B87943CE1D91B0F30035B729 /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943CC1D91B0F30035B729 /* Salesman.cpp */; };
+		B8A313981DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8A313961DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp */; };
 		B8B211651DAC895A009814B8 /* KDTreeTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8B211641DAC895A009814B8 /* KDTreeTests.mm */; };
 		B8D38E291DC46F89001B9AE3 /* libEtchASketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */; };
 		B8D38E2A1DC47034001B9AE3 /* libEtchASketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */; };
@@ -155,6 +156,8 @@
 		B87943C91D91ADF30035B729 /* ImageFlow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageFlow.hpp; sourceTree = "<group>"; };
 		B87943CC1D91B0F30035B729 /* Salesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Salesman.cpp; path = salesman/Salesman.cpp; sourceTree = "<group>"; };
 		B87943CD1D91B0F30035B729 /* Salesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Salesman.hpp; path = salesman/Salesman.hpp; sourceTree = "<group>"; };
+		B8A313961DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SmallishSpanningTreeWalkSalesman.cpp; path = salesman/SmallishSpanningTreeWalkSalesman.cpp; sourceTree = "<group>"; };
+		B8A313971DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SmallishSpanningTreeWalkSalesman.hpp; path = salesman/SmallishSpanningTreeWalkSalesman.hpp; sourceTree = "<group>"; };
 		B8B211641DAC895A009814B8 /* KDTreeTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KDTreeTests.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -345,6 +348,8 @@
 			children = (
 				B87943CC1D91B0F30035B729 /* Salesman.cpp */,
 				B87943CD1D91B0F30035B729 /* Salesman.hpp */,
+				B8A313961DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp */,
+				B8A313971DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.hpp */,
 			);
 			name = salesman;
 			sourceTree = "<group>";
@@ -549,6 +554,7 @@
 				B85A959C1DFCCB6800E0F6BE /* BlurImageFilter.cpp in Sources */,
 				B87943C41D91AA870035B729 /* Image.cpp in Sources */,
 				B87943CA1D91ADF30035B729 /* ImageFlow.cpp in Sources */,
+				B8A313981DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,8 +748,11 @@
 		B8766B9C1D79DC3E00A4ED34 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost/1.62.0/include;
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -753,8 +762,11 @@
 		B8766B9D1D79DC3E00A4ED34 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost/1.62.0/include;
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

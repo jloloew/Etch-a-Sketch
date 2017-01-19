@@ -9,6 +9,7 @@
 #include "Salesman.hpp"
 #include "EASUtils.hpp"
 
+
 using std::unordered_set;
 using std::vector;
 using etchasketch::KDTree;
@@ -64,10 +65,4 @@ etchasketch::salesman::Salesman::nearestNeighborAlgorithm(KDTree<2> &kdTree)
 			EASLog("KDTree.findNearestNeighbor returned a bad currPoint.");
 		}
 	}
-}
-
-void
-etchasketch::salesman::Salesman::primsAlgorithm(KDTree<2> &kdTree)
-{
-	
 }

@@ -98,7 +98,7 @@ willBeginComputationStage:(EASComputationStage)computationStage
 	});
 }
 
-//*
+/*
 - (void)imageFlow:(EASImageFlow *)imageFlow
 didCompleteComputationStage:(EASComputationStage)computationStage
 {
