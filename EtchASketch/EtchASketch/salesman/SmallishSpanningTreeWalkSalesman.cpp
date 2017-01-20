@@ -40,18 +40,6 @@ etchasketch::salesman::SmallishSpanningTreeWalkSalesman::orderPoints()
 	delete kdTree;
 }
 
-/*
- * 1. Add an edge from each node to its nearest neighbor.
- * 2. For each disjoint subgraph, find its average coordinate (its center).
- * 3. Add the center of each subgraph to a KDTree.
- * 4. Recurse (go to step 1).
- * 5. For each edge between subgraphs, use a heuristic to connect them. Let the
- *    subgraphs be called A and B. Create a KDTree with the vertices in B. Find
- *    the nearest neighbor to the center of subgraph A. This will be the
- *    endpoint in B used to bridge to A. Add the vertices in A to a KDTree. Find
- *    the nearest neighbor to the bridge vertex we found in B. Connect the
- *    vertices in A and B.
- */
 void
 etchasketch::salesman::SmallishSpanningTreeWalkSalesman::smallishSpanningTreeWalkAlgorithm(KDTree<2> &kdTree)
 {
@@ -137,22 +125,32 @@ etchasketch::salesman::SmallishSpanningTreeWalkSalesman::smallishSpanningTreeWal
 
 void
 etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(UndirectedGraph &g,
-																		   vector<GraphComponent *> &components)
+																		   vector<GraphComponent *> &components) const
 {
 	
 	// Find the center of each component.
-	std::unordered_map<const GraphComponent *, KDPoint<2>> *componentCenters = new std::unordered_map<const GraphComponent *, KDPoint<2>>();
-	std::for_each(components.begin(), components.end(), [&](const GraphComponent *comp) {
+	std::unordered_map<const KDPoint<2>, GraphComponent *> *componentCenters = new std::unordered_map<const KDPoint<2>, GraphComponent *>();
+	std::unordered_map<const GraphComponent *, KDTree<2>> *compTrees = new std::unordered_map<const GraphComponent *, KDTree<2>>();
+	KDTree<2> compCentersTree; // A KDTree with the center of each component.
+	bool centerAFound = false;
+	KDPoint<2> centerA; // The center of component A.
+	std::for_each(components.begin(), components.end(), [&](GraphComponent *comp) {
+		// Set up a KDTree of the points in the component.
+		KDTree<2> compTree;
 		// Find the average coords of all the points in the component.
-		KDPoint<2> avgPoint(0, 0);
-		std::for_each(comp->begin(), comp->end(), [&g, &avgPoint](const VertexDesc vDesc) {
-			const KDPoint<2> pt = g[vDesc];
-			avgPoint[0] += pt[0];
-			avgPoint[1] += pt[1];
-		});
-		avgPoint[0] /= comp->size();
-		avgPoint[1] /= comp->size();
-		(*componentCenters)[comp] = avgPoint;
+		const KDPoint<2> avgPoint = findCenterPoint(g, *comp, compTree);
+		(*componentCenters)[avgPoint] = comp;
+		(*compTrees)[comp] = compTree;
+		
+		// Check whether this is the first component. Don't insert the first one
+		// into the KDTree.
+		if (!centerAFound) {
+			centerAFound = true;
+			centerA = avgPoint;
+		} else if (!compCentersTree.insert(avgPoint)) {
+			// Add the point to the KDTree.
+			EASLog("Error: center point already in use by another component. Skipping.");
+		}
 	});
 	
 	// Loop until we have one single giant component.
@@ -162,46 +160,29 @@ etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(Undir
 			EASLog("%lu components remaining", components.size());
 		}
 		
-		// Pick an arbitrary component (the first one). Find the component nearest
-		// to this one.
+		// Pick an arbitrary component (the first one). Find the component
+		// nearest to this one.
 		GraphComponent *compA = components[0];
-		GraphComponent *compB = components[1];
-		const KDPoint<2> centerA = (*componentCenters)[compA];
-		float bestDist = centerA.distanceTo((*componentCenters)[compB]);
-		for (int i = 2; i != components.size(); ++i) {
-			GraphComponent *curComp = components[i];
-			const float curDist = centerA.distanceTo((*componentCenters)[curComp]);
-			if (curDist < bestDist) {
-				bestDist = curDist;
-				compB = curComp;
-			}
-		}
+		KDPoint<2> *nn = compCentersTree.findNearestNeighbor(centerA);
+		const KDPoint<2> compCenterB = *nn;
+		delete nn;
+		nn = nullptr;
+		GraphComponent *compB = (*componentCenters)[compCenterB];
 		
 		// Find the point in component B nearest the center of component A. This
 		// point will become B's bridging point with A.
 		VertexDesc bridgeB = findNearestPoint(g, *compB, centerA);
 		// Find the point in A nearest the bridge point in B.
-		const KDPoint<2> centerB = g[bridgeB];
-		VertexDesc bridgeA = findNearestPoint(g, *compA, centerB);
+		const KDPoint<2> bridgeBPt = g[bridgeB];
+		VertexDesc bridgeA = findNearestPoint(g, *compA, bridgeBPt);
 		
 		// Create an edge between bridges A and B.
 		add_edge(bridgeA, bridgeB, g);
 		
-		// Update the center of the soon-to-be-merged component.
-		// (We're going to merge the points of A into B.)
-		KDPoint<2> newCenterB(0, 0);
-		newCenterB[0] += centerB[0] * compB->size();
-		newCenterB[0] += centerA[0] * compA->size();
-		newCenterB[0] /= compA->size() + compB->size();
-		newCenterB[1] += centerB[1] * compB->size();
-		newCenterB[1] += centerA[1] * compA->size();
-		newCenterB[1] /= compA->size() + compB->size();
-		(*componentCenters)[compB] = newCenterB;
-		// For performance reasons, we don't even bother to erase compA from
-		// componentCenters.
-		
-		// Merge the points of A into B.
-		compB->insert(compA->begin(), compA->end());
+		// Merge component A into component B.
+		mergeComponents(*compB, *compA, compCenterB, centerA, g,
+						*componentCenters, *compTrees, compCentersTree);
+		// Remove A from the component set and delete it.
 		components.erase(components.begin());
 		delete compA;
 	}
@@ -209,6 +190,28 @@ etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(Undir
 	// Clean up.
 	delete componentCenters;
 	componentCenters = nullptr;
+}
+
+KDPoint<2>
+etchasketch::salesman::SmallishSpanningTreeWalkSalesman::findCenterPoint(const UndirectedGraph &g,
+																		 const GraphComponent &comp,
+																		 KDTree<2> &compTree) const
+{
+	// Find the average of all the points in the component.
+	KDPoint<2> avgPoint(0, 0);
+	for (auto vDesc = comp.begin(); vDesc != comp.end(); ++vDesc) {
+		const KDPoint<2> pt = g[*vDesc];
+		avgPoint[0] += pt[0];
+		avgPoint[1] += pt[1];
+		// Add each point we find to the component's KDTree.
+		compTree.insert(pt);
+	}
+	for (int i = 0; i <= 1; ++i) {
+		double sum = static_cast<double>(avgPoint[i]);
+		sum /= static_cast<double>(comp.size());
+		avgPoint[i] = static_cast<KDPointCoordinate>(sum);
+	}
+	return avgPoint;
 }
 
 etchasketch::salesman::SmallishSpanningTreeWalkSalesman::VertexDesc
@@ -228,6 +231,47 @@ etchasketch::salesman::SmallishSpanningTreeWalkSalesman::findNearestPoint(const 
 		}
 	});
 	return *bestDesc;
+}
+
+void
+etchasketch::salesman::SmallishSpanningTreeWalkSalesman::mergeComponents(GraphComponent &dst,
+																		 GraphComponent &src,
+																		 const KDPoint<2> &centerDst,
+																		 const KDPoint<2> &centerSrc,
+																		 const UndirectedGraph &g,
+																		 std::unordered_map<const KDPoint<2>, GraphComponent *> &componentCenters,
+																		 std::unordered_map<const GraphComponent *, KDTree<2>> &compTrees,
+																		 KDTree<2> &compCentersTree) const
+{
+	// Update the center of the soon-to-be-merged component.
+	KDPoint<2> newCenterDst(0, 0);
+	for (int i = 0; i <= 1; ++i) {
+		// Recompute the average coordinate in each dimension.
+		newCenterDst[i] += centerDst[i] * dst.size();
+		newCenterDst[i] += centerSrc[i] * src.size();
+		double sum = static_cast<double>(newCenterDst[i]);
+		sum /= static_cast<double>(dst.size() + src.size());
+		newCenterDst[i] = static_cast<KDPointCoordinate>(sum);
+	}
+	// Erase the center of src and the old center of dst from the
+	// componentCenters map, and add the center of the new, merged component.
+	componentCenters.erase(centerSrc);
+	componentCenters.erase(centerDst);
+	componentCenters[newCenterDst] = &dst;
+	// Do the same with the compCentersTree.
+	compCentersTree.remove(centerSrc);
+	compCentersTree.remove(centerDst);
+	compCentersTree.insert(newCenterDst);
+	// Add the points of src to the KDTree of dst.
+	KDTree<2> &dstTree = compTrees[&dst];
+	for (auto iter = src.begin(); iter != src.end(); ++iter) {
+		const KDPoint<2> pt = g[*iter];
+		dstTree.insert(pt);
+	}
+	// Delete src's KDTree.
+	compTrees.erase(&src);
+	// Merge the points of src into dst.
+	dst.insert(src.begin(), src.end());
 }
 
 void

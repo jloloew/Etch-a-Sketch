@@ -36,15 +36,34 @@ namespace etchasketch {
 			typedef std::map<VertexDesc, size_t> VertexDescMap; // Based on https://stackoverflow.com/questions/15432104/how-to-create-a-propertymap-for-a-boost-graph-using-lists-as-vertex-container
 			typedef std::unordered_set<VertexDesc> GraphComponent;
 			
-			/**
-			 *
+			/*
+			 * 1. Add an edge from each node to its nearest neighbor.
+			 * 2. For each disjoint subgraph, find its average coordinate (its center).
+			 * 3. Add the center of each subgraph to a KDTree.
+			 * 4. Recurse (go to step 1).
+			 * 5. For each edge between subgraphs, use a heuristic to connect them. Let the
+			 *    subgraphs be called A and B. Create a KDTree with the vertices in B. Find
+			 *    the nearest neighbor to the center of subgraph A. This will be the
+			 *    endpoint in B used to bridge to A. Add the vertices in A to a KDTree. Find
+			 *    the nearest neighbor to the bridge vertex we found in B. Connect the
+			 *    vertices in A and B.
 			 */
 			void smallishSpanningTreeWalkAlgorithm(KDTree<2> &kdTree);
 			
 			/**
-			 *
+			 * Add edges between the disjoint components of the graph to create
+			 * a single connected component.
 			 */
-			void connectComponents(UndirectedGraph &g, vector<GraphComponent *> &components);
+			void connectComponents(UndirectedGraph &g,
+								   std::vector<GraphComponent *> &components) const;
+			
+			/**
+			 * Find the average coordinate of all the points in the component.
+			 * Also fills the compTree with each point in the component.
+			 */
+			KDPoint<2> findCenterPoint(const UndirectedGraph &g,
+									   const GraphComponent &comp,
+									   KDTree<2> &compTree) const;
 			
 			/**
 			 * Within a component, find the point nearest a given target point.
@@ -53,8 +72,17 @@ namespace etchasketch {
 										const GraphComponent &component,
 										const KDPoint<2> &target) const;
 			
+			void mergeComponents(GraphComponent &dst,
+								 GraphComponent &src,
+								 const KDPoint<2> &centerDst,
+								 const KDPoint<2> &centerSrc,
+								 const UndirectedGraph &g,
+								 std::unordered_map<const KDPoint<2>, GraphComponent *> &componentCenters,
+								 std::unordered_map<const GraphComponent *, KDTree<2>> &compTrees,
+								 KDTree<2> &compCentersTree) const;
+			
 			/**
-			 * Walk the graph, adding each point visited to the list of ordered 
+			 * Walk the graph, adding each point visited to the list of ordered
 			 * points.
 			 */
 			void
