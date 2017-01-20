@@ -139,28 +139,28 @@ void
 etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(UndirectedGraph &g,
 																		   vector<GraphComponent *> &components)
 {
-//	if (components.size() <= 1) { // Nothing to do.
-//		return;
-//	}
+	
+	// Find the center of each component.
+	std::unordered_map<const GraphComponent *, KDPoint<2>> *componentCenters = new std::unordered_map<const GraphComponent *, KDPoint<2>>();
+	std::for_each(components.begin(), components.end(), [&](const GraphComponent *comp) {
+		// Find the average coords of all the points in the component.
+		KDPoint<2> avgPoint(0, 0);
+		std::for_each(comp->begin(), comp->end(), [&g, &avgPoint](const VertexDesc vDesc) {
+			const KDPoint<2> pt = g[vDesc];
+			avgPoint[0] += pt[0];
+			avgPoint[1] += pt[1];
+		});
+		avgPoint[0] /= comp->size();
+		avgPoint[1] /= comp->size();
+		(*componentCenters)[comp] = avgPoint;
+	});
+	
+	// Loop until we have one single giant component.
 	while (components.size() >= 2) {
+		// Debug
 		if (components.size() % 100 == 0) {
 			EASLog("%lu components remaining", components.size());
 		}
-		
-		// Find the center of each component.
-		std::unordered_map<const GraphComponent *, KDPoint<2>> *componentCenters = new std::unordered_map<const GraphComponent *, KDPoint<2>>();
-		std::for_each(components.begin(), components.end(), [&](const GraphComponent *comp) {
-			// Find the average coords of all the points in the component.
-			KDPoint<2> avgPoint(0, 0);
-			std::for_each(comp->begin(), comp->end(), [&g, &avgPoint](const VertexDesc vDesc) {
-				const KDPoint<2> pt = g[vDesc];
-				avgPoint[0] += pt[0];
-				avgPoint[1] += pt[1];
-			});
-			avgPoint[0] /= comp->size();
-			avgPoint[1] /= comp->size();
-			(*componentCenters)[comp] = avgPoint;
-		});
 		
 		// Pick an arbitrary component (the first one). Find the component nearest
 		// to this one.
@@ -176,8 +176,6 @@ etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(Undir
 				compB = curComp;
 			}
 		}
-		delete componentCenters;
-		componentCenters = nullptr;
 		
 		// Find the point in component B nearest the center of component A. This
 		// point will become B's bridging point with A.
@@ -189,12 +187,28 @@ etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(Undir
 		// Create an edge between bridges A and B.
 		add_edge(bridgeA, bridgeB, g);
 		
-		// Merge the points of A into B and recurse.
+		// Update the center of the soon-to-be-merged component.
+		// (We're going to merge the points of A into B.)
+		KDPoint<2> newCenterB(0, 0);
+		newCenterB[0] += centerB[0] * compB->size();
+		newCenterB[0] += centerA[0] * compA->size();
+		newCenterB[0] /= compA->size() + compB->size();
+		newCenterB[1] += centerB[1] * compB->size();
+		newCenterB[1] += centerA[1] * compA->size();
+		newCenterB[1] /= compA->size() + compB->size();
+		(*componentCenters)[compB] = newCenterB;
+		// For performance reasons, we don't even bother to erase compA from
+		// componentCenters.
+		
+		// Merge the points of A into B.
 		compB->insert(compA->begin(), compA->end());
 		components.erase(components.begin());
 		delete compA;
 	}
-//	connectComponents(g, components);
+	
+	// Clean up.
+	delete componentCenters;
+	componentCenters = nullptr;
 }
 
 etchasketch::salesman::SmallishSpanningTreeWalkSalesman::VertexDesc
