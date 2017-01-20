@@ -9,6 +9,7 @@
 #include "SmallishSpanningTreeWalkSalesman.hpp"
 #include "EASUtils.hpp"
 #include <algorithm>
+#include <limits>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/connected_components.hpp>
 
@@ -136,9 +137,83 @@ etchasketch::salesman::SmallishSpanningTreeWalkSalesman::smallishSpanningTreeWal
 
 void
 etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(UndirectedGraph &g,
-																		   vector<std::unordered_set<VertexDesc> *> &components)
+																		   vector<GraphComponent *> &components)
 {
-	
+//	if (components.size() <= 1) { // Nothing to do.
+//		return;
+//	}
+	while (components.size() >= 2) {
+		if (components.size() % 100 == 0) {
+			EASLog("%lu components remaining", components.size());
+		}
+		
+		// Find the center of each component.
+		std::unordered_map<const GraphComponent *, KDPoint<2>> *componentCenters = new std::unordered_map<const GraphComponent *, KDPoint<2>>();
+		std::for_each(components.begin(), components.end(), [&](const GraphComponent *comp) {
+			// Find the average coords of all the points in the component.
+			KDPoint<2> avgPoint(0, 0);
+			std::for_each(comp->begin(), comp->end(), [&g, &avgPoint](const VertexDesc vDesc) {
+				const KDPoint<2> pt = g[vDesc];
+				avgPoint[0] += pt[0];
+				avgPoint[1] += pt[1];
+			});
+			avgPoint[0] /= comp->size();
+			avgPoint[1] /= comp->size();
+			(*componentCenters)[comp] = avgPoint;
+		});
+		
+		// Pick an arbitrary component (the first one). Find the component nearest
+		// to this one.
+		GraphComponent *compA = components[0];
+		GraphComponent *compB = components[1];
+		const KDPoint<2> centerA = (*componentCenters)[compA];
+		float bestDist = centerA.distanceTo((*componentCenters)[compB]);
+		for (int i = 2; i != components.size(); ++i) {
+			GraphComponent *curComp = components[i];
+			const float curDist = centerA.distanceTo((*componentCenters)[curComp]);
+			if (curDist < bestDist) {
+				bestDist = curDist;
+				compB = curComp;
+			}
+		}
+		delete componentCenters;
+		componentCenters = nullptr;
+		
+		// Find the point in component B nearest the center of component A. This
+		// point will become B's bridging point with A.
+		VertexDesc bridgeB = findNearestPoint(g, *compB, centerA);
+		// Find the point in A nearest the bridge point in B.
+		const KDPoint<2> centerB = g[bridgeB];
+		VertexDesc bridgeA = findNearestPoint(g, *compA, centerB);
+		
+		// Create an edge between bridges A and B.
+		add_edge(bridgeA, bridgeB, g);
+		
+		// Merge the points of A into B and recurse.
+		compB->insert(compA->begin(), compA->end());
+		components.erase(components.begin());
+		delete compA;
+	}
+//	connectComponents(g, components);
+}
+
+etchasketch::salesman::SmallishSpanningTreeWalkSalesman::VertexDesc
+etchasketch::salesman::SmallishSpanningTreeWalkSalesman::findNearestPoint(const UndirectedGraph &g,
+																		  const GraphComponent &component,
+																		  const KDPoint<2> &target) const
+{
+	// Find the point within the component nearest the target point.
+	float bestDist = std::numeric_limits<float>::max();
+	const VertexDesc *bestDesc = nullptr;
+	std::for_each(component.begin(), component.end(), [&](const VertexDesc vDesc) {
+		const KDPoint<2> pt = g[vDesc];
+		const float curDist = pt.distanceTo(target);
+		if (curDist < bestDist) {
+			bestDist = curDist;
+			bestDesc = &vDesc;
+		}
+	});
+	return *bestDesc;
 }
 
 void

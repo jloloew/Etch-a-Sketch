@@ -34,6 +34,7 @@ namespace etchasketch {
 			typedef boost::graph_traits<UndirectedGraph>::edge_descriptor EdgeDesc;
 			typedef boost::graph_traits<UndirectedGraph>::adjacency_iterator AdjacencyIterator;
 			typedef std::map<VertexDesc, size_t> VertexDescMap; // Based on https://stackoverflow.com/questions/15432104/how-to-create-a-propertymap-for-a-boost-graph-using-lists-as-vertex-container
+			typedef std::unordered_set<VertexDesc> GraphComponent;
 			
 			/**
 			 *
@@ -43,7 +44,14 @@ namespace etchasketch {
 			/**
 			 *
 			 */
-			void connectComponents(UndirectedGraph &g, vector<std::unordered_set<VertexDesc> *> &components);
+			void connectComponents(UndirectedGraph &g, vector<GraphComponent *> &components);
+			
+			/**
+			 * Within a component, find the point nearest a given target point.
+			 */
+			VertexDesc findNearestPoint(const UndirectedGraph &g,
+										const GraphComponent &component,
+										const KDPoint<2> &target) const;
 			
 			/**
 			 * Walk the graph, adding each point visited to the list of ordered 
