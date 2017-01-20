@@ -88,13 +88,19 @@ etchasketch::ImageFlow::generateEdgePoints()
 		}
 	}
 	
+	// Insert the starting point.
+	const KDPoint<2> startPoint(0, 0);
+	pointSet->insert(startPoint);
+	
 	setEdgePoints(pointSet);
 }
 
 void
 etchasketch::ImageFlow::orderEdgePointsForDrawing()
 {
-	setSalesman(new SmallishSpanningTreeWalkSalesman(*edgePoints));
+	// TODO: Put startPoint in class scope or something. 
+	const KDPoint<2> startPoint(0, 0);
+	setSalesman(new SmallishSpanningTreeWalkSalesman(*edgePoints, startPoint));
 	salesman->orderPoints();
 	setOrderedEdgePoints(salesman->getOrderedPoints());
 	// Done with the salesman.

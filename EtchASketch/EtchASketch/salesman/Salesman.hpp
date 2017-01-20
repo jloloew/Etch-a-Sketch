@@ -20,8 +20,10 @@ namespace etchasketch {
 		class Salesman {
 			
 		public:
-			Salesman(const std::unordered_set<etchasketch::KDPoint<2>>
-					 &unorderedPoints);
+			/// The startPoint must be contained within the unorderedPoints.
+			Salesman(const std::unordered_set<KDPoint<2>>
+					 &unorderedPoints,
+					 const KDPoint<2> &startPoint);
 			
 			virtual ~Salesman();
 			
@@ -33,6 +35,7 @@ namespace etchasketch {
 				{ return new std::vector<KDPoint<2>>(orderedPoints); }
 			
 		protected:
+			const KDPoint<2> startPoint;
 			std::unordered_set<KDPoint<2>> unorderedPoints;
 			std::vector<KDPoint<2>> orderedPoints;
 			

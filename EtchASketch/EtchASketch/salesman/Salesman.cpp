@@ -16,8 +16,10 @@ using etchasketch::KDTree;
 using etchasketch::KDPoint;
 
 etchasketch::salesman::Salesman::Salesman(const unordered_set<KDPoint<2>>
-										  &unorderedPoints)
-: unorderedPoints(unorderedPoints),
+										  &unorderedPoints,
+										  const KDPoint<2> &startPoint)
+: startPoint(startPoint),
+unorderedPoints(unorderedPoints),
 orderedPoints(vector<KDPoint<2>>())//unorderedPoints.size()))
 { }
 
