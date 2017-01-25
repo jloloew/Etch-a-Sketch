@@ -263,7 +263,7 @@ etchasketch::KDTree<Dim>::insert(KDPoint<Dim> *newPoint)
 	return true; // Success.
 	
 warnAndFail:
-	EASLog("Warning: the KDTree may be in an inconsistent state.");
+//	EASLog("Warning: the KDTree may be in an inconsistent state.");
 	return false;
 }
 
