@@ -41,7 +41,7 @@ namespace etchasketch {
                       EdgeDesc;
                   typedef boost::graph_traits<
                       UndirectedGraph>::adjacency_iterator AdjacencyIterator;
-                  typedef std::map<VertexDesc, size_t>
+                  typedef std::unordered_map<VertexDesc, size_t>
                       VertexDescMap; // Based on
                                      // https://stackoverflow.com/questions/15432104/how-to-create-a-propertymap-for-a-boost-graph-using-lists-as-vertex-container
                   typedef std::unordered_set<VertexDesc> GraphComponent;

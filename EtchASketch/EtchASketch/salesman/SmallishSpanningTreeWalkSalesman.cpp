@@ -77,8 +77,6 @@ void etchasketch::salesman::SmallishSpanningTreeWalkSalesman::
 
   // 2. For each disjoint subgraph, find its average coordinate (its center).
   // Find the disjoint subgraphs.
-  // TODO: Build this information as we go with incremental_components().
-
   VertexDescMap *idxMap = new VertexDescMap();
   associative_property_map<VertexDescMap> indexMap(*idxMap);
   VertexIterator di, dj;
@@ -157,7 +155,7 @@ void etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(
     if (isFirstComponent) {
       isFirstComponent = false;
       centerA = avgPoint;
-      return;
+			continue;
     }
     // Add the point to the KDTree.
     if (!compCentersTree.insert(avgPoint)) {
