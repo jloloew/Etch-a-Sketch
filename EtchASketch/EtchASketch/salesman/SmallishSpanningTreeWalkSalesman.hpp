@@ -114,7 +114,7 @@ namespace etchasketch {
                    */
                   bool walkDFSHelper(const UndirectedGraph &g,
                                      const VertexDesc &curVertex,
-                                     std::map<VertexDesc, bool> &visited);
+                                     std::unordered_map<VertexDesc, bool> &visited);
 		};
 		
 	}

@@ -291,23 +291,21 @@ void etchasketch::salesman::SmallishSpanningTreeWalkSalesman::mergeComponents(
 void etchasketch::salesman::SmallishSpanningTreeWalkSalesman::walkDFS(
     const UndirectedGraph &g, const VertexDesc &startVertex) {
   // Mark all vertices as unvisited to start.
-  std::map<VertexDesc, bool> *visited = new std::map<VertexDesc, bool>();
+  std::unordered_map<VertexDesc, bool> visited = std::unordered_map<VertexDesc, bool>();
   VertexIterator vi, vEnd;
   tie(vi, vEnd) = vertices(g);
   for (; vi != vEnd; ++vi) {
-    (*visited)[*vi] = false;
+    visited[*vi] = false;
   }
   // Call the helper.
-  walkDFSHelper(g, startVertex, *visited);
-  // Clean up and return.
-  delete visited;
+  walkDFSHelper(g, startVertex, visited);
 }
 
 // Returns true if curVertex was successfully visited for the first time, or
 // false otherwise.
 bool etchasketch::salesman::SmallishSpanningTreeWalkSalesman::walkDFSHelper(
     const UndirectedGraph &g, const VertexDesc &curVertex,
-    std::map<VertexDesc, bool> &visited) {
+    std::unordered_map<VertexDesc, bool> &visited) {
   // Base case.
   if (visited[curVertex]) {
     return false;
