@@ -133,10 +133,10 @@ void etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(
   // Find the center of each component.
 
   /// Keys are the points at the center of the components (the values).
-  std::unordered_map<const KDPoint<2>, GraphComponent *> *componentCenters =
-      new std::unordered_map<const KDPoint<2>, GraphComponent *>();
-  std::unordered_map<const GraphComponent *, KDTree<2> *> *compTrees =
-      new std::unordered_map<const GraphComponent *, KDTree<2> *>();
+  std::unordered_map<const KDPoint<2>, GraphComponent *> componentCenters =
+      std::unordered_map<const KDPoint<2>, GraphComponent *>();
+  std::unordered_map<const GraphComponent *, KDTree<2> *> compTrees =
+      std::unordered_map<const GraphComponent *, KDTree<2> *>();
   KDTree<2> compCentersTree; // A KDTree with the center of each component.
 
   bool isFirstComponent = true;
@@ -147,8 +147,8 @@ void etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(
     KDTree<2> *compTree = new KDTree<2>();
     // Find the average coords of all the points in the component.
     const KDPoint<2> avgPoint = findCenterPoint(g, *comp, *compTree);
-    (*componentCenters)[avgPoint] = comp;
-    (*compTrees)[comp] = compTree;
+    componentCenters[avgPoint] = comp;
+    compTrees[comp] = compTree;
 
     // Check whether this is the first component. Don't insert the first one
     // into the KDTree.
@@ -178,7 +178,7 @@ void etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(
     const KDPoint<2> compCenterB = *nn;
     delete nn;
     nn = nullptr;
-    GraphComponent *compB = (*componentCenters)[compCenterB];
+    GraphComponent *compB = componentCenters[compCenterB];
 
     // Find the point in component B nearest the center of component A. This
     // point will become B's bridging point with A.
@@ -191,21 +191,18 @@ void etchasketch::salesman::SmallishSpanningTreeWalkSalesman::connectComponents(
     add_edge(bridgeA, bridgeB, g);
 
     // Merge component A into component B.
-    mergeComponents(*compB, *compA, compCenterB, centerA, g, *componentCenters,
-                    *compTrees, compCentersTree);
+    mergeComponents(*compB, *compA, compCenterB, centerA, g, componentCenters,
+                    compTrees, compCentersTree);
     // Remove A from the component set and delete it.
     components.erase(components.begin());
     delete compA;
   }
 
   // Clean up.
-	for (auto iter = compTrees->begin(); iter != compTrees->end(); ++iter) {
+	for (auto iter = compTrees.begin(); iter != compTrees.end(); ++iter) {
 		KDTree<2> *compTree = iter->second;
 		delete compTree;
 	}
-	delete compTrees;
-  delete componentCenters;
-  componentCenters = nullptr;
 }
 
 KDPoint<2>
