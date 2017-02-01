@@ -30,7 +30,8 @@ namespace etchasketch {
 			apply(const etchasketch::Image &originalImage) const;
 			
 		private:
-			float kernel[radius][radius];
+			static const uint32_t kernelSize = 2*radius + 1;
+			float kernel[kernelSize][kernelSize];
 			
 			void initKernel();
 			

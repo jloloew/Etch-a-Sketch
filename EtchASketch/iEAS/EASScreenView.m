@@ -117,7 +117,7 @@
 	const CGFloat pointSize = 5.0;
 	const CGFloat offset = pointSize / 2.0;
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
-	CGContextSetFillColor(ctx, CGColorGetComponents(self.pointColor.CGColor));
+	CGContextSetFillColorWithColor(ctx, [self.pointColor CGColor]);
 	// Draw each point.
 	for (NSValue *point in self.points) {
 		CGPoint pt = point.CGPointValue;

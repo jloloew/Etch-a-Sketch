@@ -24,20 +24,20 @@ etchasketch::edgedetect::BlurImageFilter::initKernel()
 {
 	// Based on http://stackoverflow.com/questions/8204645/implementing-gaussian-blur-how-to-calculate-convolution-matrix-kernel
 	float sigma = 1.0f;
-	float mean = radius / 2;
+	float mean = kernelSize / 2;
 	float sum = 0.0f; // For accumulating the kernel values
-	for (uint32_t x = 0; x < radius; x++)
-		for (uint32_t y = 0; y < radius; y++) {
-			kernel[x][y] = exp( -0.5 * (pow((x-mean)/sigma, 2.0) + pow((y-mean)/sigma,2.0)) )
-			/ (2 * M_PI * sigma * sigma);
+	for (uint32_t x = 0; x < kernelSize; x++)
+		for (uint32_t y = 0; y < kernelSize; y++) {
+			kernel[x][y] = (float)( exp( -0.5 * (pow((x-mean)/sigma, 2.0) + pow((y-mean)/sigma,2.0)) )
+			/ (2 * M_PI * sigma * sigma) );
 			
 			// Accumulate the kernel values
 			sum += kernel[x][y];
 		}
 	
 	// Normalize the kernel
-	for (uint32_t x = 0; x < radius; x++) {
-		for (uint32_t y = 0; y < radius; y++) {
+	for (uint32_t x = 0; x < kernelSize; x++) {
+		for (uint32_t y = 0; y < kernelSize; y++) {
 			kernel[x][y] /= sum;
 		}
 	}
