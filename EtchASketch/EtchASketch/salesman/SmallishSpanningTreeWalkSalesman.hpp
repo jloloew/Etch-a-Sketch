@@ -68,7 +68,7 @@ namespace etchasketch {
                    */
                   void connectComponents(
                       UndirectedGraph &g,
-                      std::vector<GraphComponent *> &components) const;
+                      std::vector<GraphComponent> &components) const;
 
                   /**
                    * Find the average coordinate of all the points in the
@@ -95,9 +95,9 @@ namespace etchasketch {
                       GraphComponent &dst, GraphComponent &src,
                       const KDPoint<2> &centerDst, const KDPoint<2> &centerSrc,
                       const UndirectedGraph &g,
-                      std::unordered_map<const KDPoint<2>, GraphComponent *>
+                      std::unordered_map<const KDPoint<2>, GraphComponent &>
                           &componentCenters,
-                      std::unordered_map<const GraphComponent *, KDTree<2> *>
+                      std::unordered_map<const GraphComponent *, KDTree<2>>
                           &compTrees,
                       KDTree<2> &compCentersTree) const;
 
