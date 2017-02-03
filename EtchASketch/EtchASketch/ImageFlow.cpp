@@ -9,15 +9,18 @@
 #include "ImageFlow.hpp"
 #include "SobelEdgeDetector.hpp"
 #include "BlurImageFilter.hpp"
-#include "SmallishSpanningTreeWalkSalesman.hpp"
+//#include "SmallishSpanningTreeWalkSalesman.hpp"
+#include "BobAndWeaveSalesman.hpp"
 
 using std::unordered_set;
 using std::vector;
 using etchasketch::Image;
+using etchasketch::KDPoint;
 using etchasketch::edgedetect::BlurImageFilter;
 using etchasketch::edgedetect::SobelEdgeDetector;
 using etchasketch::salesman::Salesman;
-using etchasketch::salesman::SmallishSpanningTreeWalkSalesman;
+//using etchasketch::salesman::SmallishSpanningTreeWalkSalesman;
+using etchasketch::salesman::BobAndWeaveSalesman;
 
 etchasketch::ImageFlow::ImageFlow(const Image &colorImage)
 : originalImage(colorImage),
@@ -100,9 +103,10 @@ etchasketch::ImageFlow::orderEdgePointsForDrawing()
 {
 	// TODO: Put startPoint in class scope or something.
 	const KDPoint<2> startPoint(0, 0);
-	setSalesman(new SmallishSpanningTreeWalkSalesman(*edgePoints, startPoint));
+//	setSalesman(new SmallishSpanningTreeWalkSalesman(*edgePoints, startPoint));
+	setSalesman(new BobAndWeaveSalesman(*edgeDetectedImage));
 	salesman->orderPoints();
-	setOrderedEdgePoints(salesman->getOrderedPoints());
+	setOrderedEdgePoints(new std::vector<KDPoint<2>>(salesman->getOrderedPoints()));
 	// Done with the salesman.
 	setSalesman(nullptr);
 }

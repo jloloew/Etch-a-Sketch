@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B81A6CE61E45459100430220 /* BobAndWeaveSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81A6CE41E45459100430220 /* BobAndWeaveSalesman.cpp */; };
+		B81A6CE91E45495200430220 /* NearestNeighborSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81A6CE71E45495200430220 /* NearestNeighborSalesman.cpp */; };
 		B820E9051DAC6E2200135C8A /* EASImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B820E9041DAC6E2200135C8A /* EASImage.mm */; };
 		B827FE8F1DB1B27F007F2469 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
 		B827FE931DB1B74B007F2469 /* EASBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */; };
@@ -101,6 +103,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B81A6CE41E45459100430220 /* BobAndWeaveSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BobAndWeaveSalesman.cpp; path = salesman/BobAndWeaveSalesman.cpp; sourceTree = "<group>"; };
+		B81A6CE51E45459100430220 /* BobAndWeaveSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BobAndWeaveSalesman.hpp; path = salesman/BobAndWeaveSalesman.hpp; sourceTree = "<group>"; };
+		B81A6CE71E45495200430220 /* NearestNeighborSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NearestNeighborSalesman.cpp; path = salesman/NearestNeighborSalesman.cpp; sourceTree = "<group>"; };
+		B81A6CE81E45495200430220 /* NearestNeighborSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NearestNeighborSalesman.hpp; path = salesman/NearestNeighborSalesman.hpp; sourceTree = "<group>"; };
 		B820E9031DAC6E2200135C8A /* EASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASImage.h; sourceTree = "<group>"; };
 		B820E9041DAC6E2200135C8A /* EASImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EASImage.mm; sourceTree = "<group>"; };
 		B820E9181DAC75C800135C8A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -346,6 +352,10 @@
 		B87943CB1D91B0CB0035B729 /* salesman */ = {
 			isa = PBXGroup;
 			children = (
+				B81A6CE41E45459100430220 /* BobAndWeaveSalesman.cpp */,
+				B81A6CE51E45459100430220 /* BobAndWeaveSalesman.hpp */,
+				B81A6CE71E45495200430220 /* NearestNeighborSalesman.cpp */,
+				B81A6CE81E45495200430220 /* NearestNeighborSalesman.hpp */,
 				B87943CC1D91B0F30035B729 /* Salesman.cpp */,
 				B87943CD1D91B0F30035B729 /* Salesman.hpp */,
 				B8A313961DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp */,
@@ -545,12 +555,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B81A6CE91E45495200430220 /* NearestNeighborSalesman.cpp in Sources */,
 				B872DD901DB06C30008E08D8 /* KDPoint.hpp in Sources */,
 				B872DD8F1DB06C2D008E08D8 /* KDTree.hpp in Sources */,
 				B87943CE1D91B0F30035B729 /* Salesman.cpp in Sources */,
 				B8643B301D920D0B00B93D84 /* SobelEdgeDetector.cpp in Sources */,
 				B8766BDA1D79DE7600A4ED34 /* EtchASketch.cpp in Sources */,
 				B8766BDD1D79EE4600A4ED34 /* EASUtils.cpp in Sources */,
+				B81A6CE61E45459100430220 /* BobAndWeaveSalesman.cpp in Sources */,
 				B85A959C1DFCCB6800E0F6BE /* BlurImageFilter.cpp in Sources */,
 				B87943C41D91AA870035B729 /* Image.cpp in Sources */,
 				B87943CA1D91ADF30035B729 /* ImageFlow.cpp in Sources */,
