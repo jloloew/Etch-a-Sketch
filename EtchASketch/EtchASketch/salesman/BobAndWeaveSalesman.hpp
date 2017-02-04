@@ -11,23 +11,51 @@
 
 #include "Salesman.hpp"
 #include "Image.hpp"
+#include "KDPoint.hpp"
 
 namespace etchasketch {
-	namespace salesman {
-		
-		class BobAndWeaveSalesman : public Salesman {
-		public:
-			BobAndWeaveSalesman(const Image &img);
-			
-			virtual ~BobAndWeaveSalesman() { }
-			
-			void orderPoints();
-			
-		private:
-			const Image &img;
-		};
-		
-	}
+namespace salesman {
+
+/**
+ * Create a salesman that draws periodic horizontal lines which are perturbed to
+ * follow the edges in the input image.
+ */
+class BobAndWeaveSalesman : public Salesman {
+  public:
+	/**
+	 * @param edgeImage The image produced by edge detection.
+	 * @param lineSeparation The vertical distance between each horizontal line
+	 * drawn, in pixels.
+	 */
+	BobAndWeaveSalesman(const Image &edgeImage, size_t lineSeparation = 20);
+
+	virtual ~BobAndWeaveSalesman();
+
+	void orderPoints();
+
+  private:
+	const Image &edgeImage;
+
+	/// The vertical distance between each horizontal line drawn, in pixels.
+	const size_t lineSeparation;
+	
+	/// The radius around each point, within which other points can perform
+	// "gravitational attraction" to draw the cursor closer.
+	static const size_t pointSearchRadius = 10;
+	
+	/**
+	 * Get the vertical displacement for the cursor at the given point within
+	 * the image.
+	 * 
+	 * Search within a radius of @c pointSearchRadius around the given point,
+	 * performing "gravitational attraction" to draw the cursor up or down to
+	 * better conform to the detected lines.
+	 */
+	KDPoint<2> offsetPointAt(const KDPointCoordinate x,
+							 const KDPointCoordinate y) const;
+};
+
+}
 }
 
 #endif /* BobAndWeaveSalesman_hpp */

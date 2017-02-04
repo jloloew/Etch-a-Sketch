@@ -10,6 +10,7 @@
 #include "EASUtils.hpp"
 
 etchasketch::salesman::Salesman::Salesman()
+: orderedPoints(std::vector<KDPoint<2>>())
 { }
 
 etchasketch::salesman::Salesman::~Salesman(void)
