@@ -27,7 +27,7 @@ class BobAndWeaveSalesman : public Salesman {
 	 * @param lineSeparation The vertical distance between each horizontal line
 	 * drawn, in pixels.
 	 */
-	BobAndWeaveSalesman(const Image &edgeImage, size_t lineSeparation = 20);
+	BobAndWeaveSalesman(const Image &edgeImage);
 
 	virtual ~BobAndWeaveSalesman();
 
@@ -37,11 +37,13 @@ class BobAndWeaveSalesman : public Salesman {
 	const Image &edgeImage;
 
 	/// The vertical distance between each horizontal line drawn, in pixels.
-	const size_t lineSeparation;
+	constexpr static const size_t lineSeparation = 10;
 	
 	/// The radius around each point, within which other points can perform
 	// "gravitational attraction" to draw the cursor closer.
-	static const size_t pointSearchRadius = 10;
+	constexpr static const size_t pointSearchRadius = 10;
+	
+	constexpr static const float k_grav = 10.0f;
 	
 	/**
 	 * Get the vertical displacement for the cursor at the given point within

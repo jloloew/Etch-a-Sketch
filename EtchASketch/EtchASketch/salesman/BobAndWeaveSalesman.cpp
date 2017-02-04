@@ -15,8 +15,8 @@
 namespace etchasketch {
 namespace salesman {
 
-BobAndWeaveSalesman::BobAndWeaveSalesman(const Image &edgeImage, size_t lineSeparation)
-    : Salesman(), edgeImage(edgeImage), lineSeparation(lineSeparation)
+BobAndWeaveSalesman::BobAndWeaveSalesman(const Image &edgeImage)
+    : Salesman(), edgeImage(edgeImage)
 {
 }
 
