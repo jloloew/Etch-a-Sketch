@@ -101,6 +101,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A576B7351E48D56C00FC853E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B820E9031DAC6E2200135C8A /* EASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASImage.h; sourceTree = "<group>"; };
 		B820E9041DAC6E2200135C8A /* EASImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EASImage.mm; sourceTree = "<group>"; };
 		B820E9181DAC75C800135C8A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -272,6 +273,15 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
+		A576B7341E48D55200FC853E /* Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				A576B7351E48D56C00FC853E /* README.md */,
+			);
+			name = Metadata;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		B820E9001DAC6DC700135C8A /* EtchASketchWrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +311,7 @@
 				B8766C071D79FF4300A4ED34 /* EtchASketchTests */,
 				B8766B931D79DC3E00A4ED34 /* Products */,
 				B820E9171DAC75C800135C8A /* Frameworks */,
+				A576B7341E48D55200FC853E /* Metadata */,
 			);
 			sourceTree = "<group>";
 		};
