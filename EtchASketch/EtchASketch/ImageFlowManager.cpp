@@ -1,12 +1,12 @@
 //
-//  ImageFlow.cpp
+//  ImageFlowManager.cpp
 //  EtchASketch
 //
 //  Created by Justin Loew on 9/20/16.
 //  Copyright © 2016 Justin Loew. All rights reserved.
 //
 
-#include "ImageFlow.hpp"
+#include "ImageFlowManager.hpp"
 #include "SobelEdgeDetector.hpp"
 #include "BlurImageFilter.hpp"
 #include "SmallishSpanningTreeWalkSalesman.hpp"
@@ -19,7 +19,7 @@ using etchasketch::edgedetect::SobelEdgeDetector;
 using etchasketch::salesman::Salesman;
 using etchasketch::salesman::SmallishSpanningTreeWalkSalesman;
 
-etchasketch::ImageFlow::ImageFlow(const Image &colorImage)
+etchasketch::ImageFlowManager::ImageFlowManager(const Image &colorImage)
 : originalImage(colorImage),
 grayscaleImage(colorImage.getWidth(), colorImage.getHeight()),
 edgeDetectedImage(nullptr),
@@ -29,7 +29,7 @@ edgeDetector(new SobelEdgeDetector()),
 salesman(nullptr)
 { }
 
-etchasketch::ImageFlow::~ImageFlow()
+etchasketch::ImageFlowManager::~ImageFlowManager()
 {
 	delete edgeDetectedImage;
 	delete edgePoints;
@@ -39,7 +39,7 @@ etchasketch::ImageFlow::~ImageFlow()
 }
 
 void
-etchasketch::ImageFlow::convertToGrayscale()
+etchasketch::ImageFlowManager::convertToGrayscale()
 {
 	// Transform each pixel.
 	for (int x = 0; x < originalImage.getWidth(); x++) {
@@ -56,7 +56,7 @@ etchasketch::ImageFlow::convertToGrayscale()
 }
 
 void
-etchasketch::ImageFlow::detectEdges()
+etchasketch::ImageFlowManager::detectEdges()
 {
 	// Blur the image.
 	BlurImageFilter *blurFilter = new BlurImageFilter();
@@ -71,7 +71,7 @@ etchasketch::ImageFlow::detectEdges()
 }
 
 void
-etchasketch::ImageFlow::generateEdgePoints()
+etchasketch::ImageFlowManager::generateEdgePoints()
 {
 	unordered_set<KDPoint<2>> *pointSet = new unordered_set<KDPoint<2>>();
 	// Loop through each point to see if its pixel is part of an edge.
@@ -96,7 +96,7 @@ etchasketch::ImageFlow::generateEdgePoints()
 }
 
 void
-etchasketch::ImageFlow::orderEdgePointsForDrawing()
+etchasketch::ImageFlowManager::orderEdgePointsForDrawing()
 {
 	// TODO: Put startPoint in class scope or something.
 	const KDPoint<2> startPoint(0, 0);
@@ -108,7 +108,7 @@ etchasketch::ImageFlow::orderEdgePointsForDrawing()
 }
 
 const vector<KDPoint<2>> &
-etchasketch::ImageFlow::getOrderedEdgePoints()
+etchasketch::ImageFlowManager::getOrderedEdgePoints()
 {
 	// Make sure we actually have the ordered edge points ready to go.
 	if (nullptr == orderedEdgePoints) {
@@ -122,7 +122,7 @@ etchasketch::ImageFlow::getOrderedEdgePoints()
 #pragma mark Setters
 
 void
-etchasketch::ImageFlow::setEdgeDetectedImage(const Image *newImage)
+etchasketch::ImageFlowManager::setEdgeDetectedImage(const Image *newImage)
 {
 	// Delete the old value and set it to the new pointer.
 	delete edgeDetectedImage;
@@ -130,7 +130,7 @@ etchasketch::ImageFlow::setEdgeDetectedImage(const Image *newImage)
 }
 
 void
-etchasketch::ImageFlow::setEdgePoints(const unordered_set<KDPoint<2>>
+etchasketch::ImageFlowManager::setEdgePoints(const unordered_set<KDPoint<2>>
 									  *newEdgePoints)
 {
 	// Delete the old value and set it to the new pointer.
@@ -139,7 +139,7 @@ etchasketch::ImageFlow::setEdgePoints(const unordered_set<KDPoint<2>>
 }
 
 void
-etchasketch::ImageFlow::setOrderedEdgePoints(const vector<KDPoint<2>>
+etchasketch::ImageFlowManager::setOrderedEdgePoints(const vector<KDPoint<2>>
 											 *newOrderedEdgePoints)
 {
 	// Delete the old value and set it to the new pointer.
@@ -148,7 +148,7 @@ etchasketch::ImageFlow::setOrderedEdgePoints(const vector<KDPoint<2>>
 }
 
 void
-etchasketch::ImageFlow::setSalesman(Salesman *newSalesman)
+etchasketch::ImageFlowManager::setSalesman(Salesman *newSalesman)
 {
 	// Delete the old value and set it to the new pointer.
 	delete salesman;

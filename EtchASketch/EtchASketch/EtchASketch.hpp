@@ -10,6 +10,6 @@
 #define EtchASketch_hpp
 
 #include "Image.hpp"
-#include "ImageFlow.hpp"
+#include "ImageFlowManager.hpp"
 
 #endif /* EtchASketch_hpp */

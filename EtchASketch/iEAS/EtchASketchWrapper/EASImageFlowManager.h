@@ -1,5 +1,5 @@
 //
-//  EASImageFlow.h
+//  EASImageFlowManager.h
 //  EtchASketch
 //
 //  Created by Justin Loew on 10/14/16.
@@ -19,18 +19,18 @@ typedef NS_ENUM(NSUInteger, EASComputationStage) {
 	EASComputationStageFinished
 };
 
-@class EASImageFlow;
+@class EASImageFlowManager;
 
 /// Used to receive callbacks when each stage of computation completes.
-@protocol EASImageFlowDelegate <NSObject>
+@protocol EASImageFlowManagerDelegate <NSObject>
 
 @optional
-- (void)imageFlow:(EASImageFlow *)imageFlow willBeginComputationStage:(EASComputationStage)computationStage;
+- (void)imageFlow:(EASImageFlowManager *)imageFlow willBeginComputationStage:(EASComputationStage)computationStage;
 
 // Not called for @c EASComputationStageFinished.
-- (void)imageFlow:(EASImageFlow *)imageFlow didCompleteComputationStage:(EASComputationStage)computationStage;
+- (void)imageFlow:(EASImageFlowManager *)imageFlow didCompleteComputationStage:(EASComputationStage)computationStage;
 
-- (void)imageFlowDidCompleteAllComputations:(EASImageFlow *)imageFlow;
+- (void)imageFlowDidCompleteAllComputations:(EASImageFlowManager *)imageFlow;
 
 @end
 
@@ -38,11 +38,11 @@ typedef NS_ENUM(NSUInteger, EASComputationStage) {
  * The top-level object that takes an image and walks it through each stage of
  * processing.
  */
-@interface EASImageFlow : NSObject
+@interface EASImageFlowManager : NSObject
 
 @property (nonatomic, readonly) EASComputationStage computationStage;
 
-@property (nonatomic, weak, nullable) id<EASImageFlowDelegate> delegate;
+@property (nonatomic, weak, nullable) id<EASImageFlowManagerDelegate> delegate;
 
 /// Create a new flow with a starting image.
 - (instancetype)initWithColorImage:(EASImage *)colorImage;

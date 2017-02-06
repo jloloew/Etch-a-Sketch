@@ -1,22 +1,22 @@
 //
-//  EASImageFlow.mm
+//  EASImageFlowManager.mm
 //  EtchASketch
 //
 //  Created by Justin Loew on 10/14/16.
 //  Copyright © 2016 Justin Loew. All rights reserved.
 //
 
-#import "EASImageFlow.h"
+#import "EASImageFlowManager.h"
 #import "EtchASketch.hpp"
 
 using etchasketch::Image;
-using etchasketch::ImageFlow;
+using etchasketch::ImageFlowManager;
 
-@interface EASImageFlow ()
+@interface EASImageFlowManager ()
 
 @property (nonatomic, readwrite) EASComputationStage computationStage;
 
-@property (nonatomic, readonly) ImageFlow *imageFlow;
+@property (nonatomic, readonly) ImageFlowManager *imageFlowManager;
 
 @end
 
@@ -30,21 +30,21 @@ using etchasketch::ImageFlow;
 @end
 
 
-@implementation EASImageFlow
+@implementation EASImageFlowManager
 
 - (instancetype)initWithColorImage:(EASImage *)colorImage {
 	self = [super init];
 	if (self != nil) {
 		self.computationStage = EASComputationStageNone;
 		self.delegate = nil;
-		_imageFlow = new ImageFlow(*colorImage.image);
+		_imageFlowManager = new ImageFlowManager(*colorImage.image);
 	}
 	return self;
 }
 
 - (void)dealloc {
-	delete self.imageFlow;
-	_imageFlow = nullptr;
+	delete self.imageFlowManager;
+	_imageFlowManager = nullptr;
 }
 
 #pragma mark Computations
@@ -57,7 +57,7 @@ using etchasketch::ImageFlow;
 		[self.delegate imageFlow:self willBeginComputationStage:self.computationStage];
 	}
 	
-	self.imageFlow->convertToGrayscale();
+	self.imageFlowManager->convertToGrayscale();
 	
 	// Notify the delegate.
 	if ([self.delegate respondsToSelector:@selector(imageFlow:didCompleteComputationStage:)]) {
@@ -73,7 +73,7 @@ using etchasketch::ImageFlow;
 		[self.delegate imageFlow:self willBeginComputationStage:self.computationStage];
 	}
 	
-	self.imageFlow->detectEdges();
+	self.imageFlowManager->detectEdges();
 	
 	// Notify the delegate.
 	if ([self.delegate respondsToSelector:@selector(imageFlow:didCompleteComputationStage:)]) {
@@ -89,7 +89,7 @@ using etchasketch::ImageFlow;
 		[self.delegate imageFlow:self willBeginComputationStage:self.computationStage];
 	}
 	
-	self.imageFlow->generateEdgePoints();
+	self.imageFlowManager->generateEdgePoints();
 	
 	// Notify the delegate.
 	if ([self.delegate respondsToSelector:@selector(imageFlow:didCompleteComputationStage:)]) {
@@ -105,7 +105,7 @@ using etchasketch::ImageFlow;
 		[self.delegate imageFlow:self willBeginComputationStage:self.computationStage];
 	}
 	
-	self.imageFlow->orderEdgePointsForDrawing();
+	self.imageFlowManager->orderEdgePointsForDrawing();
 	
 	// Notify the delegate.
 	if ([self.delegate respondsToSelector:@selector(imageFlow:didCompleteComputationStage:)]) {
@@ -127,7 +127,7 @@ using etchasketch::ImageFlow;
 		}
 	}
 	
-	const vector<KDPoint<2>> &pts = self.imageFlow->getOrderedEdgePoints();
+	const vector<KDPoint<2>> &pts = self.imageFlowManager->getOrderedEdgePoints();
 	NSUInteger numPts = (NSUInteger)pts.size();
 	// Copy the data out, converting to NSValue.
 	NSMutableArray<NSValue *> *points = [NSMutableArray arrayWithCapacity:numPts];
@@ -140,14 +140,14 @@ using etchasketch::ImageFlow;
 #pragma mark - Image getters
 
 - (UIImage *)grayscaleImage {
-	const Image & grayscaleImage = self.imageFlow->getGrayscaleImage();
+	const Image & grayscaleImage = self.imageFlowManager->getGrayscaleImage();
 	EASImage *easImage = [[EASImage alloc] initWithCPPImage:&grayscaleImage];
 	UIImage *grayImage = [easImage UIImage];
 	return grayImage;
 }
 
 - (UIImage *)detectedEdgesImage {
-	const Image *detectedEdgesImage = self.imageFlow->getEdgeDetectedImage();
+	const Image *detectedEdgesImage = self.imageFlowManager->getEdgeDetectedImage();
 	EASImage *easImage = [[EASImage alloc] initWithCPPImage:detectedEdgesImage];
 	UIImage *edgeImage = [easImage UIImage];
 	return edgeImage;
