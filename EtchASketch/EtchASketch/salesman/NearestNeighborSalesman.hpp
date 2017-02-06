@@ -19,7 +19,7 @@ namespace etchasketch {
 	namespace salesman {
 		
 		/// Solves the traveling salesman problem.
-		class NearestNeighborSalesman {
+		class NearestNeighborSalesman : public Salesman {
 			
 		public:
 			/// The startPoint must be contained within the unorderedPoints.
