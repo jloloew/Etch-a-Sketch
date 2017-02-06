@@ -37,7 +37,7 @@ class BobAndWeaveSalesman : public Salesman {
 	const Image &edgeImage;
 
 	/// The vertical distance between each horizontal line drawn, in pixels.
-	constexpr static const size_t lineSeparation = 10;
+	constexpr static const size_t lineSeparation = 4;
 	
 	/// The radius around each point, within which other points can perform
 	// "gravitational attraction" to draw the cursor closer.
