@@ -15,11 +15,6 @@ using etchasketch::KDPoint;
 etchasketch::Image::Image(size_t width, size_t height, const Pixel *data)
 : width(width), height(height)
 {
-//	if (nullptr == data) { // Safety first
-//		this->data = nullptr;
-//		return;
-//	}
-	
 	this->data = new Pixel[getPixelCount()];
 	if (nullptr == this->data) {
 		this->width = 0;

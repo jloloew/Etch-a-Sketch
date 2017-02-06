@@ -28,10 +28,6 @@ template<int Dim>
 etchasketch::KDTree<Dim>::KDTree(const unordered_set<KDPoint<Dim>> &newPoints)
 : KDTree()
 {
-	if (newPoints.empty()) {
-		return;
-	}
-	
 	buildTree(newPoints);
 }
 
@@ -67,13 +63,10 @@ etchasketch::KDTree<Dim>::smallerDimVal(const KDPoint<Dim> &first,
 										const KDPoint<Dim> &second,
 										const int curDim) const
 {
-	if (first[curDim] < second[curDim]) {
-		return true;
-	} else if (first[curDim] > second[curDim]) {
-		return false;
-	} else {
-		return first < second;
-	}
+    if (first[curDim] == second[curDim])
+        return first < second;
+    else
+        return first[curDim] < second[curDim];
 }
 
 #pragma mark - Find nearest neighbor

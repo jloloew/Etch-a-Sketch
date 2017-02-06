@@ -19,7 +19,6 @@ namespace etchasketch {
 		class Salesman {
 			
 		public:
-			
 			Salesman();
 			
 			virtual ~Salesman();

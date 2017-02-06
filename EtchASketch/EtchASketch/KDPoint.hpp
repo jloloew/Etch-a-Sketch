@@ -55,10 +55,8 @@ namespace etchasketch {
 		 */
 		KDPoint(const KDPoint<Dim> & __restrict other);
 		
-		inline
 		bool isValid() const;
 		
-		inline
 		bool isLeaf() const;
 		
 		/**
