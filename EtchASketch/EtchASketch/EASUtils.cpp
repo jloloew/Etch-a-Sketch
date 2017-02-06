@@ -24,18 +24,17 @@ double
 etchasketch::utils::timeFunction(void (function)(void))
 {
 	// Get the start time.
-	struct timeval startTime, endTime;
-	if (gettimeofday(&startTime, NULL) != 0) {
-		// error
+    timeval startTime, endTime;
+	if (gettimeofday(&startTime, NULL) != 0)
 		return -1.0;
-	}
+
 	// Run the function.
 	function();
+
 	// Get the end time and compute the time difference.
-	if (gettimeofday(&endTime, NULL) != 0) {
-		// error
+	if (gettimeofday(&endTime, NULL) != 0)
 		return -1.0;
-	}
+
 	double timeTaken = static_cast<double>(endTime.tv_sec - startTime.tv_sec);
 	double usecTaken = static_cast<double>(endTime.tv_usec - startTime.tv_usec);
 	timeTaken += usecTaken / USEC_PER_SEC; // Convert usec to sec.

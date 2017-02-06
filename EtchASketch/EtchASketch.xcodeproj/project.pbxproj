@@ -107,11 +107,11 @@
 		B820E9041DAC6E2200135C8A /* EASImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EASImage.mm; sourceTree = "<group>"; };
 		B820E9181DAC75C800135C8A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B827FE8C1DB18A98007F2469 /* EASUtils+Private.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "EASUtils+Private.hpp"; sourceTree = "<group>"; };
-		B827FE8D1DB1B27F007F2469 /* EASImageFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EASImageFlow.h; path = EtchASketchWrapper/EASImageFlow.h; sourceTree = "<group>"; };
-		B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = EASImageFlow.mm; path = EtchASketchWrapper/EASImageFlow.mm; sourceTree = "<group>"; };
+		B827FE8D1DB1B27F007F2469 /* EASImageFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = EASImageFlow.h; path = EtchASketchWrapper/EASImageFlow.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; name = EASImageFlow.mm; path = EtchASketchWrapper/EASImageFlow.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASBoardViewController.xib; sourceTree = "<group>"; };
-		B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASBoardViewController.h; sourceTree = "<group>"; };
-		B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASBoardViewController.m; sourceTree = "<group>"; };
+		B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EASBoardViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EASBoardViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B827FE9B1DB1BF48007F2469 /* EASScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASScreenViewController.h; sourceTree = "<group>"; };
 		B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASScreenViewController.m; sourceTree = "<group>"; };
 		B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASScreenViewController.xib; sourceTree = "<group>"; };
@@ -393,8 +393,8 @@
 			isa = PBXGroup;
 			children = (
 				B8766C081D79FF4300A4ED34 /* EtchASketchTests.mm */,
-				B8766C0A1D79FF4300A4ED34 /* Info.plist */,
 				B8B211641DAC895A009814B8 /* KDTreeTests.mm */,
+				B8766C0A1D79FF4300A4ED34 /* Info.plist */,
 			);
 			path = EtchASketchTests;
 			sourceTree = "<group>";
