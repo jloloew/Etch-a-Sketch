@@ -21,8 +21,7 @@ namespace etchasketch {
 			
 		public:
 			/// The startPoint must be contained within the unorderedPoints.
-			Salesman(const std::unordered_set<KDPoint<2>>
-					 &unorderedPoints,
+			Salesman(const std::unordered_set<KDPoint<2>> &unorderedPoints,
 					 const KDPoint<2> &startPoint);
 			
 			virtual ~Salesman();

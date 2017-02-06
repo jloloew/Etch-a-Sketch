@@ -9,14 +9,12 @@
 #include "Salesman.hpp"
 #include "EASUtils.hpp"
 
-
 using std::unordered_set;
 using std::vector;
 using etchasketch::KDTree;
 using etchasketch::KDPoint;
 
-etchasketch::salesman::Salesman::Salesman(const unordered_set<KDPoint<2>>
-										  &unorderedPoints,
+etchasketch::salesman::Salesman::Salesman(const unordered_set<KDPoint<2>> &unorderedPoints,
 										  const KDPoint<2> &startPoint)
 : startPoint(startPoint),
 unorderedPoints(unorderedPoints),

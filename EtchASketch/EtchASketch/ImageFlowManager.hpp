@@ -1,13 +1,13 @@
 //
-//  ImageFlow.hpp
+//  ImageFlowManager.hpp
 //  EtchASketch
 //
 //  Created by Justin Loew on 9/20/16.
 //  Copyright © 2016 Justin Loew. All rights reserved.
 //
 
-#ifndef ImageFlow_hpp
-#define ImageFlow_hpp
+#ifndef ImageFlowManager_hpp
+#define ImageFlowManager_hpp
 
 #include <unordered_set>
 #include <vector>
@@ -21,16 +21,16 @@ namespace etchasketch {
 	 * The top-level object that takes an image and walks it through each stage
 	 * of processing.
 	 */
-	class ImageFlow {
+	class ImageFlowManager {
 		
 	public:
 		
 		/**
 		 * Create a new flow with a starting image.
 		 */
-		ImageFlow(const etchasketch::Image &colorImage);
+		ImageFlowManager(const etchasketch::Image &colorImage);
 		
-		virtual ~ImageFlow();
+		virtual ~ImageFlowManager();
 		
 		/*
 		 * These public methods are listed in the order in which they are 
@@ -96,4 +96,4 @@ namespace etchasketch {
 	
 }
 
-#endif /* ImageFlow_hpp */
+#endif /* ImageFlowManager_hpp */

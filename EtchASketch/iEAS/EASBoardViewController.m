@@ -30,7 +30,7 @@
 	// Set up image flow.
 	UIImage *img = [UIImage imageNamed:@"Lena"];
 	EASImage *image = [[EASImage alloc] initWithImage:img];
-	self.imageFlow = [[EASImageFlow alloc] initWithColorImage:image];
+	self.imageFlow = [[EASImageFlowManager alloc] initWithColorImage:image];
 	self.imageFlow.delegate = self;
 	
 	// Set up screen VC.
@@ -66,7 +66,7 @@
 
 #pragma mark EASImageFlowDelegate
 
-- (void)imageFlow:(EASImageFlow * __unused)imageFlow
+- (void)imageFlow:(EASImageFlowManager * __unused)imageFlow
 willBeginComputationStage:(EASComputationStage)computationStage
 {
 	// Set the status label for the current stage of computation.
@@ -99,7 +99,7 @@ willBeginComputationStage:(EASComputationStage)computationStage
 }
 
 /*
-- (void)imageFlow:(EASImageFlow *)imageFlow
+- (void)imageFlow:(EASImageFlowManager *)imageFlow
 didCompleteComputationStage:(EASComputationStage)computationStage
 {
 	// Get the image that was just produced.
@@ -135,7 +135,7 @@ didCompleteComputationStage:(EASComputationStage)computationStage
 	});
 }
 
-- (void)imageFlowDidCompleteAllComputations:(EASImageFlow * __unused)imageFlow {
+- (void)imageFlowDidCompleteAllComputations:(EASImageFlowManager * __unused)imageFlow {
 	// Draw the ordered edge points.
 	NSArray<NSValue *> * __block points = [self.imageFlow getOrderedEdgePoints];
 	dispatch_sync(dispatch_get_main_queue(), ^{

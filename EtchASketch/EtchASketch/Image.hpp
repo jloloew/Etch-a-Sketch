@@ -68,7 +68,8 @@ namespace etchasketch {
 		
 	private:
 		size_t width, height;
-		
+
+        // 1-dimensional array of Pixels representing a 2-dimensional image.  See operator[] for mapping.
 		Pixel *data;
 	};
 	

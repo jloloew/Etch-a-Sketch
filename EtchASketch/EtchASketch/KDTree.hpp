@@ -67,17 +67,6 @@ namespace etchasketch {
 		 * increasing dimensions, modulo the total number: a 3D tree will
 		 * have levels split by dimension 0, 1, 2, 0, 1, 2, etc.
 		 *
-		 * You will probably want to write a helper function which performs the
-		 * median selection and partitioning. Maybe you can use a function you
-		 * already wrote...
-		 *
-		 * @see Here is a reference that should help you create concise,
-		 * efficient code: [Partition-based General Selection
-		 * Algorithm](http://en.wikipedia.org/wiki/Selection_algorithm). Note
-		 * that "select pivotIndex between left and right" means that you
-		 * should choose a midpoint between the left and right indices.
-		 *
-		 * @todo This function is required for MP 6.1.
 		 * @param newPoints The vector of points to build your KDTree off of.
 		 */
 		KDTree(const std::vector<etchasketch::KDPoint<Dim>> &newPoints);
@@ -130,18 +119,9 @@ namespace etchasketch {
 		 * cannot possibly be a better nearest neighbor in the subtree, so the
 		 * subtree can be skipped entirely.
 		 *
-		 * You can assume that findNearestNeighbor will only be called on a
+		 * findNearestNeighbor should only be called on a
 		 * valid kd-tree.
 		 *
-		 * @see Here is a reference we found quite useful in writing our
-		 * kd-tree: [Andrew Moore's KD-Tree Tutorial]
-		 *  (http://www.autonlab.org/autonweb/14665/version/2/part/5/data/moore-tutorial.pdf?branch=main&language=en).
-		 *
-		 * @see There is [an example]
-		 *  (https://wiki.engr.illinois.edu/display/cs225/MP+6.1) on the KDTree
-		 * spec on the wiki.
-		 *
-		 * @todo This function is required for MP 6.1.
 		 * @param query The point we wish to find the closest neighbor to in the
 		 * tree.
 		 * @return A copy of the closest point to `query` in the KDTree.
@@ -160,7 +140,7 @@ namespace etchasketch {
 		/**
 		 * Insert a new point.
 		 * @param newPoint The new point to be added to the KD tree.
-		 * @returns `true` on success, or `false` if `newPoint` already exists.
+		 * @return `true` on success, or `false` if `newPoint` already exists.
 		 */
 		bool insert(const etchasketch::KDPoint<Dim> &newPoint);
 		
@@ -168,7 +148,7 @@ namespace etchasketch {
 		 * Remove a given node from the KD tree, then delete the node. The
 		 * target's subtrees are retained in the KD tree.
 		 * @param target The node to be removed and deleted.
-		 * @returns `true` if `target` was successfully removed, `false` 
+		 * @return `true` if `target` was successfully removed, `false`
 		 *  otherwise.
 		 */
 		bool remove(const etchasketch::KDPoint<Dim> &target);
@@ -192,13 +172,13 @@ namespace etchasketch {
 		
 		/**
 		 * Like regular insert, but takes a pointer for a pre-copied point.
-		 * @returns `true` on success, or `false` on failure.
+		 * @return `true` on success, or `false` on failure.
 		 */
 		bool insert(etchasketch::KDPoint<Dim> *newPoint);
 		
 		/**
 		 * Helper function for insert.
-		 * @returns `true` on success, or `false` on failure.
+		 * @return `true` on success, or `false` on failure.
 		 */
 		bool insert(etchasketch::KDPoint<Dim> &newPoint,
 					etchasketch::KDPoint<Dim> &subRoot,
@@ -225,7 +205,6 @@ namespace etchasketch {
 		 *     cout << smallerDimVal(a, b, 2) << endl; // should print false
 		 *     cout << smallerDimVal(a, b, 1) << endl; // based on operator<, this should be true
 		 *
-		 * @todo This function is required for MP 6.1.
 		 * @param first KDPoint to compare.
 		 * @param second Second point to compare.
 		 * @param curDim Dimension these points are being compared in.
@@ -263,7 +242,6 @@ namespace etchasketch {
 		 *     cout << shouldReplace(target, currentBest3, possibleBest3) << endl;
 		 *      // based on operator<, this should be false
 		 *
-		 * @todo This function is required for MP 6.1.
 		 * @param target The KDPoint we want to be close to.
 		 * @param currentBest The KDPoint that is currently our closest KDPoint
 		 *    to target.

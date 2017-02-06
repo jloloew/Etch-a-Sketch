@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B820E9051DAC6E2200135C8A /* EASImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B820E9041DAC6E2200135C8A /* EASImage.mm */; };
-		B827FE8F1DB1B27F007F2469 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
+		B827FE8F1DB1B27F007F2469 /* EASImageFlowManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlowManager.mm */; };
 		B827FE931DB1B74B007F2469 /* EASBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */; };
 		B827FE941DB1B74B007F2469 /* EASBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */; };
 		B827FE951DB1B74B007F2469 /* EASBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */; };
@@ -39,19 +39,19 @@
 		B8766BDD1D79EE4600A4ED34 /* EASUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDB1D79EE4600A4ED34 /* EASUtils.cpp */; };
 		B8766C091D79FF4300A4ED34 /* EtchASketchTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8766C081D79FF4300A4ED34 /* EtchASketchTests.mm */; };
 		B87943C41D91AA870035B729 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C21D91AA870035B729 /* Image.cpp */; };
-		B87943CA1D91ADF30035B729 /* ImageFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlow.cpp */; };
+		B87943CA1D91ADF30035B729 /* ImageFlowManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlowManager.cpp */; };
 		B87943CE1D91B0F30035B729 /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943CC1D91B0F30035B729 /* Salesman.cpp */; };
 		B8A313981DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8A313961DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp */; };
 		B8B211651DAC895A009814B8 /* KDTreeTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8B211641DAC895A009814B8 /* KDTreeTests.mm */; };
 		B8D38E291DC46F89001B9AE3 /* libEtchASketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */; };
 		B8D38E2A1DC47034001B9AE3 /* libEtchASketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */; };
 		B8FA80381DB31D0000123AB6 /* EASImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B820E9041DAC6E2200135C8A /* EASImage.mm */; };
-		B8FA803A1DB31D0400123AB6 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
+		B8FA803A1DB31D0400123AB6 /* EASImageFlowManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlowManager.mm */; };
 		B8FA803B1DB31E2500123AB6 /* EASUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDB1D79EE4600A4ED34 /* EASUtils.cpp */; };
 		B8FA803E1DB31E3200123AB6 /* SobelEdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */; };
 		B8FA803F1DB31E3800123AB6 /* EtchASketch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BD81D79DE7600A4ED34 /* EtchASketch.cpp */; };
 		B8FA80421DB31E3F00123AB6 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C21D91AA870035B729 /* Image.cpp */; };
-		B8FA80441DB31E4400123AB6 /* ImageFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlow.cpp */; };
+		B8FA80441DB31E4400123AB6 /* ImageFlowManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlowManager.cpp */; };
 		B8FA80461DB31E4B00123AB6 /* KDTree.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */; };
 		B8FA80481DB31E5000123AB6 /* KDPoint.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */; };
 		B8FA804A1DB31E5500123AB6 /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943CC1D91B0F30035B729 /* Salesman.cpp */; };
@@ -101,15 +101,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A576B7351E48D56C00FC853E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A576B7371E48DACD00FC853E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B820E9031DAC6E2200135C8A /* EASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASImage.h; sourceTree = "<group>"; };
 		B820E9041DAC6E2200135C8A /* EASImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EASImage.mm; sourceTree = "<group>"; };
 		B820E9181DAC75C800135C8A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B827FE8C1DB18A98007F2469 /* EASUtils+Private.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "EASUtils+Private.hpp"; sourceTree = "<group>"; };
-		B827FE8D1DB1B27F007F2469 /* EASImageFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EASImageFlow.h; path = EtchASketchWrapper/EASImageFlow.h; sourceTree = "<group>"; };
-		B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = EASImageFlow.mm; path = EtchASketchWrapper/EASImageFlow.mm; sourceTree = "<group>"; };
+		B827FE8D1DB1B27F007F2469 /* EASImageFlowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = EASImageFlowManager.h; path = EtchASketchWrapper/EASImageFlowManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B827FE8E1DB1B27F007F2469 /* EASImageFlowManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; name = EASImageFlowManager.mm; path = EtchASketchWrapper/EASImageFlowManager.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASBoardViewController.xib; sourceTree = "<group>"; };
-		B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASBoardViewController.h; sourceTree = "<group>"; };
-		B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASBoardViewController.m; sourceTree = "<group>"; };
+		B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EASBoardViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EASBoardViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B827FE9B1DB1BF48007F2469 /* EASScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASScreenViewController.h; sourceTree = "<group>"; };
 		B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASScreenViewController.m; sourceTree = "<group>"; };
 		B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASScreenViewController.xib; sourceTree = "<group>"; };
@@ -152,8 +154,8 @@
 		B87943C21D91AA870035B729 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
 		B87943C31D91AA870035B729 /* Image.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Image.hpp; sourceTree = "<group>"; };
 		B87943C61D91AB400035B729 /* EdgeDetector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = EdgeDetector.hpp; path = edgedetect/EdgeDetector.hpp; sourceTree = "<group>"; };
-		B87943C81D91ADF30035B729 /* ImageFlow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageFlow.cpp; sourceTree = "<group>"; };
-		B87943C91D91ADF30035B729 /* ImageFlow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageFlow.hpp; sourceTree = "<group>"; };
+		B87943C81D91ADF30035B729 /* ImageFlowManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageFlowManager.cpp; sourceTree = "<group>"; };
+		B87943C91D91ADF30035B729 /* ImageFlowManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageFlowManager.hpp; sourceTree = "<group>"; };
 		B87943CC1D91B0F30035B729 /* Salesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Salesman.cpp; path = salesman/Salesman.cpp; sourceTree = "<group>"; };
 		B87943CD1D91B0F30035B729 /* Salesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Salesman.hpp; path = salesman/Salesman.hpp; sourceTree = "<group>"; };
 		B8A313961DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SmallishSpanningTreeWalkSalesman.cpp; path = salesman/SmallishSpanningTreeWalkSalesman.cpp; sourceTree = "<group>"; };
@@ -202,13 +204,93 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A576B72A1E48B8CF00FC853E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8766BB21D79DC9100A4ED34 /* LaunchScreen.storyboard */,
+				B8766BAD1D79DC9100A4ED34 /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A576B72B1E48B8ED00FC853E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A576B7301E48B99000FC853E /* AppDelegate */,
+				A576B72F1E48B97F00FC853E /* DebugViewController */,
+				A576B72E1E48B96200FC853E /* BoardViewController */,
+				A576B72C1E48B95100FC853E /* ScreenViewController */,
+				B820E9001DAC6DC700135C8A /* EtchASketchWrapper */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A576B72C1E48B95100FC853E /* ScreenViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A576B72D1E48B95B00FC853E /* ScreenView */,
+				B827FE9B1DB1BF48007F2469 /* EASScreenViewController.h */,
+				B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */,
+				B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */,
+			);
+			name = ScreenViewController;
+			sourceTree = "<group>";
+		};
+		A576B72D1E48B95B00FC853E /* ScreenView */ = {
+			isa = PBXGroup;
+			children = (
+				B827FEA41DB1BF98007F2469 /* EASScreenView.h */,
+				B827FEA51DB1BF98007F2469 /* EASScreenView.m */,
+			);
+			name = ScreenView;
+			sourceTree = "<group>";
+		};
+		A576B72E1E48B96200FC853E /* BoardViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */,
+				B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */,
+				B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */,
+			);
+			name = BoardViewController;
+			sourceTree = "<group>";
+		};
+		A576B72F1E48B97F00FC853E /* DebugViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B85A95911DFCC06E00E0F6BE /* EASDebugViewController.h */,
+				B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */,
+				B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */,
+			);
+			name = DebugViewController;
+			sourceTree = "<group>";
+		};
+		A576B7301E48B99000FC853E /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				B8766BA71D79DC9100A4ED34 /* AppDelegate.h */,
+				B8766BA81D79DC9100A4ED34 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		A576B7341E48D55200FC853E /* Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				A576B7371E48DACD00FC853E /* LICENSE */,
+				A576B7351E48D56C00FC853E /* README.md */,
+			);
+			name = Metadata;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		B820E9001DAC6DC700135C8A /* EtchASketchWrapper */ = {
 			isa = PBXGroup;
 			children = (
 				B820E9031DAC6E2200135C8A /* EASImage.h */,
 				B820E9041DAC6E2200135C8A /* EASImage.mm */,
-				B827FE8D1DB1B27F007F2469 /* EASImageFlow.h */,
-				B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */,
+				B827FE8D1DB1B27F007F2469 /* EASImageFlowManager.h */,
+				B827FE8E1DB1B27F007F2469 /* EASImageFlowManager.mm */,
 			);
 			name = EtchASketchWrapper;
 			sourceTree = "<group>";
@@ -231,6 +313,7 @@
 				B8766C071D79FF4300A4ED34 /* EtchASketchTests */,
 				B8766B931D79DC3E00A4ED34 /* Products */,
 				B820E9171DAC75C800135C8A /* Frameworks */,
+				A576B7341E48D55200FC853E /* Metadata */,
 			);
 			sourceTree = "<group>";
 		};
@@ -257,8 +340,8 @@
 				B8766BD91D79DE7600A4ED34 /* EtchASketch.hpp */,
 				B87943C21D91AA870035B729 /* Image.cpp */,
 				B87943C31D91AA870035B729 /* Image.hpp */,
-				B87943C81D91ADF30035B729 /* ImageFlow.cpp */,
-				B87943C91D91ADF30035B729 /* ImageFlow.hpp */,
+				B87943C81D91ADF30035B729 /* ImageFlowManager.cpp */,
+				B87943C91D91ADF30035B729 /* ImageFlowManager.hpp */,
 				B8766BDE1D79FA7400A4ED34 /* KDTree.cpp */,
 				B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */,
 				B8766BE11D79FB8600A4ED34 /* KDPoint.cpp */,
@@ -271,24 +354,8 @@
 		B8766BA31D79DC9100A4ED34 /* iEAS */ = {
 			isa = PBXGroup;
 			children = (
-				B8766BA71D79DC9100A4ED34 /* AppDelegate.h */,
-				B8766BA81D79DC9100A4ED34 /* AppDelegate.m */,
-				B8766BB01D79DC9100A4ED34 /* Assets.xcassets */,
-				B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */,
-				B85A95911DFCC06E00E0F6BE /* EASDebugViewController.h */,
-				B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */,
-				B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */,
-				B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */,
-				B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */,
-				B827FEA41DB1BF98007F2469 /* EASScreenView.h */,
-				B827FEA51DB1BF98007F2469 /* EASScreenView.m */,
-				B827FE9B1DB1BF48007F2469 /* EASScreenViewController.h */,
-				B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */,
-				B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */,
-				B820E9001DAC6DC700135C8A /* EtchASketchWrapper */,
-				B8766BB51D79DC9100A4ED34 /* Info.plist */,
-				B8766BB21D79DC9100A4ED34 /* LaunchScreen.storyboard */,
-				B8766BAD1D79DC9100A4ED34 /* Main.storyboard */,
+				A576B72A1E48B8CF00FC853E /* Views */,
+				A576B72B1E48B8ED00FC853E /* Controllers */,
 				B8766BA41D79DC9100A4ED34 /* Supporting Files */,
 			);
 			path = iEAS;
@@ -297,6 +364,8 @@
 		B8766BA41D79DC9100A4ED34 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B8766BB01D79DC9100A4ED34 /* Assets.xcassets */,
+				B8766BB51D79DC9100A4ED34 /* Info.plist */,
 				B8766BA51D79DC9100A4ED34 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -324,8 +393,8 @@
 			isa = PBXGroup;
 			children = (
 				B8766C081D79FF4300A4ED34 /* EtchASketchTests.mm */,
-				B8766C0A1D79FF4300A4ED34 /* Info.plist */,
 				B8B211641DAC895A009814B8 /* KDTreeTests.mm */,
+				B8766C0A1D79FF4300A4ED34 /* Info.plist */,
 			);
 			path = EtchASketchTests;
 			sourceTree = "<group>";
@@ -553,7 +622,7 @@
 				B8766BDD1D79EE4600A4ED34 /* EASUtils.cpp in Sources */,
 				B85A959C1DFCCB6800E0F6BE /* BlurImageFilter.cpp in Sources */,
 				B87943C41D91AA870035B729 /* Image.cpp in Sources */,
-				B87943CA1D91ADF30035B729 /* ImageFlow.cpp in Sources */,
+				B87943CA1D91ADF30035B729 /* ImageFlowManager.cpp in Sources */,
 				B8A313981DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -567,7 +636,7 @@
 				B85A95941DFCC06E00E0F6BE /* EASDebugViewController.m in Sources */,
 				B8766BA91D79DC9100A4ED34 /* AppDelegate.m in Sources */,
 				B8766BA61D79DC9100A4ED34 /* main.m in Sources */,
-				B827FE8F1DB1B27F007F2469 /* EASImageFlow.mm in Sources */,
+				B827FE8F1DB1B27F007F2469 /* EASImageFlowManager.mm in Sources */,
 				B820E9051DAC6E2200135C8A /* EASImage.mm in Sources */,
 				B827FEA61DB1BF98007F2469 /* EASScreenView.m in Sources */,
 			);
@@ -586,7 +655,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B827FEA01DB1BF48007F2469 /* EASScreenViewController.m in Sources */,
-				B8FA80441DB31E4400123AB6 /* ImageFlow.cpp in Sources */,
+				B8FA80441DB31E4400123AB6 /* ImageFlowManager.cpp in Sources */,
 				B8FA803F1DB31E3800123AB6 /* EtchASketch.cpp in Sources */,
 				B8766BCA1D79DC9100A4ED34 /* iEASUITests.m in Sources */,
 				B8FA803E1DB31E3200123AB6 /* SobelEdgeDetector.cpp in Sources */,
@@ -596,7 +665,7 @@
 				B8FA80481DB31E5000123AB6 /* KDPoint.hpp in Sources */,
 				B8FA804A1DB31E5500123AB6 /* Salesman.cpp in Sources */,
 				B8FA80421DB31E3F00123AB6 /* Image.cpp in Sources */,
-				B8FA803A1DB31D0400123AB6 /* EASImageFlow.mm in Sources */,
+				B8FA803A1DB31D0400123AB6 /* EASImageFlowManager.mm in Sources */,
 				B8FA80461DB31E4B00123AB6 /* KDTree.hpp in Sources */,
 				B8FA803B1DB31E2500123AB6 /* EASUtils.cpp in Sources */,
 			);
@@ -757,7 +826,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost/1.62.0/include;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost/1.63.0/include;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -776,7 +845,7 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost/1.62.0/include;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost/1.63.0/include;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -814,7 +883,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinloew.iEAS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -851,7 +920,7 @@
 				LLVM_LTO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinloew.iEAS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
