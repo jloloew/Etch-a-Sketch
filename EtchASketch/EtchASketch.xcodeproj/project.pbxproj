@@ -202,6 +202,76 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A576B72A1E48B8CF00FC853E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8766BB21D79DC9100A4ED34 /* LaunchScreen.storyboard */,
+				B8766BAD1D79DC9100A4ED34 /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A576B72B1E48B8ED00FC853E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A576B7301E48B99000FC853E /* AppDelegate */,
+				A576B72F1E48B97F00FC853E /* DebugViewController */,
+				A576B72E1E48B96200FC853E /* BoardViewController */,
+				A576B72C1E48B95100FC853E /* ScreenViewController */,
+				B820E9001DAC6DC700135C8A /* EtchASketchWrapper */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A576B72C1E48B95100FC853E /* ScreenViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A576B72D1E48B95B00FC853E /* ScreenView */,
+				B827FE9B1DB1BF48007F2469 /* EASScreenViewController.h */,
+				B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */,
+				B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */,
+			);
+			name = ScreenViewController;
+			sourceTree = "<group>";
+		};
+		A576B72D1E48B95B00FC853E /* ScreenView */ = {
+			isa = PBXGroup;
+			children = (
+				B827FEA41DB1BF98007F2469 /* EASScreenView.h */,
+				B827FEA51DB1BF98007F2469 /* EASScreenView.m */,
+			);
+			name = ScreenView;
+			sourceTree = "<group>";
+		};
+		A576B72E1E48B96200FC853E /* BoardViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */,
+				B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */,
+				B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */,
+			);
+			name = BoardViewController;
+			sourceTree = "<group>";
+		};
+		A576B72F1E48B97F00FC853E /* DebugViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B85A95911DFCC06E00E0F6BE /* EASDebugViewController.h */,
+				B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */,
+				B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */,
+			);
+			name = DebugViewController;
+			sourceTree = "<group>";
+		};
+		A576B7301E48B99000FC853E /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				B8766BA71D79DC9100A4ED34 /* AppDelegate.h */,
+				B8766BA81D79DC9100A4ED34 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
 		B820E9001DAC6DC700135C8A /* EtchASketchWrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,24 +341,8 @@
 		B8766BA31D79DC9100A4ED34 /* iEAS */ = {
 			isa = PBXGroup;
 			children = (
-				B8766BA71D79DC9100A4ED34 /* AppDelegate.h */,
-				B8766BA81D79DC9100A4ED34 /* AppDelegate.m */,
-				B8766BB01D79DC9100A4ED34 /* Assets.xcassets */,
-				B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */,
-				B85A95911DFCC06E00E0F6BE /* EASDebugViewController.h */,
-				B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */,
-				B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */,
-				B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */,
-				B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */,
-				B827FEA41DB1BF98007F2469 /* EASScreenView.h */,
-				B827FEA51DB1BF98007F2469 /* EASScreenView.m */,
-				B827FE9B1DB1BF48007F2469 /* EASScreenViewController.h */,
-				B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */,
-				B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */,
-				B820E9001DAC6DC700135C8A /* EtchASketchWrapper */,
-				B8766BB51D79DC9100A4ED34 /* Info.plist */,
-				B8766BB21D79DC9100A4ED34 /* LaunchScreen.storyboard */,
-				B8766BAD1D79DC9100A4ED34 /* Main.storyboard */,
+				A576B72A1E48B8CF00FC853E /* Views */,
+				A576B72B1E48B8ED00FC853E /* Controllers */,
 				B8766BA41D79DC9100A4ED34 /* Supporting Files */,
 			);
 			path = iEAS;
@@ -297,6 +351,8 @@
 		B8766BA41D79DC9100A4ED34 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B8766BB01D79DC9100A4ED34 /* Assets.xcassets */,
+				B8766BB51D79DC9100A4ED34 /* Info.plist */,
 				B8766BA51D79DC9100A4ED34 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -814,7 +870,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinloew.iEAS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -851,7 +907,7 @@
 				LLVM_LTO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinloew.iEAS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
