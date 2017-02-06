@@ -25,13 +25,15 @@ namespace etchasketch {
 namespace salesman {
 
 SmallishSpanningTreeWalkSalesman::SmallishSpanningTreeWalkSalesman(
-        const std::unordered_set<KDPoint<2>> &unorderedPoints,
-		const KDPoint<2> &startPoint)
-    : Salesman(unorderedPoints, startPoint)
-{ }
+        const std::unordered_set<KDPoint<2>> &unorderedPoints, const KDPoint<2> &startPoint)
+    : Salesman(),
+      startPoint(startPoint),
+      unorderedPoints(unorderedPoints),
+      orderedPoints(vector<KDPoint<2>>())
+{
+}
 
-void
-SmallishSpanningTreeWalkSalesman::orderPoints()
+void SmallishSpanningTreeWalkSalesman::orderPoints()
 {
 	// Create a K-D tree with the points.
 	KDTree<2> *kdTree = new KDTree<2>(unorderedPoints);
@@ -41,9 +43,7 @@ SmallishSpanningTreeWalkSalesman::orderPoints()
 	delete kdTree;
 }
 
-void
-SmallishSpanningTreeWalkSalesman::smallishSpanningTreeWalkAlgorithm(
-	KDTree<2> &kdTree)
+void SmallishSpanningTreeWalkSalesman::smallishSpanningTreeWalkAlgorithm(KDTree<2> &kdTree)
 {
 	// Map each point to its vertex_t.
 	std::unordered_map<KDPoint<2>, VertexDesc> *vertexMap =
@@ -124,10 +124,8 @@ SmallishSpanningTreeWalkSalesman::smallishSpanningTreeWalkAlgorithm(
 	delete g;
 }
 
-void
-SmallishSpanningTreeWalkSalesman::connectComponents(
-	UndirectedGraph &g,
-	vector<GraphComponent> &components) const
+void SmallishSpanningTreeWalkSalesman::connectComponents(UndirectedGraph &g,
+                                                         vector<GraphComponent> &components) const
 {
 	// Find the center of each component.
 
@@ -207,11 +205,9 @@ SmallishSpanningTreeWalkSalesman::connectComponents(
 	}
 }
 
-KDPoint<2>
-SmallishSpanningTreeWalkSalesman::findCenterPoint(
-	const UndirectedGraph &g,
-	const GraphComponent &comp,
-	KDTree<2> &compTree) const
+KDPoint<2> SmallishSpanningTreeWalkSalesman::findCenterPoint(const UndirectedGraph &g,
+                                                             const GraphComponent &comp,
+                                                             KDTree<2> &compTree) const
 {
 	// Find the average of all the points in the component.
 	KDPoint<2> avgPoint(0, 0);
@@ -233,10 +229,9 @@ SmallishSpanningTreeWalkSalesman::findCenterPoint(
 }
 
 SmallishSpanningTreeWalkSalesman::VertexDesc
-SmallishSpanningTreeWalkSalesman::findNearestPoint(
-	const UndirectedGraph &g,
-	const GraphComponent &component,
-	const KDPoint<2> &target) const
+        SmallishSpanningTreeWalkSalesman::findNearestPoint(const UndirectedGraph &g,
+                                                           const GraphComponent &component,
+                                                           const KDPoint<2> &target) const
 {
 	// Find the point within the component nearest the target point.
 	float bestDist = std::numeric_limits<float>::max();
@@ -253,16 +248,15 @@ SmallishSpanningTreeWalkSalesman::findNearestPoint(
 	return *bestDesc;
 }
 
-void
-SmallishSpanningTreeWalkSalesman::mergeComponents(
-	GraphComponent &dst,
-	GraphComponent &src,
-	const KDPoint<2> &centerDst,
-	const KDPoint<2> &centerSrc,
-	const UndirectedGraph &g,
-	std::unordered_map<const KDPoint<2>, GraphComponent &> &componentCenters,
-	std::unordered_map<const GraphComponent *, KDTree<2>> &compTrees,
-	KDTree<2> &compCentersTree) const
+void SmallishSpanningTreeWalkSalesman::mergeComponents(
+        GraphComponent &dst,
+        GraphComponent &src,
+        const KDPoint<2> &centerDst,
+        const KDPoint<2> &centerSrc,
+        const UndirectedGraph &g,
+        std::unordered_map<const KDPoint<2>, GraphComponent &> &componentCenters,
+        std::unordered_map<const GraphComponent *, KDTree<2>> &compTrees,
+        KDTree<2> &compCentersTree) const
 {
 	// Update the center of the soon-to-be-merged component.
 	KDPoint<2> newCenterDst(0, 0);
@@ -296,10 +290,8 @@ SmallishSpanningTreeWalkSalesman::mergeComponents(
 	compTrees.erase(&src);
 }
 
-void
-SmallishSpanningTreeWalkSalesman::walkDFS(
-	const UndirectedGraph &g,
-	const VertexDesc &startVertex)
+void SmallishSpanningTreeWalkSalesman::walkDFS(const UndirectedGraph &g,
+                                               const VertexDesc &startVertex)
 {
 	// Mark all vertices as unvisited to start.
 	std::unordered_map<VertexDesc, bool> visited =
@@ -315,11 +307,9 @@ SmallishSpanningTreeWalkSalesman::walkDFS(
 
 // Returns true if curVertex was successfully visited for the first time, or
 // false otherwise.
-bool
-SmallishSpanningTreeWalkSalesman::walkDFSHelper(
-	const UndirectedGraph &g,
-	const VertexDesc &curVertex,
-	std::unordered_map<VertexDesc, bool> &visited)
+bool SmallishSpanningTreeWalkSalesman::walkDFSHelper(const UndirectedGraph &g,
+                                                     const VertexDesc &curVertex,
+                                                     std::unordered_map<VertexDesc, bool> &visited)
 {
 	// Base case.
 	if (visited[curVertex]) {

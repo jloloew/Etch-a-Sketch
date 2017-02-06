@@ -11,6 +11,7 @@
 
 using etchasketch::Image;
 using etchasketch::ImageFlow;
+using etchasketch::KDPoint;
 
 @interface EASImageFlow ()
 
@@ -127,7 +128,7 @@ using etchasketch::ImageFlow;
 		}
 	}
 	
-	const vector<KDPoint<2>> &pts = self.imageFlow->getOrderedEdgePoints();
+	const std::vector<KDPoint<2>> &pts = self.imageFlow->getOrderedEdgePoints();
 	NSUInteger numPts = (NSUInteger)pts.size();
 	// Copy the data out, converting to NSValue.
 	NSMutableArray<NSValue *> *points = [NSMutableArray arrayWithCapacity:numPts];
