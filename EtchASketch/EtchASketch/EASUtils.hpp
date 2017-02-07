@@ -21,6 +21,26 @@ etchasketch::utils::_EAS_Log("\n"); \
 
 #define EASLog(fmt, ...) _EASLog2((fmt) , ## __VA_ARGS__)
 
+
+#ifndef MAX
+#define MAX(a, b) \
+({ __typeof__(a) _a = (a); \
+__typeof__(b) _b = (b); \
+_a > _b ? _a : _b; })
+#endif // MAX
+
+#ifndef MIN
+#define MIN(a, b) \
+({ __typeof__(a) _a = (a); \
+__typeof__(b) _b = (b); \
+_a < _b ? _a : _b; })
+#endif // MIN
+
+#ifndef SIGN
+#define SIGN(a) ((a) < 0 ? -1 : 1)
+#endif // SIGN
+
+
 namespace etchasketch {
 	namespace utils {
 		

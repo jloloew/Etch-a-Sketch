@@ -7,16 +7,15 @@
 //
 
 #include "BobAndWeaveSalesman.hpp"
+#include "EASUtils.hpp"
 
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
-#define MIN(a, b) ((a) < (b) ? (a) : (b))
-#define SIGN(a) ((a) < 0 ? -1 : 1)
 
 namespace etchasketch {
 namespace salesman {
 
-BobAndWeaveSalesman::BobAndWeaveSalesman(const Image &edgeImage)
-    : Salesman(), edgeImage(edgeImage)
+BobAndWeaveSalesman::BobAndWeaveSalesman(const Image &grayscaleImage,
+										 const Image &edgeImage)
+    : Salesman(), grayscaleImage(grayscaleImage), edgeImage(edgeImage)
 {
 }
 
