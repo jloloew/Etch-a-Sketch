@@ -17,6 +17,7 @@ IB_DESIGNABLE
 
 /// The color in which the points are displayed.
 @property (nonatomic) IBInspectable UIColor *pointColor;
+
 /// The color in which the lines connecting the points are displayed.
 @property (nonatomic) IBInspectable UIColor *lineColor;
 

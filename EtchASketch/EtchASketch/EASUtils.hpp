@@ -25,7 +25,8 @@ namespace etchasketch {
 	namespace utils {
 		
 		/**
-		 * Run a function and return the time it took to execute, in seconds.
+		 * Times the execution of a given function.
+		 * @return The execution time in seconds, or -1 on failure.
 		 */
 		double timeFunction(void (function)(void))
 		__attribute__((warn_unused_result));
