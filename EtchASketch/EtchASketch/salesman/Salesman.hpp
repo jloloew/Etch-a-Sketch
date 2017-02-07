@@ -13,29 +13,30 @@
 #include "KDPoint.hpp"
 
 namespace etchasketch {
-	namespace salesman {
-		
-		/// Solves the traveling salesman problem.
-		class Salesman {
-			
-		public:
-			
-			Salesman();
-			
-			virtual ~Salesman();
-			
-			/// Order the points for the best drawing order.
-			virtual void orderPoints();
-			
-			/// Get a copy of the ordered points.
-			const std::vector<KDPoint<2>> & getOrderedPoints() const
-				{ return orderedPoints; }
-			
-		protected:
-			std::vector<KDPoint<2>> orderedPoints;
-		};
-		
+namespace salesman {
+
+/// Solves the traveling salesman problem.
+class Salesman {
+
+  public:
+	Salesman();
+
+	virtual ~Salesman();
+
+	/// Order the points for the best drawing order.
+	virtual void orderPoints();
+
+	/// Get a copy of the ordered points.
+	const std::vector<KDPoint<2>> &getOrderedPoints() const
+	{
+		return orderedPoints;
 	}
+
+  protected:
+	std::vector<KDPoint<2>> orderedPoints;
+};
+
+}
 }
 
 #endif /* Salesman_hpp */

@@ -127,6 +127,8 @@
 		B85A95971DFCC9E300E0F6BE /* ImageFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImageFilter.hpp; path = edgedetect/ImageFilter.hpp; sourceTree = "<group>"; };
 		B85A959A1DFCCB6800E0F6BE /* BlurImageFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BlurImageFilter.cpp; path = edgedetect/BlurImageFilter.cpp; sourceTree = "<group>"; };
 		B85A959B1DFCCB6800E0F6BE /* BlurImageFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BlurImageFilter.hpp; path = edgedetect/BlurImageFilter.hpp; sourceTree = "<group>"; };
+		B86263AC1E4948B50010A1B2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		B86263AD1E4948BE0010A1B2 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SobelEdgeDetector.cpp; path = edgedetect/SobelEdgeDetector.cpp; sourceTree = "<group>"; };
 		B8643B2F1D920D0B00B93D84 /* SobelEdgeDetector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SobelEdgeDetector.hpp; path = edgedetect/SobelEdgeDetector.hpp; sourceTree = "<group>"; };
 		B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEtchASketch.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +232,8 @@
 		B8766B891D79DC3E00A4ED34 = {
 			isa = PBXGroup;
 			children = (
+				B86263AD1E4948BE0010A1B2 /* LICENSE */,
+				B86263AC1E4948B50010A1B2 /* README.md */,
 				B8766B941D79DC3E00A4ED34 /* EtchASketch */,
 				B8766BA31D79DC9100A4ED34 /* iEAS */,
 				B8766BBD1D79DC9100A4ED34 /* iEASTests */,

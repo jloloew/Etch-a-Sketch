@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UIImageView *boardImageView;
 @property (strong, nonatomic) EASScreenViewController *screenVC;
-@property (nonatomic, strong) EASImageFlow *imageFlow;
+@property (strong, nonatomic) EASImageFlow *imageFlow;
 
 @end
 NS_ASSUME_NONNULL_END
