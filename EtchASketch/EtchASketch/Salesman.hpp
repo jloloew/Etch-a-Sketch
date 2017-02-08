@@ -27,13 +27,13 @@ class Salesman {
 	virtual void orderPoints();
 
 	/// Get a copy of the ordered points.
-	const std::vector<KDPoint<2>> &getOrderedPoints() const
+	const std::vector<etchasketch::Point> &getOrderedPoints() const
 	{
 		return orderedPoints;
 	}
 
   protected:
-	std::vector<KDPoint<2>> orderedPoints;
+	std::vector<etchasketch::Point> orderedPoints;
 };
 
 }
