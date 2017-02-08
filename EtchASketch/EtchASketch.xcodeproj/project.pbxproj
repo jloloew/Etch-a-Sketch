@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A52158321E4AD0F2002A411E /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A52158311E4AD0F2002A411E /* Makefile */; };
-		A52158351E4AD210002A411E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158341E4AD210002A411E /* main.cpp */; };
-		B81A6CE61E45459100430220 /* BobAndWeaveSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81A6CE41E45459100430220 /* BobAndWeaveSalesman.cpp */; };
-		B81A6CE91E45495200430220 /* NearestNeighborSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81A6CE71E45495200430220 /* NearestNeighborSalesman.cpp */; };
+		A521583A1E4ADE6B002A411E /* BlurImageFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158391E4ADE6B002A411E /* BlurImageFilter.cpp */; };
+		A521583E1E4ADE93002A411E /* SobelEdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A521583D1E4ADE93002A411E /* SobelEdgeDetector.cpp */; };
+		A52158421E4ADECE002A411E /* BobAndWeaveSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158401E4ADECE002A411E /* BobAndWeaveSalesman.cpp */; };
+		A52158451E4ADEE3002A411E /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158441E4ADEE3002A411E /* Salesman.cpp */; };
+		A52158471E4ADEF5002A411E /* NearestNeighborSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158461E4ADEF5002A411E /* NearestNeighborSalesman.cpp */; };
+		A521584A1E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158491E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp */; };
 		B820E9051DAC6E2200135C8A /* EASImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B820E9041DAC6E2200135C8A /* EASImage.mm */; };
 		B827FE8F1DB1B27F007F2469 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
 		B827FE931DB1B74B007F2469 /* EASBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */; };
@@ -27,9 +29,6 @@
 		B827FEA81DB1BF98007F2469 /* EASScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FEA51DB1BF98007F2469 /* EASScreenView.m */; };
 		B85A95941DFCC06E00E0F6BE /* EASDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */; };
 		B85A95951DFCC06E00E0F6BE /* EASDebugViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */; };
-		B85A959C1DFCCB6800E0F6BE /* BlurImageFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85A959A1DFCCB6800E0F6BE /* BlurImageFilter.cpp */; };
-		B85A959D1DFCCB6800E0F6BE /* BlurImageFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85A959A1DFCCB6800E0F6BE /* BlurImageFilter.cpp */; };
-		B8643B301D920D0B00B93D84 /* SobelEdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */; };
 		B872DD8F1DB06C2D008E08D8 /* KDTree.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */; };
 		B872DD901DB06C30008E08D8 /* KDPoint.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */; };
 		B8766BA61D79DC9100A4ED34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8766BA51D79DC9100A4ED34 /* main.m */; };
@@ -44,21 +43,17 @@
 		B8766C091D79FF4300A4ED34 /* EtchASketchTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8766C081D79FF4300A4ED34 /* EtchASketchTests.mm */; };
 		B87943C41D91AA870035B729 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C21D91AA870035B729 /* Image.cpp */; };
 		B87943CA1D91ADF30035B729 /* ImageFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlow.cpp */; };
-		B87943CE1D91B0F30035B729 /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943CC1D91B0F30035B729 /* Salesman.cpp */; };
-		B8A313981DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8A313961DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp */; };
 		B8B211651DAC895A009814B8 /* KDTreeTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8B211641DAC895A009814B8 /* KDTreeTests.mm */; };
 		B8D38E291DC46F89001B9AE3 /* libEtchASketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */; };
 		B8D38E2A1DC47034001B9AE3 /* libEtchASketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */; };
 		B8FA80381DB31D0000123AB6 /* EASImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B820E9041DAC6E2200135C8A /* EASImage.mm */; };
 		B8FA803A1DB31D0400123AB6 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
 		B8FA803B1DB31E2500123AB6 /* EASUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDB1D79EE4600A4ED34 /* EASUtils.cpp */; };
-		B8FA803E1DB31E3200123AB6 /* SobelEdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */; };
 		B8FA803F1DB31E3800123AB6 /* EtchASketch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BD81D79DE7600A4ED34 /* EtchASketch.cpp */; };
 		B8FA80421DB31E3F00123AB6 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C21D91AA870035B729 /* Image.cpp */; };
 		B8FA80441DB31E4400123AB6 /* ImageFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943C81D91ADF30035B729 /* ImageFlow.cpp */; };
 		B8FA80461DB31E4B00123AB6 /* KDTree.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */; };
 		B8FA80481DB31E5000123AB6 /* KDPoint.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */; };
-		B8FA804A1DB31E5500123AB6 /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87943CC1D91B0F30035B729 /* Salesman.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,12 +100,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A52158311E4AD0F2002A411E /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = EtchCLI/Makefile; sourceTree = "<group>"; };
-		A52158341E4AD210002A411E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = EtchCLI/main.cpp; sourceTree = "<group>"; };
-		B81A6CE41E45459100430220 /* BobAndWeaveSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BobAndWeaveSalesman.cpp; path = salesman/BobAndWeaveSalesman.cpp; sourceTree = "<group>"; };
-		B81A6CE51E45459100430220 /* BobAndWeaveSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BobAndWeaveSalesman.hpp; path = salesman/BobAndWeaveSalesman.hpp; sourceTree = "<group>"; };
-		B81A6CE71E45495200430220 /* NearestNeighborSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NearestNeighborSalesman.cpp; path = salesman/NearestNeighborSalesman.cpp; sourceTree = "<group>"; };
-		B81A6CE81E45495200430220 /* NearestNeighborSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NearestNeighborSalesman.hpp; path = salesman/NearestNeighborSalesman.hpp; sourceTree = "<group>"; };
+		A52158361E4ADD9C002A411E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = EtchASketch/EtchCLI/main.cpp; sourceTree = "<group>"; };
+		A52158371E4ADD9C002A411E /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = EtchASketch/EtchCLI/Makefile; sourceTree = "<group>"; };
+		A52158381E4ADE61002A411E /* BlurImageFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BlurImageFilter.hpp; sourceTree = "<group>"; };
+		A52158391E4ADE6B002A411E /* BlurImageFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlurImageFilter.cpp; sourceTree = "<group>"; };
+		A521583B1E4ADE78002A411E /* EdgeDetector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EdgeDetector.hpp; sourceTree = "<group>"; };
+		A521583C1E4ADE87002A411E /* SobelEdgeDetector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SobelEdgeDetector.hpp; sourceTree = "<group>"; };
+		A521583D1E4ADE93002A411E /* SobelEdgeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SobelEdgeDetector.cpp; sourceTree = "<group>"; };
+		A521583F1E4ADE9D002A411E /* ImageFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageFilter.hpp; sourceTree = "<group>"; };
+		A52158401E4ADECE002A411E /* BobAndWeaveSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BobAndWeaveSalesman.cpp; sourceTree = "<group>"; };
+		A52158411E4ADECE002A411E /* BobAndWeaveSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BobAndWeaveSalesman.hpp; sourceTree = "<group>"; };
+		A52158431E4ADEE3002A411E /* NearestNeighborSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NearestNeighborSalesman.hpp; sourceTree = "<group>"; };
+		A52158441E4ADEE3002A411E /* Salesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Salesman.cpp; sourceTree = "<group>"; };
+		A52158461E4ADEF5002A411E /* NearestNeighborSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NearestNeighborSalesman.cpp; sourceTree = "<group>"; };
+		A52158481E4ADF00002A411E /* Salesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Salesman.hpp; sourceTree = "<group>"; };
+		A52158491E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SmallishSpanningTreeWalkSalesman.cpp; sourceTree = "<group>"; };
+		A521584B1E4ADF17002A411E /* SmallishSpanningTreeWalkSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SmallishSpanningTreeWalkSalesman.hpp; sourceTree = "<group>"; };
 		B820E9031DAC6E2200135C8A /* EASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASImage.h; sourceTree = "<group>"; };
 		B820E9041DAC6E2200135C8A /* EASImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EASImage.mm; sourceTree = "<group>"; };
 		B820E9181DAC75C800135C8A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -128,13 +133,8 @@
 		B85A95911DFCC06E00E0F6BE /* EASDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASDebugViewController.h; sourceTree = "<group>"; };
 		B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASDebugViewController.m; sourceTree = "<group>"; };
 		B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASDebugViewController.xib; sourceTree = "<group>"; };
-		B85A95971DFCC9E300E0F6BE /* ImageFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImageFilter.hpp; path = edgedetect/ImageFilter.hpp; sourceTree = "<group>"; };
-		B85A959A1DFCCB6800E0F6BE /* BlurImageFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BlurImageFilter.cpp; path = edgedetect/BlurImageFilter.cpp; sourceTree = "<group>"; };
-		B85A959B1DFCCB6800E0F6BE /* BlurImageFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BlurImageFilter.hpp; path = edgedetect/BlurImageFilter.hpp; sourceTree = "<group>"; };
 		B86263AC1E4948B50010A1B2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		B86263AD1E4948BE0010A1B2 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SobelEdgeDetector.cpp; path = edgedetect/SobelEdgeDetector.cpp; sourceTree = "<group>"; };
-		B8643B2F1D920D0B00B93D84 /* SobelEdgeDetector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SobelEdgeDetector.hpp; path = edgedetect/SobelEdgeDetector.hpp; sourceTree = "<group>"; };
 		B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEtchASketch.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8766BA21D79DC9100A4ED34 /* iEAS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iEAS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8766BA51D79DC9100A4ED34 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -163,13 +163,8 @@
 		B8766C0A1D79FF4300A4ED34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B87943C21D91AA870035B729 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
 		B87943C31D91AA870035B729 /* Image.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Image.hpp; sourceTree = "<group>"; };
-		B87943C61D91AB400035B729 /* EdgeDetector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = EdgeDetector.hpp; path = edgedetect/EdgeDetector.hpp; sourceTree = "<group>"; };
 		B87943C81D91ADF30035B729 /* ImageFlow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageFlow.cpp; sourceTree = "<group>"; };
 		B87943C91D91ADF30035B729 /* ImageFlow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageFlow.hpp; sourceTree = "<group>"; };
-		B87943CC1D91B0F30035B729 /* Salesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Salesman.cpp; path = salesman/Salesman.cpp; sourceTree = "<group>"; };
-		B87943CD1D91B0F30035B729 /* Salesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Salesman.hpp; path = salesman/Salesman.hpp; sourceTree = "<group>"; };
-		B8A313961DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SmallishSpanningTreeWalkSalesman.cpp; path = salesman/SmallishSpanningTreeWalkSalesman.cpp; sourceTree = "<group>"; };
-		B8A313971DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SmallishSpanningTreeWalkSalesman.hpp; path = salesman/SmallishSpanningTreeWalkSalesman.hpp; sourceTree = "<group>"; };
 		B8B211641DAC895A009814B8 /* KDTreeTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KDTreeTests.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,8 +212,8 @@
 		A52158301E4AD0C8002A411E /* EtchCLI */ = {
 			isa = PBXGroup;
 			children = (
-				A52158311E4AD0F2002A411E /* Makefile */,
-				A52158341E4AD210002A411E /* main.cpp */,
+				A52158371E4ADD9C002A411E /* Makefile */,
+				A52158361E4ADD9C002A411E /* main.cpp */,
 			);
 			name = EtchCLI;
 			path = ..;
@@ -358,12 +353,12 @@
 		B87943C11D91AA4E0035B729 /* edgedetect */ = {
 			isa = PBXGroup;
 			children = (
-				B85A959A1DFCCB6800E0F6BE /* BlurImageFilter.cpp */,
-				B85A959B1DFCCB6800E0F6BE /* BlurImageFilter.hpp */,
-				B87943C61D91AB400035B729 /* EdgeDetector.hpp */,
-				B8643B2E1D920D0B00B93D84 /* SobelEdgeDetector.cpp */,
-				B8643B2F1D920D0B00B93D84 /* SobelEdgeDetector.hpp */,
-				B85A95971DFCC9E300E0F6BE /* ImageFilter.hpp */,
+				A52158381E4ADE61002A411E /* BlurImageFilter.hpp */,
+				A52158391E4ADE6B002A411E /* BlurImageFilter.cpp */,
+				A521583B1E4ADE78002A411E /* EdgeDetector.hpp */,
+				A521583D1E4ADE93002A411E /* SobelEdgeDetector.cpp */,
+				A521583C1E4ADE87002A411E /* SobelEdgeDetector.hpp */,
+				A521583F1E4ADE9D002A411E /* ImageFilter.hpp */,
 			);
 			name = edgedetect;
 			sourceTree = "<group>";
@@ -371,14 +366,14 @@
 		B87943CB1D91B0CB0035B729 /* salesman */ = {
 			isa = PBXGroup;
 			children = (
-				B81A6CE41E45459100430220 /* BobAndWeaveSalesman.cpp */,
-				B81A6CE51E45459100430220 /* BobAndWeaveSalesman.hpp */,
-				B81A6CE71E45495200430220 /* NearestNeighborSalesman.cpp */,
-				B81A6CE81E45495200430220 /* NearestNeighborSalesman.hpp */,
-				B87943CC1D91B0F30035B729 /* Salesman.cpp */,
-				B87943CD1D91B0F30035B729 /* Salesman.hpp */,
-				B8A313961DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp */,
-				B8A313971DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.hpp */,
+				A52158401E4ADECE002A411E /* BobAndWeaveSalesman.cpp */,
+				A52158411E4ADECE002A411E /* BobAndWeaveSalesman.hpp */,
+				A52158461E4ADEF5002A411E /* NearestNeighborSalesman.cpp */,
+				A52158431E4ADEE3002A411E /* NearestNeighborSalesman.hpp */,
+				A52158441E4ADEE3002A411E /* Salesman.cpp */,
+				A52158481E4ADF00002A411E /* Salesman.hpp */,
+				A52158491E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp */,
+				A521584B1E4ADF17002A411E /* SmallishSpanningTreeWalkSalesman.hpp */,
 			);
 			name = salesman;
 			sourceTree = "<group>";
@@ -574,20 +569,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B81A6CE91E45495200430220 /* NearestNeighborSalesman.cpp in Sources */,
 				B872DD901DB06C30008E08D8 /* KDPoint.hpp in Sources */,
+				A52158451E4ADEE3002A411E /* Salesman.cpp in Sources */,
 				B872DD8F1DB06C2D008E08D8 /* KDTree.hpp in Sources */,
-				B87943CE1D91B0F30035B729 /* Salesman.cpp in Sources */,
-				A52158351E4AD210002A411E /* main.cpp in Sources */,
-				B8643B301D920D0B00B93D84 /* SobelEdgeDetector.cpp in Sources */,
+				A52158471E4ADEF5002A411E /* NearestNeighborSalesman.cpp in Sources */,
+				A52158421E4ADECE002A411E /* BobAndWeaveSalesman.cpp in Sources */,
+				A521583E1E4ADE93002A411E /* SobelEdgeDetector.cpp in Sources */,
+				A521583A1E4ADE6B002A411E /* BlurImageFilter.cpp in Sources */,
+				A521584A1E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp in Sources */,
 				B8766BDA1D79DE7600A4ED34 /* EtchASketch.cpp in Sources */,
 				B8766BDD1D79EE4600A4ED34 /* EASUtils.cpp in Sources */,
-				B81A6CE61E45459100430220 /* BobAndWeaveSalesman.cpp in Sources */,
-				B85A959C1DFCCB6800E0F6BE /* BlurImageFilter.cpp in Sources */,
 				B87943C41D91AA870035B729 /* Image.cpp in Sources */,
-				A52158321E4AD0F2002A411E /* Makefile in Sources */,
 				B87943CA1D91ADF30035B729 /* ImageFlow.cpp in Sources */,
-				B8A313981DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,12 +615,10 @@
 				B8FA80441DB31E4400123AB6 /* ImageFlow.cpp in Sources */,
 				B8FA803F1DB31E3800123AB6 /* EtchASketch.cpp in Sources */,
 				B8766BCA1D79DC9100A4ED34 /* iEASUITests.m in Sources */,
-				B8FA803E1DB31E3200123AB6 /* SobelEdgeDetector.cpp in Sources */,
 				B827FEA81DB1BF98007F2469 /* EASScreenView.m in Sources */,
 				B8FA80381DB31D0000123AB6 /* EASImage.mm in Sources */,
 				B827FE9A1DB1BDFE007F2469 /* EASBoardViewController.m in Sources */,
 				B8FA80481DB31E5000123AB6 /* KDPoint.hpp in Sources */,
-				B8FA804A1DB31E5500123AB6 /* Salesman.cpp in Sources */,
 				B8FA80421DB31E3F00123AB6 /* Image.cpp in Sources */,
 				B8FA803A1DB31D0400123AB6 /* EASImageFlow.mm in Sources */,
 				B8FA80461DB31E4B00123AB6 /* KDTree.hpp in Sources */,
@@ -639,7 +630,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B85A959D1DFCCB6800E0F6BE /* BlurImageFilter.cpp in Sources */,
 				B8B211651DAC895A009814B8 /* KDTreeTests.mm in Sources */,
 				B8766C091D79FF4300A4ED34 /* EtchASketchTests.mm in Sources */,
 			);
