@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A52158321E4AD0F2002A411E /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A52158311E4AD0F2002A411E /* Makefile */; };
+		A52158351E4AD210002A411E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158341E4AD210002A411E /* main.cpp */; };
 		B81A6CE61E45459100430220 /* BobAndWeaveSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81A6CE41E45459100430220 /* BobAndWeaveSalesman.cpp */; };
 		B81A6CE91E45495200430220 /* NearestNeighborSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81A6CE71E45495200430220 /* NearestNeighborSalesman.cpp */; };
 		B820E9051DAC6E2200135C8A /* EASImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B820E9041DAC6E2200135C8A /* EASImage.mm */; };
@@ -103,6 +105,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A52158311E4AD0F2002A411E /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = EtchCLI/Makefile; sourceTree = "<group>"; };
+		A52158341E4AD210002A411E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = EtchCLI/main.cpp; sourceTree = "<group>"; };
 		B81A6CE41E45459100430220 /* BobAndWeaveSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BobAndWeaveSalesman.cpp; path = salesman/BobAndWeaveSalesman.cpp; sourceTree = "<group>"; };
 		B81A6CE51E45459100430220 /* BobAndWeaveSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BobAndWeaveSalesman.hpp; path = salesman/BobAndWeaveSalesman.hpp; sourceTree = "<group>"; };
 		B81A6CE71E45495200430220 /* NearestNeighborSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NearestNeighborSalesman.cpp; path = salesman/NearestNeighborSalesman.cpp; sourceTree = "<group>"; };
@@ -210,6 +214,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A52158301E4AD0C8002A411E /* EtchCLI */ = {
+			isa = PBXGroup;
+			children = (
+				A52158311E4AD0F2002A411E /* Makefile */,
+				A52158341E4AD210002A411E /* main.cpp */,
+			);
+			name = EtchCLI;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		B820E9001DAC6DC700135C8A /* EtchASketchWrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +249,7 @@
 				B86263AD1E4948BE0010A1B2 /* LICENSE */,
 				B86263AC1E4948B50010A1B2 /* README.md */,
 				B8766B941D79DC3E00A4ED34 /* EtchASketch */,
+				A52158301E4AD0C8002A411E /* EtchCLI */,
 				B8766BA31D79DC9100A4ED34 /* iEAS */,
 				B8766BBD1D79DC9100A4ED34 /* iEASTests */,
 				B8766BC81D79DC9100A4ED34 /* iEASUITests */,
@@ -563,12 +578,14 @@
 				B872DD901DB06C30008E08D8 /* KDPoint.hpp in Sources */,
 				B872DD8F1DB06C2D008E08D8 /* KDTree.hpp in Sources */,
 				B87943CE1D91B0F30035B729 /* Salesman.cpp in Sources */,
+				A52158351E4AD210002A411E /* main.cpp in Sources */,
 				B8643B301D920D0B00B93D84 /* SobelEdgeDetector.cpp in Sources */,
 				B8766BDA1D79DE7600A4ED34 /* EtchASketch.cpp in Sources */,
 				B8766BDD1D79EE4600A4ED34 /* EASUtils.cpp in Sources */,
 				B81A6CE61E45459100430220 /* BobAndWeaveSalesman.cpp in Sources */,
 				B85A959C1DFCCB6800E0F6BE /* BlurImageFilter.cpp in Sources */,
 				B87943C41D91AA870035B729 /* Image.cpp in Sources */,
+				A52158321E4AD0F2002A411E /* Makefile in Sources */,
 				B87943CA1D91ADF30035B729 /* ImageFlow.cpp in Sources */,
 				B8A313981DFE420600AD6B54 /* SmallishSpanningTreeWalkSalesman.cpp in Sources */,
 			);
