@@ -118,8 +118,6 @@ namespace etchasketch {
 	
 	template<int Dim>
 	std::ostream & operator<<(std::ostream &out, const KDPoint<Dim> &p);
-
-    typedef etchasketch::KDPoint<2> Point;
 }
 
 // Add a hash function for use in unordered_map.
@@ -127,9 +125,9 @@ namespace std {
 	// Non-const version.
 
 	template<>
-    struct hash<etchasketch::Point> {
+    struct hash<etchasketch::KDPoint<2>> {
 		size_t
-		operator()(const etchasketch::Point &pt) const
+		operator()(const etchasketch::KDPoint<2> &pt) const
 		{
 			// Hash the point.
 			return (pt[0] * 0x1f1f1f1f) ^ pt[1];
@@ -140,9 +138,9 @@ namespace std {
 	
 	// Const version.
 	template<>
-    struct hash<const etchasketch::Point> {
+    struct hash<const etchasketch::KDPoint<2>> {
 		size_t
-		operator()(const etchasketch::Point &pt) const
+		operator()(const etchasketch::KDPoint<2> &pt) const
 		{
 			// Hash the point.
 			return (pt[0] * 0x1f1f1f1f) ^ pt[1];

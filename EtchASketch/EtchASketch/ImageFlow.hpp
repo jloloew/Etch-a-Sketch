@@ -60,7 +60,7 @@ namespace etchasketch {
 		/**
 		 * Get the points in drawing order, generating them if necessary.
 		 */
-		const std::vector<etchasketch::Point> & getOrderedEdgePoints();
+		const std::vector<etchasketch::KDPoint<2>> & getOrderedEdgePoints();
 		
 		// For the Objective-C wrapper.
 		
@@ -75,8 +75,8 @@ namespace etchasketch {
 		const etchasketch::Image originalImage;
 		etchasketch::Image grayscaleImage;
 		const etchasketch::Image *edgeDetectedImage;
-		const std::unordered_set<etchasketch::Point> *edgePoints;
-		const std::vector<etchasketch::Point> *orderedEdgePoints;
+		const std::unordered_set<etchasketch::KDPoint<2>> *edgePoints;
+		const std::vector<etchasketch::KDPoint<2>> *orderedEdgePoints;
 		
 		etchasketch::edgedetect::EdgeDetector *edgeDetector;
 		etchasketch::salesman::Salesman *salesman;
@@ -84,10 +84,10 @@ namespace etchasketch {
 		// Setters
 		void setEdgeDetectedImage(const etchasketch::Image *newImage);
 		
-		void setEdgePoints(const std::unordered_set<etchasketch::Point>
+		void setEdgePoints(const std::unordered_set<etchasketch::KDPoint<2>>
 						   *newEdgePoints);
 		
-		void setOrderedEdgePoints(const std::vector<etchasketch::Point>
+		void setOrderedEdgePoints(const std::vector<etchasketch::KDPoint<2>>
 								  *newOrderedEdgePoints);
 		
 		void setSalesman(etchasketch::salesman::Salesman *newSalesman);
