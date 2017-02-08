@@ -67,7 +67,7 @@ KDPoint<2> BobAndWeaveSalesman::offsetPointAt(const KDPointCoordinate x,
 		}
 	}
 	double avgBrightness = static_cast<double>(totalBrightness) / numPixelsSearched / 255.0;
-	double verticalDisplacement = sin(x) * avgBrightness * k_grav;
+	double verticalDisplacement = sin(x) * avgBrightness * lineSeparation / 2 * k_grav;
 	
 	// Add the vertical displacement to the point and return it.
 	KDPointCoordinate dy = static_cast<KDPointCoordinate>(verticalDisplacement);

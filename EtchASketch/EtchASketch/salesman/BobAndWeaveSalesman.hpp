@@ -47,9 +47,9 @@ class BobAndWeaveSalesman : public Salesman {
 
 	/// The radius around each point, within which other points can perform
 	// "gravitational attraction" to draw the cursor closer.
-	static constexpr KDPointCoordinate pointSearchRadius = 10;
+	static constexpr KDPointCoordinate pointSearchRadius = 1;
 
-	static constexpr float k_grav = 10.0f;
+	static constexpr float k_grav = 4.0f;
 
 	/**
 	 * Get the vertical displacement for the cursor at the given point within
