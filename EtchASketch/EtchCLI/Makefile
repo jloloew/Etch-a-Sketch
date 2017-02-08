@@ -9,7 +9,7 @@ LDFLAGS = -std=c++11 -stdlib=libc++
 LIB_SRC=$(wildcard ../EtchASketch/*.cpp)
 
 # This generates the list of .o files. The order is hardcoded for now.
-LIB_OBJ  = Image.o ImageFlow.o BlurImageFilter.o SobelEdgeDetector.o BobAndWeaveSalesman.o Salesman.o EASUtils.o
+LIB_OBJ = Image.o ImageFlow.o BlurImageFilter.o SobelEdgeDetector.o BobAndWeaveSalesman.o Salesman.o EASUtils.o
 
 all : $(EXENAME)
 
