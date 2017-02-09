@@ -1,13 +1,13 @@
 EXENAME = etch
 OBJS = main.o libEtchASketch.a
 
-CXX = clang++
-CXXFLAGS = -c -Ofast -Wall -std=c++11 -stdlib=libc++ -I../EtchASketch
-LD = clang++
-LDFLAGS = -std=c++11 -stdlib=libc++
-
 LIB_SRC_PTH = ../EtchASketch/
 LIB_SRC = $(wildcard $(LIB_SRC_PTH)*.cpp)
+
+CXX = clang++
+CXXFLAGS = -c -Ofast -Wall -std=c++11 -stdlib=libc++ -I$(LIB_SRC_PTH)
+LD = clang++
+LDFLAGS = -std=c++11 -stdlib=libc++
 
 # Filter out KDPoint.cpp, KDTree.cpp, and EtchASketch.cpp
 LIB_SRC_FILTR = $(LIB_SRC_PTH)KDPoint.cpp $(LIB_SRC_PTH)KDTree.cpp
