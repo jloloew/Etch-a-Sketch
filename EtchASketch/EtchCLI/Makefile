@@ -3,9 +3,10 @@ OBJS = main.o libEtchASketch.a
 
 LIB_SRC_PTH = ../EtchASketch/
 LIB_SRC = $(wildcard $(LIB_SRC_PTH)*.cpp)
+HDR_PTHS := $(addprefix -I,$(shell find /usr/include/c++/ -type d -print))
 
 CXX = clang++
-CXXFLAGS = -c -Ofast -Wall -std=c++11 -stdlib=libc++ -I$(LIB_SRC_PTH)
+CXXFLAGS = -c -Ofast -Wall -std=c++11 -stdlib=libc++ -I$(LIB_SRC_PTH) -I$(HDR_PTHS)
 LD = clang++
 LDFLAGS = -std=c++11 -stdlib=libc++
 
