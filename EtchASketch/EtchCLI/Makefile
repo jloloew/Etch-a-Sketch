@@ -6,7 +6,7 @@ LIB_SRC = $(wildcard $(LIB_SRC_PTH)*.cpp)
 HDR_PTHS := $(addprefix -I,$(shell find /usr/include/c++/ -type d -print))
 
 CXX = clang++
-CXXFLAGS = -c -Ofast -Wall -std=c++11 -stdlib=libc++ -I$(LIB_SRC_PTH) -I$(HDR_PTHS)
+CXXFLAGS = -c -O0 -Wall -std=c++11 -stdlib=libc++ -I$(LIB_SRC_PTH)
 LD = clang++
 LDFLAGS = -std=c++11 -stdlib=libc++
 
@@ -26,6 +26,8 @@ main.o : main.cpp libEtchASketch.a
 
 libEtchASketch.a :
 	$(CXX) $(CXXFLAGS) $(LIB_SRC); ar rcs $@ *.o
+
+.PHONY: clean
 
 clean :
 	-rm -f *.o *.a $(EXENAME)
