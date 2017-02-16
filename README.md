@@ -2,6 +2,12 @@
 
 TODO: Write a project description
 
+## Current Status
+### Original
+![Stock Lena image](images/lena.png)
+### Current Product
+![Example as of February 7, 2017](images/2017-02-07.png)
+
 ## Installation
 
 TODO: Describe the installation process
