@@ -50,9 +50,10 @@
 }
 
 - (void)commonInit {
+	self.backgroundColor = [UIColor lightGrayColor];
 	self.points = [NSMutableArray array];
 	self.pointColor = [UIColor blackColor];
-	self.lineColor = self.tintColor;
+	self.lineColor = [UIColor darkGrayColor];
 }
 
 - (void)addPoints:(NSArray<NSValue *> *)newPoints animated:(BOOL)animated {
@@ -76,7 +77,7 @@
 		pointsLayer.lineWidth = 3.0f;
 		pointsLayer.lineJoin = kCALineJoinMiter;
 		
-		[self.layer addSublayer:pointsLayer];
+//		[self.layer addSublayer:pointsLayer];
 		
 		self.pointsLayer = pointsLayer;
 	}
