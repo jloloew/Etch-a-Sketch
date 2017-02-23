@@ -6,15 +6,21 @@
 //  Copyright © 2017 Justin Loew. All rights reserved.
 //
 
-#include <stdio.h>
+#include <iostream>
 #include "EtchASketch.hpp"
 
-int main(int argc, char *argv[]) {
-    printf("Welcome to etch ❤️\n");
-    printf("ARGC: %d\n", argc);
+using std::cout;
+using std::endl;
 
-    etchasketch::Image input_img = etchasketch::Image(0, 0, NULL);
-    etchasketch::ImageFlow input_img_flow = etchasketch::ImageFlow(input_img);
+int
+main(int argc, char *argv[])
+{
+    cout << "Welcome to etch ❤️" << endl;
+    cout << "ARGC: " << argc << endl;
+
+    etchasketch::Image inputImg = etchasketch::Image(0, 0, NULL);
+    etchasketch::ImageFlow inputImgFlow = etchasketch::ImageFlow(inputImg);
 
     return 0;
 }
+
