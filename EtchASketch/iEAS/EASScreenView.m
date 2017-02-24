@@ -204,4 +204,16 @@
 	[self setNeedsDisplay];
 }
 
+// For debugging and documentation purposes.
+- (UIImage *)captureView {
+	// From https://stackoverflow.com/questions/17145049/capture-uiview-and-save-as-image
+	CGRect rect = [self bounds];
+	UIGraphicsBeginImageContext(rect.size);
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	[self.layer renderInContext:context];
+	UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	return img;
+}
+
 @end
