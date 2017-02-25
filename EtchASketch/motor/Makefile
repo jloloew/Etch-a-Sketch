@@ -1,7 +1,7 @@
 EXENAME = testMotor
 OBJS = main.o motor.o
 
-LIB_SRC_PTH = ./
+LIB_SRC_PTH = ../EtchCLI/
 LIB_SRC = $(wildcard $(LIB_SRC_PTH)*.cpp)
 HDR_PTHS := $(addprefix -I,$(shell find /usr/include/c++/ -type d -print))
 
@@ -18,8 +18,8 @@ $(EXENAME) : $(OBJS)
 main.o : main.c motor.o
 	$(CC) $(CCFLAGS) $^
 
-libMotor.a :
-	$(CC) $(CCFLAGS) $(LIB_SRC)
+motor.o : $(LIB_SRC_PTH)motor.c
+	$(CC) $(CCFLAGS) $^
 
 .PHONY: clean
 

@@ -70,6 +70,7 @@ main(int argc, char * const argv[])
         }
     }
     validateArgs(inFile, imgWidth, imgHeight);
+
     // Make sure we can open the input file.
     FILE *inImageFd = fopen(inFile.c_str(), "r");
     if (!inImageFd) {
@@ -87,6 +88,7 @@ main(int argc, char * const argv[])
         perror("Unable to read input image");
         exit(1);
     }
+
     // Copy the input image into an etchasketch::Image.
     etchasketch::Image inputImg = etchasketch::Image(imgWidth, imgHeight, rawInputImage);
     delete [] rawInputImage;

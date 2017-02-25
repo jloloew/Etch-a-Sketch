@@ -14,6 +14,7 @@ main(int argc, char *argv[])
         fprintf(stderr, "Error creating motor.\n");
         return 1;
     }
+
     // Print the pin numbers.
     printf("WiringPi pin numbers:\n");
     printf("Step:      %02d\n", m0.pin_step);
@@ -25,5 +26,7 @@ main(int argc, char *argv[])
     while (1) {
         motor_move(&m0, DIR_CW);
     }
+
+    return 0;
 }
 
