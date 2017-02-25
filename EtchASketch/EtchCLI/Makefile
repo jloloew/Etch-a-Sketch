@@ -25,9 +25,11 @@ main.o : main.cpp libEtchASketch.a
 	$(CXX) $(CXXFLAGS) main.cpp
 
 libEtchASketch.a :
-	$(CXX) $(CXXFLAGS) $(LIB_SRC); ar rcs $@ *.o
+	$(CXX) $(CXXFLAGS) $(LIB_SRC)
+	ar rcs $@ *.o
 
 .PHONY: clean
 
 clean :
 	-rm -f *.o *.a $(EXENAME)
+
