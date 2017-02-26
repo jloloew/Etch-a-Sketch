@@ -21,6 +21,7 @@ using std::endl;
 using std::string;
 using std::stringstream;
 
+/*
 bool
 writeOrderedEdgePointsToFile(
   string const & file_name,
@@ -102,6 +103,7 @@ writeOrderedEdgePointsToFile(
     fclose(fp);
     return true;
 }
+*/
 
 double
 etchasketch::utils::timeFunction(void (function)(void))

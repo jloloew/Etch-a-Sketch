@@ -10,7 +10,7 @@ main(int argc, char *argv[])
     
     // Set up a motor.
     motor_t m0;
-    if (!motor_init(&m0)) {
+    if (motor_init(&m0)) {
         fprintf(stderr, "Error creating motor.\n");
         return 1;
     }

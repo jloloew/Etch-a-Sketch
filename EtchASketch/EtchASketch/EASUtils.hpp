@@ -28,12 +28,14 @@ namespace etchasketch {
 		/**
 		* Utility function to write a vector of ordered edge points to a png.
 		*/
-		bool
+    /*
+    bool
 		writeOrderedEdgePointsToFile(
 		  std::string const & file_name,
 		  std::vector<etchasketch::KDPoint<2>> orderedEdgePoints,
 		  long imgWidth,
 		  long imgHeight);
+    */
 	}
 }
 
