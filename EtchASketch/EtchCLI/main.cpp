@@ -11,6 +11,7 @@
 #include <string>
 #include <unistd.h>
 #include "EtchASketch.hpp"
+#include "motor.h"
 
 using std::cout;
 using std::endl;
@@ -107,5 +108,50 @@ main(int argc, char * const argv[])
         imgWidth,
         imgHeight);
 */
+
+    // Set up a motor.
+    motor_initialize();
+
+    motor_t mx;
+    motor_t my;
+
+    if (motor_init(&mx)) {
+        fprintf(stderr, "Error creating motor x.\n");
+        return 1;
+    }
+    if (motor_init(&my)) {
+        fprintf(stderr, "Error creating motor y.\n");
+        return 1;
+    }
+
+    size_t curr_x = 0;
+    size_t curr_y = 0;
+
+    for(size_t i = 0; i < points.size(); i++) {
+      etchasketch::KDPoint<2> target = points[i];
+
+      // MOVE X TO TARGET
+      while(curr_x != target[0]) {
+        if(curr_x < target[0]) {
+          motor_move(&mx, DIR_CW);
+          curr_x++;
+        } else {
+          motor_move(&mx, DIR_CCW);
+          curr_x--;
+        }
+      }
+
+      // MOVE Y TO TARGET
+      while(curr_y != target[1]) {
+        if(curr_y < target[1]) {
+          motor_move(&my, DIR_CW);
+          curr_y++;
+        } else {
+          motor_move(&my, DIR_CCW);
+          curr_y--;
+        }
+      }
+    }
+
     return 0;
 }
