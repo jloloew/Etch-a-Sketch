@@ -13,27 +13,27 @@
 
 namespace etchasketch {
 	namespace edgedetect {
-		
+
 		class SobelEdgeDetector : public etchasketch::edgedetect::EdgeDetector {
 		public:
 			SobelEdgeDetector();
 			
 			virtual ~SobelEdgeDetector() { };
-			
+
 			/**
 			 * Detect edges in an image, copying the result into a newly
 			 * allocated image.
 			 */
 			virtual etchasketch::Image *
 			detectEdges(const etchasketch::Image &grayscaleImage) const;
-			
+
 		private:
 			float intensityForPoint(const etchasketch::Image &img,
 									const int x,
 									const int y) const;
-			
+
 		};
-		
+
 	}
 }
 

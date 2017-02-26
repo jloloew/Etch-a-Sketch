@@ -9,8 +9,9 @@
 #ifndef EASUtils_hpp
 #define EASUtils_hpp
 
-#include <iostream>
 #include <string>
+#include <vector>
+#include "Image.hpp"
 
 #define _EASLog2(fmt, ...) do { \
 etchasketch::utils::_EAS_Log("%s:%s:%d: ", __FILE__, __PRETTY_FUNCTION__, \
@@ -23,22 +24,16 @@ etchasketch::utils::_EAS_Log("\n"); \
 
 namespace etchasketch {
 	namespace utils {
-		
+
 		/**
-		 * Times the execution of a given function.
-		 * @return The execution time in seconds, or -1 on failure.
-		 */
-		double timeFunction(void (function)(void))
-		__attribute__((warn_unused_result));
-		
-		/**
-		 * Same as `timeFunction`, but also prints how long the function took.
-		 */
-		double timeFunctionAndPrint(void (function)(void),
-									std::string funcName);
-		
-		void _EAS_Log(std::string fmt, ...);
-		
+		* Utility function to write a vector of ordered edge points to a png.
+		*/
+		bool
+		writeOrderedEdgePointsToFile(
+		  std::string const & file_name,
+		  std::vector<etchasketch::KDPoint<2>> orderedEdgePoints,
+		  long imgWidth,
+		  long imgHeight);
 	}
 }
 
