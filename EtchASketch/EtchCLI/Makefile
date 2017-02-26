@@ -7,8 +7,10 @@ HDR_PTHS := $(addprefix -I,$(shell find /usr/include/c++/ -type d -print))
 
 CXX = clang++
 CXXFLAGS = -c -O0 -Wall -std=c++11 -stdlib=libc++ -I$(LIB_SRC_PTH)
+CC = clang
+CCFLAGS = -c -O0 -Wall -I$(LIB_SRC_PTH)
 LD = clang++
-LDFLAGS = -std=c++11 -stdlib=libc++
+LDFLAGS = -std=c++11 -stdlib=libc++ -lwiringPi
 
 # Filter out KDPoint.cpp, KDTree.cpp, and EtchASketch.cpp
 LIB_SRC_FILTR = $(LIB_SRC_PTH)KDPoint.cpp $(LIB_SRC_PTH)KDTree.cpp
@@ -21,8 +23,11 @@ all : $(EXENAME)
 $(EXENAME) : $(OBJS)
 	$(LD) $(OBJS) /usr/lib/arm-linux-gnueabihf/libunwind.so.8 $(LDFLAGS) -o $(EXENAME)
 
-main.o : main.cpp libEtchASketch.a
+main.o : main.cpp libEtchASketch.a motor.o
 	$(CXX) $(CXXFLAGS) main.cpp
+
+motor.o : motor.c
+	$(CC) $(CCFLAGS) $^
 
 libEtchASketch.a :
 	$(CXX) $(CXXFLAGS) $(LIB_SRC)

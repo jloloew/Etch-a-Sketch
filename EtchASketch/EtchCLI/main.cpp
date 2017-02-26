@@ -48,6 +48,8 @@ fail:
 int
 main(int argc, char * const argv[])
 {
+    motor_initialize();
+    
     cout << "Welcome to etch ❤️" << endl;
 
     // Parse arguments.
@@ -102,6 +104,7 @@ main(int argc, char * const argv[])
     inputImgFlow.generateEdgePoints();
     inputImgFlow.orderEdgePointsForDrawing();
     std::vector<etchasketch::KDPoint<2>> points = inputImgFlow.getOrderedEdgePoints();
+    cout << "ImageFlow completed its run." << endl;
 /*    etchasketch::utils::writeOrderedEdgePointsToFile(
         "lena_ordered_edge_points.png",
         points,
@@ -110,8 +113,6 @@ main(int argc, char * const argv[])
 */
 
     // Set up a motor.
-    motor_initialize();
-
     motor_t mx;
     motor_t my;
 
