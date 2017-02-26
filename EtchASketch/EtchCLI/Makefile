@@ -21,7 +21,7 @@ LIB_SRC += $(LIB_SRC_PTH)KDPoint.hpp $(LIB_SRC_PTH)KDTree.hpp
 all : $(EXENAME)
 
 $(EXENAME) : $(OBJS)
-	$(LD) $(OBJS) /usr/lib/arm-linux-gnueabihf/libunwind.so.8 $(LDFLAGS) -o $(EXENAME)
+	$(LD) $(OBJS) motor.o /usr/lib/arm-linux-gnueabihf/libunwind.so.8 $(LDFLAGS) -o $(EXENAME)
 
 main.o : main.cpp libEtchASketch.a motor.o
 	$(CXX) $(CXXFLAGS) main.cpp
