@@ -48,9 +48,10 @@ fail:
 int
 main(int argc, char * const argv[])
 {
-    motor_initialize();
-    
     cout << "Welcome to etch ❤️" << endl;
+
+    // Initializing motors requires root access.
+    motor_initialize();
 
     // Parse arguments.
     string inFile;
@@ -112,45 +113,48 @@ main(int argc, char * const argv[])
         imgHeight);
 */
 
-    // Set up a motor.
+    // Set up x and y motors.
     motor_t mx;
     motor_t my;
 
-    if (motor_init(&mx)) {
-        fprintf(stderr, "Error creating motor x.\n");
-        return 1;
-    }
-    if (motor_init(&my)) {
-        fprintf(stderr, "Error creating motor y.\n");
+    if (motor_init(&mx) || motor_init(&my)) {
+        fprintf(stderr, "Error creating motor.\n");
         return 1;
     }
 
-    size_t curr_x = 0;
-    size_t curr_y = 0;
+    // Tracks EAS tracer position.
+    size_t tracer_x = 0;
+    size_t tracer_y = 0;
 
-    for(size_t i = 0; i < points.size(); i++) {
+    // For every ordered edge point…
+    for (size_t i = 0; i < points.size(); i++) {
       etchasketch::KDPoint<2> target = points[i];
 
-      // MOVE X TO TARGET
-      while(curr_x != target[0]) {
-        if(curr_x < target[0]) {
-          motor_move(&mx, DIR_CW);
-          curr_x++;
-        } else {
-          motor_move(&mx, DIR_CCW);
-          curr_x--;
-        }
-      }
+      int x_dist = target[0] - tracer_x;
+      int y_dist = target[1] - tracer_y;
 
-      // MOVE Y TO TARGET
-      while(curr_y != target[1]) {
-        if(curr_y < target[1]) {
-          motor_move(&my, DIR_CW);
-          curr_y++;
-        } else {
-          motor_move(&my, DIR_CCW);
-          curr_y--;
-        }
+      // While not at target…
+      while (x_dist || y_dist) {
+
+          if (x_dist < 0) {
+            motor_move(&mx, DIR_CCW);
+            x_dist++;
+            tracer_x--;
+          } else if (x_dist > 0) {
+            motor_move(&mx, DIR_CW);
+            x_dist--;
+            tracer_x++;
+          }
+
+          if (y_dist < 0) {
+            motor_move(&my, DIR_CCW);
+            y_dist++;
+            tracer_y--;
+          } else if (y_dist > 0) {
+            motor_move(&my, DIR_CW);
+            y_dist--;
+            tracer_y++;
+          }
       }
     }
 
