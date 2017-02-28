@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include "EtchASketch.hpp"
 #include "motor.h"
+#include "MotorController.hpp"
 
 using std::cout;
 using std::endl;
