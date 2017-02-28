@@ -50,8 +50,7 @@ main(int argc, char * const argv[])
 {
     cout << "Welcome to etch ❤️" << endl;
 
-    // Initializing motors requires root access.
-    motor_initialize();
+    
 
     // Parse arguments.
     string inFile;
@@ -113,6 +112,12 @@ main(int argc, char * const argv[])
         imgHeight);
 */
 
+    // Draw ordered edge points.
+    MotorController tracer = MotorController();
+    tracer.drawOrderedPoints(points);
+
+
+    /*
     // Set up x and y motors.
     motor_t mx;
     motor_t my;
@@ -157,6 +162,7 @@ main(int argc, char * const argv[])
           }
       }
     }
+    */
 
     return 0;
 }

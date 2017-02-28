@@ -13,6 +13,7 @@
 		A52158451E4ADEE3002A411E /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158441E4ADEE3002A411E /* Salesman.cpp */; };
 		A52158471E4ADEF5002A411E /* NearestNeighborSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158461E4ADEF5002A411E /* NearestNeighborSalesman.cpp */; };
 		A521584A1E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158491E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp */; };
+		A550315C1E66316A00F4C4A1 /* motor.c in Sources */ = {isa = PBXBuildFile; fileRef = A550315B1E66316A00F4C4A1 /* motor.c */; };
 		B820E9051DAC6E2200135C8A /* EASImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B820E9041DAC6E2200135C8A /* EASImage.mm */; };
 		B827FE8F1DB1B27F007F2469 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
 		B827FE931DB1B74B007F2469 /* EASBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */; };
@@ -113,9 +114,13 @@
 		A52158431E4ADEE3002A411E /* NearestNeighborSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NearestNeighborSalesman.hpp; sourceTree = "<group>"; };
 		A52158441E4ADEE3002A411E /* Salesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Salesman.cpp; sourceTree = "<group>"; };
 		A52158461E4ADEF5002A411E /* NearestNeighborSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NearestNeighborSalesman.cpp; sourceTree = "<group>"; };
-		A52158481E4ADF00002A411E /* Salesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Salesman.hpp; sourceTree = "<group>"; };
+		A52158481E4ADF00002A411E /* Salesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = Salesman.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		A52158491E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SmallishSpanningTreeWalkSalesman.cpp; sourceTree = "<group>"; };
 		A521584B1E4ADF17002A411E /* SmallishSpanningTreeWalkSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SmallishSpanningTreeWalkSalesman.hpp; sourceTree = "<group>"; };
+		A550315A1E66316A00F4C4A1 /* motor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = motor.h; path = EtchASketch/EtchCLI/motor.h; sourceTree = "<group>"; };
+		A550315B1E66316A00F4C4A1 /* motor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = motor.c; path = EtchASketch/EtchCLI/motor.c; sourceTree = "<group>"; };
+		A550315D1E66329A00F4C4A1 /* MotorController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MotorController.cpp; sourceTree = "<group>"; };
+		A550315E1E66329A00F4C4A1 /* MotorController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MotorController.hpp; sourceTree = "<group>"; };
 		B820E9031DAC6E2200135C8A /* EASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASImage.h; sourceTree = "<group>"; };
 		B820E9041DAC6E2200135C8A /* EASImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EASImage.mm; sourceTree = "<group>"; };
 		B820E9181DAC75C800135C8A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -157,14 +162,14 @@
 		B8766BDE1D79FA7400A4ED34 /* KDTree.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = KDTree.cpp; sourceTree = "<group>"; };
 		B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = KDTree.hpp; sourceTree = "<group>"; };
 		B8766BE11D79FB8600A4ED34 /* KDPoint.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = KDPoint.cpp; sourceTree = "<group>"; };
-		B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = KDPoint.hpp; sourceTree = "<group>"; };
+		B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; lineEnding = 0; path = KDPoint.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		B8766C061D79FF4300A4ED34 /* EtchASketchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EtchASketchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8766C081D79FF4300A4ED34 /* EtchASketchTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EtchASketchTests.mm; sourceTree = "<group>"; };
 		B8766C0A1D79FF4300A4ED34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B87943C21D91AA870035B729 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
 		B87943C31D91AA870035B729 /* Image.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Image.hpp; sourceTree = "<group>"; };
 		B87943C81D91ADF30035B729 /* ImageFlow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageFlow.cpp; sourceTree = "<group>"; };
-		B87943C91D91ADF30035B729 /* ImageFlow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageFlow.hpp; sourceTree = "<group>"; };
+		B87943C91D91ADF30035B729 /* ImageFlow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = ImageFlow.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		B8B211641DAC895A009814B8 /* KDTreeTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KDTreeTests.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,7 +218,11 @@
 			isa = PBXGroup;
 			children = (
 				A52158371E4ADD9C002A411E /* Makefile */,
+				A550315A1E66316A00F4C4A1 /* motor.h */,
+				A550315B1E66316A00F4C4A1 /* motor.c */,
 				A52158361E4ADD9C002A411E /* main.cpp */,
+				A550315D1E66329A00F4C4A1 /* MotorController.cpp */,
+				A550315E1E66329A00F4C4A1 /* MotorController.hpp */,
 			);
 			name = EtchCLI;
 			path = ..;
@@ -570,6 +579,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B872DD901DB06C30008E08D8 /* KDPoint.hpp in Sources */,
+				A550315C1E66316A00F4C4A1 /* motor.c in Sources */,
 				A52158451E4ADEE3002A411E /* Salesman.cpp in Sources */,
 				B872DD8F1DB06C2D008E08D8 /* KDTree.hpp in Sources */,
 				A52158471E4ADEF5002A411E /* NearestNeighborSalesman.cpp in Sources */,

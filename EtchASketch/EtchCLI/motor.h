@@ -19,6 +19,10 @@ typedef struct {
     unsigned int pin_dir, pin_step;
 } motor_t;
 
+typedef struct {
+    float x, y;
+} motor_point_t;
+
 // Stuff for pretty printing GPIO labels.
 static const int numPins = 40;
 static const int numLabels = numPins + 1;
@@ -37,6 +41,7 @@ int motor_init(motor_t *motor);
 void motor_move(const motor_t *motor, motor_dir_t dir);
 
 void print_gpio_labels(void);
+
 
 #ifdef __cplusplus
 }
