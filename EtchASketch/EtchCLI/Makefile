@@ -6,9 +6,9 @@ LIB_SRC = $(wildcard $(LIB_SRC_PTH)*.cpp)
 HDR_PTHS := $(addprefix -I,$(shell find /usr/include/c++/ -type d -print))
 
 CXX = clang++
-CXXFLAGS = -c -O0 -Wall -std=c++11 -stdlib=libc++ -I$(LIB_SRC_PTH)
+CXXFLAGS = -c -g -O0 -Wall -std=c++11 -stdlib=libc++ -I$(LIB_SRC_PTH)
 CC = clang
-CCFLAGS = -c -O0 -Wall -I$(LIB_SRC_PTH)
+CCFLAGS = -c -g -O0 -Wall -I$(LIB_SRC_PTH)
 LD = clang++
 LDFLAGS = -std=c++11 -stdlib=libc++ -lwiringPi
 
