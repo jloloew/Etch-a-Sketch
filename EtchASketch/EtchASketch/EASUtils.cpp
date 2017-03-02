@@ -13,12 +13,97 @@
 #include <sstream>
 #include <iostream>
 #include <sys/time.h>
+#include <png.h>
 
 #define USEC_PER_SEC 1.0e6
 
 using std::endl;
 using std::string;
 using std::stringstream;
+
+/*
+bool
+writeOrderedEdgePointsToFile(
+  string const & file_name,
+  std::vector<etchasketch::KDPoint<2>> orderedEdgePoints,
+  long imgWidth,
+  long imgHeight)
+{
+    FILE * fp = fopen(file_name.c_str(), "wb");
+    if (!fp)
+    {
+        return false;
+    }
+
+    png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    if (!png_ptr)
+    {
+        fclose(fp);
+        return false;
+    }
+
+    png_infop info_ptr = png_create_info_struct(png_ptr);
+    if (!info_ptr)
+    {
+        png_destroy_write_struct(&png_ptr, NULL);
+        fclose(fp);
+        return false;
+    }
+
+    if (setjmp(png_jmpbuf(png_ptr)))
+    {
+        png_destroy_write_struct(&png_ptr, &info_ptr);
+        fclose(fp);
+        return false;
+    }
+
+    png_init_io(png_ptr, fp);
+
+    // write header
+    if (setjmp(png_jmpbuf(png_ptr)))
+    {
+        png_destroy_write_struct(&png_ptr, &info_ptr);
+        fclose(fp);
+        return false;
+    }
+    png_set_IHDR(png_ptr, info_ptr, imgWidth, imgHeight,
+            8,
+            PNG_COLOR_TYPE_RGB_ALPHA,
+            PNG_INTERLACE_NONE,
+            PNG_COMPRESSION_TYPE_BASE,
+            PNG_FILTER_TYPE_BASE);
+
+    png_write_info(png_ptr, info_ptr);
+
+    // write image
+    if (setjmp(png_jmpbuf(png_ptr)))
+    {
+        png_destroy_write_struct(&png_ptr, &info_ptr);
+        fclose(fp);
+        return false;
+    }
+
+    int bpr = png_get_rowbytes(png_ptr, info_ptr);
+    png_byte * row = new png_byte[bpr];
+    for (size_t y = 0; y < imgHeight; y++)
+    {
+        for (size_t x = 0; x < imgWidth; x++)
+        {
+            png_byte * pix = &(row[x*4]);
+            pix[0] = 0;
+            pix[1] = 0;
+            pix[2] = 0;
+            pix[3] = 0;
+        }
+        png_write_row(png_ptr, row);
+    }
+    delete [] row;
+    png_write_end(png_ptr, NULL);
+    png_destroy_write_struct(&png_ptr, &info_ptr);
+    fclose(fp);
+    return true;
+}
+*/
 
 double
 etchasketch::utils::timeFunction(void (function)(void))
@@ -81,7 +166,7 @@ etchasketch::utils::prettyPrintJSON(std::ostream &out, std::istream &in)
 			}
 		}
 	};
-	
+
 	size_t nestingLevel = 0;
 	bool isWithinSquareBrackets = false;
 	while (!in.eof()) {

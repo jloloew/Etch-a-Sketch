@@ -7,7 +7,7 @@
 //
 
 #include "Salesman.hpp"
-#include "EASUtils.hpp"
+#include "EASUtils+Private.hpp"
 
 etchasketch::salesman::Salesman::Salesman()
 : orderedPoints(std::vector<KDPoint<2>>())
