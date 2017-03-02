@@ -104,7 +104,7 @@ etchasketch::ImageFlow::orderEdgePointsForDrawing()
 	// TODO: Put startPoint in class scope or something.
 	const KDPoint<2> startPoint(0, 0);
 //	setSalesman(new SmallishSpanningTreeWalkSalesman(*edgePoints, startPoint));
-	setSalesman(new BobAndWeaveSalesman(*edgeDetectedImage));
+	setSalesman(new BobAndWeaveSalesman(grayscaleImage, *edgeDetectedImage));
 	salesman->orderPoints();
 	setOrderedEdgePoints(new std::vector<KDPoint<2>>(salesman->getOrderedPoints()));
 	// Done with the salesman.
