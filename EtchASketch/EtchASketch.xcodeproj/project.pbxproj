@@ -101,6 +101,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A5034B3A1E6B82B200A4E0C6 /* MotorController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MotorController.cpp; path = EtchASketch/EtchCLI/MotorController.cpp; sourceTree = "<group>"; };
+		A5034B3C1E6B82BC00A4E0C6 /* MotorController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MotorController.hpp; path = EtchASketch/EtchCLI/MotorController.hpp; sourceTree = "<group>"; };
 		A52158361E4ADD9C002A411E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = EtchASketch/EtchCLI/main.cpp; sourceTree = "<group>"; };
 		A52158371E4ADD9C002A411E /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = EtchASketch/EtchCLI/Makefile; sourceTree = "<group>"; };
 		A52158381E4ADE61002A411E /* BlurImageFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BlurImageFilter.hpp; sourceTree = "<group>"; };
@@ -119,8 +121,6 @@
 		A521584B1E4ADF17002A411E /* SmallishSpanningTreeWalkSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SmallishSpanningTreeWalkSalesman.hpp; sourceTree = "<group>"; };
 		A550315A1E66316A00F4C4A1 /* motor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = motor.h; path = EtchASketch/EtchCLI/motor.h; sourceTree = "<group>"; };
 		A550315B1E66316A00F4C4A1 /* motor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = motor.c; path = EtchASketch/EtchCLI/motor.c; sourceTree = "<group>"; };
-		A550315D1E66329A00F4C4A1 /* MotorController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MotorController.cpp; sourceTree = "<group>"; };
-		A550315E1E66329A00F4C4A1 /* MotorController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MotorController.hpp; sourceTree = "<group>"; };
 		B820E9031DAC6E2200135C8A /* EASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASImage.h; sourceTree = "<group>"; };
 		B820E9041DAC6E2200135C8A /* EASImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EASImage.mm; sourceTree = "<group>"; };
 		B820E9181DAC75C800135C8A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -221,8 +221,8 @@
 				A550315A1E66316A00F4C4A1 /* motor.h */,
 				A550315B1E66316A00F4C4A1 /* motor.c */,
 				A52158361E4ADD9C002A411E /* main.cpp */,
-				A550315D1E66329A00F4C4A1 /* MotorController.cpp */,
-				A550315E1E66329A00F4C4A1 /* MotorController.hpp */,
+				A5034B3C1E6B82BC00A4E0C6 /* MotorController.hpp */,
+				A5034B3A1E6B82B200A4E0C6 /* MotorController.cpp */,
 			);
 			name = EtchCLI;
 			path = ..;

@@ -38,7 +38,35 @@ void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2
     
     // for each point to draw
     for(size_t i = 0; i < points.size(); i++) {
-        
+
+        etchasketch::KDPoint<2> target = points[i];
+
+        int x_dist = target[0] - nibLoc.x;
+        int y_dist = target[1] - nibLoc.y;
+
+        // While not at target…
+        while (x_dist || y_dist) {
+            if (x_dist < 0) {
+                motor_move(&motorX, DIR_CCW);
+                x_dist++;
+                nibLoc.x--;
+            } else if (x_dist > 0) {
+                motor_move(&motorX, DIR_CW);
+                x_dist--;
+                nibLoc.x++;
+            }
+
+            if (y_dist < 0) {
+                motor_move(&motorY, DIR_CCW);
+                y_dist++;
+                nibLoc.y--;
+            } else if (y_dist > 0) {
+                motor_move(&motorY, DIR_CW);
+                y_dist--;
+                nibLoc.y++;
+            }
+        }
+        /*
         etchasketch::KDPoint<2> tgt_pt = points[i];
         float slope = (tgt_pt[1] - nibLoc.y)/(tgt_pt[0] - nibLoc.x);
         
@@ -94,6 +122,7 @@ void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2
                 }
             }
         }
+         */
     }
 }
 
