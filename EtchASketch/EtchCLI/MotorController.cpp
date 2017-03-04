@@ -7,6 +7,7 @@
 //
 
 #include "MotorController.hpp"
+#include <iostream>
 
 MotorController::MotorController()
 {
@@ -21,7 +22,10 @@ MotorController::MotorController()
     // Initializing motors requires root access.
     motor_initialize();
 
-
+    // Initialize motor nibLoc
+    nibLoc.x = 0;
+    nibLoc.y = 0;
+    
     if (motor_init(&motorX) || motor_init(&motorY)) {
         fprintf(stderr, "Error creating motor.\n");
         exit(1);
@@ -30,7 +34,67 @@ MotorController::MotorController()
 
 void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2>> &points)
 {
-
+    cout << "DRAWING ORDERED EDGE POINTS" << endl;
+    
+    // for each point to draw
+    for(size_t i = 0; i < points.size(); i++) {
+        
+        etchasketch::KDPoint<2> tgt_pt = points[i];
+        float slope = (tgt_pt[1] - nibLoc.y)/(tgt_pt[0] - nibLoc.x);
+        
+        // while point not reached
+        while (nibLoc.x != tgt_pt[0] && nibLoc.y != tgt_pt[1]) {
+            
+            cout << "x: " << nibLoc.x << ", y: " << nibLoc.y << endl;
+            float slope_pt_x = nibLoc.x;
+            float slope_pt_y = nibLoc.y;
+           
+            float ref_pt_x = nibLoc.x;
+            float ref_pt_y = nibLoc.y;
+            
+            if (nibLoc.x < tgt_pt[0]) {
+                slope_pt_x++;
+                slope_pt_y += slope;
+                
+                ref_pt_x++;
+            }
+            if (nibLoc.x > tgt_pt[0]) {
+                slope_pt_x--;
+                slope_pt_y -= slope;
+                
+                ref_pt_x--;
+            }
+            
+            if (nibLoc.y < tgt_pt[1]) {
+                ref_pt_y++;   
+            }
+            if (nibLoc.y > tgt_pt[1]) {
+                ref_pt_y--;
+            }
+             
+            if (slope_pt_y >= ref_pt_y) {
+                // y movement
+                if (tgt_pt[1] > nibLoc.y) {
+                    motor_move(&motorY, DIR_CW);
+                    nibLoc.y++;
+                }
+                if (tgt_pt[1] < nibLoc.y) {
+                    motor_move(&motorY, DIR_CCW);
+                    nibLoc.y--;
+                }
+            } else {
+                // x movement
+                if (tgt_pt[0] > nibLoc.x) {
+                    motor_move(&motorX, DIR_CW);
+                    nibLoc.x++;
+                }
+                if (tgt_pt[0] < nibLoc.x) {
+                    motor_move(&motorX, DIR_CCW);
+                    nibLoc.x--;
+                }
+            }
+        }
+    }
 }
 
 int MotorController::moveToPoint(const etchasketch::KDPoint<2> &pt)
