@@ -115,13 +115,7 @@ main(int argc, char * const argv[])
 
     // Draw ordered edge points.
     MotorController tracer = MotorController();
-    // tracer.drawOrderedPoints(points);
-
-    std::vector<etchasketch::KDPoint<2>> test_points;
-    test_points.push_back(etchasketch::KDPoint<2>(0, 0));
-    test_points.push_back(etchasketch::KDPoint<2>(2, 5));
-
-    tracer.drawOrderedPoints(test_points);
+    tracer.drawOrderedPoints(points);
 
 
     /*
