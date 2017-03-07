@@ -66,6 +66,7 @@ void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2
                 nibLoc.y++;
             }
         }
+    }
         /*
         etchasketch::KDPoint<2> tgt_pt = points[i];
         float slope = (tgt_pt[1] - nibLoc.y)/(tgt_pt[0] - nibLoc.x);
@@ -123,7 +124,6 @@ void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2
             }
         }
          */
-    }
 }
 
 int MotorController::moveToPoint(const etchasketch::KDPoint<2> &pt)

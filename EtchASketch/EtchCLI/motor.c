@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <wiringPi.h>
+//#include <wiringPi.h>
 #include "motor.h"
 
 #define DELAY_US 1000
