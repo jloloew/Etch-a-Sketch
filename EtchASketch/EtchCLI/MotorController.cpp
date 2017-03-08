@@ -38,7 +38,7 @@ void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2
     
     // for each point to draw
     for(size_t i = 0; i < points.size(); i++) {
-
+        /*
         etchasketch::KDPoint<2> target = points[i];
 
         int x_dist = target[0] - nibLoc.x;
@@ -66,20 +66,25 @@ void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2
                 nibLoc.y++;
             }
         }
-        /*
+        */
+
         etchasketch::KDPoint<2> tgt_pt = points[i];
         float slope = (tgt_pt[1] - nibLoc.y)/(tgt_pt[0] - nibLoc.x);
         
-        // while point not reached
+        // while not at target point
         while (nibLoc.x != tgt_pt[0] && nibLoc.y != tgt_pt[1]) {
             
             cout << "x: " << nibLoc.x << ", y: " << nibLoc.y << endl;
+
+            // mark position along slope line in proper x direction
             float slope_pt_x = nibLoc.x;
             float slope_pt_y = nibLoc.y;
-           
+
+            // mark unit movement position in proper x and y direction
             float ref_pt_x = nibLoc.x;
             float ref_pt_y = nibLoc.y;
-            
+
+            // update markers...
             if (nibLoc.x < tgt_pt[0]) {
                 slope_pt_x++;
                 slope_pt_y += slope;
@@ -99,9 +104,9 @@ void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2
             if (nibLoc.y > tgt_pt[1]) {
                 ref_pt_y--;
             }
-             
-            if (slope_pt_y >= ref_pt_y) {
-                // y movement
+
+            // choose x or y movement
+            if (slope_pt_y >= ref_pt_y) {         // y movement
                 if (tgt_pt[1] > nibLoc.y) {
                     motor_move(&motorY, DIR_CW);
                     nibLoc.y++;
@@ -110,8 +115,7 @@ void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2
                     motor_move(&motorY, DIR_CCW);
                     nibLoc.y--;
                 }
-            } else {
-                // x movement
+            } else {                             // x movement
                 if (tgt_pt[0] > nibLoc.x) {
                     motor_move(&motorX, DIR_CW);
                     nibLoc.x++;
@@ -122,7 +126,6 @@ void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2
                 }
             }
         }
-         */
     }
 }
 
