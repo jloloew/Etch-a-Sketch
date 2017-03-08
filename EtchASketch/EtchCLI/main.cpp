@@ -51,7 +51,7 @@ main(int argc, char * const argv[])
 {
     cout << "Welcome to etch ❤️" << endl;
 
-    
+
 
     // Parse arguments.
     string inFile;
@@ -117,53 +117,17 @@ main(int argc, char * const argv[])
     MotorController tracer = MotorController();
     tracer.drawOrderedPoints(points);
 
-
     /*
-    // Set up x and y motors.
-    motor_t mx;
-    motor_t my;
+    std::vector<etchasketch::KDPoint<2>> test_points;
+    test_points.push_back(etchasketch::KDPoint<2>(0, 0));
+    test_points.push_back(etchasketch::KDPoint<2>(2, 5));
+    test_points.push_back(etchasketch::KDPoint<2>(10, 1));
 
-    if (motor_init(&mx) || motor_init(&my)) {
-        fprintf(stderr, "Error creating motor.\n");
-        return 1;
-    }
-
-    // Tracks EAS tracer position.
-    size_t tracer_x = 0;
-    size_t tracer_y = 0;
-
-    // For every ordered edge point…
-    for (size_t i = 0; i < points.size(); i++) {
-      etchasketch::KDPoint<2> target = points[i];
-
-      int x_dist = target[0] - tracer_x;
-      int y_dist = target[1] - tracer_y;
-
-      // While not at target…
-      while (x_dist || y_dist) {
-
-          if (x_dist < 0) {
-            motor_move(&mx, DIR_CCW);
-            x_dist++;
-            tracer_x--;
-          } else if (x_dist > 0) {
-            motor_move(&mx, DIR_CW);
-            x_dist--;
-            tracer_x++;
-          }
-
-          if (y_dist < 0) {
-            motor_move(&my, DIR_CCW);
-            y_dist++;
-            tracer_y--;
-          } else if (y_dist > 0) {
-            motor_move(&my, DIR_CW);
-            y_dist--;
-            tracer_y++;
-          }
-      }
-    }
+    tracer.drawOrderedPoints(test_points);
     */
+
+    cout << "MotorController finished tracing points." << endl;
+
 
     return 0;
 }
