@@ -47,24 +47,26 @@ void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2
         // While not at target…
         while (x_dist || y_dist) {
             if (x_dist < 0) {
-                motor_move(&motorX, DIR_CCW);
+                motor_prepare_move(&motorX, DIR_CCW);
                 x_dist++;
                 nibLoc.x--;
             } else if (x_dist > 0) {
-                motor_move(&motorX, DIR_CW);
+                motor_prepare_move(&motorX, DIR_CW);
                 x_dist--;
                 nibLoc.x++;
             }
 
             if (y_dist < 0) {
-                motor_move(&motorY, DIR_CCW);
+                motor_prepare_move(&motorY, DIR_CCW);
                 y_dist++;
                 nibLoc.y--;
             } else if (y_dist > 0) {
-                motor_move(&motorY, DIR_CW);
+                motor_prepare_move(&motorY, DIR_CW);
                 y_dist--;
                 nibLoc.y++;
             }
+            
+            motor_execute_move(&motorX, 2);
         }
         */
 

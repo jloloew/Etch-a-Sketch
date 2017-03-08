@@ -24,8 +24,9 @@ main(int argc, char *argv[])
 
     printf("Beginning rotation...\n");
     while (1) {
-        motor_move(&m0, DIR_CW);
-        motor_move(&m1, DIR_CCW);
+        motor_prepare_move(&m0, DIR_CW);
+        motor_prepare_move(&m1, DIR_CCW);
+        motor_execute_move(&m0, 2);
     }
 
     return 0;
