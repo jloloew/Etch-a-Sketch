@@ -1,6 +1,5 @@
 /**
  * @file image.cpp
- * @author jloew2
  */
 
 #include "image.h"
