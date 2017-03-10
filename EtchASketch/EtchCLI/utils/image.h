@@ -1,6 +1,5 @@
 /**
  * @file image.h
- * @author jloew2
  */
 
 #ifndef IMAGE_H
