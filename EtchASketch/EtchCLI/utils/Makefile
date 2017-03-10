@@ -1,4 +1,4 @@
-EXENAME = mp2
+EXENAME = etcher
 OBJS = png.o rgbapixel.o image.o
 
 CXX = clang++
@@ -6,13 +6,13 @@ CXXFLAGS = -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
 LD = clang++
 LDFLAGS = -std=c++1y -stdlib=libc++ -lpng -lc++abi
 
-all : testimage
+all : etcher
 
-testimage : testimage.o image.o png.o rgbapixel.o
-	$(LD) testimage.o image.o png.o rgbapixel.o $(LDFLAGS) -o testimage
+etcher : main.o image.o png.o rgbapixel.o
+	$(LD) main.o image.o png.o rgbapixel.o $(LDFLAGS) -o $(EXENAME)
 
-testimage.o : image.o testimage.cpp
-	$(CXX) $(CXXFLAGS) testimage.cpp
+main.o : image.o main.cpp
+	$(CXX) $(CXXFLAGS) main.cpp
 
 image.o : png.o image.cpp image.h
 	$(CXX) $(CXXFLAGS) image.cpp
