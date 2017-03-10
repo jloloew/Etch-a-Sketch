@@ -7,7 +7,7 @@
 //
 
 #include "BobAndWeaveSalesman.hpp"
-#include "EASUtils.hpp"
+#include "EASUtils+Private.hpp"
 #include <cmath>
 
 
@@ -71,7 +71,8 @@ KDPoint<2> BobAndWeaveSalesman::offsetPointAt(const KDPointCoordinate x,
 	
 	// Add the vertical displacement to the point and return it.
 	KDPointCoordinate dy = static_cast<KDPointCoordinate>(verticalDisplacement);
-	return KDPoint<2>(x, y + dy);
+	KDPointCoordinate ydy = MIN(MAX(y + dy, 0), static_cast<KDPointCoordinate>(grayscaleImage.getHeight() - 1));
+	return KDPoint<2>(x, ydy);
 }
 
 } // namespace salesman

@@ -28,5 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// Return a @c UIImage of the @c EASImage, performing conversion if necessary.
 - (nullable UIImage *)UIImage;
 
+
+
+
++ (EASImage *)imageFromTempDebuggingFileImage;
+
 @end
 NS_ASSUME_NONNULL_END

@@ -156,4 +156,34 @@ using etchasketch::Image;
 	return static_cast<NSUInteger>(self.image->getHeight());
 }
 
++ (EASImage *)imageFromTempDebuggingFileImage {
+	// Make sure we can open the input file.
+	long imgWidth = 512, imgHeight = 512;
+	FILE *inImageFd = fopen("/Users/jloloew/Desktop/EtchASketch/EtchASketch/EtchCLI/utils/lena.etch", "r");
+	if (!inImageFd) {
+		perror("Can't open input image");
+		exit(1);
+	}
+	
+	// Read in the input image.
+	etchasketch::Image::Pixel *rawInputImage = new etchasketch::Image::Pixel[imgWidth * imgHeight];
+	if (!rawInputImage) {
+		perror("Out of memory");
+		exit(1);
+	}
+	if (fread(rawInputImage, sizeof(etchasketch::Image::Pixel), imgWidth * imgHeight, inImageFd) != imgWidth * imgHeight) {
+		perror("Unable to read input image");
+		exit(1);
+	}
+	
+	// Copy the input image into an etchasketch::Image.
+	etchasketch::Image *inputImg = new etchasketch::Image(imgWidth, imgHeight, rawInputImage);
+	delete [] rawInputImage;
+	rawInputImage = nullptr;
+	
+	// Convert to UIImage
+	EASImage *tmp = [[EASImage alloc] initWithCPPImage:inputImg];
+	return tmp;
+}
+
 @end

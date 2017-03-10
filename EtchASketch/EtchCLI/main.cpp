@@ -106,6 +106,7 @@ main(int argc, char * const argv[])
     inputImgFlow.orderEdgePointsForDrawing();
     std::vector<etchasketch::KDPoint<2>> points = inputImgFlow.getOrderedEdgePoints();
     cout << "ImageFlow completed its run." << endl;
+    
 /*    etchasketch::utils::writeOrderedEdgePointsToFile(
         "lena_ordered_edge_points.png",
         points,
