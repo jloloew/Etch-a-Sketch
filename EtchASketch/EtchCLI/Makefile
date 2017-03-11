@@ -23,7 +23,7 @@ ifeq ($(UNAME_S),Linux)
 endif
 LD_OBJS = $(OBJS)
 ifeq ($(UNAME_S),Linux)
-	LD_OBJS += /usr/lib/arm-linux/gnueabihf/libunwind.so.8
+	LD_OBJS += /usr/lib/arm-linux-gnueabihf/libunwind.so.8
 endif
 
 MOTOR_FILES = motor.c libEtchASketch.a

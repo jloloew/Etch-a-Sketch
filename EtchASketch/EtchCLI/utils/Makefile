@@ -9,7 +9,7 @@ LDFLAGS = -std=c++1y -stdlib=libc++ -lpng -lc++abi
 all : etcher
 
 etcher : main.o image.o png.o rgbapixel.o
-	$(LD) main.o image.o png.o rgbapixel.o $(LDFLAGS) -o $(EXENAME)
+	$(LD) main.o image.o png.o rgbapixel.o /usr/lib/arm-linux-gnueabihf/libunwind.so.8 $(LDFLAGS) -o $(EXENAME)
 
 main.o : image.o main.cpp
 	$(CXX) $(CXXFLAGS) main.cpp

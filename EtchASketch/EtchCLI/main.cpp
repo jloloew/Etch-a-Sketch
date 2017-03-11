@@ -118,17 +118,7 @@ main(int argc, char * const argv[])
     MotorController tracer = MotorController();
     tracer.drawOrderedPoints(points);
 
-    /*
-    std::vector<etchasketch::KDPoint<2>> test_points;
-    test_points.push_back(etchasketch::KDPoint<2>(0, 0));
-    test_points.push_back(etchasketch::KDPoint<2>(2, 5));
-    test_points.push_back(etchasketch::KDPoint<2>(10, 1));
-
-    tracer.drawOrderedPoints(test_points);
-    */
-
     cout << "MotorController finished tracing points." << endl;
-
 
     return 0;
 }

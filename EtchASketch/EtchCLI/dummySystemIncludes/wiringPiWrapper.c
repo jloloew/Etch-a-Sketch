@@ -1,6 +1,6 @@
 #include "wiringPiWrapper.h"
 #include <stdio.h>
-
+#ifndef __linux__
 int
 wiringPiSetup(void)
 {
@@ -25,4 +25,5 @@ delayMicroseconds(unsigned int howLong)
 {
     // Skip the delay and do nothing
 }
+#endif // __linux__
 

@@ -28,7 +28,7 @@ MotorController::MotorController()
     nibLoc.x = 0;
     nibLoc.y = 0;
 
-    if (motor_init(&motorX) || motor_init(&motorY)) {
+    if (motor_init(&motors[0]) || motor_init(&motors[1])) {
         fprintf(stderr, "Error creating motor.\n");
         exit(1);
     }
@@ -98,7 +98,7 @@ void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2
       // cout << "chosen_pt x: " << chosen_pt[0] << ", y: " << chosen_pt[1] << endl;
       // cout << "goal_pt x: " << goal_pt[0] << ", y: " << goal_pt[1] << endl;
       // cout << "----------" << endl;
-      cout << "current_pt x: " << current_pt[0] << ", y: " << current_pt[1] << endl;
+      // cout << "current_pt x: " << current_pt[0] << ", y: " << current_pt[1] << endl;
       // cout << "----------" << endl << endl;
       //
       // sleep(1);
@@ -117,10 +117,32 @@ double MotorController::euclidean_distance(const etchasketch::KDPoint<2> &a,
 
 int MotorController::moveToPoint(const etchasketch::KDPoint<2> &pt)
 {
+ 
+    int x_dist = pt[0] - nibLoc.x;
+    int y_dist = pt[1] - nibLoc.y;
+    
+    // control motors!
+    for (size_t i = 0; i < 100; i++) {
+        if (x_dist > 0) {
+            motor_prepare_move(&motors[0], DIR_CW);
+        } else if (x_dist < 0) {
+            motor_prepare_move(&motors[0], DIR_CCW);
+        }
+        
+        if (y_dist > 0) {
+            motor_prepare_move(&motors[1], DIR_CCW);
+        } else if (y_dist < 0) {
+            motor_prepare_move(&motors[1], DIR_CW);
+        }
+
+        motor_execute_move(motors, 2);
+    }
+    
+    cout << "x: " << nibLoc.x << ", y: " << nibLoc.y << endl;
+    
+    // update nibLoc coordinates
     nibLoc.x = pt[0];
     nibLoc.y = pt[1];
-
-    // control motors!
-
-    return -1;
+    
+    return 0;
 }

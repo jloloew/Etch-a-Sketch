@@ -33,8 +33,7 @@ public:
 
 private:
 
-    motor_t motorX;
-    motor_t motorY;
+    motor_t motors[2];
     motor_point_t nibLoc;
 
     double euclidean_distance(const etchasketch::KDPoint<2> &a,
