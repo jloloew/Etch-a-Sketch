@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <wiringPi.h>
+#include <wiringPiWrapper.h>
 #include "motor.h"
 
 #define DELAY_US 1000
@@ -25,6 +25,8 @@ static gpio_pinout_labels_t pinout_labels = {
     }
 };
 
+static void motor_set_dir(motor_t *motor, motor_dir_t dir);
+
 void
 motor_initialize(void)
 {
@@ -44,6 +46,8 @@ motor_init(motor_t *motor)
     static unsigned int next_id = 0;
     unsigned int id = next_id++;
     if (id >= NUM_PIN_ASSIGMENTS) {
+        printf("Motor %u hasn't been defined yet\n", id);
+        next_id--; // Prevent overflow after 4,000,000,000 more calls
         return 1;
     }
     motor->pin_step = step_pins[id];
@@ -57,7 +61,57 @@ motor_init(motor_t *motor)
 }
 
 void
-motor_move(const motor_t *motor, motor_dir_t dir)
+motor_prepare_move(motor_t *motor, motor_dir_t dir)
+{
+    if (!motor) { // Safety first
+        return;
+    }
+    
+    motor->next_move.should_move = 1;
+    motor->next_move.dir = dir;
+}
+
+void
+motor_execute_move(motor_t motors[], unsigned int n_motors)
+{
+    if (!motors) { // Safety first
+        return;
+    }
+    
+    // Set all the direction pins
+    for (unsigned int i = 0; i < n_motors; i++) {
+        motor_t *motor = &motors[i];
+        if (motor->next_move.should_move) {
+            motor_set_dir(motor, motor->next_move.dir);
+        }
+    }
+    
+    // Raise the step pins
+    for (unsigned int i = 0; i < n_motors; i++) {
+        motor_t *motor = &motors[i];
+        if (motor->next_move.should_move) {
+            digitalWrite(motor->pin_step, HIGH);
+        }
+    }
+    
+    // Delay.
+    delayMicroseconds(DELAY_US);
+    
+    // Clear the step pins and each motor's next_move
+    for (unsigned int i = 0; i < n_motors; i++) {
+        motor_t *motor = &motors[i];
+        if (motor->next_move.should_move) {
+            digitalWrite(motor->pin_step, LOW);
+            motor->next_move.should_move = 0;
+        }
+    }
+    
+    // Finish off the delay.
+    delayMicroseconds(DELAY_US);
+}
+
+static void
+motor_set_dir(motor_t *motor, motor_dir_t dir)
 {
     if (!motor) { // Safety first
         return;
@@ -77,12 +131,6 @@ motor_move(const motor_t *motor, motor_dir_t dir)
         fprintf(stderr, "Invalid direction: %d\n", dir);
         return;
     }
-    
-    // Pulse the step pin
-    digitalWrite(motor->pin_step, HIGH);
-    delayMicroseconds(DELAY_US);
-    digitalWrite(motor->pin_step, LOW);
-    delayMicroseconds(DELAY_US);
 }
 
 static void

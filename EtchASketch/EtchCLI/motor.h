@@ -12,11 +12,18 @@ enum {
 };
 typedef int motor_dir_t;
 
+struct motor_move_s {
+    int should_move;
+    motor_dir_t dir;
+};
+
 typedef struct {
     /// A unique identifier.
     unsigned int id;
     
     unsigned int pin_dir, pin_step;
+    
+    struct motor_move_s next_move;
 } motor_t;
 
 typedef struct {
@@ -38,7 +45,10 @@ void motor_initialize(void);
 
 int motor_init(motor_t *motor);
 
-void motor_move(const motor_t *motor, motor_dir_t dir);
+void motor_prepare_move(motor_t *motor, motor_dir_t dir);
+
+/// This call blocks.
+void motor_execute_move(motor_t motors[], unsigned int n_motors);
 
 void print_gpio_labels(void);
 

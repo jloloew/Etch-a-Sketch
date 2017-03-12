@@ -13,7 +13,7 @@
 #include <sstream>
 #include <iostream>
 #include <sys/time.h>
-#include <png.h>
+//#include <png.h>
 
 #define USEC_PER_SEC 1.0e6
 

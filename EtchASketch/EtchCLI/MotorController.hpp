@@ -13,6 +13,10 @@
 #include "motor.h"
 #include "EtchASketch.hpp"
 
+
+#define EAS_BOARD_WIDTH 1000
+#define EAS_BOARD_HEIGHT 1000
+
 class MotorController {
 
 public:
@@ -29,10 +33,11 @@ public:
 
 private:
 
-    motor_t motorX;
-    motor_t motorY;
+    motor_t motors[2];
     motor_point_t nibLoc;
 
+    double euclidean_distance(const etchasketch::KDPoint<2> &a,
+                              const etchasketch::KDPoint<2> &b);
     int moveToPoint(const etchasketch::KDPoint<2> &pt);
 };
 

@@ -11,8 +11,6 @@
 		A521583E1E4ADE93002A411E /* SobelEdgeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A521583D1E4ADE93002A411E /* SobelEdgeDetector.cpp */; };
 		A52158421E4ADECE002A411E /* BobAndWeaveSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158401E4ADECE002A411E /* BobAndWeaveSalesman.cpp */; };
 		A52158451E4ADEE3002A411E /* Salesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158441E4ADEE3002A411E /* Salesman.cpp */; };
-		A52158471E4ADEF5002A411E /* NearestNeighborSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158461E4ADEF5002A411E /* NearestNeighborSalesman.cpp */; };
-		A521584A1E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A52158491E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp */; };
 		A550315C1E66316A00F4C4A1 /* motor.c in Sources */ = {isa = PBXBuildFile; fileRef = A550315B1E66316A00F4C4A1 /* motor.c */; };
 		B820E9051DAC6E2200135C8A /* EASImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B820E9041DAC6E2200135C8A /* EASImage.mm */; };
 		B827FE8F1DB1B27F007F2469 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
@@ -32,6 +30,7 @@
 		B85A95951DFCC06E00E0F6BE /* EASDebugViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */; };
 		B872DD8F1DB06C2D008E08D8 /* KDTree.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */; };
 		B872DD901DB06C30008E08D8 /* KDPoint.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */; };
+		B8765E851E72227B00420672 /* wiringPiWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B8765E831E72227B00420672 /* wiringPiWrapper.c */; };
 		B8766BA61D79DC9100A4ED34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8766BA51D79DC9100A4ED34 /* main.m */; };
 		B8766BA91D79DC9100A4ED34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8766BA81D79DC9100A4ED34 /* AppDelegate.m */; };
 		B8766BAF1D79DC9100A4ED34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8766BAD1D79DC9100A4ED34 /* Main.storyboard */; };
@@ -101,6 +100,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A5034B3A1E6B82B200A4E0C6 /* MotorController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MotorController.cpp; path = EtchASketch/EtchCLI/MotorController.cpp; sourceTree = "<group>"; };
+		A5034B3C1E6B82BC00A4E0C6 /* MotorController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MotorController.hpp; path = EtchASketch/EtchCLI/MotorController.hpp; sourceTree = "<group>"; };
 		A52158361E4ADD9C002A411E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = EtchASketch/EtchCLI/main.cpp; sourceTree = "<group>"; };
 		A52158371E4ADD9C002A411E /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = EtchASketch/EtchCLI/Makefile; sourceTree = "<group>"; };
 		A52158381E4ADE61002A411E /* BlurImageFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BlurImageFilter.hpp; sourceTree = "<group>"; };
@@ -111,16 +112,10 @@
 		A521583F1E4ADE9D002A411E /* ImageFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageFilter.hpp; sourceTree = "<group>"; };
 		A52158401E4ADECE002A411E /* BobAndWeaveSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BobAndWeaveSalesman.cpp; sourceTree = "<group>"; };
 		A52158411E4ADECE002A411E /* BobAndWeaveSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BobAndWeaveSalesman.hpp; sourceTree = "<group>"; };
-		A52158431E4ADEE3002A411E /* NearestNeighborSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NearestNeighborSalesman.hpp; sourceTree = "<group>"; };
 		A52158441E4ADEE3002A411E /* Salesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Salesman.cpp; sourceTree = "<group>"; };
-		A52158461E4ADEF5002A411E /* NearestNeighborSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NearestNeighborSalesman.cpp; sourceTree = "<group>"; };
 		A52158481E4ADF00002A411E /* Salesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = Salesman.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
-		A52158491E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SmallishSpanningTreeWalkSalesman.cpp; sourceTree = "<group>"; };
-		A521584B1E4ADF17002A411E /* SmallishSpanningTreeWalkSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SmallishSpanningTreeWalkSalesman.hpp; sourceTree = "<group>"; };
 		A550315A1E66316A00F4C4A1 /* motor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = motor.h; path = EtchASketch/EtchCLI/motor.h; sourceTree = "<group>"; };
 		A550315B1E66316A00F4C4A1 /* motor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = motor.c; path = EtchASketch/EtchCLI/motor.c; sourceTree = "<group>"; };
-		A550315D1E66329A00F4C4A1 /* MotorController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MotorController.cpp; sourceTree = "<group>"; };
-		A550315E1E66329A00F4C4A1 /* MotorController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MotorController.hpp; sourceTree = "<group>"; };
 		B820E9031DAC6E2200135C8A /* EASImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASImage.h; sourceTree = "<group>"; };
 		B820E9041DAC6E2200135C8A /* EASImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EASImage.mm; sourceTree = "<group>"; };
 		B820E9181DAC75C800135C8A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -140,6 +135,8 @@
 		B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASDebugViewController.xib; sourceTree = "<group>"; };
 		B86263AC1E4948B50010A1B2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		B86263AD1E4948BE0010A1B2 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		B8765E831E72227B00420672 /* wiringPiWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wiringPiWrapper.c; sourceTree = "<group>"; };
+		B8765E841E72227B00420672 /* wiringPiWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wiringPiWrapper.h; sourceTree = "<group>"; };
 		B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEtchASketch.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8766BA21D79DC9100A4ED34 /* iEAS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iEAS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8766BA51D79DC9100A4ED34 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -217,12 +214,13 @@
 		A52158301E4AD0C8002A411E /* EtchCLI */ = {
 			isa = PBXGroup;
 			children = (
+				B8765E821E72227B00420672 /* dummySystemIncludes */,
 				A52158371E4ADD9C002A411E /* Makefile */,
 				A550315A1E66316A00F4C4A1 /* motor.h */,
 				A550315B1E66316A00F4C4A1 /* motor.c */,
 				A52158361E4ADD9C002A411E /* main.cpp */,
-				A550315D1E66329A00F4C4A1 /* MotorController.cpp */,
-				A550315E1E66329A00F4C4A1 /* MotorController.hpp */,
+				A5034B3C1E6B82BC00A4E0C6 /* MotorController.hpp */,
+				A5034B3A1E6B82B200A4E0C6 /* MotorController.cpp */,
 			);
 			name = EtchCLI;
 			path = ..;
@@ -245,6 +243,16 @@
 				B820E9181DAC75C800135C8A /* libc++.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B8765E821E72227B00420672 /* dummySystemIncludes */ = {
+			isa = PBXGroup;
+			children = (
+				B8765E831E72227B00420672 /* wiringPiWrapper.c */,
+				B8765E841E72227B00420672 /* wiringPiWrapper.h */,
+			);
+			name = dummySystemIncludes;
+			path = EtchASketch/EtchCLI/dummySystemIncludes;
 			sourceTree = "<group>";
 		};
 		B8766B891D79DC3E00A4ED34 = {
@@ -377,12 +385,8 @@
 			children = (
 				A52158401E4ADECE002A411E /* BobAndWeaveSalesman.cpp */,
 				A52158411E4ADECE002A411E /* BobAndWeaveSalesman.hpp */,
-				A52158461E4ADEF5002A411E /* NearestNeighborSalesman.cpp */,
-				A52158431E4ADEE3002A411E /* NearestNeighborSalesman.hpp */,
 				A52158441E4ADEE3002A411E /* Salesman.cpp */,
 				A52158481E4ADF00002A411E /* Salesman.hpp */,
-				A52158491E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp */,
-				A521584B1E4ADF17002A411E /* SmallishSpanningTreeWalkSalesman.hpp */,
 			);
 			name = salesman;
 			sourceTree = "<group>";
@@ -582,11 +586,9 @@
 				A550315C1E66316A00F4C4A1 /* motor.c in Sources */,
 				A52158451E4ADEE3002A411E /* Salesman.cpp in Sources */,
 				B872DD8F1DB06C2D008E08D8 /* KDTree.hpp in Sources */,
-				A52158471E4ADEF5002A411E /* NearestNeighborSalesman.cpp in Sources */,
 				A52158421E4ADECE002A411E /* BobAndWeaveSalesman.cpp in Sources */,
 				A521583E1E4ADE93002A411E /* SobelEdgeDetector.cpp in Sources */,
 				A521583A1E4ADE6B002A411E /* BlurImageFilter.cpp in Sources */,
-				A521584A1E4ADF0A002A411E /* SmallishSpanningTreeWalkSalesman.cpp in Sources */,
 				B8766BDA1D79DE7600A4ED34 /* EtchASketch.cpp in Sources */,
 				B8766BDD1D79EE4600A4ED34 /* EASUtils.cpp in Sources */,
 				B87943C41D91AA870035B729 /* Image.cpp in Sources */,
@@ -602,6 +604,7 @@
 				B827FE981DB1BDFE007F2469 /* EASBoardViewController.m in Sources */,
 				B85A95941DFCC06E00E0F6BE /* EASDebugViewController.m in Sources */,
 				B8766BA91D79DC9100A4ED34 /* AppDelegate.m in Sources */,
+				B8765E851E72227B00420672 /* wiringPiWrapper.c in Sources */,
 				B8766BA61D79DC9100A4ED34 /* main.m in Sources */,
 				B827FE8F1DB1B27F007F2469 /* EASImageFlow.mm in Sources */,
 				B820E9051DAC6E2200135C8A /* EASImage.mm in Sources */,
@@ -840,6 +843,7 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = iEAS/Info.plist;
@@ -876,6 +880,7 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = iEAS/Info.plist;

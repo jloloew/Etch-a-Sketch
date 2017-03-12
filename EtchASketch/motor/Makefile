@@ -6,7 +6,7 @@ LIB_SRC = $(wildcard $(LIB_SRC_PTH)*.cpp)
 HDR_PTHS := $(addprefix -I,$(shell find /usr/include/c++/ -type d -print))
 
 CC = clang
-CCFLAGS = -c -O0 -Wall -I$(LIB_SRC_PTH)
+CCFLAGS = -c -O0 -Wall -I$(LIB_SRC_PTH) -I$(LIB_SRC_PTH)/dummySystemIncludes/
 LD = clang
 LDFLAGS = -lwiringPi
 
@@ -15,7 +15,7 @@ all : $(EXENAME)
 $(EXENAME) : $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-main.o : main.c motor.o
+main.o : main.c motor.o $(LIB_SRC_PTH)wiringPiWrapper.o
 	$(CC) $(CCFLAGS) $^
 
 motor.o : $(LIB_SRC_PTH)motor.c

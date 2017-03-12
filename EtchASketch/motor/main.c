@@ -9,23 +9,24 @@ main(int argc, char *argv[])
     motor_initialize();
     
     // Set up a motor.
-    motor_t m0, m1;
-    if (motor_init(&m0) || motor_init(&m1)) {
+    motor_t m[2];
+    if (motor_init(&m[0]) || motor_init(&m[1])) {
         fprintf(stderr, "Error creating motor.\n");
         return 1;
     }
 
     // Print the pin numbers.
     printf("WiringPi pin numbers:\n");
-    printf("Step:      %02d\n", m0.pin_step);
-    printf("Direction: %02d\n", m0.pin_dir);
+    printf("Step:      %02d\n", m[0].pin_step);
+    printf("Direction: %02d\n", m[0].pin_dir);
     
 //    print_gpio_labels();
 
     printf("Beginning rotation...\n");
     while (1) {
-        motor_move(&m0, DIR_CW);
-        motor_move(&m1, DIR_CCW);
+        motor_prepare_move(&m[0], DIR_CCW);
+        //motor_prepare_move(&m[1], DIR_CCW);
+        motor_execute_move(m, 2);
     }
 
     return 0;
