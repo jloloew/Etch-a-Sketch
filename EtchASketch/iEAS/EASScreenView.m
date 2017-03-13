@@ -50,9 +50,10 @@
 }
 
 - (void)commonInit {
+	self.backgroundColor = [UIColor lightGrayColor];
 	self.points = [NSMutableArray array];
 	self.pointColor = [UIColor blackColor];
-	self.lineColor = self.tintColor;
+	self.lineColor = [UIColor darkGrayColor];
 }
 
 - (void)addPoints:(NSArray<NSValue *> *)newPoints animated:(BOOL)animated {
@@ -76,7 +77,7 @@
 		pointsLayer.lineWidth = 3.0f;
 		pointsLayer.lineJoin = kCALineJoinMiter;
 		
-		[self.layer addSublayer:pointsLayer];
+//		[self.layer addSublayer:pointsLayer];
 		
 		self.pointsLayer = pointsLayer;
 	}
@@ -201,6 +202,18 @@
 - (void)setPointColor:(UIColor *)pointColor {
 	_pointColor = pointColor;
 	[self setNeedsDisplay];
+}
+
+// For debugging and documentation purposes.
+- (UIImage *)captureView {
+	// From https://stackoverflow.com/questions/17145049/capture-uiview-and-save-as-image
+	CGRect rect = [self bounds];
+	UIGraphicsBeginImageContext(rect.size);
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	[self.layer renderInContext:context];
+	UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	return img;
 }
 
 @end
