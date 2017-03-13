@@ -34,6 +34,8 @@ struct Image {
 
 	// Deep copy another image.
 	Image(const etchasketch::Image &other);
+	
+	Image & operator=(const Image &that);
 
 	virtual ~Image();
 
