@@ -52,6 +52,11 @@ using etchasketch::KDPoint;
 
 - (void)generateGrayscaleImage {
 	NSAssert(self.computationStage == EASComputationStageNone, @"Computation already completed");
+	if (self.computationStage >= EASComputationStageGenerateGrayscaleImage) {
+		// Already done, or at least in progress.
+		return;
+	}
+	
 	// Update the current stage of computation and notify the delegate.
 	self.computationStage = EASComputationStageGenerateGrayscaleImage;
 	if ([self.delegate respondsToSelector:@selector(imageFlow:willBeginComputationStage:)]) {
@@ -68,6 +73,11 @@ using etchasketch::KDPoint;
 
 - (void)detectEdges {
 	NSAssert(self.computationStage == EASComputationStageGenerateGrayscaleImage, @"Computation already completed");
+	if (self.computationStage >= EASComputationStageDetectEdges) {
+		// Already done, or at least in progress.
+		return;
+	}
+	
 	// Update the current stage of computation and notify the delegate.
 	self.computationStage = EASComputationStageDetectEdges;
 	if ([self.delegate respondsToSelector:@selector(imageFlow:willBeginComputationStage:)]) {
@@ -84,6 +94,11 @@ using etchasketch::KDPoint;
 
 - (void)generateEdgePoints {
 	NSAssert(self.computationStage == EASComputationStageDetectEdges, @"Computation already completed");
+	if (self.computationStage >= EASComputationStageGenerateEdgePoints) {
+		// Already done, or at least in progress.
+		return;
+	}
+	
 	// Update the current stage of computation and notify the delegate.
 	self.computationStage = EASComputationStageGenerateEdgePoints;
 	if ([self.delegate respondsToSelector:@selector(imageFlow:willBeginComputationStage:)]) {
@@ -100,6 +115,11 @@ using etchasketch::KDPoint;
 
 - (void)orderEdgePointsForDrawing {
 	NSAssert(self.computationStage == EASComputationStageGenerateEdgePoints, @"Computation already completed");
+	if (self.computationStage >= EASComputationStageOrderEdgePointsForDrawing) {
+		// Already done, or at least in progress.
+		return;
+	}
+	
 	// Update the current stage of computation and notify the delegate.
 	self.computationStage = EASComputationStageOrderEdgePointsForDrawing;
 	if ([self.delegate respondsToSelector:@selector(imageFlow:willBeginComputationStage:)]) {
@@ -136,6 +156,13 @@ using etchasketch::KDPoint;
 		[points addObject:[NSValue valueWithCGPoint:CGPointMake((*it)[0], (*it)[1])]];
 	}
 	return points;
+}
+
+- (void)performAllComputationSteps {
+	[self generateGrayscaleImage];
+	[self detectEdges];
+	[self generateEdgePoints];
+	[self orderEdgePointsForDrawing];
 }
 
 #pragma mark - Image getters

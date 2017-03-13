@@ -62,6 +62,9 @@ typedef NS_ENUM(NSUInteger, EASComputationStage) {
 /// Get the points to draw in order, first computing them if necessary.
 - (NSArray<NSValue *> *)getOrderedEdgePoints;
 
+/// Perform the entire computation sequence.
+- (void)performAllComputationSteps;
+
 #pragma mark Image getters
 
 - (nullable UIImage *)grayscaleImage;

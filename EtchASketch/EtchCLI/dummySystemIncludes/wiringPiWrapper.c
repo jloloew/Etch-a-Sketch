@@ -9,7 +9,7 @@ wiringPiSetup(void)
 }
 
 void
-pinMode(int pin, int mode)
+pinMode(int pin __attribute__((unused)), int mode __attribute__((unused)))
 {
     // Empty
 }
@@ -21,7 +21,7 @@ digitalWrite(int pin, int value)
 }
 
 void
-delayMicroseconds(unsigned int howLong)
+delayMicroseconds(unsigned int howLong __attribute__((unused)))
 {
     // Skip the delay and do nothing
 }

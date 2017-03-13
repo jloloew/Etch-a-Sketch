@@ -151,7 +151,7 @@ print_gpio_labels(void)
     // Pad the labels to a uniform length first.
     for (int i = 0; i < numLabels; i++) {
         char * const str = gpio->labels[i];
-        int j;
+        size_t j;
         for (j = strnlen(str, labelWidth); j <= labelWidth; j++) {
             str[j] = ' ';
         }

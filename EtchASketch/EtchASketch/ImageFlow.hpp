@@ -62,6 +62,11 @@ namespace etchasketch {
 		 */
 		const std::vector<etchasketch::KDPoint<2>> & getOrderedEdgePoints();
 		
+		/**
+		 * Do the entire computation flow.
+		 */
+		void performAllComputationSteps();
+		
 		// For the Objective-C wrapper.
 		
 		const etchasketch::Image & getGrayscaleImage() const

@@ -9,8 +9,6 @@
 #include "ImageFlow.hpp"
 #include "SobelEdgeDetector.hpp"
 #include "BlurImageFilter.hpp"
-#include "NearestNeighborSalesman.hpp"
-#include "SmallishSpanningTreeWalkSalesman.hpp"
 #include "BobAndWeaveSalesman.hpp"
 
 using std::unordered_set;
@@ -20,8 +18,6 @@ using etchasketch::KDPoint;
 using etchasketch::edgedetect::BlurImageFilter;
 using etchasketch::edgedetect::SobelEdgeDetector;
 using etchasketch::salesman::Salesman;
-using etchasketch::salesman::NearestNeighborSalesman;
-using etchasketch::salesman::SmallishSpanningTreeWalkSalesman;
 using etchasketch::salesman::BobAndWeaveSalesman;
 
 etchasketch::ImageFlow::ImageFlow(const Image &colorImage)
@@ -106,8 +102,6 @@ etchasketch::ImageFlow::orderEdgePointsForDrawing()
 	// TODO: Put startPoint in class scope or something.
 	const KDPoint<2> startPoint(0, 0);
 	Salesman *salesman = nullptr;
-//	salesman = new NearestNeighborSalesman(*edgePoints, startPoint);
-//	salesman = new SmallishSpanningTreeWalkSalesman(*edgePoints, startPoint);
 	salesman = new BobAndWeaveSalesman(grayscaleImage, *edgeDetectedImage);
 	setSalesman(salesman);
 	salesman->orderPoints();
@@ -120,12 +114,27 @@ const vector<KDPoint<2>> &
 etchasketch::ImageFlow::getOrderedEdgePoints()
 {
 	// Make sure we actually have the ordered edge points ready to go.
-	if (nullptr == orderedEdgePoints) {
-		// TODO: Make sure we've gone through the entire flow.
-		orderEdgePointsForDrawing();
+	performAllComputationSteps();
+	return *orderedEdgePoints;
+}
+
+void
+etchasketch::ImageFlow::performAllComputationSteps()
+{
+	// Check if each stage of computation is done. If any stage has not yet been
+	// performed, do so now.
+	if (!edgeDetectedImage) {
+		convertToGrayscale();
+		detectEdges();
 	}
 	
-	return *orderedEdgePoints;
+	if (!edgePoints) {
+		generateEdgePoints();
+	}
+	
+	if (!orderedEdgePoints) {
+		orderEdgePointsForDrawing();
+	}
 }
 
 #pragma mark Setters
