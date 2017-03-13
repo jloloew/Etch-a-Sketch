@@ -175,8 +175,8 @@ using etchasketch::KDPoint;
 }
 
 - (UIImage *)detectedEdgesImage {
-	const Image *detectedEdgesImage = self.imageFlow->getEdgeDetectedImage();
-	EASImage *easImage = [[EASImage alloc] initWithCPPImage:detectedEdgesImage];
+	const Image & detectedEdgesImage = self.imageFlow->getEdgeDetectedImage();
+	EASImage *easImage = [[EASImage alloc] initWithCPPImage:&detectedEdgesImage];
 	UIImage *edgeImage = [easImage UIImage];
 	return edgeImage;
 }

@@ -23,7 +23,7 @@ using etchasketch::salesman::BobAndWeaveSalesman;
 etchasketch::ImageFlow::ImageFlow(const Image &colorImage)
 : originalImage(colorImage),
 grayscaleImage(colorImage.getWidth(), colorImage.getHeight()),
-edgeDetectedImage(nullptr),
+edgeDetectedImage(Image(0, 0)),
 edgePoints(nullptr),
 orderedEdgePoints(nullptr),
 edgeDetector(new SobelEdgeDetector()),
@@ -32,7 +32,6 @@ salesman(nullptr)
 
 etchasketch::ImageFlow::~ImageFlow()
 {
-	delete edgeDetectedImage;
 	delete edgePoints;
 	delete orderedEdgePoints;
 	delete edgeDetector;
@@ -68,7 +67,7 @@ etchasketch::ImageFlow::detectEdges()
 	Image *detectedImage = edgeDetector->detectEdges(*blurredImage);
 	delete blurredImage;
 	blurredImage = nullptr;
-	setEdgeDetectedImage(detectedImage);
+	edgeDetectedImage = *detectedImage;
 }
 
 void
@@ -76,10 +75,10 @@ etchasketch::ImageFlow::generateEdgePoints()
 {
 	unordered_set<KDPoint<2>> *pointSet = new unordered_set<KDPoint<2>>();
 	// Loop through each point to see if its pixel is part of an edge.
-	for (int x = 0; x < edgeDetectedImage->getWidth(); x++) {
-		for (int y = 0; y < edgeDetectedImage->getHeight(); y++) {
+	for (int x = 0; x < edgeDetectedImage.getWidth(); x++) {
+		for (int y = 0; y < edgeDetectedImage.getHeight(); y++) {
 			const KDPoint<2> pt(x, y);
-			const Image::Pixel px = (*edgeDetectedImage)[pt];
+			const Image::Pixel px = edgeDetectedImage[pt];
 			// Arbitrarily choose the green component. RGB all have the same value.
 			const uint8_t greenComponent = ((px >> 16) & 0xFF);
 			// Check for non-black.
@@ -102,7 +101,7 @@ etchasketch::ImageFlow::orderEdgePointsForDrawing()
 	// TODO: Put startPoint in class scope or something.
 	const KDPoint<2> startPoint(0, 0);
 	Salesman *salesman = nullptr;
-	salesman = new BobAndWeaveSalesman(grayscaleImage, *edgeDetectedImage);
+	salesman = new BobAndWeaveSalesman(grayscaleImage, edgeDetectedImage);
 	setSalesman(salesman);
 	salesman->orderPoints();
 	setOrderedEdgePoints(new std::vector<KDPoint<2>>(salesman->getOrderedPoints()));
@@ -123,12 +122,9 @@ etchasketch::ImageFlow::performAllComputationSteps()
 {
 	// Check if each stage of computation is done. If any stage has not yet been
 	// performed, do so now.
-	if (!edgeDetectedImage) {
+	if (!edgePoints) {
 		convertToGrayscale();
 		detectEdges();
-	}
-	
-	if (!edgePoints) {
 		generateEdgePoints();
 	}
 	
@@ -138,14 +134,6 @@ etchasketch::ImageFlow::performAllComputationSteps()
 }
 
 #pragma mark Setters
-
-void
-etchasketch::ImageFlow::setEdgeDetectedImage(const Image *newImage)
-{
-	// Delete the old value and set it to the new pointer.
-	delete edgeDetectedImage;
-	edgeDetectedImage = newImage;
-}
 
 void
 etchasketch::ImageFlow::setEdgePoints(const unordered_set<KDPoint<2>>

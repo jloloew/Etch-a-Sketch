@@ -72,14 +72,14 @@ namespace etchasketch {
 		const etchasketch::Image & getGrayscaleImage() const
 			{ return grayscaleImage; }
 		
-		const etchasketch::Image * getEdgeDetectedImage() const
+		const etchasketch::Image & getEdgeDetectedImage() const
 			{ return edgeDetectedImage; }
 		
 	private:
 		// Images and other such things, in order of use.
 		const etchasketch::Image originalImage;
 		etchasketch::Image grayscaleImage;
-		const etchasketch::Image *edgeDetectedImage;
+		etchasketch::Image edgeDetectedImage;
 		const std::unordered_set<etchasketch::KDPoint<2>> *edgePoints;
 		const std::vector<etchasketch::KDPoint<2>> *orderedEdgePoints;
 		
@@ -87,8 +87,6 @@ namespace etchasketch {
 		etchasketch::salesman::Salesman *salesman;
 		
 		// Setters
-		void setEdgeDetectedImage(const etchasketch::Image *newImage);
-		
 		void setEdgePoints(const std::unordered_set<etchasketch::KDPoint<2>>
 						   *newEdgePoints);
 		
