@@ -28,9 +28,9 @@
 	self.statusLabel.text = @"Loading…";
 	
 	// Set up image flow.
-	UIImage *img = [UIImage imageNamed:@"Lena"];
 	EASImage *image;
 	//*
+	UIImage *img = [UIImage imageNamed:@"Lena"];
 	image = [[EASImage alloc] initWithImage:img];
 	/*/
 	image = [EASImage imageFromEtchFileAtPath:@"/Users/jloloew/Desktop/EtchASketch/EtchASketch/EtchCLI/utils/lena.etch"];
