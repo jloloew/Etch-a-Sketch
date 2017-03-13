@@ -156,10 +156,10 @@ using etchasketch::Image;
 	return static_cast<NSUInteger>(self.image->getHeight());
 }
 
-+ (EASImage *)imageFromTempDebuggingFileImage {
++ (EASImage *)imageFromEtchFileAtPath:(NSString *)path {
 	// Make sure we can open the input file.
 	long imgWidth = 512, imgHeight = 512;
-	FILE *inImageFd = fopen("/Users/jloloew/Desktop/EtchASketch/EtchASketch/EtchCLI/utils/lena.etch", "r");
+	FILE *inImageFd = fopen([path cStringUsingEncoding:NSUTF8StringEncoding], "r");
 	if (!inImageFd) {
 		perror("Can't open input image");
 		exit(1);

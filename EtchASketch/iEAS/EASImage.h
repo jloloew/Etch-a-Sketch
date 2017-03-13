@@ -28,10 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// Return a @c UIImage of the @c EASImage, performing conversion if necessary.
 - (nullable UIImage *)UIImage;
 
-
-
-
-+ (EASImage *)imageFromTempDebuggingFileImage;
+/**
+ * Read in a @c .etch file and attempt to convert it to an @c EASImage. For
+ * debugging purposes.
+ */
++ (EASImage *)imageFromEtchFileAtPath:(NSString *)path;
 
 @end
 NS_ASSUME_NONNULL_END

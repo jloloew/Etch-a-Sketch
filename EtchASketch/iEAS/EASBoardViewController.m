@@ -29,8 +29,12 @@
 	
 	// Set up image flow.
 	UIImage *img = [UIImage imageNamed:@"Lena"];
-//	EASImage *image = [[EASImage alloc] initWithImage:img];
-	EASImage *image = [EASImage imageFromTempDebuggingFileImage];
+	EASImage *image;
+	//*
+	image = [[EASImage alloc] initWithImage:img];
+	/*/
+	image = [EASImage imageFromEtchFileAtPath:@"/Users/jloloew/Desktop/EtchASketch/EtchASketch/EtchCLI/utils/lena.etch"];
+	// */
 	self.imageFlow = [[EASImageFlow alloc] initWithColorImage:image];
 	self.imageFlow.delegate = self;
 	
@@ -41,24 +45,12 @@
 	[self.screenContents addSubview:self.screenVC.view];
 	[self.view bringSubviewToFront:self.statusLabel];
 	
-	
-	
-	//*
 	// Wait for the UI to load, then begin computation.
 	[NSTimer scheduledTimerWithTimeInterval:1.0
 									 target:self
 								   selector:@selector(doComputationSequence)
 								   userInfo:nil
 									repeats:NO];
-	/*/
-	
-	UIImage *fileImage;
-	if ([image respondsToSelector:@selector(tempDebuggingReadImage)]) {
-		fileImage = [image tempDebuggingReadImage];
-	}
-	UIImageView *fileIV = [[UIImageView alloc] initWithImage:fileImage];
-	[self.view addSubview:fileIV];
-	// */
 }
 
 - (void)doComputationSequence {

@@ -215,12 +215,12 @@
 			isa = PBXGroup;
 			children = (
 				B8765E821E72227B00420672 /* dummySystemIncludes */,
-				A52158371E4ADD9C002A411E /* Makefile */,
-				A550315A1E66316A00F4C4A1 /* motor.h */,
-				A550315B1E66316A00F4C4A1 /* motor.c */,
 				A52158361E4ADD9C002A411E /* main.cpp */,
-				A5034B3C1E6B82BC00A4E0C6 /* MotorController.hpp */,
+				A52158371E4ADD9C002A411E /* Makefile */,
+				A550315B1E66316A00F4C4A1 /* motor.c */,
+				A550315A1E66316A00F4C4A1 /* motor.h */,
 				A5034B3A1E6B82B200A4E0C6 /* MotorController.cpp */,
+				A5034B3C1E6B82BC00A4E0C6 /* MotorController.hpp */,
 			);
 			name = EtchCLI;
 			path = ..;
@@ -258,16 +258,16 @@
 		B8766B891D79DC3E00A4ED34 = {
 			isa = PBXGroup;
 			children = (
-				B86263AD1E4948BE0010A1B2 /* LICENSE */,
-				B86263AC1E4948B50010A1B2 /* README.md */,
 				B8766B941D79DC3E00A4ED34 /* EtchASketch */,
+				B8766C071D79FF4300A4ED34 /* EtchASketchTests */,
 				A52158301E4AD0C8002A411E /* EtchCLI */,
+				B820E9171DAC75C800135C8A /* Frameworks */,
 				B8766BA31D79DC9100A4ED34 /* iEAS */,
 				B8766BBD1D79DC9100A4ED34 /* iEASTests */,
 				B8766BC81D79DC9100A4ED34 /* iEASUITests */,
-				B8766C071D79FF4300A4ED34 /* EtchASketchTests */,
+				B86263AD1E4948BE0010A1B2 /* LICENSE */,
 				B8766B931D79DC3E00A4ED34 /* Products */,
-				B820E9171DAC75C800135C8A /* Frameworks */,
+				B86263AC1E4948B50010A1B2 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -296,10 +296,10 @@
 				B87943C31D91AA870035B729 /* Image.hpp */,
 				B87943C81D91ADF30035B729 /* ImageFlow.cpp */,
 				B87943C91D91ADF30035B729 /* ImageFlow.hpp */,
-				B8766BDE1D79FA7400A4ED34 /* KDTree.cpp */,
-				B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */,
 				B8766BE11D79FB8600A4ED34 /* KDPoint.cpp */,
 				B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */,
+				B8766BDE1D79FA7400A4ED34 /* KDTree.cpp */,
+				B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */,
 				B87943CB1D91B0CB0035B729 /* salesman */,
 			);
 			path = EtchASketch;
@@ -311,12 +311,12 @@
 				B8766BA71D79DC9100A4ED34 /* AppDelegate.h */,
 				B8766BA81D79DC9100A4ED34 /* AppDelegate.m */,
 				B8766BB01D79DC9100A4ED34 /* Assets.xcassets */,
+				B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */,
+				B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */,
 				B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */,
 				B85A95911DFCC06E00E0F6BE /* EASDebugViewController.h */,
 				B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */,
 				B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */,
-				B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */,
-				B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */,
 				B827FEA41DB1BF98007F2469 /* EASScreenView.h */,
 				B827FEA51DB1BF98007F2469 /* EASScreenView.m */,
 				B827FE9B1DB1BF48007F2469 /* EASScreenViewController.h */,
@@ -370,12 +370,12 @@
 		B87943C11D91AA4E0035B729 /* edgedetect */ = {
 			isa = PBXGroup;
 			children = (
-				A52158381E4ADE61002A411E /* BlurImageFilter.hpp */,
 				A52158391E4ADE6B002A411E /* BlurImageFilter.cpp */,
+				A52158381E4ADE61002A411E /* BlurImageFilter.hpp */,
 				A521583B1E4ADE78002A411E /* EdgeDetector.hpp */,
+				A521583F1E4ADE9D002A411E /* ImageFilter.hpp */,
 				A521583D1E4ADE93002A411E /* SobelEdgeDetector.cpp */,
 				A521583C1E4ADE87002A411E /* SobelEdgeDetector.hpp */,
-				A521583F1E4ADE9D002A411E /* ImageFilter.hpp */,
 			);
 			name = edgedetect;
 			sourceTree = "<group>";
