@@ -23,9 +23,11 @@ CXX = clang++
 CXXFLAGS = -c -g -O0 -Wall -std=c++11 -stdlib=libc++ -I$(LIB_SRC_PTH)
 CC = clang
 CCFLAGS = -c -g -O0 -Wall -I$(LIB_SRC_PTH) -I./dummySystemIncludes/
+MOTORUTILS_CCFLAGS = -O0 -Wall -I$(LIB_SRC_PTH) -I./dummySystemIncludes/
 LD = clang++
 LDFLAGS = -std=c++11 -stdlib=libc++
 ifeq ($(UNAME_S),Linux)
+	MOTORUTILS_CCFLAGS += -lwiringPi
 	LDFLAGS += -lwiringPi
 endif
 LD_OBJS = $(OBJS)
@@ -73,16 +75,16 @@ motor-utils : $(MOTORUTILS)
 MOTORUTILS_DEPS = motor-main.c motor.o $(LIBUNWIND)
 
 motor-left : $(MOTORUTILS_DEPS)
-	$(CC) $(CCFLAGS) -o $@ $^ -DMOTOR_MOVE_LEFT=1
+	$(CC) $(MOTORUTILS_CCFLAGS) -o $@ $^ -DMOTOR_MOVE_LEFT=1
 
 motor-right : $(MOTORUTILS_DEPS)
-	$(CC) $(CCFLAGS) -o $@ $^ -DMOTOR_MOVE_RIGHT=1
+	$(CC) $(MOTORUTILS_CCFLAGS) -o $@ $^ -DMOTOR_MOVE_RIGHT=1
 
 motor-up : $(MOTORUTILS_DEPS)
-	$(CC) $(CCFLAGS) -o $@ $^ -DMOTOR_MOVE_UP=1
+	$(CC) $(MOTORUTILS_CCFLAGS) -o $@ $^ -DMOTOR_MOVE_UP=1
 
 motor-down : $(MOTORUTILS_DEPS)
-	$(CC) $(CCFLAGS) -o $@ $^ -DMOTOR_MOVE_DOWN=1
+	$(CC) $(MOTORUTILS_CCFLAGS) -o $@ $^ -DMOTOR_MOVE_DOWN=1
 
 .PHONY: clean motor-utils
 

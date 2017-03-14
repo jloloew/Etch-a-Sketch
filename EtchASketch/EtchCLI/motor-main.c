@@ -30,13 +30,13 @@ main(int argc, char *argv[])
     while (1) {
 #ifdef MOTOR_MOVE_LEFT
         motor_prepare_move(&m[0], DIR_CCW);
-#elifdef MOTOR_MOVE_RIGHT
+#elif defined MOTOR_MOVE_RIGHT
 		motor_prepare_move(&m[0], DIR_CW);
 #endif
 		
 #ifdef MOTOR_MOVE_DOWN
 		motor_prepare_move(&m[1], DIR_CCW);
-#elifdef MOTOR_MOVE_UP
+#elif defined MOTOR_MOVE_UP
 		motor_prepare_move(&m[1], DIR_CW);
 #endif
         motor_execute_move(m, 2);
