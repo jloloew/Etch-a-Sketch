@@ -6,6 +6,13 @@ ifeq ($(UNAME_S),Linux)
 	OBJS += wiringPiWrapper.o
 endif
 
+MOTORUTILS =
+ifeq ($(UNAME_S),Linux)
+	MOTORUTILS += motor-left motor-right motor-up motor-down
+endif
+
+LIBUNWIND = /usr/lib/arm-linux-gnueabihf/libunwind.so.8
+
 LIB_SRC_PTH = ../EtchASketch/
 LIB_SRC = $(wildcard $(LIB_SRC_PTH)*.cpp)
 ifeq ($(UNAME_S),Linux)
@@ -23,7 +30,7 @@ ifeq ($(UNAME_S),Linux)
 endif
 LD_OBJS = $(OBJS)
 ifeq ($(UNAME_S),Linux)
-	LD_OBJS += /usr/lib/arm-linux-gnueabihf/libunwind.so.8
+	LD_OBJS += $(LIBUNWIND)
 endif
 
 MOTOR_FILES = motor.c libEtchASketch.a
@@ -39,7 +46,7 @@ LIB_SRC_FILTR += MotorController.cpp
 LIB_SRC := $(filter-out $(LIB_SRC_FILTR), $(LIB_SRC))
 LIB_SRC += $(LIB_SRC_PTH)KDPoint.hpp $(LIB_SRC_PTH)KDTree.hpp
 
-all : $(EXENAME)
+all : $(EXENAME) motor-utils
 
 $(EXENAME) : $(OBJS)
 	$(LD) $(LD_OBJS) $(LDFLAGS) -o $(EXENAME)
@@ -61,8 +68,24 @@ libEtchASketch.a :
 	$(CXX) $(CXXFLAGS) $(LIB_SRC)
 	ar rcs $@ *.o
 
-.PHONY: clean
+motor-utils : $(MOTORUTILS)
+
+MOTORUTILS_DEPS = motor-main.c motor.o $(LIBUNWIND)
+
+motor-left : $(MOTORUTILS_DEPS)
+	$(CC) $(CCFLAGS) -o $@ $^ -DMOTOR_MOVE_LEFT=1
+
+motor-right : $(MOTORUTILS_DEPS)
+	$(CC) $(CCFLAGS) -o $@ $^ -DMOTOR_MOVE_RIGHT=1
+
+motor-up : $(MOTORUTILS_DEPS)
+	$(CC) $(CCFLAGS) -o $@ $^ -DMOTOR_MOVE_UP=1
+
+motor-down : $(MOTORUTILS_DEPS)
+	$(CC) $(CCFLAGS) -o $@ $^ -DMOTOR_MOVE_DOWN=1
+
+.PHONY: clean motor-utils
 
 clean :
-	-rm -f *.o *.a $(EXENAME)
+	-rm -f *.o *.a $(EXENAME) $(MOTORUTILS)
 

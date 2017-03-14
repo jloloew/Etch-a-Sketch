@@ -168,6 +168,7 @@
 		B87943C81D91ADF30035B729 /* ImageFlow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageFlow.cpp; sourceTree = "<group>"; };
 		B87943C91D91ADF30035B729 /* ImageFlow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = ImageFlow.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		B8B211641DAC895A009814B8 /* KDTreeTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KDTreeTests.mm; sourceTree = "<group>"; };
+		B8F394A71E776930009D5021 /* motor-main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "motor-main.c"; path = "EtchASketch/EtchCLI/motor-main.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +218,7 @@
 				B8765E821E72227B00420672 /* dummySystemIncludes */,
 				A52158361E4ADD9C002A411E /* main.cpp */,
 				A52158371E4ADD9C002A411E /* Makefile */,
+				B8F394A71E776930009D5021 /* motor-main.c */,
 				A550315B1E66316A00F4C4A1 /* motor.c */,
 				A550315A1E66316A00F4C4A1 /* motor.h */,
 				A5034B3A1E6B82B200A4E0C6 /* MotorController.cpp */,
