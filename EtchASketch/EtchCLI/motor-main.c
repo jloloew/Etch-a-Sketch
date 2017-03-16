@@ -2,16 +2,24 @@
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "motor.h"
 
 static unsigned long num_steps_taken = 0;
 
-static void
+/// Print the total number of steps taken, then exits.
+static void __attribute__((noreturn))
+print_steps_taken_and_exit(void)
+{
+    printf("\nTotal number of steps taken: %lu\n", num_steps_taken);
+    _exit(0);
+}
+
+/// Signal handler. Prints the total number of steps taken, then exits.
+static void __attribute__((noreturn))
 int_handler(int sig __attribute__((unused)))
 {
-    printf("\n\nTotal number of steps taken: %lu\n", num_steps_taken);
-    // Just exit.
-    _exit(0);
+    print_steps_taken_and_exit();
 }
 
 static void __attribute__((noreturn))
@@ -54,17 +62,19 @@ main(int argc, const char *argv[])
 	printf("Motor 1:\n");
 	printf("    Step:      %02d\n", m[1].pin_step);
 	printf("    Direction: %02d\n", m[1].pin_dir);
+    printf("\n");
 
 //    print_gpio_labels();
 
     if (num_steps > 0) {
-        printf("Will move %lu steps\n", num_steps);
+        printf("Will move %lu steps.\n", num_steps);
     }
 
     // Install signal handler to print the total number of steps taken at exit.
     struct sigaction act;
     act.sa_handler = int_handler;
     sigaction(SIGINT, &act, NULL);
+    atexit(print_steps_taken_and_exit);
 
     printf("Beginning rotation...\n");
 
