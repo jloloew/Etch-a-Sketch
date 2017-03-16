@@ -52,7 +52,6 @@ MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2>> &i
 		
 		// while not at goal_pt
 		while ((current_pt.x != goal_pt.x) || (current_pt.y != goal_pt.y)) {
-			
 			// enumerate possible next coordinates
 			motor_point_t n, e, s, w;
 			n = current_pt; e = current_pt; s = current_pt; w = current_pt;
@@ -63,10 +62,10 @@ MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2>> &i
 			if (current_pt.x > 0.0f) {
 				e.x -= 1.0f;
 			}
-			if (current_pt.y < EAS_BOARD_HEIGHT) {
+			if (current_pt.y < motor_max_loc[1]) {
 				s.y += 1.0f;
 			}
-			if (current_pt.x < EAS_BOARD_WIDTH) {
+			if (current_pt.x < motor_max_loc[0]) {
 				w.x += 1.0f;
 			}
 			
@@ -140,8 +139,8 @@ MotorController::scaleImagePointsToMotorPoints(const vector<etchasketch::KDPoint
 			.x = static_cast<float>(ipt[0]),
 			.y = static_cast<float>(ipt[1])
 		};
-		mpt.x = mpt.x * motor_max_loc[0] / static_cast<float>(imageWidth);
-		mpt.y = mpt.y * motor_max_loc[1] / static_cast<float>(imageHeight);
+		mpt.x = floorf(mpt.x * motor_max_loc[0] / static_cast<float>(imageWidth));
+		mpt.y = floorf(mpt.y * motor_max_loc[1] / static_cast<float>(imageHeight));
 		motorPoints.push_back(mpt);
 	}
 	
@@ -160,30 +159,30 @@ MotorController::euclideanDistance(const motor_point_t &a,
 int
 MotorController::moveToPoint(const motor_point_t &pt)
 {
-
     const float x_dist = pt.x - nibLoc.x;
     const float y_dist = pt.y - nibLoc.y;
-
+    
     // Control motors
 	if (x_dist > 0.0f) {
 		motor_prepare_move(&motors[0], DIR_CW);
 	} else if (x_dist < 0.0f) {
 		motor_prepare_move(&motors[0], DIR_CCW);
 	}
-
+    
 	if (y_dist > 0.0f) {
 		motor_prepare_move(&motors[1], DIR_CCW);
 	} else if (y_dist < 0.0f) {
 		motor_prepare_move(&motors[1], DIR_CW);
 	}
-
+    
 	motor_execute_move(motors, 2);
-
-    cout << "x: " << nibLoc.x << ", y: " << nibLoc.y << endl;
-
+    
+    cout << "nibLoc: x: " << nibLoc.x << ", y: " << nibLoc.y << endl;
+    
     // Update nibLoc coordinates
     nibLoc.x = pt.x;
     nibLoc.y = pt.y;
-
+    
     return 0;
 }
+

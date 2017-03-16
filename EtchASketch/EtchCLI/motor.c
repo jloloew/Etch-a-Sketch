@@ -7,8 +7,8 @@
 #define DELAY_US 1000
 
 const float motor_max_loc[NUM_MOTORS_AVAILABLE] = {
-	5000.0f,
-	5000.0f
+	13000,
+	 9500
 };
 
 // WiringPi pin numbers

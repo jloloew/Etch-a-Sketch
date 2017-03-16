@@ -13,14 +13,9 @@
 #include "motor.h"
 #include "EtchASketch.hpp"
 
-
-#define EAS_BOARD_WIDTH 1000
-#define EAS_BOARD_HEIGHT 1000
-
 class MotorController {
 
 public:
-
     /**
      *
      */
@@ -34,7 +29,6 @@ public:
 						   size_t imageHeight);
 
 private:
-
     motor_t motors[2];
     motor_point_t nibLoc;
 	
@@ -52,3 +46,4 @@ private:
 };
 
 #endif /* MotorController_hpp */
+

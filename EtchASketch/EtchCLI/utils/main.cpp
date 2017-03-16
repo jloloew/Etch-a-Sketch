@@ -32,10 +32,10 @@ main(int argc, char * const argv[])
     */
 
 	Image* imageToEtch = new Image();
-	imageToEtch->readFromFile("lena.png");
-	imageToEtch->etchToFile("lena.etch");
+	imageToEtch->readFromFile("stick-figure.png");
+	imageToEtch->etchToFile("stick-figure.etch");
 
-    cout << "I have written your etch file to lena.etch 🎉" << endl;
+    cout << "I have written your etch file to stick-figure.etch 🎉" << endl;
 
 	return 0;
 }
