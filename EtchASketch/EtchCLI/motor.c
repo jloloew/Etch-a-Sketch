@@ -6,6 +6,11 @@
 
 #define DELAY_US 1000
 
+const float motor_max_loc[NUM_MOTORS_AVAILABLE] = {
+	5000.0f,
+	5000.0f
+};
+
 // WiringPi pin numbers
 static const unsigned int dir_pins[] = {
     4,
@@ -15,7 +20,6 @@ static const unsigned int step_pins[] = {
     2,
     12
 };
-#define NUM_PIN_ASSIGMENTS 2
 static gpio_pinout_labels_t pinout_labels = {
     .labels = {
         [16] = "Direction 0", // WiringPi 4
@@ -45,7 +49,7 @@ motor_init(motor_t *motor)
     
     static unsigned int next_id = 0;
     unsigned int id = next_id++;
-    if (id >= NUM_PIN_ASSIGMENTS) {
+    if (id >= NUM_MOTORS_AVAILABLE) {
         printf("Motor %u hasn't been defined yet\n", id);
         next_id--; // Prevent overflow after 4,000,000,000 more calls
         return 1;

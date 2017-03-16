@@ -11,138 +11,179 @@
 #include <math.h>
 #include <unistd.h>
 
+using std::vector;
+
 MotorController::MotorController()
 {
-    // Protect against multiple motor controller instances -> singleton.
-    static char singletonGuard = 0;
-    if (singletonGuard != 0) {
-        fprintf(stderr, "Motor controller must be a singleton.\n");
-        exit(1);
-    }
-    singletonGuard = 1;
-
-    // Initializing motors requires root access.
-    motor_initialize();
-
-    // Initialize motor nibLoc
-    nibLoc.x = 0;
-    nibLoc.y = 0;
-
-    if (motor_init(&motors[0]) || motor_init(&motors[1])) {
-        fprintf(stderr, "Error creating motor.\n");
-        exit(1);
-    }
+	// Protect against multiple motor controller instances -> singleton.
+	static bool singletonGuard = false;
+	if (singletonGuard) {
+		fprintf(stderr, "Motor controller must be a singleton.\n");
+		exit(1);
+	}
+	singletonGuard = true;
+	
+	// Initializing motors requires root access.
+	motor_initialize();
+	
+	// Initialize motor nibLoc
+	nibLoc.x = 0;
+	nibLoc.y = 0;
+	
+	if (motor_init(&motors[0]) || motor_init(&motors[1])) {
+		fprintf(stderr, "Error creating motor.\n");
+		exit(1);
+	}
 }
 
-void MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2>> &points)
+void
+MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2>> &imagePoints,
+								   size_t imageWidth,
+								   size_t imageHeight)
 {
-  // for each point to draw
-  for(size_t i = 0; i < points.size(); i++) {
-    etchasketch::KDPoint<2> goal_pt = points[i];
-    etchasketch::KDPoint<2> start_pt = etchasketch::KDPoint<2>(nibLoc.x, nibLoc.y);
-    etchasketch::KDPoint<2> current_pt = start_pt;
-
-    // while not at goal_pt
-    while((current_pt[0] != goal_pt[0]) || (current_pt[1] != goal_pt[1])) {
-
-      // enumerate possible next coordinates
-      etchasketch::KDPoint<2> n, e, s, w;
-      n = current_pt; e = current_pt; s = current_pt; w = current_pt;
-
-      if (current_pt[1] > 0) n[1]--;
-      if (current_pt[0] > 0) e[0]--;
-      if (current_pt[1] < EAS_BOARD_HEIGHT) s[1]++;
-      if (current_pt[0] < EAS_BOARD_WIDTH) w[0]++;
-
-      // calculate distance from possible choices to goal_pt
-      double curr_dist, n_dist, e_dist, s_dist, w_dist;
-      curr_dist = euclidean_distance(current_pt, goal_pt);
-      n_dist = euclidean_distance(n, goal_pt);
-      e_dist = euclidean_distance(e, goal_pt);
-      s_dist = euclidean_distance(s, goal_pt);
-      w_dist = euclidean_distance(w, goal_pt);
-
-      // generate chosen_pt that minimizes distance to goal_pt
-      etchasketch::KDPoint<2> chosen_pt = current_pt;
-
-      // X
-      if (e_dist < curr_dist || w_dist < curr_dist) {
-        if (e_dist < w_dist)
-          chosen_pt[0] = e[0];
-        else
-          chosen_pt[0] = w[0];
-      }
-
-      // Y
-      if (n_dist < curr_dist || s_dist < curr_dist) {
-        if (n_dist < s_dist)
-          chosen_pt[1] = n[1];
-        else
-          chosen_pt[1] = s[1];
-      }
-
-      // move to chosen point
-      moveToPoint(chosen_pt);
-      current_pt = chosen_pt;
-
-      // debugging
-      // cout << "n x: " << n[0] << ", y: " << n[1] << endl;
-      // cout << "     n_dist:" << n_dist << endl;
-      // cout << "s x: " << s[0] << ", y: " << s[1] << endl;
-      // cout << "     s_dist:" << s_dist << endl;
-      // cout << "e x: " << e[0] << ", y: " << e[1] << endl;
-      // cout << "     e_dist:" << e_dist << endl;
-      // cout << "w x: " << w[0] << ", y: " << w[1] << endl;
-      // cout << "     w_dist:" << w_dist << endl;
-      //
-      // cout << "chosen_pt x: " << chosen_pt[0] << ", y: " << chosen_pt[1] << endl;
-      // cout << "goal_pt x: " << goal_pt[0] << ", y: " << goal_pt[1] << endl;
-      // cout << "----------" << endl;
-      // cout << "current_pt x: " << current_pt[0] << ", y: " << current_pt[1] << endl;
-      // cout << "----------" << endl << endl;
-      //
-      // sleep(1);
-
-    } // while not at goal_pt
-  } // for each point
+	// Scale the points to fit the motor's drawable resolution.
+	const vector<motor_point_t> motorPoints = scaleImagePointsToMotorPoints(imagePoints, imageWidth, imageHeight);
+	
+	// for each point to draw
+	for (auto it = motorPoints.begin(); it != motorPoints.end(); ++it) {
+		motor_point_t goal_pt = *it;
+		motor_point_t start_pt = nibLoc;
+		motor_point_t current_pt = start_pt;
+		
+		// while not at goal_pt
+		while ((current_pt.x != goal_pt.x) || (current_pt.y != goal_pt.y)) {
+			
+			// enumerate possible next coordinates
+			motor_point_t n, e, s, w;
+			n = current_pt; e = current_pt; s = current_pt; w = current_pt;
+			
+			if (current_pt.y > 0.0f) {
+				n.y -= 1.0f;
+			}
+			if (current_pt.x > 0.0f) {
+				e.x -= 1.0f;
+			}
+			if (current_pt.y < EAS_BOARD_HEIGHT) {
+				s.y += 1.0f;
+			}
+			if (current_pt.x < EAS_BOARD_WIDTH) {
+				w.x += 1.0f;
+			}
+			
+			// calculate distance from possible choices to goal_pt
+			double curr_dist, n_dist, e_dist, s_dist, w_dist;
+			curr_dist = euclideanDistance(current_pt, goal_pt);
+			n_dist = euclideanDistance(n, goal_pt);
+			e_dist = euclideanDistance(e, goal_pt);
+			s_dist = euclideanDistance(s, goal_pt);
+			w_dist = euclideanDistance(w, goal_pt);
+			
+			// generate chosen_pt that minimizes distance to goal_pt
+			motor_point_t chosen_pt = current_pt;
+			
+			// X
+			if (e_dist < curr_dist || w_dist < curr_dist) {
+				if (e_dist < w_dist) {
+					chosen_pt.x = e.x;
+				} else {
+					chosen_pt.x = w.x;
+				}
+			}
+			
+			// Y
+			if (n_dist < curr_dist || s_dist < curr_dist) {
+				if (n_dist < s_dist) {
+					chosen_pt.y = n.y;
+				} else {
+					chosen_pt.y = s.y;
+				}
+			}
+			
+			// move to chosen point
+			moveToPoint(chosen_pt);
+			current_pt = chosen_pt;
+			
+			// debugging
+			// cout << "n x: " << n[0] << ", y: " << n[1] << endl;
+			// cout << "     n_dist:" << n_dist << endl;
+			// cout << "s x: " << s[0] << ", y: " << s[1] << endl;
+			// cout << "     s_dist:" << s_dist << endl;
+			// cout << "e x: " << e[0] << ", y: " << e[1] << endl;
+			// cout << "     e_dist:" << e_dist << endl;
+			// cout << "w x: " << w[0] << ", y: " << w[1] << endl;
+			// cout << "     w_dist:" << w_dist << endl;
+			//
+			// cout << "chosen_pt x: " << chosen_pt[0] << ", y: " << chosen_pt[1] << endl;
+			// cout << "goal_pt x: " << goal_pt[0] << ", y: " << goal_pt[1] << endl;
+			// cout << "----------" << endl;
+			// cout << "current_pt x: " << current_pt[0] << ", y: " << current_pt[1] << endl;
+			// cout << "----------" << endl << endl;
+			//
+			// sleep(1);
+			
+		} // while not at goal_pt
+	} // for each point
 }
 
-double MotorController::euclidean_distance(const etchasketch::KDPoint<2> &a,
-                                           const etchasketch::KDPoint<2> &b)
+vector<motor_point_t>
+MotorController::scaleImagePointsToMotorPoints(const vector<etchasketch::KDPoint<2>> &imagePoints,
+							  size_t imageWidth,
+							  size_t imageHeight) const
 {
-  double x = a[0] - b[0];
-  double y = a[1] - b[1];
-  return sqrt(pow(x, 2) + pow(y, 2));
+	vector<motor_point_t> motorPoints = vector<motor_point_t>();
+	motorPoints.reserve(imagePoints.size());
+	
+	// TODO: this
+	for (auto it = imagePoints.begin(); it != imagePoints.end(); ++it) {
+		const etchasketch::KDPoint<2> &ipt = *it;
+		motor_point_t mpt = {
+			.x = static_cast<float>(ipt[0]),
+			.y = static_cast<float>(ipt[1])
+		};
+		mpt.x = mpt.x * motor_max_loc[0] / static_cast<float>(imageWidth);
+		mpt.y = mpt.y * motor_max_loc[1] / static_cast<float>(imageHeight);
+		motorPoints.push_back(mpt);
+	}
+	
+	return motorPoints;
 }
 
-int MotorController::moveToPoint(const etchasketch::KDPoint<2> &pt)
+double
+MotorController::euclideanDistance(const motor_point_t &a,
+                                   const motor_point_t &b) const
 {
- 
-    int x_dist = pt[0] - nibLoc.x;
-    int y_dist = pt[1] - nibLoc.y;
-    
-    // control motors!
-    for (size_t i = 0; i < 100; i++) {
-        if (x_dist > 0) {
-            motor_prepare_move(&motors[0], DIR_CW);
-        } else if (x_dist < 0) {
-            motor_prepare_move(&motors[0], DIR_CCW);
-        }
-        
-        if (y_dist > 0) {
-            motor_prepare_move(&motors[1], DIR_CCW);
-        } else if (y_dist < 0) {
-            motor_prepare_move(&motors[1], DIR_CW);
-        }
+	const double x = a.x - b.x;
+	const double y = a.y - b.y;
+	return sqrt(pow(x, 2) + pow(y, 2));
+}
 
-        motor_execute_move(motors, 2);
-    }
-    
+int
+MotorController::moveToPoint(const motor_point_t &pt)
+{
+
+    const float x_dist = pt.x - nibLoc.x;
+    const float y_dist = pt.y - nibLoc.y;
+
+    // Control motors
+	if (x_dist > 0.0f) {
+		motor_prepare_move(&motors[0], DIR_CW);
+	} else if (x_dist < 0.0f) {
+		motor_prepare_move(&motors[0], DIR_CCW);
+	}
+
+	if (y_dist > 0.0f) {
+		motor_prepare_move(&motors[1], DIR_CCW);
+	} else if (y_dist < 0.0f) {
+		motor_prepare_move(&motors[1], DIR_CW);
+	}
+
+	motor_execute_move(motors, 2);
+
     cout << "x: " << nibLoc.x << ", y: " << nibLoc.y << endl;
-    
-    // update nibLoc coordinates
-    nibLoc.x = pt[0];
-    nibLoc.y = pt[1];
-    
+
+    // Update nibLoc coordinates
+    nibLoc.x = pt.x;
+    nibLoc.y = pt.y;
+
     return 0;
 }

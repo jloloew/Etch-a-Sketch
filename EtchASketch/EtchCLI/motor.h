@@ -6,11 +6,19 @@
 extern "C" {
 #endif
 
+#define NUM_MOTORS_AVAILABLE 2
+
 enum {
     DIR_CW,
     DIR_CCW
 };
 typedef int motor_dir_t;
+
+/**
+ * The maximum distance the motor can safely take from its starting position, in
+ * steps.
+ */
+extern const float motor_max_loc[NUM_MOTORS_AVAILABLE];
 
 struct motor_move_s {
     int should_move;

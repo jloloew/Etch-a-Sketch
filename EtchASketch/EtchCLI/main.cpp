@@ -19,11 +19,10 @@ using std::endl;
 using std::string;
 
 /// Print usage and exit.
-__attribute__((noreturn))
-static void
+static void __attribute__((noreturn))
 usage(void)
 {
-    cout << "Usage: etch -i /path/to/input/image.bmp -w 800 -h 600" << endl;
+    cout << "Usage: etch -i /path/to/input/image.etch -w 800 -h 600" << endl;
     exit(1);
 }
 
@@ -50,8 +49,6 @@ int
 main(int argc, char * const argv[])
 {
     cout << "Welcome to etch ❤️" << endl;
-
-
 
     // Parse arguments.
     string inFile;
@@ -100,13 +97,10 @@ main(int argc, char * const argv[])
 
     // Create an ImageFlow.
     etchasketch::ImageFlow inputImgFlow = etchasketch::ImageFlow(inputImg);
-    inputImgFlow.convertToGrayscale();
-    inputImgFlow.detectEdges();
-    inputImgFlow.generateEdgePoints();
-    inputImgFlow.orderEdgePointsForDrawing();
+    inputImgFlow.performAllComputationSteps();
     std::vector<etchasketch::KDPoint<2>> points = inputImgFlow.getOrderedEdgePoints();
     cout << "ImageFlow completed its run." << endl;
-    
+
 /*    etchasketch::utils::writeOrderedEdgePointsToFile(
         "lena_ordered_edge_points.png",
         points,
@@ -116,7 +110,7 @@ main(int argc, char * const argv[])
 
     // Draw ordered edge points.
     MotorController tracer = MotorController();
-    tracer.drawOrderedPoints(points);
+    tracer.drawOrderedPoints(points, inputImg.getWidth(), inputImg.getHeight());
 
     cout << "MotorController finished tracing points." << endl;
 
