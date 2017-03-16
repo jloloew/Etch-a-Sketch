@@ -153,7 +153,10 @@ namespace etchasketch {
 		bool remove(const etchasketch::KDPoint<Dim> &target);
 		
 		/// Print the KD tree, one node at a time.
-		void print(std::ostream &out, bool prettyJSON = true) const;
+		void print(std::ostream &out = std::cout, bool prettyJSON = true) const;
+		
+		/// Because std::cout isn't available from within lldb.
+		void debugPrint() const { print(); }
 		
 	private:
 		/// This is the root node of our KDTree representation.

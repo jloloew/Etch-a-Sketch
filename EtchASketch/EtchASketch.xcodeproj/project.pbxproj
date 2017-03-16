@@ -26,6 +26,8 @@
 		B827FEA31DB1BF48007F2469 /* EASScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */; };
 		B827FEA61DB1BF98007F2469 /* EASScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FEA51DB1BF98007F2469 /* EASScreenView.m */; };
 		B827FEA81DB1BF98007F2469 /* EASScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FEA51DB1BF98007F2469 /* EASScreenView.m */; };
+		B8460EB11E7AF69A00D86B0E /* NearestNeighborSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8460EAF1E7AF69A00D86B0E /* NearestNeighborSalesman.cpp */; };
+		B8460EB21E7AF69A00D86B0E /* NearestNeighborSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8460EAF1E7AF69A00D86B0E /* NearestNeighborSalesman.cpp */; };
 		B85A95941DFCC06E00E0F6BE /* EASDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */; };
 		B85A95951DFCC06E00E0F6BE /* EASDebugViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */; };
 		B872DD8F1DB06C2D008E08D8 /* KDTree.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */; };
@@ -130,6 +132,8 @@
 		B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASScreenViewController.xib; sourceTree = "<group>"; };
 		B827FEA41DB1BF98007F2469 /* EASScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASScreenView.h; sourceTree = "<group>"; };
 		B827FEA51DB1BF98007F2469 /* EASScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASScreenView.m; sourceTree = "<group>"; };
+		B8460EAF1E7AF69A00D86B0E /* NearestNeighborSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NearestNeighborSalesman.cpp; sourceTree = "<group>"; };
+		B8460EB01E7AF69A00D86B0E /* NearestNeighborSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NearestNeighborSalesman.hpp; sourceTree = "<group>"; };
 		B85A95911DFCC06E00E0F6BE /* EASDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASDebugViewController.h; sourceTree = "<group>"; };
 		B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASDebugViewController.m; sourceTree = "<group>"; };
 		B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASDebugViewController.xib; sourceTree = "<group>"; };
@@ -387,6 +391,8 @@
 			children = (
 				A52158401E4ADECE002A411E /* BobAndWeaveSalesman.cpp */,
 				A52158411E4ADECE002A411E /* BobAndWeaveSalesman.hpp */,
+				B8460EAF1E7AF69A00D86B0E /* NearestNeighborSalesman.cpp */,
+				B8460EB01E7AF69A00D86B0E /* NearestNeighborSalesman.hpp */,
 				A52158441E4ADEE3002A411E /* Salesman.cpp */,
 				A52158481E4ADF00002A411E /* Salesman.hpp */,
 			);
@@ -584,6 +590,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8460EB11E7AF69A00D86B0E /* NearestNeighborSalesman.cpp in Sources */,
 				B872DD901DB06C30008E08D8 /* KDPoint.hpp in Sources */,
 				A550315C1E66316A00F4C4A1 /* motor.c in Sources */,
 				A52158451E4ADEE3002A411E /* Salesman.cpp in Sources */,
@@ -645,6 +652,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8460EB21E7AF69A00D86B0E /* NearestNeighborSalesman.cpp in Sources */,
 				B8B211651DAC895A009814B8 /* KDTreeTests.mm in Sources */,
 				B8766C091D79FF4300A4ED34 /* EtchASketchTests.mm in Sources */,
 			);

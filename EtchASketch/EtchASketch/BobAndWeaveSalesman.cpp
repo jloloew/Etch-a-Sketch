@@ -24,7 +24,8 @@ BobAndWeaveSalesman::~BobAndWeaveSalesman()
 {
 }
 
-void BobAndWeaveSalesman::orderPoints()
+void
+BobAndWeaveSalesman::orderPoints()
 {
 	// TODO: parallelize this
 	for (KDPointCoordinate y = 0; y < grayscaleImage.getHeight(); y += lineSeparation) {
@@ -47,8 +48,9 @@ void BobAndWeaveSalesman::orderPoints()
 	}
 }
 
-KDPoint<2> BobAndWeaveSalesman::offsetPointAt(const KDPointCoordinate x,
-                                              const KDPointCoordinate y) const
+KDPoint<2>
+BobAndWeaveSalesman::offsetPointAt(const KDPointCoordinate x,
+								   const KDPointCoordinate y) const
 {
 	uint32_t totalBrightness = 0;
 	uint32_t numPixelsSearched = 0;

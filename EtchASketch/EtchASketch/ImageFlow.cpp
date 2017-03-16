@@ -9,7 +9,7 @@
 #include "ImageFlow.hpp"
 #include "SobelEdgeDetector.hpp"
 #include "BlurImageFilter.hpp"
-#include "BobAndWeaveSalesman.hpp"
+#include "NearestNeighborSalesman.hpp"
 
 using std::unordered_set;
 using std::vector;
@@ -18,7 +18,7 @@ using etchasketch::KDPoint;
 using etchasketch::edgedetect::BlurImageFilter;
 using etchasketch::edgedetect::SobelEdgeDetector;
 using etchasketch::salesman::Salesman;
-using etchasketch::salesman::BobAndWeaveSalesman;
+using etchasketch::salesman::NearestNeighborSalesman;
 
 etchasketch::ImageFlow::ImageFlow(const Image &colorImage)
 : originalImage(colorImage),
@@ -88,7 +88,7 @@ etchasketch::ImageFlow::generateEdgePoints()
 		}
 	}
 	
-	// Insert the starting point.
+	// Insert the starting point if it's not already in there.
 	const KDPoint<2> startPoint(0, 0);
 	pointSet->insert(startPoint);
 	
@@ -101,7 +101,7 @@ etchasketch::ImageFlow::orderEdgePointsForDrawing()
 	// TODO: Put startPoint in class scope or something.
 	const KDPoint<2> startPoint(0, 0);
 	Salesman *salesman = nullptr;
-	salesman = new BobAndWeaveSalesman(grayscaleImage, edgeDetectedImage);
+	salesman = new NearestNeighborSalesman(*edgePoints, startPoint);
 	setSalesman(salesman);
 	salesman->orderPoints();
 	setOrderedEdgePoints(new std::vector<KDPoint<2>>(salesman->getOrderedPoints()));

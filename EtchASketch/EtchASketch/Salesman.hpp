@@ -26,8 +26,8 @@ class Salesman {
 	/// Order the points for the best drawing order.
 	virtual void orderPoints();
 
-	/// Get a copy of the ordered points.
-	const std::vector<etchasketch::KDPoint<2>> &getOrderedPoints() const
+	/// Get a reference to the ordered points.
+	const std::vector<etchasketch::KDPoint<2>> & getOrderedPoints() const
 	{
 		return orderedPoints;
 	}
