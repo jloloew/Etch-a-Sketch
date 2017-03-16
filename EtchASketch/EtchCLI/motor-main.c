@@ -11,7 +11,7 @@ static unsigned long num_steps_taken = 0;
 static void __attribute__((noreturn))
 print_steps_taken_and_exit(void)
 {
-    printf("\nTotal number of steps taken: %lu\n", num_steps_taken);
+    printf("\n\nTotal number of steps taken: %lu\n", num_steps_taken);
     _exit(0);
 }
 
@@ -53,6 +53,7 @@ main(int argc, const char *argv[])
             usage(argv);
         }
     }
+    const unsigned long target_num_steps = num_steps;
 
     // Print the pin numbers.
     printf("WiringPi pin numbers:\n");
@@ -66,7 +67,7 @@ main(int argc, const char *argv[])
 
 //    print_gpio_labels();
 
-    if (num_steps > 0) {
+    if (target_num_steps > 0) {
         printf("Will move %lu steps.\n", num_steps);
     }
 
@@ -77,6 +78,10 @@ main(int argc, const char *argv[])
     atexit(print_steps_taken_and_exit);
 
     printf("Beginning rotation...\n");
+    if (target_num_steps > 0) {
+        printf("%05lu / %05lu", 0LU, target_num_steps);
+        fflush(stdout);
+    }
 
     int keep_going = 1;
     while (keep_going) {
@@ -99,7 +104,11 @@ main(int argc, const char *argv[])
 #endif
         motor_execute_move(m, 2);
 
-        num_steps_taken++;
+        // Update the current step count.
+        if (++num_steps_taken % 10 == 0) {
+            printf("\r%05lu", num_steps_taken);
+            fflush(stdout);
+        }
     }
 
     return 0;
