@@ -16,7 +16,7 @@ namespace salesman {
 
 BobAndWeaveSalesman::BobAndWeaveSalesman(const Image &grayscaleImage,
 										 const Image &edgeImage)
-    : Salesman(), grayscaleImage(grayscaleImage), edgeImage(edgeImage)
+	: Salesman(), grayscaleImage(grayscaleImage), edgeImage(edgeImage)
 {
 }
 

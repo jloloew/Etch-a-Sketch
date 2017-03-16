@@ -40,19 +40,13 @@ struct Image {
 	virtual ~Image();
 
 	inline bool isValid() const
-	{
-		return (getWidth() > 0) && (getHeight() > 0) && (nullptr != data);
-	}
+		{ return (getWidth() > 0) && (getHeight() > 0) && (nullptr != data); }
 
 	inline size_t getWidth() const
-	{
-		return width;
-	}
+		{ return width; }
 
 	inline size_t getHeight() const
-	{
-		return height;
-	}
+		{ return height; }
 
 	Pixel operator[](const etchasketch::KDPoint<2> &index) const;
 
@@ -61,15 +55,11 @@ struct Image {
 	// For the Objective-C wrapper.
 
 	inline Pixel *getData() const
-	{
-		return data;
-	}
+		{ return data; }
 
 	inline size_t getPixelCount() const
 	// TODO: check for overflow on the multiplication
-	{
-		return width * height;
-	}
+		{ return width * height; }
 
   private:
 	size_t width, height;
