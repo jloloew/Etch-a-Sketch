@@ -58,15 +58,17 @@ etchasketch::ImageFlow::convertToGrayscale()
 void
 etchasketch::ImageFlow::detectEdges()
 {
+	/*
 	// Blur the image.
-	BlurImageFilter *blurFilter = new BlurImageFilter();
-	Image *blurredImage = blurFilter->apply(grayscaleImage);
-	delete blurFilter;
-	blurFilter = nullptr;
+	BlurImageFilter blurFilter = BlurImageFilter();
+	Image *blurredImage = blurFilter.apply(grayscaleImage);
 	// Perform edge detection.
 	Image *detectedImage = edgeDetector->detectEdges(*blurredImage);
 	delete blurredImage;
 	blurredImage = nullptr;
+	/*/
+	Image *detectedImage = edgeDetector->detectEdges(grayscaleImage);
+	// */
 	edgeDetectedImage = *detectedImage;
 }
 
