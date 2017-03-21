@@ -110,18 +110,17 @@ main(int argc, char * const argv[])
 */
 
     // Estimate time to draw ordered edge points.
-    time_t now = time(0);
-
     float avgTimeToDrawPt = 0.5;
-    time_t estimatedCompletionTime = now + (points.size() * avgTimeToDrawPt);
-    struct tm* estimatedDrawingCompletionTime = localtime(&estimatedCompletionTime);
+    long totalNumSeconds = avgTimeToDrawPt * points.size();
 
-    cout << "Drawing " << points.size() << " points is estimated to finish at "
-         << (estimatedDrawingCompletionTime->tm_year + 1900) << '-'
-         << (estimatedDrawingCompletionTime->tm_mon + 1) << '-'
-         << estimatedDrawingCompletionTime->tm_mday
-         <<  " " << estimatedDrawingCompletionTime->tm_hour
-         <<  ":" << estimatedDrawingCompletionTime->tm_min
+    long seconds = totalNumSeconds % 60;
+    long minutes = totalNumSeconds / 60 % 60;
+    long hours = totalNumSeconds / 60 / 60 / 24;
+
+    cout << "Drawing " << points.size() << " points is estimated to finish in "
+         << hours << ":"
+         << minutes << ":"
+         << seconds << "."
          << endl;
 
     // Draw ordered edge points.
