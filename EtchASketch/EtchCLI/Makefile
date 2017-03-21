@@ -2,7 +2,7 @@ UNAME_S := $(shell uname -s)
 
 EXENAME = etch
 OBJS = main.o libEtchASketch.a motor.o MotorController.o
-ifeq ($(UNAME_S),Linux)
+ifneq ($(UNAME_S),Linux)
 	OBJS += wiringPiWrapper.o
 endif
 
