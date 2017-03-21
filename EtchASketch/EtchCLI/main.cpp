@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
+#include <ctime>
 #include "EtchASketch.hpp"
 #include "motor.h"
 #include "MotorController.hpp"
@@ -107,6 +108,20 @@ main(int argc, char * const argv[])
         imgWidth,
         imgHeight);
 */
+
+    // Estimate time to draw ordered edge points.
+    float avgTimeToDrawPt = 0.5;
+    long totalNumSeconds = avgTimeToDrawPt * points.size();
+
+    long seconds = totalNumSeconds % 60;
+    long minutes = totalNumSeconds / 60 % 60;
+    long hours = totalNumSeconds / 60 / 60 / 24;
+
+    cout << "Drawing " << points.size() << " points is estimated to finish in "
+         << hours << ":"
+         << minutes << ":"
+         << seconds << "."
+         << endl;
 
     // Draw ordered edge points.
     MotorController tracer = MotorController();
