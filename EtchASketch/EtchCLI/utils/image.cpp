@@ -13,6 +13,6 @@ void Image::etchToFile(string const & file_name) {
 		return;
 	}
 
-    fwrite(_pixels, sizeof(RGBAPixel), _width * _height, fp);
+  fwrite(_pixels, sizeof(RGBAPixel), _width * _height, fp);
 	fclose(fp);
 }

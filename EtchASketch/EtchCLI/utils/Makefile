@@ -1,4 +1,4 @@
-EXENAME = etcher
+EXENAME = etch-convert
 OBJS = png.o rgbapixel.o image.o
 
 CXX = clang++
@@ -6,9 +6,9 @@ CXXFLAGS = -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
 LD = clang++
 LDFLAGS = -std=c++1y -stdlib=libc++ -lpng -lc++abi
 
-all : etcher
+all : etch-convert
 
-etcher : main.o image.o png.o rgbapixel.o
+etch-convert : main.o image.o png.o rgbapixel.o
 	$(LD) main.o image.o png.o rgbapixel.o /usr/lib/arm-linux-gnueabihf/libunwind.so.8 $(LDFLAGS) -o $(EXENAME)
 
 main.o : image.o main.cpp
@@ -24,4 +24,4 @@ rgbapixel.o : rgbapixel.cpp rgbapixel.h
 	$(CXX) $(CXXFLAGS) rgbapixel.cpp
 
 clean :
-	-rm -f *.o $(EXENAME)
+	-rm -f *.o *.etch $(EXENAME)

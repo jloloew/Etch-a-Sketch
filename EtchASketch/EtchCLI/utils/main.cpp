@@ -1,41 +1,50 @@
 #include <stdio.h>
+#include <unistd.h>
 #include "image.h"
 
 using namespace std;
 
-/*
 void usage() {
-    return;
+  cout << "Usage: etch-convert -i /path/to/input/image.png" << endl;
+  return;
 }
-*/
 
 int
 main(int argc, char * const argv[])
 {
-    cout << "Welcome to the etcher utility, the one and only .etch file generator!" << endl;
+  cout << "Welcome to etch-convert, the one and only .png ➡️  .etch file converter!" << endl;
 
-    // Parse arguments.
-    /*
-    string inFile;
-    long imgWidth = -1, imgHeight = -1;
-    int ch;
-    while ((ch = getopt(argc, argv, "i")) != -1) {
-        switch (ch) {
-            case 'i':
-                inFile = string(optarg);
-                break;
-            case '?':
-            default:
-                usage();
-        }
-    }
-    */
+  // Parse arguments.
+  string inputFile;
+  int ch;
+  while ((ch = getopt(argc, argv, "i:")) != -1) {
+      switch (ch) {
+          case 'i':
+              inputFile = string(optarg);
+              break;
+          case '?':
+          default:
+              usage();
+              exit(EXIT_FAILURE);
+      }
+  }
 
-	Image* imageToEtch = new Image();
-	imageToEtch->readFromFile("stick-figure.png");
-	imageToEtch->etchToFile("stick-figure.etch");
+  // Validate arguments.
+  if (inputFile.length() <= 4) { // .png = 4 chars
+    usage();
+    exit(EXIT_FAILURE);
+  }
 
-    cout << "I have written your etch file to stick-figure.etch 🎉" << endl;
+  // Attempt to create image from input file name.
+	Image* inputImage = new Image();
+	inputImage->readFromFile(inputFile);
 
-	return 0;
+  // Attempt to etch image to file.
+  string outputFile = inputFile.substr(0, inputFile.find("."));
+  outputFile.append(".etch");
+	inputImage->etchToFile(outputFile);
+
+  cout << "Your etched file has been written to " << outputFile << " 🎉" << endl;
+
+	return EXIT_SUCCESS;
 }
