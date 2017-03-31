@@ -30,6 +30,7 @@
 		B8460EB21E7AF69A00D86B0E /* NearestNeighborSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8460EAF1E7AF69A00D86B0E /* NearestNeighborSalesman.cpp */; };
 		B85A95941DFCC06E00E0F6BE /* EASDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */; };
 		B85A95951DFCC06E00E0F6BE /* EASDebugViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */; };
+		B86256A01E8EB5C1008BDD33 /* SmallishSpanningTreeWalkSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B862569E1E8EB5C1008BDD33 /* SmallishSpanningTreeWalkSalesman.cpp */; };
 		B872DD8F1DB06C2D008E08D8 /* KDTree.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDF1D79FA7400A4ED34 /* KDTree.hpp */; };
 		B872DD901DB06C30008E08D8 /* KDPoint.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BE21D79FB8600A4ED34 /* KDPoint.hpp */; };
 		B8765E851E72227B00420672 /* wiringPiWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B8765E831E72227B00420672 /* wiringPiWrapper.c */; };
@@ -137,6 +138,8 @@
 		B85A95911DFCC06E00E0F6BE /* EASDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASDebugViewController.h; sourceTree = "<group>"; };
 		B85A95921DFCC06E00E0F6BE /* EASDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASDebugViewController.m; sourceTree = "<group>"; };
 		B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASDebugViewController.xib; sourceTree = "<group>"; };
+		B862569E1E8EB5C1008BDD33 /* SmallishSpanningTreeWalkSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SmallishSpanningTreeWalkSalesman.cpp; sourceTree = "<group>"; };
+		B862569F1E8EB5C1008BDD33 /* SmallishSpanningTreeWalkSalesman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SmallishSpanningTreeWalkSalesman.hpp; sourceTree = "<group>"; };
 		B86263AC1E4948B50010A1B2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		B86263AD1E4948BE0010A1B2 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B8765E831E72227B00420672 /* wiringPiWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wiringPiWrapper.c; sourceTree = "<group>"; };
@@ -395,6 +398,8 @@
 				B8460EB01E7AF69A00D86B0E /* NearestNeighborSalesman.hpp */,
 				A52158441E4ADEE3002A411E /* Salesman.cpp */,
 				A52158481E4ADF00002A411E /* Salesman.hpp */,
+				B862569E1E8EB5C1008BDD33 /* SmallishSpanningTreeWalkSalesman.cpp */,
+				B862569F1E8EB5C1008BDD33 /* SmallishSpanningTreeWalkSalesman.hpp */,
 			);
 			name = salesman;
 			sourceTree = "<group>";
@@ -597,6 +602,7 @@
 				B872DD8F1DB06C2D008E08D8 /* KDTree.hpp in Sources */,
 				A52158421E4ADECE002A411E /* BobAndWeaveSalesman.cpp in Sources */,
 				A521583E1E4ADE93002A411E /* SobelEdgeDetector.cpp in Sources */,
+				B86256A01E8EB5C1008BDD33 /* SmallishSpanningTreeWalkSalesman.cpp in Sources */,
 				A521583A1E4ADE6B002A411E /* BlurImageFilter.cpp in Sources */,
 				B8766BDA1D79DE7600A4ED34 /* EtchASketch.cpp in Sources */,
 				B8766BDD1D79EE4600A4ED34 /* EASUtils.cpp in Sources */,

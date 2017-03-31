@@ -9,7 +9,7 @@
 #include "ImageFlow.hpp"
 #include "SobelEdgeDetector.hpp"
 #include "BlurImageFilter.hpp"
-#include "NearestNeighborSalesman.hpp"
+#include "SmallishSpanningTreeWalkSalesman.hpp"
 
 using std::unordered_set;
 using std::vector;
@@ -18,7 +18,7 @@ using etchasketch::KDPoint;
 using etchasketch::edgedetect::BlurImageFilter;
 using etchasketch::edgedetect::SobelEdgeDetector;
 using etchasketch::salesman::Salesman;
-using etchasketch::salesman::NearestNeighborSalesman;
+using etchasketch::salesman::SmallishSpanningTreeWalkSalesman;
 
 etchasketch::ImageFlow::ImageFlow(const Image &colorImage)
 : originalImage(colorImage),
@@ -103,7 +103,7 @@ etchasketch::ImageFlow::orderEdgePointsForDrawing()
 	// TODO: Put startPoint in class scope or something.
 	const KDPoint<2> startPoint(0, 0);
 	Salesman *salesman = nullptr;
-	salesman = new NearestNeighborSalesman(*edgePoints, startPoint);
+	salesman = new SmallishSpanningTreeWalkSalesman(*edgePoints, startPoint);
 	setSalesman(salesman);
 	salesman->orderPoints();
 	setOrderedEdgePoints(new std::vector<KDPoint<2>>(salesman->getOrderedPoints()));
