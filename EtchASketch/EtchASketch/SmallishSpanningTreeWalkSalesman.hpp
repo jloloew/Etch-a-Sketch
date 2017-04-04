@@ -85,15 +85,17 @@ class SmallishSpanningTreeWalkSalesman : public Salesman {
 	/**
 	 * Merge together two components of a graph. Also updates a
 	 * few other maps and things, for convenience.
+	 * 
+	 * @returns The new center point of the merged component.
 	 */
-	void mergeComponents(GraphComponent &dst,
-	                     GraphComponent &src,
-	                     const KDPoint<2> &centerDst,
-	                     const KDPoint<2> &centerSrc,
-	                     const UndirectedGraph &g,
-	                     std::unordered_map<const KDPoint<2>, GraphComponent &> &componentCenters,
-	                     std::unordered_map<const GraphComponent *, KDTree<2>> &compTrees,
-	                     KDTree<2> &compCentersTree) const;
+	KDPoint<2> mergeComponents(GraphComponent &dst,
+							   GraphComponent &src,
+							   const KDPoint<2> &centerDst,
+							   const KDPoint<2> &centerSrc,
+							   const UndirectedGraph &g,
+							   std::unordered_map<const KDPoint<2>, GraphComponent &> *componentCenters,
+							   std::unordered_map<const GraphComponent *, KDTree<2>> &compTrees,
+							   KDTree<2> &compCentersTree) const;
 
 	/**
 	 * Walk the graph, adding each point visited to the list of
@@ -108,6 +110,10 @@ class SmallishSpanningTreeWalkSalesman : public Salesman {
 	bool walkDFSHelper(const UndirectedGraph &g,
 	                   const VertexDesc &curVertex,
 	                   std::unordered_map<VertexDesc, bool> &visited);
+	
+	std::vector<GraphComponent>::iterator
+	find(std::vector<GraphComponent> &vec,
+		 const GraphComponent &tgt) const;
 };
 }
 }

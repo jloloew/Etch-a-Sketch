@@ -138,25 +138,48 @@ void SmallishSpanningTreeWalkSalesman::connectComponents(UndirectedGraph &g,
 	KDPoint<2> centerA; // The center of component A.
 	for (auto iter = components.begin(); iter != components.end(); ++iter) {
 		GraphComponent &comp = *iter;
+		
+		assert(comp.size() > 0);
+		
 		// Set up a KDTree of the points in the component.
 		compTrees[&comp] = KDTree<2>();
 		KDTree<2> &compTree = compTrees[&comp];
 		// Find the average coords of all the points in the component.
-		const KDPoint<2> avgPoint = findCenterPoint(g, comp, compTree);
-		componentCenters.insert({ { avgPoint, comp } });
+		KDPoint<2> avgPoint = findCenterPoint(g, comp, compTree);
 
 		// Check whether this is the first component. Don't insert the first one
 		// into the KDTree.
-		if (isFirstComponent) {
+		if (!isFirstComponent) {
+			// Add the point to the KDTree.
+			if (!compCentersTree.insert(avgPoint)) {
+				// Center point is already in use by another component. Handle
+				// by merging the existing component into the current component.
+				GraphComponent &conflictingComp = componentCenters.at(avgPoint);
+				
+				GraphComponent *dbgCompPtr = &comp;
+				GraphComponent *dbgConfCompPtr = &conflictingComp;
+				size_t dbgCompSz = comp.size();
+				size_t dbgConfCompSz = conflictingComp.size();
+				
+				avgPoint = mergeComponents(comp, conflictingComp, avgPoint, avgPoint, g, nullptr, compTrees, compCentersTree);
+				
+				EASLog("Error: center point already in use by another component. Merging the old component into the new one. Original: %p (%lu) Attempted: %p (%lu) Merged: %p (%lu)", dbgConfCompPtr, dbgConfCompSz, dbgCompPtr, dbgCompSz, &comp, comp.size());
+				assert(comp.size() == dbgConfCompSz + dbgCompSz);
+				
+				// Remove the current component from the vector and continue on.
+				auto curIter = iter;
+				--iter;
+				components.erase(curIter);
+				
+				continue;
+			}
+		} else {
+			// This is the first component.
 			isFirstComponent = false;
 			centerA = avgPoint;
-			continue;
 		}
-		// Add the point to the KDTree.
-		if (!compCentersTree.insert(avgPoint)) {
-			EASLog("Error: center point already in use by another component. "
-			       "Skipping.");
-		}
+		
+		componentCenters.insert({ { avgPoint, comp } });
 	}
 
 	// Loop until we have one single giant component.
@@ -166,9 +189,9 @@ void SmallishSpanningTreeWalkSalesman::connectComponents(UndirectedGraph &g,
 			EASLog("%lu components remaining", components.size());
 		}
 
-		// Pick an arbitrary component (the first one). Find the component
-		// whose center is nearest to this one.
-		GraphComponent &compA = components[0];
+		// Pick an arbitrary component (centerA). Find the component whose
+		// center is nearest to this one.
+		GraphComponent &compA = componentCenters.at(centerA);
 		KDPoint<2> *nn = compCentersTree.findNearestNeighbor(centerA);
 		const KDPoint<2> compCenterB = *nn;
 		delete nn;
@@ -192,10 +215,10 @@ void SmallishSpanningTreeWalkSalesman::connectComponents(UndirectedGraph &g,
 		add_edge(bridgeA, bridgeB, g);
 
 		// Merge component A into component B.
-		mergeComponents(compB, compA, compCenterB, centerA, g, componentCenters,
+		centerA = mergeComponents(compB, compA, compCenterB, centerA, g, &componentCenters,
 		                compTrees, compCentersTree);
 		// Remove A from the component set and delete it.
-		components.erase(components.begin());
+		components.erase(find(components, compA)); // find can return the end iterator if compA is not found
 	}
 
 	// debug
@@ -248,13 +271,14 @@ SmallishSpanningTreeWalkSalesman::VertexDesc
 	return *bestDesc;
 }
 
-void SmallishSpanningTreeWalkSalesman::mergeComponents(
+KDPoint<2>
+SmallishSpanningTreeWalkSalesman::mergeComponents(
         GraphComponent &dst,
         GraphComponent &src,
         const KDPoint<2> &centerDst,
         const KDPoint<2> &centerSrc,
         const UndirectedGraph &g,
-        std::unordered_map<const KDPoint<2>, GraphComponent &> &componentCenters,
+        std::unordered_map<const KDPoint<2>, GraphComponent &> *componentCenters,
         std::unordered_map<const GraphComponent *, KDTree<2>> &compTrees,
         KDTree<2> &compCentersTree) const
 {
@@ -270,12 +294,15 @@ void SmallishSpanningTreeWalkSalesman::mergeComponents(
 	}
 	// Merge the points of src into dst.
 	dst.insert(src.begin(), src.end());
-	// Erase the center of src and the old center of dst from the
-	// componentCenters map, and add the center of the new, merged component.
-	componentCenters.erase(centerSrc);
-	componentCenters.erase(centerDst);
-	assert(dst.size() > 0);
-	componentCenters.insert({ { newCenterDst, dst } });
+	if (componentCenters != nullptr) {
+		// Erase the center of src and the old center of dst from the
+		// componentCenters map, and add the center of the new, merged component.
+		componentCenters->erase(centerSrc);
+		componentCenters->erase(centerDst);
+		assert(dst.size() > 0);
+		componentCenters->insert({ { newCenterDst, dst } });
+		assert(componentCenters->at(newCenterDst).size() > 0);
+	}
 	// Do the same with the compCentersTree.
 	compCentersTree.remove(centerSrc);
 	compCentersTree.remove(centerDst);
@@ -288,6 +315,8 @@ void SmallishSpanningTreeWalkSalesman::mergeComponents(
 	}
 	// Delete src's KDTree.
 	compTrees.erase(&src);
+	
+	return newCenterDst;
 }
 
 void SmallishSpanningTreeWalkSalesman::walkDFS(const UndirectedGraph &g,
@@ -336,6 +365,18 @@ bool SmallishSpanningTreeWalkSalesman::walkDFSHelper(const UndirectedGraph &g,
 	}
 	// This vertex was explored successfully.
 	return true;
+}
+
+vector<SmallishSpanningTreeWalkSalesman::GraphComponent>::iterator
+SmallishSpanningTreeWalkSalesman::find(vector<GraphComponent> &vec,
+									   const GraphComponent &tgt) const
+{
+	for (vector<GraphComponent>::iterator it = vec.begin(); it != vec.end(); ++it) {
+		if (&*it == &tgt) {
+			return it;
+		}
+	}
+	return vec.end();
 }
 
 } // namespace salesman
