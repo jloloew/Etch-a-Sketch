@@ -8,6 +8,13 @@ TODO: Write a project description
 ### Current Product
 ![Example as of February 7, 2017](images/2017-02-07.png "Current product")
 
+## Features
+### Line Simplification
+The [Douglas-Peucker algorithm](https://en.m.wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm) is used to simplify lines. This has the effect of reducing visual noise and reducing the drawing time of the image.
+
+Without line simplification: ![](images/lineSimplification-before.png "Lena without line simplification")
+With line simplification: ![](images/lineSimplification-after-20.png "Lena with line simplification")
+
 ## Installation
 
 TODO: Describe the installation process

@@ -10,6 +10,7 @@
 #include "SobelEdgeDetector.hpp"
 #include "BlurImageFilter.hpp"
 #include "NearestNeighborSalesman.hpp"
+#include "LineSimplifier.hpp"
 
 using std::unordered_set;
 using std::vector;
@@ -106,9 +107,14 @@ etchasketch::ImageFlow::orderEdgePointsForDrawing()
 	salesman = new NearestNeighborSalesman(*edgePoints, startPoint);
 	setSalesman(salesman);
 	salesman->orderPoints();
-	setOrderedEdgePoints(new std::vector<KDPoint<2>>(salesman->getOrderedPoints()));
-	// Done with the salesman.
-	setSalesman(nullptr);
+	vector<KDPoint<2>> *line = new vector<KDPoint<2>>(salesman->getOrderedPoints());
+	setSalesman(nullptr); // Done with the salesman.
+	
+	// Simplify the line.
+	LineSimplifier lineSimplifier = LineSimplifier();
+	lineSimplifier.simplifyLine(*line);
+	
+	setOrderedEdgePoints(line);
 }
 
 const vector<KDPoint<2>> &
