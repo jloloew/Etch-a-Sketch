@@ -169,8 +169,21 @@ etchasketch::ImageFlow::performAllComputationSteps()
 void
 etchasketch::ImageFlow::setOutputSize(size_t width, size_t height)
 {
-	outputWidth = width;
-	outputHeight = height;
+	// Scale to fit.
+	float widthf = static_cast<float>(width);
+	float heightf = static_cast<float>(height);
+	float imageWidthf = static_cast<float>(originalImage.getWidth());
+	float imageHeightf = static_cast<float>(originalImage.getHeight());
+	if (widthf / heightf > imageWidthf / imageHeightf) {
+		// Image height is the limiting factor.
+		outputWidth = static_cast<size_t>(imageWidthf * (heightf / imageHeightf));
+		outputHeight = height;
+	} else {
+		// Image width is the limiting factor.
+		outputWidth = width;
+		outputHeight = static_cast<size_t>(imageHeightf * (widthf / imageWidthf));
+	}
+	
 	// Remove our current scaled edge points.
 	setScaledEdgePoints(nullptr);
 }
