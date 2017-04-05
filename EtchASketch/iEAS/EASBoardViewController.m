@@ -47,7 +47,7 @@
 	
 	[self addObserver:self
 		   forKeyPath:@"screenVC.view.frame"
-			  options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial)
+			  options:(NSKeyValueObservingOptions)(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial)
 			  context:nil];
 	
 	// Wait for the UI to load, then begin computation.
