@@ -37,12 +37,10 @@ MotorController::MotorController()
 }
 
 void
-MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2>> &imagePoints,
-								   size_t imageWidth,
-								   size_t imageHeight)
+MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2>> &points)
 {
 	// Scale the points to fit the motor's drawable resolution.
-	const vector<motor_point_t> motorPoints = scaleImagePointsToMotorPoints(imagePoints, imageWidth, imageHeight);
+	const vector<motor_point_t> motorPoints = convertToMotorPoints(points);
 	
 	// for each point to draw
 	for (auto it = motorPoints.begin(); it != motorPoints.end(); ++it) {
@@ -125,25 +123,18 @@ MotorController::drawOrderedPoints(const std::vector<etchasketch::KDPoint<2>> &i
 }
 
 vector<motor_point_t>
-MotorController::scaleImagePointsToMotorPoints(const vector<etchasketch::KDPoint<2>> &imagePoints,
-							  size_t imageWidth,
-							  size_t imageHeight) const
+MotorController::convertToMotorPoints(const vector<etchasketch::KDPoint<2>> &points) const
 {
 	vector<motor_point_t> motorPoints = vector<motor_point_t>();
-	motorPoints.reserve(imagePoints.size());
-	
-	// TODO: this
-	for (auto it = imagePoints.begin(); it != imagePoints.end(); ++it) {
-		const etchasketch::KDPoint<2> &ipt = *it;
+	motorPoints.reserve(points.size());
+	// Convert each KDPoint to a motor_point_t.
+	for (auto it = points.begin(); it != points.end(); ++it) {
 		motor_point_t mpt = {
-			.x = static_cast<float>(ipt[0]),
-			.y = static_cast<float>(ipt[1])
+			.x = static_cast<float>((*it)[0]),
+			.y = static_cast<float>((*it)[1])
 		};
-		mpt.x = floorf(mpt.x * motor_max_loc[0] / static_cast<float>(imageWidth));
-		mpt.y = floorf(mpt.y * motor_max_loc[1] / static_cast<float>(imageHeight));
 		motorPoints.push_back(mpt);
 	}
-	
 	return motorPoints;
 }
 

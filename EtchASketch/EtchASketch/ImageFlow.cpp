@@ -27,14 +27,18 @@ grayscaleImage(colorImage.getWidth(), colorImage.getHeight()),
 edgeDetectedImage(Image(0, 0)),
 edgePoints(nullptr),
 orderedEdgePoints(nullptr),
+scaledEdgePoints(nullptr),
 edgeDetector(new SobelEdgeDetector()),
-salesman(nullptr)
+salesman(nullptr),
+outputWidth(colorImage.getWidth()),
+outputHeight(colorImage.getHeight())
 { }
 
 etchasketch::ImageFlow::~ImageFlow()
 {
 	delete edgePoints;
 	delete orderedEdgePoints;
+	delete scaledEdgePoints;
 	delete edgeDetector;
 	delete salesman;
 }
@@ -117,12 +121,29 @@ etchasketch::ImageFlow::orderEdgePointsForDrawing()
 	setOrderedEdgePoints(line);
 }
 
+void
+etchasketch::ImageFlow::scalePointsToFitOutputSize()
+{
+	vector<KDPoint<2>> *scaledPoints = new vector<KDPoint<2>>();
+	scaledPoints->reserve(orderedEdgePoints->size());
+	
+	for (auto it = orderedEdgePoints->begin(); it != orderedEdgePoints->end(); ++it) {
+		const KDPoint<2> &ipt = *it;
+		KDPointCoordinate mptx, mpty;
+		mptx = static_cast<KDPointCoordinate>(floor(ipt[0] * outputWidth / static_cast<float>(edgeDetectedImage.getWidth())));
+		mpty = static_cast<KDPointCoordinate>(floor(ipt[1] * outputHeight / static_cast<float>(edgeDetectedImage.getHeight())));
+		scaledPoints->push_back(KDPoint<2>(mptx, mpty));
+	}
+	
+	setScaledEdgePoints(scaledPoints);
+}
+
 const vector<KDPoint<2>> &
-etchasketch::ImageFlow::getOrderedEdgePoints()
+etchasketch::ImageFlow::getFinalPoints()
 {
 	// Make sure we actually have the ordered edge points ready to go.
 	performAllComputationSteps();
-	return *orderedEdgePoints;
+	return *scaledEdgePoints;
 }
 
 void
@@ -139,6 +160,19 @@ etchasketch::ImageFlow::performAllComputationSteps()
 	if (!orderedEdgePoints) {
 		orderEdgePointsForDrawing();
 	}
+	
+	if (!scaledEdgePoints) {
+		scalePointsToFitOutputSize();
+	}
+}
+
+void
+etchasketch::ImageFlow::setOutputSize(size_t width, size_t height)
+{
+	outputWidth = width;
+	outputHeight = height;
+	// Remove our current scaled edge points.
+	setScaledEdgePoints(nullptr);
 }
 
 #pragma mark Setters
@@ -159,6 +193,14 @@ etchasketch::ImageFlow::setOrderedEdgePoints(const vector<KDPoint<2>>
 	// Delete the old value and set it to the new pointer.
 	delete orderedEdgePoints;
 	orderedEdgePoints = newOrderedEdgePoints;
+}
+
+void
+etchasketch::ImageFlow::setScaledEdgePoints(const std::vector<etchasketch::KDPoint<2> > *newScaledEdgePoints)
+{
+	// Delete the old value and set it to the new pointer.
+	delete scaledEdgePoints;
+	scaledEdgePoints = newScaledEdgePoints;
 }
 
 void

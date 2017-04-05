@@ -58,14 +58,23 @@ namespace etchasketch {
 		void orderEdgePointsForDrawing();
 		
 		/**
+		 * Scale the ordered edge points to fit the output size. May stretch the
+		 * image so it doesn't scale evenly.
+		 */
+		void scalePointsToFitOutputSize();
+		
+		/**
 		 * Get the points in drawing order, generating them if necessary.
 		 */
-		const std::vector<etchasketch::KDPoint<2>> & getOrderedEdgePoints();
+		const std::vector<etchasketch::KDPoint<2>> & getFinalPoints();
 		
 		/**
 		 * Do the entire computation flow.
 		 */
 		void performAllComputationSteps();
+		
+		/// Set the desired output resolution.
+		void setOutputSize(size_t width, size_t height);
 		
 		// For the Objective-C wrapper.
 		
@@ -82,9 +91,13 @@ namespace etchasketch {
 		etchasketch::Image edgeDetectedImage;
 		const std::unordered_set<etchasketch::KDPoint<2>> *edgePoints;
 		const std::vector<etchasketch::KDPoint<2>> *orderedEdgePoints;
+		const std::vector<etchasketch::KDPoint<2>> *scaledEdgePoints;
 		
 		etchasketch::edgedetect::EdgeDetector *edgeDetector;
 		etchasketch::salesman::Salesman *salesman;
+		
+		/// The desired width and height of the ordered points.
+		size_t outputWidth, outputHeight;
 		
 		// Setters
 		void setEdgePoints(const std::unordered_set<etchasketch::KDPoint<2>>
@@ -92,6 +105,9 @@ namespace etchasketch {
 		
 		void setOrderedEdgePoints(const std::vector<etchasketch::KDPoint<2>>
 								  *newOrderedEdgePoints);
+		
+		void setScaledEdgePoints(const std::vector<etchasketch::KDPoint<2>>
+								 *newScaledEdgePoints);
 		
 		void setSalesman(etchasketch::salesman::Salesman *newSalesman);
 		

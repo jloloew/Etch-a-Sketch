@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, EASComputationStage) {
 	EASComputationStageDetectEdges,
 	EASComputationStageGenerateEdgePoints,
 	EASComputationStageOrderEdgePointsForDrawing,
+	EASComputationStageScalePointsToFitOutputSize,
 	EASComputationStageFinished
 };
 
@@ -59,11 +60,17 @@ typedef NS_ENUM(NSUInteger, EASComputationStage) {
 /// Put the edge points in the best order for drawing.
 - (void)orderEdgePointsForDrawing;
 
+/// Scale the ordered points up or down to fit in the desired output frame.
+- (void)scalePointsToFitOutputSize;
+
 /// Get the points to draw in order, first computing them if necessary.
-- (NSArray<NSValue *> *)getOrderedEdgePoints;
+- (NSArray<NSValue *> *)getFinalPoints;
 
 /// Perform the entire computation sequence.
 - (void)performAllComputationSteps;
+
+/// Set the desired output resolution.
+- (void)setOutputSizeWithWidth:(NSUInteger)width height:(NSUInteger)height;
 
 #pragma mark Image getters
 

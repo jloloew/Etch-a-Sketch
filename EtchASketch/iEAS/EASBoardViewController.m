@@ -45,12 +45,23 @@
 	[self.screenContents addSubview:self.screenVC.view];
 	[self.view bringSubviewToFront:self.statusLabel];
 	
+	[self addObserver:self
+		   forKeyPath:@"screenVC.view.frame"
+			  options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial)
+			  context:nil];
+	
 	// Wait for the UI to load, then begin computation.
 	[NSTimer scheduledTimerWithTimeInterval:1.0
 									 target:self
 								   selector:@selector(doComputationSequence)
 								   userInfo:nil
 									repeats:NO];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	[self removeObserver:self forKeyPath:@"screenVC.view.frame"];
+	
+	[super viewDidDisappear:animated];
 }
 
 - (void)doComputationSequence {
@@ -63,8 +74,9 @@
 		
 		[self.imageFlow orderEdgePointsForDrawing];
 		
-//		NSArray<NSValue *> *orderedPoints = [self.imageFlow
-//											 getOrderedEdgePoints];
+		[self.imageFlow scalePointsToFitOutputSize];
+		
+//		NSArray<NSValue *> *orderedPoints = [self.imageFlow getFinalPoints];
 //		NSLog(@"Ordered edge points: %@", orderedPoints);
 	});
 }
@@ -91,6 +103,9 @@ willBeginComputationStage:(EASComputationStage)computationStage
 			break;
 		case EASComputationStageOrderEdgePointsForDrawing:
 			statusText = @"Ordering edge points for drawing…";
+			break;
+		case EASComputationStageScalePointsToFitOutputSize:
+			statusText = @"Scaling edge points to fit output size…";
 			break;
 		case EASComputationStageFinished:
 			statusText = @"Done!";
@@ -142,10 +157,30 @@ didCompleteComputationStage:(EASComputationStage)computationStage
 
 - (void)imageFlowDidCompleteAllComputations:(EASImageFlow * __unused)imageFlow {
 	// Draw the ordered edge points.
-	NSArray<NSValue *> * __block points = [self.imageFlow getOrderedEdgePoints];
+	NSArray<NSValue *> * __block points = [self.imageFlow getFinalPoints];
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		[self.screenVC addPoints:points animated:YES];
 	});
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object
+						change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+					   context:(void *)context
+{
+	if ([keyPath isEqualToString:@"screenVC.view.frame"] && [object isEqual:self]) {
+		// Set the size of the drawn points.
+		NSValue *newFrameValue = change[NSKeyValueChangeNewKey];
+		CGSize newSize = [newFrameValue CGRectValue].size;
+		[self.imageFlow setOutputSizeWithWidth:(NSUInteger)newSize.width
+										height:(NSUInteger)newSize.height];
+		if (self.imageFlow.computationStage == EASComputationStageFinished) {
+			// Run it again.
+			[self.imageFlow scalePointsToFitOutputSize];
+		}
+	} else {
+		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+	}
 }
 
 @end

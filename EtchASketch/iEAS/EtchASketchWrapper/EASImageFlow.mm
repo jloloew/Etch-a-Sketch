@@ -132,6 +132,24 @@ using etchasketch::KDPoint;
 	if ([self.delegate respondsToSelector:@selector(imageFlow:didCompleteComputationStage:)]) {
 		[self.delegate imageFlow:self didCompleteComputationStage:self.computationStage];
 	}
+}
+
+- (void)scalePointsToFitOutputSize {
+	// We don't care if we've already completed this computation stage, since we
+	// may have changed the output size.
+	
+	// Update the current stage of computation and notify the delegate.
+	self.computationStage = EASComputationStageScalePointsToFitOutputSize;
+	if ([self.delegate respondsToSelector:@selector(imageFlow:willBeginComputationStage:)]) {
+		[self.delegate imageFlow:self willBeginComputationStage:self.computationStage];
+	}
+	
+	self.imageFlow->scalePointsToFitOutputSize();
+	
+	// Notify the delegate.
+	if ([self.delegate respondsToSelector:@selector(imageFlow:didCompleteComputationStage:)]) {
+		[self.delegate imageFlow:self didCompleteComputationStage:self.computationStage];
+	}
 	
 	// This was the last stage of computation. We're done!
 	if ([self.delegate respondsToSelector:@selector(imageFlowDidCompleteAllComputations:)]) {
@@ -139,8 +157,8 @@ using etchasketch::KDPoint;
 	}
 }
 
-- (NSArray<NSValue *> *)getOrderedEdgePoints {
-	if (self.computationStage == EASComputationStageOrderEdgePointsForDrawing) {
+- (NSArray<NSValue *> *)getFinalPoints {
+	if (self.computationStage == EASComputationStageScalePointsToFitOutputSize) {
 		// Update the current stage of computation and notify the delegate.
 		self.computationStage = EASComputationStageFinished;
 		if ([self.delegate respondsToSelector:@selector(imageFlow:willBeginComputationStage:)]) {
@@ -148,7 +166,7 @@ using etchasketch::KDPoint;
 		}
 	}
 	
-	const std::vector<KDPoint<2>> &pts = self.imageFlow->getOrderedEdgePoints();
+	const std::vector<KDPoint<2>> &pts = self.imageFlow->getFinalPoints();
 	NSUInteger numPts = (NSUInteger)pts.size();
 	// Copy the data out, converting to NSValue.
 	NSMutableArray<NSValue *> *points = [NSMutableArray arrayWithCapacity:numPts];
@@ -163,6 +181,11 @@ using etchasketch::KDPoint;
 	[self detectEdges];
 	[self generateEdgePoints];
 	[self orderEdgePointsForDrawing];
+	[self scalePointsToFitOutputSize];
+}
+
+- (void)setOutputSizeWithWidth:(NSUInteger)width height:(NSUInteger)height {
+	self.imageFlow->setOutputSize(width, height);
 }
 
 #pragma mark - Image getters
