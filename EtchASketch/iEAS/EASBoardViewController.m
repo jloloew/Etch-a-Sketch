@@ -8,18 +8,16 @@
 
 #import "EASBoardViewController.h"
 
+static void *screenViewFrameObservingContext = &screenViewFrameObservingContext;
+
 @interface EASBoardViewController ()
 
-/**
- The view that's the exact size of the screen. Contains things like the
- @c EASScreenView.
- */
-@property (weak, nonatomic) IBOutlet UIView *screenContents;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 - (void)doComputationSequence;
 
 @end
+
 
 @implementation EASBoardViewController
 
@@ -38,17 +36,12 @@
 	self.imageFlow = [[EASImageFlow alloc] initWithColorImage:image];
 	self.imageFlow.delegate = self;
 	
-	// Set up screen VC.
-	self.screenVC = [[EASScreenViewController alloc]
-					 initWithNibName:@"EASScreenViewController" bundle:nil];
-	self.screenVC.view.frame = self.screenContents.bounds;
-	[self.screenContents addSubview:self.screenVC.view];
 	[self.view bringSubviewToFront:self.statusLabel];
 	
-	[self addObserver:self
-		   forKeyPath:@"screenVC.view.frame"
-			  options:(NSKeyValueObservingOptions)(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial)
-			  context:nil];
+	[self.screenView addObserver:self
+					  forKeyPath:@"center"
+						 options:NSKeyValueObservingOptionInitial
+						 context:screenViewFrameObservingContext];
 	
 	// Wait for the UI to load, then begin computation.
 	[NSTimer scheduledTimerWithTimeInterval:1.0
@@ -59,7 +52,9 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-	[self removeObserver:self forKeyPath:@"screenVC.view.frame"];
+	[self.screenView removeObserver:self
+						 forKeyPath:@"center"
+							context:screenViewFrameObservingContext];
 	
 	[super viewDidDisappear:animated];
 }
@@ -159,27 +154,35 @@ didCompleteComputationStage:(EASComputationStage)computationStage
 	// Draw the ordered edge points.
 	NSArray<NSValue *> * __block points = [self.imageFlow getFinalPoints];
 	dispatch_sync(dispatch_get_main_queue(), ^{
-		[self.screenVC addPoints:points animated:YES];
+		[self.screenView setPoints:points animated:YES];
 	});
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
 					  ofObject:(id)object
-						change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+						change:(NSDictionary<NSKeyValueChangeKey, id> *)change
 					   context:(void *)context
 {
-	if ([keyPath isEqualToString:@"screenVC.view.frame"] && [object isEqual:self]) {
+	if (context == screenViewFrameObservingContext &&
+		object == self.screenView &&
+		[keyPath isEqualToString:@"center"])
+	{
 		// Set the size of the drawn points.
-		NSValue *newFrameValue = change[NSKeyValueChangeNewKey];
-		CGSize newSize = [newFrameValue CGRectValue].size;
+		CGSize newSize = self.screenView.frame.size;
 		[self.imageFlow setOutputSizeWithWidth:(NSUInteger)newSize.width
 										height:(NSUInteger)newSize.height];
 		if (self.imageFlow.computationStage == EASComputationStageFinished) {
 			// Run it again.
-			[self.imageFlow scalePointsToFitOutputSize];
+			dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+				[self.imageFlow scalePointsToFitOutputSize];
+			});
 		}
 	} else {
-		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+		// This was not meant for us; pass it up the chain.
+		[super observeValueForKeyPath:keyPath
+							 ofObject:object
+							   change:change
+							  context:context];
 	}
 }
 

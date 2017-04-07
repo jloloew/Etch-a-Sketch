@@ -10,20 +10,24 @@
 
 @interface EASScreenView ()
 
-@property (nonatomic, readwrite, nullable) NSMutableArray<NSValue *> *points;
+/// The points to be drawn.
+@property (nonatomic, readwrite, nonnull) NSMutableArray<NSValue *> *points;
 
+/// A layer containing a dot at each point.
 @property (nonatomic, weak, nullable) CAShapeLayer *pointsLayer;
+/// A layer containing the path connecting the points.
 @property (nonatomic, weak, nullable) CAShapeLayer *pathLayer;
 
 /// Draw each individual point.
 - (void)drawPoints;
 
-/// Draw a Bezier path connecting the points.
+/// Draw a Bézier path connecting the points.
 - (void)connectPoints;
 
-/// Create a Bezier path to connect the points.
+/// Create a Bézier path with a line connecting each point to the next.
 - (UIBezierPath *)pathConnectingPoints;
 
+/// Create a Bézier path with a dot at the position of each point.
 - (UIBezierPath *)pathDrawingPoints;
 
 @end
@@ -54,11 +58,13 @@
 	self.points = [NSMutableArray array];
 	self.pointColor = [UIColor blackColor];
 	self.lineColor = [UIColor darkGrayColor];
+	self.shouldDrawPoints = NO;
+	self.shouldDrawPath = YES;
 }
 
-- (void)addPoints:(NSArray<NSValue *> *)newPoints animated:(BOOL)animated {
+- (void)setPoints:(NSArray<NSValue *> *)newPoints animated:(BOOL)animated {
 	// Add the new points.
-	[_points addObjectsFromArray:newPoints];
+	_points = [newPoints mutableCopy];
 	
 	// Redraw.
 	if (!animated) {
@@ -67,50 +73,56 @@
 	}
 	
 	// Begin the animation.
-	// Set up our points layer.
-	if (!self.pointsLayer) {
-		CAShapeLayer *pointsLayer = [CAShapeLayer layer];
-		
-		pointsLayer.path = [self pathDrawingPoints].CGPath;
-		pointsLayer.strokeColor = self.pointColor.CGColor;
-		pointsLayer.fillColor = nil;
-		pointsLayer.lineWidth = 3.0f;
-		pointsLayer.lineJoin = kCALineJoinMiter;
-		
-//		[self.layer addSublayer:pointsLayer];
-		
-		self.pointsLayer = pointsLayer;
-	}
-	// Set up our path layer.
-	if (!self.pathLayer) {
-		CAShapeLayer *pathLayer = [CAShapeLayer layer];
-		
-		pathLayer.path = [[self pathConnectingPoints] CGPath];
-		pathLayer.strokeColor = self.lineColor.CGColor;
-		pathLayer.fillColor = nil;
-		pathLayer.lineWidth = 1.0f;
-		pathLayer.lineJoin = kCALineJoinMiter;
-		
-		[self.layer addSublayer:pathLayer];
-		
-		self.pathLayer = pathLayer;
-	}
-	
-	// Begin the animation.
 	CABasicAnimation *pathAnimation = [CABasicAnimation
 									   animationWithKeyPath:@"strokeEnd"];
 	pathAnimation.duration = 10.0;
 	pathAnimation.fromValue = @(0.0f);
 	pathAnimation.toValue = @(1.0f);
-	[self.pathLayer addAnimation:pathAnimation forKey:@"draw path"];
-	[self.pointsLayer addAnimation:pathAnimation forKey:@"draw points"];
+	
+	// Set up our points layer.
+	if (self.shouldDrawPoints) {
+		CAShapeLayer *pointsLayer = [CAShapeLayer layer];
+		pointsLayer.path = [self pathDrawingPoints].CGPath;
+		pointsLayer.strokeColor = self.pointColor.CGColor;
+		pointsLayer.fillColor = nil;
+		pointsLayer.lineWidth = 3.0f;
+		pointsLayer.lineJoin = kCALineJoinMiter;
+		if (self.pointsLayer) {
+			[self.layer replaceSublayer:self.pointsLayer with:pointsLayer];
+		} else {
+			[self.layer addSublayer:pointsLayer];
+		}
+		self.pointsLayer = pointsLayer;
+		[self.pointsLayer addAnimation:pathAnimation forKey:@"draw points"];
+	}
+	
+	// Set up our path layer.
+	if (self.shouldDrawPath) {
+		CAShapeLayer *pathLayer = [CAShapeLayer layer];
+		pathLayer.path = [[self pathConnectingPoints] CGPath];
+		pathLayer.strokeColor = self.lineColor.CGColor;
+		pathLayer.fillColor = nil;
+		pathLayer.lineWidth = 1.0f;
+		pathLayer.lineJoin = kCALineJoinMiter;
+		if (self.pathLayer) {
+			[self.layer replaceSublayer:self.pathLayer with:pathLayer];
+		} else {
+			[self.layer addSublayer:pathLayer];
+		}
+		self.pathLayer = pathLayer;
+		[self.pathLayer addAnimation:pathAnimation forKey:@"draw path"];
+	}
 }
 
 #pragma mark Drawing
 
 - (void)drawRect:(CGRect __unused)rect {
-	[self drawPoints];
-	[self connectPoints];
+	if (self.shouldDrawPoints) {
+		[self drawPoints];
+	}
+	if (self.shouldDrawPath) {
+		[self connectPoints];
+	}
 }
 
 - (void)drawPoints {

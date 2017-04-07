@@ -170,8 +170,13 @@ using etchasketch::KDPoint;
 	NSUInteger numPts = (NSUInteger)pts.size();
 	// Copy the data out, converting to NSValue.
 	NSMutableArray<NSValue *> *points = [NSMutableArray arrayWithCapacity:numPts];
+	NSUInteger nonZero = 0;
 	for (auto it = pts.begin(); it != pts.end(); ++it) {
-		[points addObject:[NSValue valueWithCGPoint:CGPointMake((*it)[0], (*it)[1])]];
+		NSValue *value = [NSValue valueWithCGPoint:CGPointMake((*it)[0], (*it)[1])];
+		if (!CGPointEqualToPoint(value.CGPointValue, CGPointZero)) {
+			nonZero++;
+		}
+		[points addObject:value];
 	}
 	return points;
 }

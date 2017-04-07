@@ -19,11 +19,6 @@
 		B827FE951DB1B74B007F2469 /* EASBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */; };
 		B827FE981DB1BDFE007F2469 /* EASBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */; };
 		B827FE9A1DB1BDFE007F2469 /* EASBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */; };
-		B827FE9E1DB1BF48007F2469 /* EASScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */; };
-		B827FEA01DB1BF48007F2469 /* EASScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */; };
-		B827FEA11DB1BF48007F2469 /* EASScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */; };
-		B827FEA21DB1BF48007F2469 /* EASScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */; };
-		B827FEA31DB1BF48007F2469 /* EASScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */; };
 		B827FEA61DB1BF98007F2469 /* EASScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FEA51DB1BF98007F2469 /* EASScreenView.m */; };
 		B827FEA81DB1BF98007F2469 /* EASScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FEA51DB1BF98007F2469 /* EASScreenView.m */; };
 		B8460EB11E7AF69A00D86B0E /* NearestNeighborSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8460EAF1E7AF69A00D86B0E /* NearestNeighborSalesman.cpp */; };
@@ -128,9 +123,6 @@
 		B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASBoardViewController.xib; sourceTree = "<group>"; };
 		B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASBoardViewController.h; sourceTree = "<group>"; };
 		B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASBoardViewController.m; sourceTree = "<group>"; };
-		B827FE9B1DB1BF48007F2469 /* EASScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASScreenViewController.h; sourceTree = "<group>"; };
-		B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASScreenViewController.m; sourceTree = "<group>"; };
-		B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASScreenViewController.xib; sourceTree = "<group>"; };
 		B827FEA41DB1BF98007F2469 /* EASScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASScreenView.h; sourceTree = "<group>"; };
 		B827FEA51DB1BF98007F2469 /* EASScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASScreenView.m; sourceTree = "<group>"; };
 		B8460EAF1E7AF69A00D86B0E /* NearestNeighborSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NearestNeighborSalesman.cpp; sourceTree = "<group>"; };
@@ -330,9 +322,6 @@
 				B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */,
 				B827FEA41DB1BF98007F2469 /* EASScreenView.h */,
 				B827FEA51DB1BF98007F2469 /* EASScreenView.m */,
-				B827FE9B1DB1BF48007F2469 /* EASScreenViewController.h */,
-				B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */,
-				B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */,
 				B820E9001DAC6DC700135C8A /* EtchASketchWrapper */,
 				B8766BB51D79DC9100A4ED34 /* Info.plist */,
 				B8766BB21D79DC9100A4ED34 /* LaunchScreen.storyboard */,
@@ -554,7 +543,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B827FEA11DB1BF48007F2469 /* EASScreenViewController.xib in Resources */,
 				B8766BB41D79DC9100A4ED34 /* LaunchScreen.storyboard in Resources */,
 				B827FE931DB1B74B007F2469 /* EASBoardViewController.xib in Resources */,
 				B8766BB11D79DC9100A4ED34 /* Assets.xcassets in Resources */,
@@ -567,7 +555,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B827FEA21DB1BF48007F2469 /* EASScreenViewController.xib in Resources */,
 				B827FE941DB1B74B007F2469 /* EASBoardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -576,7 +563,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B827FEA31DB1BF48007F2469 /* EASScreenViewController.xib in Resources */,
 				B827FE951DB1B74B007F2469 /* EASBoardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -615,7 +601,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B827FE9E1DB1BF48007F2469 /* EASScreenViewController.m in Sources */,
 				B827FE981DB1BDFE007F2469 /* EASBoardViewController.m in Sources */,
 				B85A95941DFCC06E00E0F6BE /* EASDebugViewController.m in Sources */,
 				B8766BA91D79DC9100A4ED34 /* AppDelegate.m in Sources */,
@@ -639,7 +624,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B827FEA01DB1BF48007F2469 /* EASScreenViewController.m in Sources */,
 				B8FA80441DB31E4400123AB6 /* ImageFlow.cpp in Sources */,
 				B8FA803F1DB31E3800123AB6 /* EtchASketch.cpp in Sources */,
 				B8766BCA1D79DC9100A4ED34 /* iEASUITests.m in Sources */,
