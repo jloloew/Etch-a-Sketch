@@ -14,6 +14,7 @@
 namespace etchasketch {
 	namespace edgedetect {
 		
+		/// Abstract class. Apply a filter to an image.
 		class ImageFilter {
 		public:
 			virtual ~ImageFilter() { };

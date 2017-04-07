@@ -9,6 +9,8 @@
 @import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
+
+/// Represents the contents of an Etch-a-Sketch's drawable area.
 IB_DESIGNABLE
 @interface EASScreenView : UIView
 

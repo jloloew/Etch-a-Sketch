@@ -14,11 +14,12 @@
 namespace etchasketch {
 	namespace edgedetect {
 		
+		/**
+		 * Finds edges within an image. @c EdgeDetector is an abstract
+		 * superclass; do not attempt to instantiate it.
+		 */
 		class EdgeDetector {
 		public:
-			/// Create a new edge detector.
-//			EdgeDetector() { }
-			
 			virtual ~EdgeDetector() { };
 			
 			/// Detect edges in an image.

@@ -37,24 +37,16 @@ namespace etchasketch {
 		 * intended to be called.
 		 */
 		
-		/**
-		 * Convert the color image into a grayscale image.
-		 */
+		/// Convert the color image into a grayscale image.
 		void convertToGrayscale();
 		
-		/**
-		 * Detect edges in the starting image.
-		 */
+		/// Detect edges in the starting image.
 		void detectEdges();
 		
-		/**
-		 * Get a set of all points on an edge in the edge detected image.
-		 */
+		/// Get a set of all points on an edge in the edge detected image.
 		void generateEdgePoints();
 		
-		/**
-		 * Put the edge points in the best order for drawing.
-		 */
+		/// Put the edge points in the best order for drawing.
 		void orderEdgePointsForDrawing();
 		
 		/**
@@ -63,14 +55,10 @@ namespace etchasketch {
 		 */
 		void scalePointsToFitOutputSize();
 		
-		/**
-		 * Get the points in drawing order, generating them if necessary.
-		 */
+		/// Get the points in drawing order, generating them if necessary.
 		const std::vector<etchasketch::KDPoint<2>> & getFinalPoints();
 		
-		/**
-		 * Do the entire computation flow.
-		 */
+		/// Do the entire computation flow.
 		void performAllComputationSteps();
 		
 		/// Set the desired output resolution.
@@ -78,9 +66,11 @@ namespace etchasketch {
 		
 		// For the Objective-C wrapper.
 		
+		/// Get the grayscale image, if we've already produced it.
 		const etchasketch::Image & getGrayscaleImage() const
 			{ return grayscaleImage; }
 		
+		/// Get the edge detected image, if we've already produced it.
 		const etchasketch::Image & getEdgeDetectedImage() const
 			{ return edgeDetectedImage; }
 		
@@ -96,8 +86,11 @@ namespace etchasketch {
 		etchasketch::edgedetect::EdgeDetector *edgeDetector;
 		etchasketch::salesman::Salesman *salesman;
 		
-		/// The desired width and height of the ordered points.
-		size_t outputWidth, outputHeight;
+		/// The desired width of the ordered points, in pixels.
+		size_t outputWidth;
+		
+		/// The desired height of the ordered points, in pixels.
+		size_t outputHeight;
 		
 		// Setters
 		void setEdgePoints(const std::unordered_set<etchasketch::KDPoint<2>>

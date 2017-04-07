@@ -20,6 +20,7 @@ namespace etchasketch {
 		class KDTreeTests;
 	}
 	
+	/// An implementation of a k-D tree.
 	template<int Dim>
 	class KDTree
 	{

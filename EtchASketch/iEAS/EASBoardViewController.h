@@ -11,12 +11,16 @@
 #import "EASScreenView.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+/// Shows an Etch-a-Sketch board and the contents of its screen.
 @interface EASBoardViewController : UIViewController <EASImageFlowDelegate>
 
 /// Contains the image of the Etch-a-Sketch board and background.
 @property (weak, nonatomic) IBOutlet UIImageView *boardImageView;
+
 /// Contains the contents of the Etch-a-Sketch's screen.
 @property (weak, nonatomic) IBOutlet EASScreenView *screenView;
+
 /// The component that performs the actual computation.
 @property (strong, nonatomic) EASImageFlow *imageFlow;
 

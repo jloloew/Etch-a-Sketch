@@ -27,6 +27,7 @@ namespace etchasketch {
 		double timeFunctionAndPrint(void (function)(void),
 									std::string funcName);
 
+		/// The implementation of the @c EASLog macro.
 		void _EAS_Log(std::string fmt, ...);
 
 		/**

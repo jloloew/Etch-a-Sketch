@@ -15,6 +15,10 @@
 
 namespace etchasketch {
 
+/**
+ * Removes extra points to "simplify" a line while maintaining a certain level
+ * of quality.
+ */
 class LineSimplifier {
 public:
 	/**

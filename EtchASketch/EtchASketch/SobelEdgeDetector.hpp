@@ -14,8 +14,10 @@
 namespace etchasketch {
 	namespace edgedetect {
 
+		/// Detect edges, à la Sobel.
 		class SobelEdgeDetector : public etchasketch::edgedetect::EdgeDetector {
 		public:
+			/// Create a new Sobel edge detector.
 			SobelEdgeDetector();
 			
 			virtual ~SobelEdgeDetector() { };

@@ -19,6 +19,7 @@ using std::endl;
 
 namespace etchasketch {
 
+	/// Represents a coordinate in a single dimension.
 	typedef int KDPointCoordinate;
 	
 	/**
@@ -31,6 +32,7 @@ namespace etchasketch {
 	struct KDPoint
 	{
 	public:
+		/// A value representing an invalid coordinate.
 		static const KDPointCoordinate KDPointCoordinateInvalid = INT_MAX;
 		
 	private:
@@ -45,7 +47,7 @@ namespace etchasketch {
 		
 		KDPoint(const KDPointCoordinate allValues = 0);
 		
-		KDPoint(KDPointCoordinate arr[Dim]);
+		KDPoint(const KDPointCoordinate arr[Dim]);
 		
 		explicit KDPoint(KDPointCoordinate x, KDPointCoordinate y ...);
 		
@@ -55,9 +57,11 @@ namespace etchasketch {
 		 */
 		KDPoint(const KDPoint<Dim> & __restrict other);
 		
+		/// Whether this point is a valid point.
 		inline
 		bool isValid() const;
 		
+		/// Whether this point has no subtrees.
 		inline
 		bool isLeaf() const;
 		
@@ -108,8 +112,10 @@ namespace etchasketch {
 		bool operator>(const KDPoint<Dim> p) const;
 		bool operator>=(const KDPoint<Dim> p) const;
 		
+		/// Set the value of the dimension @c index to the coordinate @c val.
 		void set(int index, KDPointCoordinate val);
 		
+		/// Print a textual representation of the point to an output stream.
 		void print(std::ostream &out = std::cout) const;
 		
 	private:
@@ -122,8 +128,7 @@ namespace etchasketch {
 
 // Add a hash function for use in unordered_map.
 namespace std {
-	// Non-const version.
-
+	/// Hash a point.
 	template<>
     struct hash<etchasketch::KDPoint<2>> {
 		size_t
@@ -133,10 +138,8 @@ namespace std {
 			return (pt[0] * 0x1f1f1f1f) ^ pt[1];
 		}
 	};
-
-    //const etchasketch::KDPoint<2>
 	
-	// Const version.
+	/// Hash a point.
 	template<>
     struct hash<const etchasketch::KDPoint<2>> {
 		size_t
