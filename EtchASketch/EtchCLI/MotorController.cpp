@@ -168,7 +168,7 @@ MotorController::moveToPoint(const motor_point_t &pt)
     
 	motor_execute_move(motors, 2);
     
-    cout << "nibLoc: x: " << nibLoc.x << ", y: " << nibLoc.y << endl;
+    // cout << "nibLoc: x: " << nibLoc.x << ", y: " << nibLoc.y << endl;
     
     // Update nibLoc coordinates
     nibLoc.x = pt.x;
