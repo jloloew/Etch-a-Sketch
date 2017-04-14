@@ -167,6 +167,7 @@
 		B87943C81D91ADF30035B729 /* ImageFlow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageFlow.cpp; sourceTree = "<group>"; };
 		B87943C91D91ADF30035B729 /* ImageFlow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = ImageFlow.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		B8B211641DAC895A009814B8 /* KDTreeTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KDTreeTests.mm; sourceTree = "<group>"; };
+		B8D0CDDB1EA0586000C6361B /* EASImage+CPP.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "EASImage+CPP.hh"; sourceTree = "<group>"; };
 		B8F394A71E776930009D5021 /* motor-main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "motor-main.c"; path = "EtchASketch/EtchCLI/motor-main.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -231,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				B820E9031DAC6E2200135C8A /* EASImage.h */,
+				B8D0CDDB1EA0586000C6361B /* EASImage+CPP.hh */,
 				B820E9041DAC6E2200135C8A /* EASImage.mm */,
 				B827FE8D1DB1B27F007F2469 /* EASImageFlow.h */,
 				B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */,

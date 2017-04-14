@@ -6,6 +6,7 @@
 //  Copyright © 2016 Justin Loew. All rights reserved.
 //
 
+#import "EASImage+CPP.hh"
 #import "EASImageFlow.h"
 #import "EtchASketch.hpp"
 
@@ -26,15 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
  * This is just the global dispatch queue, at least for now.
  */
 @property (nonatomic, readonly, nonnull) dispatch_queue_t delegateQueue;
-
-@end
-
-
-@interface EASImage ()
-
-@property (nonatomic, readonly, nonnull) etchasketch::Image *image;
-
-- (instancetype)initWithCPPImage:(const etchasketch::Image *)image;
 
 @end
 NS_ASSUME_NONNULL_END

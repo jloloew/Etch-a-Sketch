@@ -7,39 +7,32 @@
 //
 
 #import "EASImage.h"
+#import "EASImage+CPP.hh"
 #import "EtchASketch.hpp"
 
-using etchasketch::Image;
-
+NS_ASSUME_NONNULL_BEGIN
 @interface EASImage ()
 
-@property (nonatomic, readonly) const Image *image;
+@property (nonatomic, readonly, nonnull) const etchasketch::Image *image;
 
 @property (nonatomic, nullable) UIImage *backingUIImage;
 
 @property (nonatomic) BOOL shouldFreeCPPImage;
 
-/**
- * @Note: Uses the same C++ image instance. This init is meant for short 
- * lifespan EASImages where the EASImage will be freed shortly after use.
- */
-- (instancetype)initWithCPPImage:(const Image *)image;
-
 - (CGImageRef)newCGImageRepresentation;
 
 @end
+NS_ASSUME_NONNULL_END
 
 
 @implementation EASImage
 
-- (instancetype)initWithWidth:(NSUInteger)width
-					   height:(NSUInteger)height
-{
+- (instancetype)initWithWidth:(NSUInteger)width height:(NSUInteger)height {
 	self = [super init];
 	if (self) {
 		self.shouldFreeCPPImage = YES;
 		self.backingUIImage = nil;
-		_image = new Image(width, height);
+		_image = new etchasketch::Image(width, height);
 	}
 	return self;
 }
@@ -104,7 +97,6 @@ using etchasketch::Image;
 - (void)dealloc {
 	if (self.shouldFreeCPPImage) {
 		delete self.image;
-		_image = nil;
 	}
 }
 
