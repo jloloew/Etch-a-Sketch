@@ -20,6 +20,7 @@
 	etchasketch::utils::_EAS_Log("\n"); \
 } while (0)
 
+/// The Etch-a-Sketch logging facility.
 #define EASLog(fmt, ...) _EASLog2((fmt) , ## __VA_ARGS__)
 
 

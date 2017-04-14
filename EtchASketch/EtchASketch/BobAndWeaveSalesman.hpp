@@ -33,6 +33,7 @@ class BobAndWeaveSalesman : public Salesman {
 
 	virtual ~BobAndWeaveSalesman();
 
+	/// Put the points in the order in which they should be drawn.
 	void orderPoints();
 
   private:

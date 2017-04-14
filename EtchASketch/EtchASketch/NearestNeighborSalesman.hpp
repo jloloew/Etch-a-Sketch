@@ -38,7 +38,10 @@ namespace etchasketch {
 			}
 			
   protected:
+			/// The point at which we begin drawing.
 			const KDPoint<2> startPoint;
+			
+			/// The current set of points that have not yet been ordered. 
 			std::unordered_set<KDPoint<2>> unorderedPoints;
 			
   private:

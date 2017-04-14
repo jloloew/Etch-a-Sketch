@@ -19,11 +19,6 @@
 		B827FE951DB1B74B007F2469 /* EASBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */; };
 		B827FE981DB1BDFE007F2469 /* EASBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */; };
 		B827FE9A1DB1BDFE007F2469 /* EASBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */; };
-		B827FE9E1DB1BF48007F2469 /* EASScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */; };
-		B827FEA01DB1BF48007F2469 /* EASScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */; };
-		B827FEA11DB1BF48007F2469 /* EASScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */; };
-		B827FEA21DB1BF48007F2469 /* EASScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */; };
-		B827FEA31DB1BF48007F2469 /* EASScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */; };
 		B827FEA61DB1BF98007F2469 /* EASScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FEA51DB1BF98007F2469 /* EASScreenView.m */; };
 		B827FEA81DB1BF98007F2469 /* EASScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827FEA51DB1BF98007F2469 /* EASScreenView.m */; };
 		B8460EB11E7AF69A00D86B0E /* NearestNeighborSalesman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8460EAF1E7AF69A00D86B0E /* NearestNeighborSalesman.cpp */; };
@@ -128,9 +123,6 @@
 		B827FE921DB1B74B007F2469 /* EASBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASBoardViewController.xib; sourceTree = "<group>"; };
 		B827FE961DB1BDFE007F2469 /* EASBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASBoardViewController.h; sourceTree = "<group>"; };
 		B827FE971DB1BDFE007F2469 /* EASBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASBoardViewController.m; sourceTree = "<group>"; };
-		B827FE9B1DB1BF48007F2469 /* EASScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASScreenViewController.h; sourceTree = "<group>"; };
-		B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASScreenViewController.m; sourceTree = "<group>"; };
-		B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EASScreenViewController.xib; sourceTree = "<group>"; };
 		B827FEA41DB1BF98007F2469 /* EASScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASScreenView.h; sourceTree = "<group>"; };
 		B827FEA51DB1BF98007F2469 /* EASScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASScreenView.m; sourceTree = "<group>"; };
 		B8460EAF1E7AF69A00D86B0E /* NearestNeighborSalesman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NearestNeighborSalesman.cpp; sourceTree = "<group>"; };
@@ -330,9 +322,6 @@
 				B85A95931DFCC06E00E0F6BE /* EASDebugViewController.xib */,
 				B827FEA41DB1BF98007F2469 /* EASScreenView.h */,
 				B827FEA51DB1BF98007F2469 /* EASScreenView.m */,
-				B827FE9B1DB1BF48007F2469 /* EASScreenViewController.h */,
-				B827FE9C1DB1BF48007F2469 /* EASScreenViewController.m */,
-				B827FE9D1DB1BF48007F2469 /* EASScreenViewController.xib */,
 				B820E9001DAC6DC700135C8A /* EtchASketchWrapper */,
 				B8766BB51D79DC9100A4ED34 /* Info.plist */,
 				B8766BB21D79DC9100A4ED34 /* LaunchScreen.storyboard */,
@@ -554,7 +543,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B827FEA11DB1BF48007F2469 /* EASScreenViewController.xib in Resources */,
 				B8766BB41D79DC9100A4ED34 /* LaunchScreen.storyboard in Resources */,
 				B827FE931DB1B74B007F2469 /* EASBoardViewController.xib in Resources */,
 				B8766BB11D79DC9100A4ED34 /* Assets.xcassets in Resources */,
@@ -567,7 +555,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B827FEA21DB1BF48007F2469 /* EASScreenViewController.xib in Resources */,
 				B827FE941DB1B74B007F2469 /* EASBoardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -576,7 +563,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B827FEA31DB1BF48007F2469 /* EASScreenViewController.xib in Resources */,
 				B827FE951DB1B74B007F2469 /* EASBoardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -615,7 +601,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B827FE9E1DB1BF48007F2469 /* EASScreenViewController.m in Sources */,
 				B827FE981DB1BDFE007F2469 /* EASBoardViewController.m in Sources */,
 				B85A95941DFCC06E00E0F6BE /* EASDebugViewController.m in Sources */,
 				B8766BA91D79DC9100A4ED34 /* AppDelegate.m in Sources */,
@@ -639,7 +624,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B827FEA01DB1BF48007F2469 /* EASScreenViewController.m in Sources */,
 				B8FA80441DB31E4400123AB6 /* ImageFlow.cpp in Sources */,
 				B8FA803F1DB31E3800123AB6 /* EtchASketch.cpp in Sources */,
 				B8766BCA1D79DC9100A4ED34 /* iEASUITests.m in Sources */,
@@ -713,45 +697,74 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_OPTIMIZATION = time;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CLANG_WARN_ASSIGN_ENUM = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_INCREMENTAL_DISTILL = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_SHORT_ENUMS = YES;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LLVM_LTO = YES_THIN;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -760,38 +773,67 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_OPTIMIZATION = space;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CLANG_WARN_ASSIGN_ENUM = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_INCREMENTAL_DISTILL = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_SHORT_ENUMS = YES;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LLVM_LTO = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

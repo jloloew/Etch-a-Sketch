@@ -14,8 +14,10 @@
 namespace etchasketch {
 	namespace edgedetect {
 		
+		/// An image filter that applies a blur.
 		class BlurImageFilter : public etchasketch::edgedetect::ImageFilter {
 		public:
+			/// The radius of the blur.
 			static const uint32_t radius = 4;
 			
 			BlurImageFilter();

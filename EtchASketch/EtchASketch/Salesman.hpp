@@ -33,6 +33,7 @@ class Salesman {
 	}
 
   protected:
+	/// The list of points, in the order in which they should be drawn.
 	std::vector<etchasketch::KDPoint<2>> orderedPoints;
 };
 

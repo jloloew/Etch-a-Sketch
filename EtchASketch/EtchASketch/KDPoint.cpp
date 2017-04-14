@@ -35,7 +35,7 @@ etchasketch::KDPoint<Dim>::KDPoint(const KDPointCoordinate allValues)
 	Copy the array of points in
  */
 template<int Dim>
-etchasketch::KDPoint<Dim>::KDPoint(KDPointCoordinate arr[Dim])
+etchasketch::KDPoint<Dim>::KDPoint(const KDPointCoordinate arr[Dim])
 : KDPoint()
 {
 	for (int i = 0; i < Dim; i++) {

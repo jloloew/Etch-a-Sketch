@@ -58,7 +58,6 @@ NS_ASSUME_NONNULL_END
 
 - (void)dealloc {
 	delete self.imageFlow;
-	_imageFlow = nullptr;
 }
 
 #pragma mark Computations
@@ -217,8 +216,13 @@ NS_ASSUME_NONNULL_END
 		NSUInteger numPts = (NSUInteger)pts.size();
 		// Copy the data out, converting to NSValue.
 		points = [NSMutableArray arrayWithCapacity:numPts];
+		NSUInteger nonZero = 0;
 		for (auto it = pts.begin(); it != pts.end(); ++it) {
-			[points addObject:[NSValue valueWithCGPoint:CGPointMake((*it)[0], (*it)[1])]];
+			NSValue *value = [NSValue valueWithCGPoint:CGPointMake((*it)[0], (*it)[1])];
+			if (!CGPointEqualToPoint(value.CGPointValue, CGPointZero)) {
+				nonZero++;
+			}
+			[points addObject:value];
 		}
 	});
 	return points;
