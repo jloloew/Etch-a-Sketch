@@ -41,9 +41,9 @@ typedef NS_ENUM(NSUInteger, EASComputationStage) {
  */
 @interface EASImageFlow : NSObject
 
-@property (nonatomic, readonly) EASComputationStage computationStage;
+@property (atomic, readonly) EASComputationStage computationStage;
 
-@property (nonatomic, weak, nullable) id<EASImageFlowDelegate> delegate;
+@property (atomic, weak, nullable) id<EASImageFlowDelegate> delegate;
 
 /// Create a new flow with a starting image.
 - (instancetype)initWithColorImage:(EASImage *)colorImage;
