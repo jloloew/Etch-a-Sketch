@@ -14,9 +14,7 @@
 
 namespace etchasketch {
 
-/**
- * The backing store of a single image.
- */
+/// The backing store of a single image.
 struct Image {
   public:
 	/// A pixel in RGBA format.
@@ -25,6 +23,7 @@ struct Image {
 	// TODO: Add spec for the format of the data buffer.
 	/**
 	 * Create a new image.
+	 *
 	 * @param width The width of the image, in pixels.
 	 * @param height The height of the image, in pixels.
 	 * @param data A raw pixel buffer. The data is copied out into the
@@ -32,48 +31,53 @@ struct Image {
 	 */
 	Image(size_t width, size_t height, const Pixel *data = nullptr);
 
-	// Deep copy another image.
+	/// Deep copy another image.
 	Image(const etchasketch::Image &other);
+	
+	Image & operator=(const Image &that);
 
 	virtual ~Image();
 
+	/// Whether this is a valid, visually representable image.
 	inline bool isValid() const
-	{
-		return (getWidth() > 0) && (getHeight() > 0) && (nullptr != data);
-	}
+		{ return (getWidth() > 0) && (getHeight() > 0) && (nullptr != data); }
 
+	/// The width of the image, in pixels.
 	inline size_t getWidth() const
-	{
-		return width;
-	}
+		{ return width; }
 
+	/// The height of the image, in pixels.
 	inline size_t getHeight() const
-	{
-		return height;
-	}
+		{ return height; }
 
+	/// Get the @c Pixel at the given point.
 	Pixel operator[](const etchasketch::KDPoint<2> &index) const;
-
+	
+	/// Get the @c Pixel at the given point.
 	Pixel &operator[](const etchasketch::KDPoint<2> &index);
 
 	// For the Objective-C wrapper.
 
+	/// Get a pointer to the data buffer used by this image.
 	inline Pixel *getData() const
-	{
-		return data;
-	}
+		{ return data; }
 
+	/// Get the number of pixels in the image.
 	inline size_t getPixelCount() const
 	// TODO: check for overflow on the multiplication
-	{
-		return width * height;
-	}
+		{ return width * height; }
 
   private:
-	size_t width, height;
+	/// The width of the image, in pixels.
+	size_t width;
+	
+	/// The height of the image, in pixels.
+	size_t height;
 
-	/// 1-D array of Pixels representing a 2-D image. See @c operator[] for
-	/// mapping.
+	/**
+	 * 1-D array of Pixels representing a 2-D image. See @c operator[] for
+	 * mapping.
+	 */
 	Pixel *data;
 };
 }

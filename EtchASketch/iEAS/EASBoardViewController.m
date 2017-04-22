@@ -8,18 +8,16 @@
 
 #import "EASBoardViewController.h"
 
+static void *screenViewFrameObservingContext = &screenViewFrameObservingContext;
+
 @interface EASBoardViewController ()
 
-/**
- The view that's the exact size of the screen. Contains things like the
- @c EASScreenView.
- */
-@property (weak, nonatomic) IBOutlet UIView *screenContents;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 - (void)doComputationSequence;
 
 @end
+
 
 @implementation EASBoardViewController
 
@@ -28,17 +26,22 @@
 	self.statusLabel.text = @"Loading…";
 	
 	// Set up image flow.
+	EASImage *image;
+	//*
 	UIImage *img = [UIImage imageNamed:@"Lena"];
-	EASImage *image = [[EASImage alloc] initWithImage:img];
+	image = [[EASImage alloc] initWithImage:img];
+	/*/
+	image = [EASImage imageFromEtchFileAtPath:@"/Users/jloloew/Desktop/EtchASketch/EtchASketch/EtchCLI/utils/lena.etch"];
+	// */
 	self.imageFlow = [[EASImageFlow alloc] initWithColorImage:image];
 	self.imageFlow.delegate = self;
 	
-	// Set up screen VC.
-	self.screenVC = [[EASScreenViewController alloc]
-					 initWithNibName:@"EASScreenViewController" bundle:nil];
-	self.screenVC.view.frame = self.screenContents.bounds;
-	[self.screenContents addSubview:self.screenVC.view];
 	[self.view bringSubviewToFront:self.statusLabel];
+	
+	[self.screenView addObserver:self
+					  forKeyPath:@"center"
+						 options:NSKeyValueObservingOptionInitial
+						 context:screenViewFrameObservingContext];
 	
 	// Wait for the UI to load, then begin computation.
 	[NSTimer scheduledTimerWithTimeInterval:1.0
@@ -46,6 +49,14 @@
 								   selector:@selector(doComputationSequence)
 								   userInfo:nil
 									repeats:NO];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	[self.screenView removeObserver:self
+						 forKeyPath:@"center"
+							context:screenViewFrameObservingContext];
+	
+	[super viewDidDisappear:animated];
 }
 
 - (void)doComputationSequence {
@@ -58,8 +69,9 @@
 		
 		[self.imageFlow orderEdgePointsForDrawing];
 		
-//		NSArray<NSValue *> *orderedPoints = [self.imageFlow
-//											 getOrderedEdgePoints];
+		[self.imageFlow scalePointsToFitOutputSize];
+		
+//		NSArray<NSValue *> *orderedPoints = [self.imageFlow getFinalPoints];
 //		NSLog(@"Ordered edge points: %@", orderedPoints);
 	});
 }
@@ -86,6 +98,9 @@ willBeginComputationStage:(EASComputationStage)computationStage
 			break;
 		case EASComputationStageOrderEdgePointsForDrawing:
 			statusText = @"Ordering edge points for drawing…";
+			break;
+		case EASComputationStageScalePointsToFitOutputSize:
+			statusText = @"Scaling edge points to fit output size…";
 			break;
 		case EASComputationStageFinished:
 			statusText = @"Done!";
@@ -137,10 +152,38 @@ didCompleteComputationStage:(EASComputationStage)computationStage
 
 - (void)imageFlowDidCompleteAllComputations:(EASImageFlow * __unused)imageFlow {
 	// Draw the ordered edge points.
-	NSArray<NSValue *> * __block points = [self.imageFlow getOrderedEdgePoints];
+	NSArray<NSValue *> * __block points = [self.imageFlow getFinalPoints];
 	dispatch_sync(dispatch_get_main_queue(), ^{
-		[self.screenVC addPoints:points animated:YES];
+		[self.screenView setPoints:points animated:YES];
 	});
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object
+						change:(NSDictionary<NSKeyValueChangeKey, id> *)change
+					   context:(void *)context
+{
+	if (context == screenViewFrameObservingContext &&
+		object == self.screenView &&
+		[keyPath isEqualToString:@"center"])
+	{
+		// Set the size of the drawn points.
+		CGSize newSize = self.screenView.frame.size;
+		[self.imageFlow setOutputSizeWithWidth:(NSUInteger)newSize.width
+										height:(NSUInteger)newSize.height];
+		if (self.imageFlow.computationStage == EASComputationStageFinished) {
+			// Run it again.
+			dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+				[self.imageFlow scalePointsToFitOutputSize];
+			});
+		}
+	} else {
+		// This was not meant for us; pass it up the chain.
+		[super observeValueForKeyPath:keyPath
+							 ofObject:object
+							   change:change
+							  context:context];
+	}
 }
 
 @end

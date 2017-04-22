@@ -11,5 +11,6 @@
 
 #include "Image.hpp"
 #include "ImageFlow.hpp"
+#include "EASUtils.hpp"
 
 #endif /* EtchASketch_hpp */

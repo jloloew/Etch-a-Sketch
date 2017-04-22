@@ -39,6 +39,22 @@ etchasketch::Image::Image(const etchasketch::Image &other)
 	}
 }
 
+etchasketch::Image &
+etchasketch::Image::operator=(const etchasketch::Image &that)
+{
+	if (this == &that) { // Safety first
+		return *this;
+	}
+	
+	width = that.getWidth();
+	height = that.getHeight();
+	delete [] data;
+	const size_t pxCount = that.getPixelCount();
+	data = new Pixel[pxCount];
+	memcpy(data, that.getData(), pxCount * sizeof(Pixel));
+	return *this;
+}
+
 etchasketch::Image::~Image()
 {
 	delete [] data;

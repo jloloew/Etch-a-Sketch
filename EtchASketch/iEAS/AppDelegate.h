@@ -10,9 +10,12 @@
 #import "EASBoardViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+/// The view controller displaying the Etch-a-Sketch.
 @property (strong, nonatomic) EASBoardViewController *boardVC;
 
 @end

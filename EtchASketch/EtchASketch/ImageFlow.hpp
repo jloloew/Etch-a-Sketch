@@ -37,58 +37,70 @@ namespace etchasketch {
 		 * intended to be called.
 		 */
 		
-		/**
-		 * Convert the color image into a grayscale image.
-		 */
+		/// Convert the color image into a grayscale image.
 		void convertToGrayscale();
 		
-		/**
-		 * Detect edges in the starting image.
-		 */
+		/// Detect edges in the starting image.
 		void detectEdges();
 		
-		/**
-		 * Get a set of all points on an edge in the edge detected image.
-		 */
+		/// Get a set of all points on an edge in the edge detected image.
 		void generateEdgePoints();
 		
-		/**
-		 * Put the edge points in the best order for drawing.
-		 */
+		/// Put the edge points in the best order for drawing.
 		void orderEdgePointsForDrawing();
 		
 		/**
-		 * Get the points in drawing order, generating them if necessary.
+		 * Scale the ordered edge points to fit the output size. May stretch the
+		 * image so it doesn't scale evenly.
 		 */
-		const std::vector<etchasketch::KDPoint<2>> & getOrderedEdgePoints();
+		void scalePointsToFitOutputSize();
+		
+		/// Get the points in drawing order, generating them if necessary.
+		const std::vector<etchasketch::KDPoint<2>> & getFinalPoints();
+		
+		/// Do the entire computation flow.
+		void performAllComputationSteps();
+		
+		/// Set the desired output resolution.
+		void setOutputSize(size_t width, size_t height);
 		
 		// For the Objective-C wrapper.
 		
+		/// Get the grayscale image, if we've already produced it.
 		const etchasketch::Image & getGrayscaleImage() const
 			{ return grayscaleImage; }
 		
-		const etchasketch::Image * getEdgeDetectedImage() const
+		/// Get the edge detected image, if we've already produced it.
+		const etchasketch::Image & getEdgeDetectedImage() const
 			{ return edgeDetectedImage; }
 		
 	private:
 		// Images and other such things, in order of use.
 		const etchasketch::Image originalImage;
 		etchasketch::Image grayscaleImage;
-		const etchasketch::Image *edgeDetectedImage;
+		etchasketch::Image edgeDetectedImage;
 		const std::unordered_set<etchasketch::KDPoint<2>> *edgePoints;
 		const std::vector<etchasketch::KDPoint<2>> *orderedEdgePoints;
+		const std::vector<etchasketch::KDPoint<2>> *scaledEdgePoints;
 		
 		etchasketch::edgedetect::EdgeDetector *edgeDetector;
 		etchasketch::salesman::Salesman *salesman;
 		
-		// Setters
-		void setEdgeDetectedImage(const etchasketch::Image *newImage);
+		/// The desired width of the ordered points, in pixels.
+		size_t outputWidth;
 		
+		/// The desired height of the ordered points, in pixels.
+		size_t outputHeight;
+		
+		// Setters
 		void setEdgePoints(const std::unordered_set<etchasketch::KDPoint<2>>
 						   *newEdgePoints);
 		
 		void setOrderedEdgePoints(const std::vector<etchasketch::KDPoint<2>>
 								  *newOrderedEdgePoints);
+		
+		void setScaledEdgePoints(const std::vector<etchasketch::KDPoint<2>>
+								 *newScaledEdgePoints);
 		
 		void setSalesman(etchasketch::salesman::Salesman *newSalesman);
 		
