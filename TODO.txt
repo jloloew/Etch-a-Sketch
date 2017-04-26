@@ -1,0 +1,17 @@
+- Fix left motor shaking.
+- Merge etch-convert functionality into etch executable.
+- CASE DESIGN:
+    - https://www.tinkercad.com/
+    - pulleys and wood (ask Dad for input)
+    - swing case erasing: https://www.youtube.com/watch?v=bS-zDuRoe_Q
+    - ipad on back that redners image and vibrates?
+- camera module integration
+- https://arxiv.org/pdf/1506.03134.pdf
+- Reset nib location upon completion
+- Smallish spanning tree algorithm
+- Refine maximum allowable nib velocity
+- Better thermal management
+- Improve multithreaded safety
+- Bresenham’s interpolation algorithm
+- Hardware upgrades—timed run motor control
+- Add real-time support for driving the motors
