@@ -1,5 +1,5 @@
 # Lena
-CS296-41 End-of-semester presentation slides giving an overview of the project can be found [here](https://www.icloud.com/keynote/0Zn7Z1xenVRJlimIRGz1t2ifg#rEAS_296_presentation).
+CS296-41 End-of-semester presentation slides giving a little info on the motor control aspect of the project can be found [here](https://www.icloud.com/keynote/0Zn7Z1xenVRJlimIRGz1t2ifg#rEAS_296_presentation).
 
 TODO: Write a project description.
 
