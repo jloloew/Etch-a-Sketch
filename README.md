@@ -1,6 +1,7 @@
 # Lena
+CS296-41 End-of-semester presentation slides giving an overview of the project can be found [here](https://www.icloud.com/keynote/0Zn7Z1xenVRJlimIRGz1t2ifg#rEAS_296_presentation).
 
-TODO: Write a project description
+TODO: Write a project description.
 
 ## Current Status
 ### Original
