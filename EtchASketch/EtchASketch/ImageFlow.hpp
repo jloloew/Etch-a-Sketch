@@ -30,6 +30,13 @@ namespace etchasketch {
 		 */
 		ImageFlow(const etchasketch::Image &colorImage);
 		
+		/**
+		 * Create a new flow with a starting image and desired output size.
+		 */
+		ImageFlow(const etchasketch::Image &colorImage,
+				  size_t outputWidth,
+				  size_t outputHeight);
+		
 		virtual ~ImageFlow();
 		
 		/*
@@ -76,7 +83,8 @@ namespace etchasketch {
 		
 	private:
 		// Images and other such things, in order of use.
-		const etchasketch::Image originalImage;
+		const etchasketch::Image fullSizeOriginalImage;
+		etchasketch::Image originalImage;
 		etchasketch::Image grayscaleImage;
 		etchasketch::Image edgeDetectedImage;
 		const std::unordered_set<etchasketch::KDPoint<2>> *edgePoints;
@@ -91,6 +99,9 @@ namespace etchasketch {
 		
 		/// The desired height of the ordered points, in pixels.
 		size_t outputHeight;
+		
+		const etchasketch::Image
+		downscaleOriginalImageIfNecessary(const Image &fullImage) const;
 		
 		// Setters
 		void setEdgePoints(const std::unordered_set<etchasketch::KDPoint<2>>

@@ -34,9 +34,18 @@ struct Image {
 	/// Deep copy another image.
 	Image(const etchasketch::Image &other);
 	
+	/// Create a copy of another image, resizing in the process.
+	Image(const etchasketch::Image &other, size_t newWidth, size_t newHeight);
+	
 	Image & operator=(const Image &that);
 
 	virtual ~Image();
+	
+	/**
+	 * Change the size of an image, scaling the image's current contents if
+	 * necessary.
+	 */
+	void resize(size_t newWidth, size_t newHeight);
 
 	/// Whether this is a valid, visually representable image.
 	inline bool isValid() const

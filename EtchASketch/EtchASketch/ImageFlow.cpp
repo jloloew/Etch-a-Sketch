@@ -22,16 +22,23 @@ using etchasketch::salesman::Salesman;
 using etchasketch::salesman::NearestNeighborSalesman;
 
 etchasketch::ImageFlow::ImageFlow(const Image &colorImage)
-: originalImage(colorImage),
+: ImageFlow(colorImage, colorImage.getWidth(), colorImage.getHeight())
+{ }
+
+etchasketch::ImageFlow::ImageFlow(const Image &colorImage,
+								  size_t outputWidth,
+								  size_t outputHeight)
+: fullSizeOriginalImage(colorImage),
+outputWidth(outputWidth),
+outputHeight(outputHeight),
+originalImage(downscaleOriginalImageIfNecessary(colorImage)),
 grayscaleImage(colorImage.getWidth(), colorImage.getHeight()),
 edgeDetectedImage(Image(0, 0)),
 edgePoints(nullptr),
 orderedEdgePoints(nullptr),
 scaledEdgePoints(nullptr),
 edgeDetector(new SobelEdgeDetector()),
-salesman(nullptr),
-outputWidth(colorImage.getWidth()),
-outputHeight(colorImage.getHeight())
+salesman(nullptr)
 { }
 
 etchasketch::ImageFlow::~ImageFlow()
@@ -41,6 +48,17 @@ etchasketch::ImageFlow::~ImageFlow()
 	delete scaledEdgePoints;
 	delete edgeDetector;
 	delete salesman;
+}
+
+const etchasketch::Image
+etchasketch::ImageFlow::downscaleOriginalImageIfNecessary(const Image &fullImage) const
+{
+	// Check whether the input image is already smaller than the output size.
+	if (fullImage.getWidth() <= outputWidth && fullImage.getHeight() <= outputHeight) {
+		return fullImage;
+	}
+	
+	return Image(fullImage, outputWidth, outputHeight);
 }
 
 void
@@ -86,7 +104,8 @@ etchasketch::ImageFlow::generateEdgePoints()
 		for (int y = 0; y < edgeDetectedImage.getHeight(); y++) {
 			const KDPoint<2> pt(x, y);
 			const Image::Pixel px = edgeDetectedImage[pt];
-			// Arbitrarily choose the green component. RGB all have the same value.
+			// Arbitrarily choose the green component. RGB all have the same
+			// value.
 			const uint8_t greenComponent = ((px >> 16) & 0xFF);
 			// Check for non-black.
 			if (greenComponent != 0) {
@@ -209,7 +228,7 @@ etchasketch::ImageFlow::setOrderedEdgePoints(const vector<KDPoint<2>>
 }
 
 void
-etchasketch::ImageFlow::setScaledEdgePoints(const std::vector<etchasketch::KDPoint<2> > *newScaledEdgePoints)
+etchasketch::ImageFlow::setScaledEdgePoints(const vector<KDPoint<2>> *newScaledEdgePoints)
 {
 	// Delete the old value and set it to the new pointer.
 	delete scaledEdgePoints;
