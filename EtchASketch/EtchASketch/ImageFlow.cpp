@@ -32,7 +32,7 @@ etchasketch::ImageFlow::ImageFlow(const Image &colorImage,
 outputWidth(outputWidth),
 outputHeight(outputHeight),
 originalImage(downscaleOriginalImageIfNecessary(colorImage)),
-grayscaleImage(colorImage.getWidth(), colorImage.getHeight()),
+grayscaleImage(originalImage.getWidth(), originalImage.getHeight()),
 edgeDetectedImage(Image(0, 0)),
 edgePoints(nullptr),
 orderedEdgePoints(nullptr),
@@ -188,6 +188,15 @@ etchasketch::ImageFlow::performAllComputationSteps()
 void
 etchasketch::ImageFlow::setOutputSize(size_t width, size_t height)
 {
+	// Remove the minimum amount of data necessary to get a high quality output.
+	bool shouldDownscaleOriginalImage = width > outputWidth || height > outputHeight;
+	if (shouldDownscaleOriginalImage) {
+		setEdgePoints(nullptr);
+		setOrderedEdgePoints(nullptr);
+	}
+	setScaledEdgePoints(nullptr);
+	
+	
 	// Scale to fit.
 	float widthf = static_cast<float>(width);
 	float heightf = static_cast<float>(height);
@@ -203,8 +212,11 @@ etchasketch::ImageFlow::setOutputSize(size_t width, size_t height)
 		outputHeight = static_cast<size_t>(imageHeightf * (widthf / imageWidthf));
 	}
 	
-	// Remove our current scaled edge points.
-	setScaledEdgePoints(nullptr);
+	if (shouldDownscaleOriginalImage) {
+		originalImage = downscaleOriginalImageIfNecessary(fullSizeOriginalImage);
+		// FISI
+		performAllComputationSteps();
+	}
 }
 
 #pragma mark Setters

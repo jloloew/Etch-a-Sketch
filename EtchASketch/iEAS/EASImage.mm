@@ -76,6 +76,19 @@ NS_ASSUME_NONNULL_END
 	return self;
 }
 
+- (instancetype)initWithImage:(EASImage *)image
+						width:(NSUInteger)width
+					   height:(NSUInteger)height
+{
+	self = [super init];
+	if (self != nil) {
+		self.shouldFreeCPPImage = YES;
+		self.backingUIImage = nil;
+		_image = new etchasketch::Image(*image.image, width, height);
+	}
+	return self;
+}
+
 - (instancetype)initWithCPPImage:(const etchasketch::Image *)image {
 	self = [super init];
 	if (self) {

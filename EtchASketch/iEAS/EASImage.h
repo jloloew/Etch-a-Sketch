@@ -30,6 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithImage:(UIImage *)image;
 
+/**
+ * Create a copy of another image, resizing in the process.
+ */
+- (instancetype)initWithImage:(EASImage *)image
+						width:(NSUInteger)width
+					   height:(NSUInteger)height;
+
 /// Check whether the image is valid.
 - (BOOL)isValid;
 

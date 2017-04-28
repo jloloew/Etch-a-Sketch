@@ -33,7 +33,10 @@ static void *screenViewFrameObservingContext = &screenViewFrameObservingContext;
 	/*/
 	image = [EASImage imageFromEtchFileAtPath:@"/Users/jloloew/Desktop/EtchASketch/EtchASketch/EtchCLI/utils/lena.etch"];
 	// */
-	self.imageFlow = [[EASImageFlow alloc] initWithColorImage:image];
+	CGSize screenSize = self.screenView.bounds.size;
+	self.imageFlow = [[EASImageFlow alloc] initWithColorImage:image
+												  outputWidth:(NSUInteger)screenSize.width
+												 outputHeight:(NSUInteger)screenSize.height];
 	self.imageFlow.delegate = self;
 	
 	[self.view bringSubviewToFront:self.statusLabel];

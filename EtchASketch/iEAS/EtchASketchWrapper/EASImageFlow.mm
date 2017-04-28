@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, nonnull) dispatch_queue_t delegateQueue;
 
+- (void)commonInit;
+
 @end
 NS_ASSUME_NONNULL_END
 
@@ -37,15 +39,32 @@ NS_ASSUME_NONNULL_END
 - (instancetype)initWithColorImage:(EASImage *)colorImage {
 	self = [super init];
 	if (self != nil) {
-		self.computationStage = EASComputationStageNone;
-		self.delegate = nil;
+		[self commonInit];
 		_imageFlow = new etchasketch::ImageFlow(*colorImage.image);
-		// Set up the dispatch queue.
-		dispatch_queue_attr_t attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INITIATED, -1);
-		_processingQueue = dispatch_queue_create("com.justinloew.EASImageFlow.processing", attr);
-		_delegateQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
 	}
 	return self;
+}
+
+- (instancetype)initWithColorImage:(EASImage *)colorImage
+					   outputWidth:(NSUInteger)outputWidth
+					  outputHeight:(NSUInteger)outputHeight
+{
+	self = [super init];
+	if (self != nil) {
+		[self commonInit];
+		_imageFlow = new etchasketch::ImageFlow(*colorImage.image,
+												outputWidth, outputHeight);
+	}
+	return self;
+}
+
+- (void)commonInit {
+	self.computationStage = EASComputationStageNone;
+	self.delegate = nil;
+	// Set up the dispatch queue.
+	dispatch_queue_attr_t attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INITIATED, -1);
+	_processingQueue = dispatch_queue_create("com.justinloew.EASImageFlow.processing", attr);
+	_delegateQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
 }
 
 - (void)dealloc {
@@ -221,11 +240,17 @@ NS_ASSUME_NONNULL_END
 }
 
 - (void)performAllComputationSteps {
+	/*
 	[self generateGrayscaleImage];
 	[self detectEdges];
 	[self generateEdgePoints];
 	[self orderEdgePointsForDrawing];
 	[self scalePointsToFitOutputSize];
+	/*/
+	dispatch_sync(self.processingQueue, ^{
+		self.imageFlow->performAllComputationSteps();
+	});
+	// */
 }
 
 - (void)setOutputSizeWithWidth:(NSUInteger)width height:(NSUInteger)height {

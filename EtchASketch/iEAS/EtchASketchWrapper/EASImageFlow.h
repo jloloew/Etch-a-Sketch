@@ -93,6 +93,11 @@ typedef NS_ENUM(NSUInteger, EASComputationStage) {
 /// Create a new flow with a starting image.
 - (instancetype)initWithColorImage:(EASImage *)colorImage;
 
+/// Create a new flow with a starting image and desired output size.
+- (instancetype)initWithColorImage:(EASImage *)colorImage
+					   outputWidth:(NSUInteger)outputWidth
+					  outputHeight:(NSUInteger)outputHeight;
+
 /// Convert the color image to a grayscale image.
 - (void)generateGrayscaleImage;
 
