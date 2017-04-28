@@ -97,8 +97,9 @@ main(int argc, char * const argv[])
     rawInputImage = nullptr;
 
     // Create an ImageFlow.
-    etchasketch::ImageFlow inputImgFlow = etchasketch::ImageFlow(inputImg);
-	inputImgFlow.setOutputSize(motor_max_loc[0], motor_max_loc[1]);
+    etchasketch::ImageFlow inputImgFlow = etchasketch::ImageFlow(inputImg,
+																 motor_max_loc[0],
+																 motor_max_loc[1]);
     inputImgFlow.performAllComputationSteps();
     std::vector<etchasketch::KDPoint<2>> points = inputImgFlow.getFinalPoints();
     cout << "ImageFlow completed its run." << endl;

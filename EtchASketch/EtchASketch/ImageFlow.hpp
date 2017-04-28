@@ -82,8 +82,14 @@ namespace etchasketch {
 			{ return edgeDetectedImage; }
 		
 	private:
-		// Images and other such things, in order of use.
 		const etchasketch::Image fullSizeOriginalImage;
+		/// The desired width of the ordered points, in pixels.
+		size_t outputWidth;
+		
+		/// The desired height of the ordered points, in pixels.
+		size_t outputHeight;
+		
+		// Images and other such things, in order of use.
 		etchasketch::Image originalImage;
 		etchasketch::Image grayscaleImage;
 		etchasketch::Image edgeDetectedImage;
@@ -93,12 +99,6 @@ namespace etchasketch {
 		
 		etchasketch::edgedetect::EdgeDetector *edgeDetector;
 		etchasketch::salesman::Salesman *salesman;
-		
-		/// The desired width of the ordered points, in pixels.
-		size_t outputWidth;
-		
-		/// The desired height of the ordered points, in pixels.
-		size_t outputHeight;
 		
 		const etchasketch::Image
 		downscaleOriginalImageIfNecessary(const Image &fullImage) const;
