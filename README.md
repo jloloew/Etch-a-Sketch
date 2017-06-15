@@ -70,13 +70,13 @@ The final product does not look great. When you see the original and the drawing
 
 The hardware aspect of the board is outside the scope of this paper. You can find a high-level overview of the hardware setup [here](https://www.icloud.com/keynote/0Zn7Z1xenVRJlimIRGz1t2ifg#rEAS_296_presentation).
 
-[![Video 1: The board drawing Lena.](//img.youtube.com/vi/g2L0wQGVS88/maxresdefault.jpg "Video 1: The board drawing Lena.")](//www.youtube.com/watch?v=g2L0wQGVS88 "Video 1: The board drawing Lena on YouTube.")
+[![Video 1: The board drawing Lena.](https://img.youtube.com/vi/g2L0wQGVS88/maxresdefault.jpg "Video 1: The board drawing Lena.")](https://www.youtube.com/watch?v=g2L0wQGVS88 "Video 1: The board drawing Lena on YouTube.")
 
-_Video 1: The board drawing Lena._
+_Video 1: The board drawing Lena. ([YouTube](https://www.youtube.com/watch?v=g2L0wQGVS88 "Video 1: The board drawing Lena on YouTube."))_
 
-[![Video 2: The board drawing a stick figure.](//img.youtube.com/vi/pLR_sQbHdaE/maxresdefault.jpg "Video 2: The board drawing a stick figure.")](//www.youtube.com/watch?v=pLR_sQbHdaE "Video 2: The board drawing a stick figure on YouTube.")
+[![Video 2: The board drawing a stick figure.](https://img.youtube.com/vi/pLR_sQbHdaE/maxresdefault.jpg "Video 2: The board drawing a stick figure.")](https://www.youtube.com/watch?v=pLR_sQbHdaE "Video 2: The board drawing a stick figure on YouTube.")
 
-_Video 2: The board drawing a stick figure._
+_Video 2: The board drawing a stick figure. ([YouTube](https://www.youtube.com/watch?v=pLR_sQbHdaE "Video 2: The board drawing a stick figure on YouTube."))_
 
 ## To Do
 
