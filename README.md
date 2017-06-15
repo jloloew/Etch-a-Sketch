@@ -7,7 +7,7 @@ The end goal of this project is to take a photo and draw it on an [Etch A Sketch
 I chose to write the library containing core of the algorithm, `libEtchASketch`, in C++ for performance, portability, compatibility, and energy efficiency. During development, I built two clients using the library: a C++ wrapper running on the Pi called `etch`, and an Objective-C iOS app named `iEAS`. `etch` takes in an image file, runs it through the library, and uses the list of points spit out to control the stepper motors. iEAS also takes an image file, but instead of driving physical motors, it animates drawing on a virtual Etch A Sketch. Running iEAS is much more convenient than the Pi for prototyping algorithms. It doesn’t require lugging around hardware, it runs on a laptop computer which is faster than the Pi, and the simulated drawing speed is much faster than drawing on a physical Etch A Sketch.
 
 It may be helpful to quickly recap some terminology used. An Etch A Sketch is referred to as a *board*. The *nib* is the part of the Etch A Sketch controlled by the knobs that actually draws. The motors controlling the nib do not have any spatial awareness and they will gladly attempt to drive the nib off the side of the screen through a *wall*.
-	
+
 ## Implementation
 
 I faced many choices during the development of this project. They are explored here in the order in which they execute during a computation run. For the purposes of these examples, Lena (fig. 1) is the test image used.
