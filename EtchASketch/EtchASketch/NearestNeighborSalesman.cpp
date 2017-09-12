@@ -14,8 +14,8 @@ using std::vector;
 using etchasketch::KDTree;
 using etchasketch::KDPoint;
 
-etchasketch::salesman::NearestNeighborSalesman::NearestNeighborSalesman(
-																		const unordered_set<KDPoint<2>> &unorderedPoints, const KDPoint<2> &startPoint)
+etchasketch::salesman::NearestNeighborSalesman::NearestNeighborSalesman(const unordered_set<KDPoint<2>> &unorderedPoints,
+																		const KDPoint<2> &startPoint)
 : startPoint(startPoint),
 unorderedPoints(unorderedPoints)
 {
@@ -62,9 +62,9 @@ etchasketch::salesman::NearestNeighborSalesman::nearestNeighborAlgorithm(KDTree<
 			}
 			// Remove the point from the KDTree and delete our copy of it.
 			kdTree.remove(*currPoint);
-			delete currPoint;
 		} else {
 			EASLog("KDTree.findNearestNeighbor returned a bad currPoint.");
 		}
+		delete currPoint;
 	}
 }
