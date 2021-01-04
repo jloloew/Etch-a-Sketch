@@ -44,6 +44,11 @@
 		B8B211651DAC895A009814B8 /* KDTreeTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8B211641DAC895A009814B8 /* KDTreeTests.mm */; };
 		B8D38E291DC46F89001B9AE3 /* libEtchASketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */; };
 		B8D38E2A1DC47034001B9AE3 /* libEtchASketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8766B921D79DC3E00A4ED34 /* libEtchASketch.a */; };
+		B8E97B5625A2F42700DD6819 /* Tracer.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = B8E97B5325A2F42700DD6819 /* Tracer.hpp */; };
+		B8E97B5C25A2F48F00DD6819 /* TracerProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8E97B5A25A2F48F00DD6819 /* TracerProtocol.cpp */; };
+		B8E97B5F25A2F4BB00DD6819 /* TracerPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8E97B5D25A2F4BB00DD6819 /* TracerPoint.cpp */; };
+		B8E97B6325A30FD800DD6819 /* TracerDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8E97B6225A30FD800DD6819 /* TracerDataSource.cpp */; };
+		B8E97B6525A3116300DD6819 /* TracerDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8E97B6425A3116300DD6819 /* TracerDelegate.cpp */; };
 		B8FA80381DB31D0000123AB6 /* EASImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B820E9041DAC6E2200135C8A /* EASImage.mm */; };
 		B8FA803A1DB31D0400123AB6 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
 		B8FA803B1DB31E2500123AB6 /* EASUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDB1D79EE4600A4ED34 /* EASUtils.cpp */; };
@@ -92,6 +97,16 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B8E97B4F25A2F42600DD6819 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				B8E97B5625A2F42700DD6819 /* Tracer.hpp in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +183,16 @@
 		B87943C91D91ADF30035B729 /* ImageFlow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = ImageFlow.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		B8B211641DAC895A009814B8 /* KDTreeTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KDTreeTests.mm; sourceTree = "<group>"; };
 		B8D0CDDB1EA0586000C6361B /* EASImage+CPP.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "EASImage+CPP.hh"; sourceTree = "<group>"; };
+		B8E97B5125A2F42600DD6819 /* libTracer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTracer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8E97B5325A2F42700DD6819 /* Tracer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tracer.hpp; sourceTree = "<group>"; };
+		B8E97B5A25A2F48F00DD6819 /* TracerProtocol.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TracerProtocol.cpp; sourceTree = "<group>"; };
+		B8E97B5B25A2F48F00DD6819 /* TracerProtocol.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TracerProtocol.hpp; sourceTree = "<group>"; };
+		B8E97B5D25A2F4BB00DD6819 /* TracerPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TracerPoint.cpp; sourceTree = "<group>"; };
+		B8E97B5E25A2F4BB00DD6819 /* TracerPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TracerPoint.hpp; sourceTree = "<group>"; };
+		B8E97B6025A3008F00DD6819 /* TracerDataSource.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TracerDataSource.hpp; sourceTree = "<group>"; };
+		B8E97B6125A307D300DD6819 /* TracerDelegate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TracerDelegate.hpp; sourceTree = "<group>"; };
+		B8E97B6225A30FD800DD6819 /* TracerDataSource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TracerDataSource.cpp; sourceTree = "<group>"; };
+		B8E97B6425A3116300DD6819 /* TracerDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TracerDelegate.cpp; sourceTree = "<group>"; };
 		B8F394A71E776930009D5021 /* motor-main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "motor-main.c"; path = "EtchASketch/EtchCLI/motor-main.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,6 +231,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8D38E2A1DC47034001B9AE3 /* libEtchASketch.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B8E97B4E25A2F42600DD6819 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +296,7 @@
 				B8766B941D79DC3E00A4ED34 /* EtchASketch */,
 				B8766C071D79FF4300A4ED34 /* EtchASketchTests */,
 				A52158301E4AD0C8002A411E /* EtchCLI */,
+				B8E97B5225A2F42700DD6819 /* Tracer */,
 				B820E9171DAC75C800135C8A /* Frameworks */,
 				B8766BA31D79DC9100A4ED34 /* iEAS */,
 				B8766BBD1D79DC9100A4ED34 /* iEASTests */,
@@ -282,6 +315,7 @@
 				B8766BBA1D79DC9100A4ED34 /* iEASTests.xctest */,
 				B8766BC51D79DC9100A4ED34 /* iEASUITests.xctest */,
 				B8766C061D79FF4300A4ED34 /* EtchASketchTests.xctest */,
+				B8E97B5125A2F42600DD6819 /* libTracer.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -395,6 +429,22 @@
 			name = salesman;
 			sourceTree = "<group>";
 		};
+		B8E97B5225A2F42700DD6819 /* Tracer */ = {
+			isa = PBXGroup;
+			children = (
+				B8E97B5325A2F42700DD6819 /* Tracer.hpp */,
+				B8E97B6025A3008F00DD6819 /* TracerDataSource.hpp */,
+				B8E97B6225A30FD800DD6819 /* TracerDataSource.cpp */,
+				B8E97B6125A307D300DD6819 /* TracerDelegate.hpp */,
+				B8E97B6425A3116300DD6819 /* TracerDelegate.cpp */,
+				B8E97B5D25A2F4BB00DD6819 /* TracerPoint.cpp */,
+				B8E97B5E25A2F4BB00DD6819 /* TracerPoint.hpp */,
+				B8E97B5A25A2F48F00DD6819 /* TracerProtocol.cpp */,
+				B8E97B5B25A2F48F00DD6819 /* TracerProtocol.hpp */,
+			);
+			path = Tracer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -487,6 +537,23 @@
 			productReference = B8766C061D79FF4300A4ED34 /* EtchASketchTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B8E97B5025A2F42600DD6819 /* Tracer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B8E97B5925A2F42700DD6819 /* Build configuration list for PBXNativeTarget "Tracer" */;
+			buildPhases = (
+				B8E97B4D25A2F42600DD6819 /* Sources */,
+				B8E97B4E25A2F42600DD6819 /* Frameworks */,
+				B8E97B4F25A2F42600DD6819 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tracer;
+			productName = Tracer;
+			productReference = B8E97B5125A2F42600DD6819 /* libTracer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -516,6 +583,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = VM5XXWMN9Y;
 					};
+					B8E97B5025A2F42600DD6819 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = VM5XXWMN9Y;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = B8766B8D1D79DC3E00A4ED34 /* Build configuration list for PBXProject "EtchASketch" */;
@@ -536,6 +608,7 @@
 				B8766C051D79FF4300A4ED34 /* EtchASketchTests */,
 				B8766BB91D79DC9100A4ED34 /* iEASTests */,
 				B8766BC41D79DC9100A4ED34 /* iEASUITests */,
+				B8E97B5025A2F42600DD6819 /* Tracer */,
 			);
 		};
 /* End PBXProject section */
@@ -647,6 +720,17 @@
 				B8460EB21E7AF69A00D86B0E /* NearestNeighborSalesman.cpp in Sources */,
 				B8B211651DAC895A009814B8 /* KDTreeTests.mm in Sources */,
 				B8766C091D79FF4300A4ED34 /* EtchASketchTests.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B8E97B4D25A2F42600DD6819 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8E97B5F25A2F4BB00DD6819 /* TracerPoint.cpp in Sources */,
+				B8E97B6325A30FD800DD6819 /* TracerDataSource.cpp in Sources */,
+				B8E97B5C25A2F48F00DD6819 /* TracerProtocol.cpp in Sources */,
+				B8E97B6525A3116300DD6819 /* TracerDelegate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,6 +1120,53 @@
 			};
 			name = Release;
 		};
+		B8E97B5725A2F42700DD6819 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VM5XXWMN9Y;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B8E97B5825A2F42700DD6819 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VM5XXWMN9Y;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1089,6 +1220,15 @@
 			buildConfigurations = (
 				B8766C0F1D79FF4300A4ED34 /* Debug */,
 				B8766C101D79FF4300A4ED34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B8E97B5925A2F42700DD6819 /* Build configuration list for PBXNativeTarget "Tracer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8E97B5725A2F42700DD6819 /* Debug */,
+				B8E97B5825A2F42700DD6819 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
