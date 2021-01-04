@@ -49,6 +49,10 @@
 		B8E97B5F25A2F4BB00DD6819 /* TracerPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8E97B5D25A2F4BB00DD6819 /* TracerPoint.cpp */; };
 		B8E97B6325A30FD800DD6819 /* TracerDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8E97B6225A30FD800DD6819 /* TracerDataSource.cpp */; };
 		B8E97B6525A3116300DD6819 /* TracerDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8E97B6425A3116300DD6819 /* TracerDelegate.cpp */; };
+		B8E97B6625A313C600DD6819 /* libTracer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E97B5125A2F42600DD6819 /* libTracer.a */; };
+		B8E97B6B25A315D700DD6819 /* EASTracer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8E97B6A25A315D700DD6819 /* EASTracer.mm */; };
+		B8E97B6E25A315E900DD6819 /* libTracer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E97B5125A2F42600DD6819 /* libTracer.a */; };
+		B8E97B6F25A3163B00DD6819 /* EASTracer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8E97B6A25A315D700DD6819 /* EASTracer.mm */; };
 		B8FA80381DB31D0000123AB6 /* EASImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B820E9041DAC6E2200135C8A /* EASImage.mm */; };
 		B8FA803A1DB31D0400123AB6 /* EASImageFlow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */; };
 		B8FA803B1DB31E2500123AB6 /* EASUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8766BDB1D79EE4600A4ED34 /* EASUtils.cpp */; };
@@ -73,6 +77,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = B8766BA11D79DC9100A4ED34;
 			remoteInfo = iEAS;
+		};
+		B8E97B6725A313D300DD6819 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B8766B8A1D79DC3E00A4ED34 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B8E97B5025A2F42600DD6819;
+			remoteInfo = Tracer;
+		};
+		B8E97B6C25A315E100DD6819 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B8766B8A1D79DC3E00A4ED34 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B8E97B5025A2F42600DD6819;
+			remoteInfo = Tracer;
 		};
 		B8FA804B1DB3223F00123AB6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -193,6 +211,9 @@
 		B8E97B6125A307D300DD6819 /* TracerDelegate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TracerDelegate.hpp; sourceTree = "<group>"; };
 		B8E97B6225A30FD800DD6819 /* TracerDataSource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TracerDataSource.cpp; sourceTree = "<group>"; };
 		B8E97B6425A3116300DD6819 /* TracerDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TracerDelegate.cpp; sourceTree = "<group>"; };
+		B8E97B6925A315D700DD6819 /* EASTracer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EASTracer.h; sourceTree = "<group>"; };
+		B8E97B6A25A315D700DD6819 /* EASTracer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EASTracer.mm; sourceTree = "<group>"; };
+		B8E97B7025A3216400DD6819 /* EASTracer+CPP.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "EASTracer+CPP.hh"; path = "EtchASketchWrapper/EASTracer+CPP.hh"; sourceTree = "<group>"; };
 		B8F394A71E776930009D5021 /* motor-main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "motor-main.c"; path = "EtchASketch/EtchCLI/motor-main.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8E97B6625A313C600DD6819 /* libTracer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8D38E291DC46F89001B9AE3 /* libEtchASketch.a in Frameworks */,
+				B8E97B6E25A315E900DD6819 /* libTracer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,10 +287,13 @@
 			isa = PBXGroup;
 			children = (
 				B820E9031DAC6E2200135C8A /* EASImage.h */,
-				B8D0CDDB1EA0586000C6361B /* EASImage+CPP.hh */,
 				B820E9041DAC6E2200135C8A /* EASImage.mm */,
+				B8D0CDDB1EA0586000C6361B /* EASImage+CPP.hh */,
 				B827FE8D1DB1B27F007F2469 /* EASImageFlow.h */,
 				B827FE8E1DB1B27F007F2469 /* EASImageFlow.mm */,
+				B8E97B6925A315D700DD6819 /* EASTracer.h */,
+				B8E97B6A25A315D700DD6819 /* EASTracer.mm */,
+				B8E97B7025A3216400DD6819 /* EASTracer+CPP.hh */,
 			);
 			name = EtchASketchWrapper;
 			sourceTree = "<group>";
@@ -433,10 +459,10 @@
 			isa = PBXGroup;
 			children = (
 				B8E97B5325A2F42700DD6819 /* Tracer.hpp */,
-				B8E97B6025A3008F00DD6819 /* TracerDataSource.hpp */,
 				B8E97B6225A30FD800DD6819 /* TracerDataSource.cpp */,
-				B8E97B6125A307D300DD6819 /* TracerDelegate.hpp */,
+				B8E97B6025A3008F00DD6819 /* TracerDataSource.hpp */,
 				B8E97B6425A3116300DD6819 /* TracerDelegate.cpp */,
+				B8E97B6125A307D300DD6819 /* TracerDelegate.hpp */,
 				B8E97B5D25A2F4BB00DD6819 /* TracerPoint.cpp */,
 				B8E97B5E25A2F4BB00DD6819 /* TracerPoint.hpp */,
 				B8E97B5A25A2F48F00DD6819 /* TracerProtocol.cpp */,
@@ -459,6 +485,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B8E97B6825A313D300DD6819 /* PBXTargetDependency */,
 			);
 			name = EtchASketch;
 			productName = EtchASketch;
@@ -477,6 +504,7 @@
 			);
 			dependencies = (
 				B8FA804E1DB3229100123AB6 /* PBXTargetDependency */,
+				B8E97B6D25A315E100DD6819 /* PBXTargetDependency */,
 			);
 			name = iEAS;
 			productName = iEAS;
@@ -677,6 +705,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B827FE981DB1BDFE007F2469 /* EASBoardViewController.m in Sources */,
+				B8E97B6B25A315D700DD6819 /* EASTracer.mm in Sources */,
 				B85A95941DFCC06E00E0F6BE /* EASDebugViewController.m in Sources */,
 				B8766BA91D79DC9100A4ED34 /* AppDelegate.m in Sources */,
 				B8765E851E72227B00420672 /* wiringPiWrapper.c in Sources */,
@@ -703,6 +732,7 @@
 				B8FA803F1DB31E3800123AB6 /* EtchASketch.cpp in Sources */,
 				B8766BCA1D79DC9100A4ED34 /* iEASUITests.m in Sources */,
 				B827FEA81DB1BF98007F2469 /* EASScreenView.m in Sources */,
+				B8E97B6F25A3163B00DD6819 /* EASTracer.mm in Sources */,
 				B8FA80381DB31D0000123AB6 /* EASImage.mm in Sources */,
 				B827FE9A1DB1BDFE007F2469 /* EASBoardViewController.m in Sources */,
 				B8FA80481DB31E5000123AB6 /* KDPoint.hpp in Sources */,
@@ -746,6 +776,16 @@
 			isa = PBXTargetDependency;
 			target = B8766BA11D79DC9100A4ED34 /* iEAS */;
 			targetProxy = B8766BC61D79DC9100A4ED34 /* PBXContainerItemProxy */;
+		};
+		B8E97B6825A313D300DD6819 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B8E97B5025A2F42600DD6819 /* Tracer */;
+			targetProxy = B8E97B6725A313D300DD6819 /* PBXContainerItemProxy */;
+		};
+		B8E97B6D25A315E100DD6819 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B8E97B5025A2F42600DD6819 /* Tracer */;
+			targetProxy = B8E97B6C25A315E100DD6819 /* PBXContainerItemProxy */;
 		};
 		B8FA804C1DB3223F00123AB6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
